@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheMusicProject - Home</title>
+    <link rel="stylesheet" href="home-style.css">
+    
+</head>
+
+<body>
+    <aside id="aside">
+        <div id="container">
+            <a id="current" class="others">Home</a>
+            <a class="others" href="search.html">Search</a>
+            <a class="others">Sua Playlist</a>
+        </div>
+        <div id="logo">
+            <img id="logo-icon" src="Imagens/logo.png" alt="">
+            <p id="logotype">TheMusicProject</p>
+        </div>
+    </aside>
+    <main id="main">
+        <div id="top">
+            <button id="irparamenu" onclick="carregarMenu()">
+                <img id="menu-icon" src="Imagens/menu-icon.png" alt="menu-icon">
+            </button>
+
+            <div id="menu">
+                <div id="logo-menu">
+                    <img id="logo-icon-menu" src="Imagens/logo.png" alt="">
+                    <p id="logotype-menu">Dukh</p>
+                </div>
+                <div id="lista-lista">
+                    <a id="atual" class="lista">Home</a>
+                    <a href="search.html" class="lista">Search</a>
+                    <a class="lista">Playlists</a>
+                    <a class="lista">Perfil</a>
+                    <a class="lista" onclick="voltar()">Voltar</a>
+                </div>
+            </div>
+
+            <div id="searching-bar">
+                <img id='searching-icon' src="Imagens/searching-icon.png" alt="searching-icon">
+                <input type="text" placeholder="Digite aqui para pesquisar">
+            </div>
+            <a id="profile">
+                <img id="img" src="Imagens/user-icon.png" alt="">
+                <p id="username">Mcvsk</p>
+            </a>
+        </div>
+
+        <div id="middle-sentence">
+            <p id="advice">Não há músicas sendo tocadas no momento.</p>
+            <a href="descobrir.html" id="discover">Descubra ></a>
+        </div>
+    </main>
+
+    <script>
+        function carregarMenu() {
+            document.getElementById('menu').style.marginTop = '0vh';
+        }
+        function voltar(){
+            document.getElementById('menu').style.marginTop = '-50vh';
+        }
+    </script>
+</body>
+
+</html>
