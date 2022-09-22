@@ -38,6 +38,6 @@ Lista demarcada:
 
 Lista de tarefas:
 
-- [] Criar a página principal // desmarcado
+- [ ] Criar a página principal // desmarcado
 - [X] Criar a página da loja // marcado
-- [] Finalizar a reunião com o cliente
+- [ ] Finalizar a reunião com o cliente
