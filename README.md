@@ -68,13 +68,13 @@ Terminei a tabela
 
 TRECHOS DE PROGRAMA (MONOSPACE):
 
-...
+```
 num = int(input('Digite um valor: ')
 if num % 2 == 0
 	print (f'O valor {num} é PAR');
 else:
 	print (f'O valor {num} é ÍMPAR);
-...
+```
 
 OU
 
@@ -82,8 +82,8 @@ OU
 
 EMOJIS:
 
-:vulcan_salute
-:monkey
+:vulcan_salute:
+:monkey:
 
 QUOTE (CITAÇÃO):
 
