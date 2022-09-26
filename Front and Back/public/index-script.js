@@ -13,10 +13,15 @@ let inpBx = document.querySelector("#inputBox");
 let results = document.querySelector("#results");
 
 const baseUrl = 'http://localhost:3000/';
-inpBx.addEventListener('input', buscar);
 
 buscarBtn.addEventListener('click', buscar);
 
+inpBx.addEventListener('keyup', function(e){
+    e.preventDefault();
+    let tecla = e.keyCode;
+    if (tecla === 13)
+        buscarBtn.click();
+})
 
 function buscar(e) {
     results.innerHTML = 'Resultados da Busca...'
