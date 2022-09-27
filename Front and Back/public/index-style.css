@@ -13,8 +13,9 @@ body {
 aside {
     float: left;
     background-color: #6952C8;
-    height: 750vh;
+    height: 100vh;
     width: 18%;
+    position: fixed;
 }
 
 main {
@@ -405,4 +406,28 @@ h2 {
         font-size: 14px;
         width: 80%;
     }
+}
+
+audio {
+    /*border-radius: 90px;*/
+    width: 250px;
+    height: 45px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-control-container.closed {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-control-container {
+    display: none !important;
 }

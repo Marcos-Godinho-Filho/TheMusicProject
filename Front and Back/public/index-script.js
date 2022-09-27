@@ -47,7 +47,7 @@ function buscar(e) {
             });
     }
 
-    setTimeout(getInfo, 1000);
+    setTimeout(getInfo, 2000);
 
     async function getInfo(e) {
         //e.preventDefault();
