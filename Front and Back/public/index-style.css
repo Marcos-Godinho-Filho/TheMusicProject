@@ -29,6 +29,10 @@ aside {
     padding-bottom: 200px;
 }
 
+.sidebar-menu {
+    margin-top: 50px;
+}
+
 .sidebar-menu a {
     color: rgb(190, 190, 190);
     text-decoration: none;
@@ -161,7 +165,7 @@ input {
     color: white;
     border: none;
     background-color: gray;
-    font-family: 'Popings';
+    font-family: circular;
     float: left;
     margin: 30px;
     margin-left: 0px;
@@ -260,45 +264,18 @@ input {
     float: left;
 }
 
-audio {
-    width: 250px;
-    height: 45px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-audio::-webkit-media-controls-mute-button {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-slider {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container.closed {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container {
-    display: none !important;
-}
-
 #s-image {
     height: 80px;
     width: 80px;
     margin: 10px;
 }
 
-.imagem {
+.image {
     width: 100%;
 }
 
 #s-data {
     width: 55%;
-}
-
-#s-time {
-    margin-top: 25px;
 }
 
 h1 {
@@ -313,44 +290,6 @@ h2 {
 
 .preview {
     display: none;
-}
-
-::-webkit-scrollbar {
-    width: 12.5px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: lightgray;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #6952C8;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #2f178f;
-}
-
-audio {
-    width: 200px;
-    height: 45px;
-    margin: 20px;
-}
-
-audio::-webkit-media-controls-mute-button {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-slider {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container.closed {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container {
-    display: none !important;
 }
 
 .player {
@@ -418,6 +357,44 @@ audio::-webkit-media-controls-volume-control-container {
     height: 7px;
     border-radius: 8px;
     background-color: white;
+}
+
+::-webkit-scrollbar {
+    width: 12.5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #6952C8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2f178f;
+}
+
+audio {
+    width: 200px;
+    height: 45px;
+    margin: 20px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-control-container.closed {
+    display: none !important;
+}
+
+audio::-webkit-media-controls-volume-control-container {
+    display: none !important;
 }
 
 @media screen and (max-width: 1700px) {

@@ -1,6 +1,7 @@
 function carregarMenu() {
     document.querySelector('#menu').style.marginTop = '0vh';
 }
+
 function voltar() {
     document.querySelector('#menu').style.marginTop = '-50vh';
 }
@@ -16,7 +17,7 @@ const baseUrl = 'http://localhost:3000/';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function(e){
+inpBx.addEventListener('keyup', function(e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -24,7 +25,8 @@ inpBx.addEventListener('keyup', function(e){
 })
 
 function buscar(e) {
-    results.innerHTML = 'Resultados da Busca...'
+    results.innerHTML = 'Buscando...';
+    setTimeout(getInfo, 2000);
 
     e.preventDefault();
     postInfo();
@@ -47,35 +49,33 @@ function buscar(e) {
             });
     }
 
-    setTimeout(getInfo, 2000);
-
     async function getInfo(e) {
-        //e.preventDefault();
-        // alert("Chegou no getInfo()");
-        const res = await fetch(baseUrl + 'info/test?key=busca',
-            {
-                method: 'GET'
-            });
+        const res = await fetch(baseUrl + 'info/test?key=busca', {
+            method: 'GET'
+        });
 
         console.log(res);
         const data = await res.json();
 
         let resultado = data.info;
 
-        // resultado (retorno) = [{a, b, c}, {a, b, c}]
+        if (resultado.length == 0)
+            results.innerHTML = "Sem resultados para a busca"
+        else
+            results.innerHTML = 'Resultados da Busca';
+
 
         for (let pos = 0; pos < resultado.length; pos++) {
             let title = resultado[pos]["title_short"];
             let artist = resultado[pos]["artist"];
             let album = resultado[pos]["album"];
-            let duration = resultado[pos]["duration"];
             let image = resultado[pos]["image"];
             let preview = resultado[pos]["preview"];
 
             results.innerHTML += `
                 <div class="song">
                     <div class="items-song" id="s-image">
-                        <img src="${image}" alt="" class="imagem">
+                        <img src="${image}" alt="" class="image">
                     </div>
                     <div class="items-song" id="s-data">
                         <h1>${title}</h1>
@@ -87,9 +87,6 @@ function buscar(e) {
                             <source id="audio" src=${preview}>
                             Your browser does not support the audio tag.
                         </audio>
-                    </div>
-                    <div class="items-song" id="s-time">
-                        <h1>${duration}</h1>
                     </div>
                 </div>
                 `;
