@@ -11,16 +11,39 @@
 
 <body>
     <aside id="aside">
-        <div id="container">
-            <a class="others" href="home.html">Home</a>
-            <a id="current" class="others">Search</a>
-            <a class="others">Sua Playlist</a>
-        </div>
-        <div id="logo">
-            <img id="logo-icon" src="Imagens/logo.png" alt="logo">
-            <p id="logotype">TheMusicProject</p>
+        <div class="sidebar-wrapper">
+            <div class="sidebar-logo">
+                <img src="../photos/THEmusicPROJECT.png" alt="logo">
+            </div>
+
+            <div class="sidebar-menu">
+                <a class="sidebar-menu-selected" href="#"><i class="fa-solid fa-house"></i> Home </a>
+                <a href="#"><i class="fa-solid fa-magnifying glass"></i> Search </a>
+                <a href="#"><i class="fas fa-database"></i> Biblioteca </a>
+            </div>
+
+            <div class="sidebar-menu">
+                <p class="sidebar-menu-title"> Playlists </p>
+
+                <div class="sidebar-menu-item">
+                    <div class="sidebar-menu-item-componente">
+                        +
+                    </div>
+                    <span> Criar Playlist </span>
+                </div>
+
+                <div class="sidebar-playlists">
+                    <a href=""> Playlist 1 </a>
+                    <a href=""> Playlist 2 </a>
+                    <a href=""> Playlist 3 </a>
+                    <a href=""> Playlist 4 </a>
+                    <a href=""> Playlist 5 </a>
+                </div>
+
+            </div>
         </div>
     </aside>
+
     <main id="main">
         <div id="top">
             <button id="irparamenu">
@@ -46,7 +69,7 @@
                     <img id='searching-icon' src="Imagens/searching-icon.png" alt="searching-icon">
                     <input type="text" placeholder="Digite aqui para pesquisar" id="inputBox">
                 </div>
-                <button id="search">Search</button>    
+                <button id="search">Search</button>
             </div>
 
             <a id="profile">
@@ -58,7 +81,97 @@
         <div id="results"> </div>
     </main>
 
+    <div class="player">
+        <div class="player-artist">
+
+        </div>
+        <div class="player-control">
+            <div class="player-control-buttons">
+                <a href=""> <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
+
+                <a style="display: none;" id="pauseBtn" href="#" style="color: #fff;"> <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
+
+                <a id="playBtn" href="#" style="color: #fff; font-size: 30px; display: inline-block;"> <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px"></i> </a>
+
+                <a href=""> <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
+            </div>
+
+            <div class="player-control-progress">
+                <div style="width: 10%;" class="player-control-progress-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioplayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls=""> 
+        
+    </audio>
+
     <script src="index-script.js"></script>
+
+    <script src="../all.min.js"></script>
+
+    <script>
+        var audioplayer = document.getElementById('audioplayer');
+        var loaded = false;
+
+        var playBtn = document.getElementById('playBtn');
+        var pauseBtn = document.getElementById('pauseBtn');
+
+        playBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            playBtn.style.display = "none";
+            pauseBtn.style.display = "inline";
+
+        });
+
+
+        pauseBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            playBtn.style.display = "inline-block";
+            pauseBtn.style.display = "none";
+            audioplayer.pause();
+
+        });
+
+        playSong = (file) => {
+
+            if (loaded == false) {
+                audioplayer.innerHTML = `<source src="` + file + `" type="audio/mp3" />`;
+                loaded = true;
+            }
+
+            audioPlayer.play();
+
+            playBtn.style.display = "none";
+            pauseBtn.style.display = "inline-block";
+
+        }
+
+        document.querySelectorAll('.main-col').forEach(item => {
+
+            item.addEventListener('click', event => {
+
+                let image = item.getAttribute('data-image');
+                let artist = item.getAttribute('data-artist');
+                let song = item.getAttribute('data-song');
+                let file = item.getAttribute('data-file');
+
+                let playerArtistComponent = document.getElementsByClassName("player-artist");
+
+                playerArtistComponent[0].innerHTML = `
+                
+                <img src="` + image + `"/>
+                <h3>` + song + `<br><span>` + artist + `</span></h3>
+                
+                `;
+
+                playSong(file)
+            });
+
+        });
+    </script>
 </body>
 
 </html>
