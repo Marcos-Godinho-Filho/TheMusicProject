@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheMusicProject - Search</title>
+    <title>TheMusicProject - Buscar</title>
     <link rel="stylesheet" href="index-style.css">
 </head>
 
@@ -17,16 +17,22 @@
             </div>
 
             <div class="sidebar-menu">
-                <a class="sidebar-menu-selected" href="#"><i class="fa-solid fa-house"></i> Home </a>
-                <a href="#"><i class="fa-solid fa-magnifying glass"></i> Search </a>
-                <a href="#"><i class="fas fa-database"></i> Biblioteca </a>
+                <a class="sidebar-menu-selected" href="#">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="#">
+                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                </a>
+                <a href="#">
+                    <i class="fas fa-database"></i> Biblioteca
+                </a>
             </div>
 
             <div class="sidebar-menu">
                 <p class="sidebar-menu-title"> Playlists </p>
 
                 <div class="sidebar-menu-item">
-                    <div class="sidebar-menu-item-componente">
+                    <div class="sidebar-menu-item-component">
                         +
                     </div>
                     <span> Criar Playlist </span>
@@ -45,40 +51,25 @@
     </aside>
 
     <main id="main">
-        <div id="top">
-            <button id="irparamenu">
-                <img id="menu-icon" src="Imagens/menu-icon.png" alt="menu-icon">
-            </button>
+        <div class="main-wrapper">
+            <div id="top">
 
-            <div id="menu">
-                <div id="logo-menu">
-                    <img id="logo-icon-menu" src="Imagens/logo.png" alt="">
-                    <p id="logotype-menu">TheMusicProject</p>
+                <div id="bar_button">
+                    <div id="searching-bar">
+                        <img id='searching-icon' src="Imagens/searching-icon.png" alt="searching-icon">
+                        <input type="text" placeholder="Digite aqui para pesquisar" id="inputBox">
+                    </div>
+                    <button id="search">Search</button>
                 </div>
-                <div id="lista-lista">
-                    <a href="home.html" class="lista">Home</a>
-                    <a class="lista" id="atual">Search</a>
-                    <a class="lista">Sua Playlist</a>
-                    <a class="lista">Perfil</a>
-                    <a class="lista" id="voltar">Voltar</a>
-                </div>
+
+                <a id="profile">
+                    <img id="img" src="Imagens/user-icon.png" alt="">
+                    <p id="username">Mcvsk</p>
+                </a>
             </div>
 
-            <div id="bar_button">
-                <div id="searching-bar">
-                    <img id='searching-icon' src="Imagens/searching-icon.png" alt="searching-icon">
-                    <input type="text" placeholder="Digite aqui para pesquisar" id="inputBox">
-                </div>
-                <button id="search">Search</button>
-            </div>
-
-            <a id="profile">
-                <img id="img" src="Imagens/user-icon.png" alt="">
-                <p id="username">Mcvsk</p>
-            </a>
+            <div id="results"> </div>
         </div>
-
-        <div id="results"> </div>
     </main>
 
     <div class="player">
@@ -108,7 +99,7 @@
 
     <script src="index-script.js"></script>
 
-    <script src="../all.min.js"></script>
+    <script src="all.min.js"></script>
 
     <script>
         var audioplayer = document.getElementById('audioplayer');
