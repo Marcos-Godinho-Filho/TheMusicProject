@@ -131,7 +131,13 @@ main {
     position: fixed;
     height: 100px;
     z-index: 98;
-    width: 82%;
+    top: 0;
+    left: calc(250px);
+    width: calc(100% - 250px);
+}
+
+#bar-button {
+    float: left;
 }
 
 #searching-bar {
@@ -193,53 +199,25 @@ input {
     margin-left: 10px;
 }
 
+i {
+    font-size: 10px;
+}
+
 #profile {
     display: block;
     position: absolute;
     float: left;
-    top: 20px;
+    font-size: 18px;
+    top: 18px;
     right: 10px;
-    font-size: 20px;
     color: white;
     width: 22.5%;
     height: 10%;
+    padding: 10px 0;
 }
 
 #profile:hover {
     cursor: pointer;
-}
-
-#username {
-    float: left;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-#img {
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin: 10px;
-}
-
-#logo {
-    position: fixed;
-    width: 18%;
-}
-
-#logo-icon {
-    width: 30px;
-    height: 30px;
-    float: left;
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-#logotype {
-    font-size: 16px;
-    font-weight: bold;
-    float: left;
-    margin: 10px;
 }
 
 #results {
@@ -359,19 +337,19 @@ h2 {
     background-color: white;
 }
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 12.5px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background-color: lightgray;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
-::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 

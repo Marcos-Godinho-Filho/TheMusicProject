@@ -15,90 +15,77 @@
             <div class="sidebar-logo">
                 <img src="../photos/THEmusicPROJECT.png" alt="logo">
             </div>
-
             <div class="sidebar-menu">
-                <a class="sidebar-menu-selected" href="#">
+                <a href="">
                     <i class="fa-solid fa-house"></i> Home
                 </a>
-                <a href="#">
+                <a class="sidebar-menu-selected" href="index.html">
                     <i class="fa-solid fa-magnifying-glass"></i> Buscar
                 </a>
-                <a href="#">
+                <a href="">
                     <i class="fas fa-database"></i> Biblioteca
                 </a>
             </div>
-
             <div class="sidebar-menu">
-                <p class="sidebar-menu-title"> Playlists </p>
-
+                <p class="sidebar-menu-title"> Playlists</p>
                 <div class="sidebar-menu-item">
                     <div class="sidebar-menu-item-component">
                         +
                     </div>
-                    <span> Criar Playlist </span>
+                    <span> Criar Playlist</span>
                 </div>
-
                 <div class="sidebar-playlists">
-                    <a href=""> Playlist 1 </a>
-                    <a href=""> Playlist 2 </a>
-                    <a href=""> Playlist 3 </a>
-                    <a href=""> Playlist 4 </a>
-                    <a href=""> Playlist 5 </a>
+                    <a href=""> Playlist 1</a>
+                    <a href=""> Playlist 2</a>
+                    <a href=""> Playlist 3</a>
+                    <a href=""> Playlist 4</a>
+                    <a href=""> Playlist 5</a>
                 </div>
             </div>
         </div>
     </aside>
-
     <main id="main">
         <div class="main-wrapper">
             <div id="top">
                 <div id="bar_button">
                     <div id="searching-bar">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Digite aqui para pesquisar" id="inputBox">
+                        <input type=" text" placeholder="Digite aqui para pesquisar" id="inputBox">
                     </div>
                     <button id="search">Search</button>
                 </div>
-
                 <a id="profile">
-                    <img id="img" src="Imagens/user-icon.png" alt="">
-                    <p id="username">Username</p>
+                    <i class="fa-solid fa-user"></i> Username
                 </a>
             </div>
-
-            <div id="results"> </div>
+            <div id="results "></div>
         </div>
     </main>
-
     <div class="player">
-        <div class="player-artist">
-
-        </div>
+        <div class="player-artist"></div>
         <div class="player-control">
             <div class="player-control-buttons">
-                <a href=""> <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
-
-                <a style="display: none;" id="pauseBtn" href="#" style="color: #fff;"> <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
-
-                <a id="playBtn" href="#" style="color: #fff; font-size: 30px; display: inline-block;"> <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px"></i> </a>
-
-                <a href=""> <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i> </a>
+                <a href=" ">
+                    <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                </a>
+                <a style="display: none; " id="pauseBtn " href="# " style="color: #fff; ">
+                    <i class="fa-solid fa-pause " style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                </a>
+                <a id="playBtn " href="# " style="color: #fff; font-size: 30px; display: inline-block; ">
+                    <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px "></i>
+                </a>
+                <a href=" ">
+                    <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                </a>
             </div>
-
             <div class="player-control-progress">
-                <div style="width: 10%;" class="player-control-progress-2"></div>
+                <div style="width: 10%; " class="player-control-progress-2"></div>
             </div>
         </div>
     </div>
-
-    <audio id="audioplayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls=""> 
-        
-    </audio>
-
+    <audio id="audioplayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls=" "></audio>
     <script src="index-script.js"></script>
-
-    <script src="all.min.js"></script>
-
+    <script src="all.min.js "></script>
     <script>
         var audioplayer = document.getElementById('audioplayer');
         var loaded = false;
@@ -119,7 +106,7 @@
             e.preventDefault();
 
             playBtn.style.display = "inline-block";
-            pauseBtn.style.display = "none";
+            pauseBtn.style.display = "none ";
             audioplayer.pause();
 
         });
@@ -127,7 +114,7 @@
         playSong = (file) => {
 
             if (loaded == false) {
-                audioplayer.innerHTML = `<source src="` + file + `" type="audio/mp3" />`;
+                audioplayer.innerHTML = `<source src="` + file + ` " type="audio/mp3" />`;
                 loaded = true;
             }
 
@@ -151,7 +138,7 @@
 
                 playerArtistComponent[0].innerHTML = `
                 
-                <img src="` + image + `"/>
+                <img src="` + image + ` "/>
                 <h3>` + song + `<br><span>` + artist + `</span></h3>
                 
                 `;
