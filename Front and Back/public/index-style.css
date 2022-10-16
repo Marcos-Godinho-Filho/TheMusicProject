@@ -153,15 +153,24 @@ main {
     margin-right: 10px;
 }
 
+#magnifying-glass {
+    float: left;
+    z-index: 98;
+    width: 32px;
+    height: 25px;
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
 input {
     background-color: transparent;
     border: none;
     padding: 10px;
     outline: none;
     font-size: 16px;
-    width: 45%;
-    position: absolute;
+    width: calc(100% - 50px);
     z-index: 99;
+    float: left;
 }
 
 #search {
@@ -191,19 +200,6 @@ input {
     height: 40px;
 }
 
-#searching-icon {
-    float: left;
-    z-index: 98;
-    width: 25px;
-    height: 25px;
-    margin-top: 9px;
-    margin-left: 10px;
-}
-
-i {
-    font-size: 10px;
-}
-
 #profile {
     display: block;
     position: absolute;
@@ -214,7 +210,7 @@ i {
     color: white;
     width: 22.5%;
     height: 10%;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 #profile:hover {
