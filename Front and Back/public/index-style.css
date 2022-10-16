@@ -158,7 +158,7 @@ input {
     border: none;
     padding: 10px;
     outline: none;
-    font-size: 18px;
+    font-size: 16px;
     width: 45%;
     position: absolute;
     z-index: 99;
@@ -172,6 +172,7 @@ input {
     border: none;
     background-color: gray;
     font-family: circular;
+    font-size: 16px;
     float: left;
     margin: 30px;
     margin-left: 0px;
@@ -182,7 +183,7 @@ input {
 }
 
 #search:active {
-    background-color: black;
+    background-color: rgb(27, 27, 27);
 }
 
 #bar_button {

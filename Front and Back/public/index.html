@@ -32,7 +32,7 @@
                     <div class="sidebar-menu-item-component">
                         +
                     </div>
-                    <span> Criar Playlist</span>
+                    <span>Criar Playlist</span>
                 </div>
                 <div class="sidebar-playlists">
                     <a href=""> Playlist 1</a>
@@ -49,7 +49,7 @@
             <div id="top">
                 <div id="bar_button">
                     <div id="searching-bar">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <img src="../photos/magnifying_glass.png" alt="magnifying glass">
                         <input type=" text" placeholder="Digite aqui para pesquisar" id="inputBox">
                     </div>
                     <button id="search">Search</button>
@@ -58,7 +58,7 @@
                     <i class="fa-solid fa-user"></i> Username
                 </a>
             </div>
-            <div id="results "></div>
+            <div id="results"></div>
         </div>
     </main>
     <div class="player">
@@ -66,88 +66,26 @@
         <div class="player-control">
             <div class="player-control-buttons">
                 <a href=" ">
-                    <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                    <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
-                <a style="display: none; " id="pauseBtn " href="# " style="color: #fff; ">
-                    <i class="fa-solid fa-pause " style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                <a style="display: none; " id="pauseBtn" href="#" style="color: #fff;">
+                    <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
                 </a>
-                <a id="playBtn " href="# " style="color: #fff; font-size: 30px; display: inline-block; ">
-                    <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px "></i>
+                <a id="playBtn" href="#" style="color: #fff; font-size: 30px; display: inline-block;">
+                    <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px"></i>
                 </a>
-                <a href=" ">
-                    <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                <a href="">
+                    <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
             </div>
             <div class="player-control-progress">
-                <div style="width: 10%; " class="player-control-progress-2"></div>
+                <div style="width: 10%;" class="player-control-progress-2"></div>
             </div>
         </div>
     </div>
     <audio id="audioplayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls=" "></audio>
     <script src="index-script.js"></script>
-    <script src="all.min.js "></script>
-    <script>
-        var audioplayer = document.getElementById('audioplayer');
-        var loaded = false;
-
-        var playBtn = document.getElementById('playBtn');
-        var pauseBtn = document.getElementById('pauseBtn');
-
-        playBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            playBtn.style.display = "none";
-            pauseBtn.style.display = "inline";
-
-        });
-
-
-        pauseBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            playBtn.style.display = "inline-block";
-            pauseBtn.style.display = "none ";
-            audioplayer.pause();
-
-        });
-
-        playSong = (file) => {
-
-            if (loaded == false) {
-                audioplayer.innerHTML = `<source src="` + file + ` " type="audio/mp3" />`;
-                loaded = true;
-            }
-
-            audioPlayer.play();
-
-            playBtn.style.display = "none";
-            pauseBtn.style.display = "inline-block";
-
-        }
-
-        document.querySelectorAll('.main-col').forEach(item => {
-
-            item.addEventListener('click', event => {
-
-                let image = item.getAttribute('data-image');
-                let artist = item.getAttribute('data-artist');
-                let song = item.getAttribute('data-song');
-                let file = item.getAttribute('data-file');
-
-                let playerArtistComponent = document.getElementsByClassName("player-artist");
-
-                playerArtistComponent[0].innerHTML = `
-                
-                <img src="` + image + ` "/>
-                <h3>` + song + `<br><span>` + artist + `</span></h3>
-                
-                `;
-
-                playSong(file)
-            });
-
-        });
-    </script>
+    <script src="all.min.js"></script>
 </body>
 
 </html>
