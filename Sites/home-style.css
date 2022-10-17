@@ -118,7 +118,6 @@ main {
     background-color: rgb(30, 30, 30);
     height: 100%;
     float: left;
-    padding: 15px 50px;
     overflow-y: auto;
 }
 
@@ -129,7 +128,7 @@ main {
 #top {
     background-color: black;
     position: fixed;
-    height: 100px;
+    height: 50px;
     z-index: 98;
     top: 0;
     left: calc(250px);
@@ -141,81 +140,40 @@ main {
     position: absolute;
     float: left;
     font-size: 18px;
-    top: 18px;
-    right: 10px;
+    top: 14px;
+    right: 100px;
     color: white;
     width: 22.5%;
     height: 10%;
-    padding: 20px 0;
 }
 
 #profile:hover {
     cursor: pointer;
 }
 
-#results {
-    margin: 30px;
-    margin-top: 120px;
-    color: white;
-    font-size: 20px;
+#tips{
+    margin-top: 32px;
 }
 
-.song {
-    width: 90%;
-    height: 80px;
-    margin: 30px;
-    margin-left: 10px;
-    border-radius: 10px;
-    background-color: rgb(60, 60, 60);
+#tips img{
+    width: calc(100% - 250px);
+    position: absolute;
 }
 
-.song-empty {
-    width: 90%;
-    height: 80px;
+#img1{
+    z-index: 4;
 }
 
-.s-image {
-    float: left;
-    height: 70px;
-    width: 70px;
-    margin: 5px;
+#img2{
+    z-index: 3;
 }
 
-.s-image>img {
-    width: 100%;
+#img3{
+    z-index: 2;
 }
 
-.s-data {
-    width: calc(100% - 200px);
-    float: left;
-}
-
-.s-data h1 {
-    color: white;
-    font-size: 14px;
-    margin: 10px;
-}
-
-.s-data h2 {
-    color: rgb(153, 153, 153);
-    font-size: 12px;
-    margin: 10px;
-}
-
-.s-buttons {
-    float: left;
-}
-
-.s-buttons button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.s-buttons button:hover {
-    cursor: pointer;
+#img4{
+    z-index: 1;
 }
 
  ::-webkit-scrollbar {
