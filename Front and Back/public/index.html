@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheMusicProject - Buscar</title>
+    <link rel="icon" type="image/x-icon" href="../photos/icon.ico">
     <link rel="stylesheet" href="index-style.css">
 </head>
 
@@ -16,29 +17,29 @@
                 <img src="../photos/THEmusicPROJECT.png" alt="logo">
             </div>
             <div class="sidebar-menu">
-                <a href="">
+                <a href=" ">
                     <i class="fa-solid fa-house"></i> Home
                 </a>
                 <a class="sidebar-menu-selected" href="index.html">
-                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                    <i class="fa-solid fa-magnifying-glass "></i> Buscar
                 </a>
-                <a href="">
+                <a href=" ">
                     <i class="fas fa-database"></i> Biblioteca
                 </a>
             </div>
             <div class="sidebar-menu">
                 <div class="sidebar-menu-item">
-                    <div class="sidebar-menu-item-component">
+                    <div class="sidebar-menu-item-component ">
                         +
                     </div>
                     <span>Criar Playlist</span>
                 </div>
                 <div class="sidebar-playlists">
-                    <a href=""> Playlist 1</a>
-                    <a href=""> Playlist 2</a>
-                    <a href=""> Playlist 3</a>
-                    <a href=""> Playlist 4</a>
-                    <a href=""> Playlist 5</a>
+                    <a href=" "> Playlist 1</a>
+                    <a href=" "> Playlist 2</a>
+                    <a href=" "> Playlist 3</a>
+                    <a href=" "> Playlist 4</a>
+                    <a href=" "> Playlist 5</a>
                 </div>
             </div>
         </div>
@@ -49,7 +50,7 @@
                 <div id="bar_button">
                     <div id="searching-bar">
                         <img src="../photos/magnifying_glass.png" alt="magnifying glass" id="magnifying-glass">
-                        <input type="text" placeholder="Digite aqui para pesquisar" id="inputBox">
+                        <input type="text" placeholder="Digite aqui para pesquisar " id="inputBox">
                     </div>
                     <button id="search">Search</button>
                 </div>
@@ -60,7 +61,7 @@
             <div id="results">
                 <div class="song">
                     <div class="items-song" id="s-image">
-                        <img src="${image}" alt="" class="image">
+                        <img src="${image}" alt=" " class="image">
                     </div>
                     <div class="items-song" id="s-data">
                         <h1>Lose Yourself</h1>
@@ -85,13 +86,13 @@
                 <a href=" ">
                     <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
-                <a style="display: none; " id="pauseBtn" href="#" style="color: #fff;">
-                    <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
+                <a style="display: none; " id="pauseBtn" href="# " style="color: #fff;">
+                    <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
                 <a id="playBtn" href="#" style="color: #fff; font-size: 30px; display: inline-block;">
                     <i class="fa-solid fa-play" style="color: #fff; margin-inline: 20px"></i>
                 </a>
-                <a href="">
+                <a href=" ">
                     <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
             </div>
@@ -102,7 +103,7 @@
     </div>
     <audio id="audioplayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls=" "></audio>
 
-    <script src="all.min.js"></script>
+    <script src="all.min.js "></script>
 
     <script>
         function carregarMenu() {
@@ -141,14 +142,14 @@
 
             async function postInfo(e) // async --> funciona ao mesmo tempo (assincrono)
             {
-                if (inpBx.value == "") {
+                if (inpBx.value == " ") {
                     return
                 }
                 const res = await fetch(baseUrl, // espera executar a função para poder continuar
                     {
                         method: 'POST',
                         headers: {
-                            "Content-Type": 'application/json'
+                            "Content-Type ": 'application/json'
                         },
                         body: JSON.stringify({
                             parcel: inpBx.value
@@ -167,30 +168,30 @@
                 let resultado = data.info;
 
                 if (resultado.length == 0)
-                    results.innerHTML = "Sem resultados para a busca"
+                    results.innerHTML = "Sem resultados para a busca "
                 else
                     results.innerHTML = 'Resultados da Busca';
 
 
                 for (let pos = 0; pos < resultado.length; pos++) {
-                    let title = resultado[pos]["title_short"];
-                    let artist = resultado[pos]["artist"];
-                    let album = resultado[pos]["album"];
-                    let image = resultado[pos]["image"];
-                    let preview = resultado[pos]["preview"];
+                    let title = resultado[pos]["title_short "];
+                    let artist = resultado[pos]["artist "];
+                    let album = resultado[pos]["album "];
+                    let image = resultado[pos]["image "];
+                    let preview = resultado[pos]["preview "];
 
                     results.innerHTML += `
-                    <div class="song">
-                        <div class="items-song" id="s-image">
-                            <img src="${image}" alt="" class="image">
+                    <div class="song ">
+                        <div class="items-song " id="s-image ">
+                            <img src="${image} " alt=" " class="image ">
                         </div>
-                        <div class="items-song" id="s-data">
+                        <div class="items-song " id="s-data ">
                             <h1>${title}</h1>
                             <h2>${artist}</h2>
                             <h2>${album}</h2>
                         </div>
-                        <div class="items-song">
-                            <a href="${preview}">
+                        <div class="items-song ">
+                            <a href="${preview} ">
                             </a>
                         </div>
                     </div>
@@ -208,8 +209,8 @@
         // playBtn.addEventListener('click', (e) => {
         //     e.preventDefault();
 
-        //     playBtn.style.display = "none";
-        //     pauseBtn.style.display = "inline";
+        //     playBtn.style.display = "none ";
+        //     pauseBtn.style.display = "inline ";
 
         // });
 
@@ -217,7 +218,7 @@
         // pauseBtn.addEventListener('click', (e) => {
         //     e.preventDefault();
 
-        //     playBtn.style.display = "inline-block";
+        //     playBtn.style.display = "inline-block ";
         //     pauseBtn.style.display = "none ";
         //     audioplayer.pause();
 
@@ -226,14 +227,14 @@
         // playSong = (file) => {
 
         //     if (loaded == false) {
-        //         audioplayer.innerHTML = `<source src="` + file + ` " type="audio/mp3" />`;
+        //         audioplayer.innerHTML = `<source src="` + file + ` " type="audio/mp3 " />`;
         //         loaded = true;
         //     }
 
         //     audioPlayer.play();
 
-        //     playBtn.style.display = "none";
-        //     pauseBtn.style.display = "inline-block";
+        //     playBtn.style.display = "none ";
+        //     pauseBtn.style.display = "inline-block ";
 
         // }
 
@@ -246,7 +247,7 @@
         //         let song = item.getAttribute('data-song');
         //         let file = item.getAttribute('data-file');
 
-        //         let playerArtistComponent = document.getElementsByClassName("player-artist");
+        //         let playerArtistComponent = document.getElementsByClassName("player-artist ");
 
         //         playerArtistComponent[0].innerHTML = `
 
