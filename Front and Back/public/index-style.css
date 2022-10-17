@@ -1,60 +1,129 @@
 @font-face {
-    font-family: 'Popings';
-    src: url("Fontes/Poppins/Poppins-Medium.ttf");
+    font-family: circular-bold;
+    src: url("spotifyFont/GothamBold.ttf");
 }
 
+@font-face {
+    font-family: circular-light;
+    src: url("spotifyFont/GothamLight.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: circular-bold;
+}
+
+html,
 body {
-    margin: 0px;
-    font-family: 'Popings';
-    min-height: 100vh;
-    background-color: #353535;
+    height: 100%;
 }
 
 aside {
     float: left;
-    background-color: #6952C8;
-    height: 100vh;
-    width: 18%;
-    position: fixed;
+    width: 250px;
+    padding: 10px 10px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: black;
+}
+
+.sidebar-wrapper {
+    padding-bottom: 200px;
+}
+
+.sidebar-menu {
+    margin-top: 50px;
+}
+
+.sidebar-menu a {
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.sidebar-menu a.sidebar-menu-selected {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu svg {
+    margin: 0 20px;
+}
+
+.sidebar-logo img {
+    max-width: 250px;
+    width: 100%;
+}
+
+.sidebar-menu a.sidebar-menu-selecionado {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu-item {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sidebar-menu-item-component {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin: 8px;
+}
+
+.sidebar-menu-item span {
+    color: rgb(190, 190, 190);
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.sidebar-menu-item img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sidebar-playlists {
+    padding: 20px 0;
+    border-top: 1px solid rgb(40, 40, 40);
+}
+
+.sidebar-playlists a {
+    display: block;
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+}
+
+.sidebar-playlists a:hover {
+    color: white;
 }
 
 main {
-    float: right;
-    background-color: #353535;
-    height: 100vh;
-    width: 82%;
+    width: calc(100% - 250px);
+    background-color: rgb(30, 30, 30);
+    height: 100%;
+    float: left;
+    padding: 15px 50px;
+    overflow-y: auto;
 }
 
-a {
-    text-decoration: none;
-}
-
-#current {
-    background-color: #816BD8;
-}
-
-#current:hover {
-    cursor: default;
-}
-
-.others {
-    display: block;
-    padding: 10px;
-    transition: 0.5s;
-    text-decoration: none;
-    color: white;
-}
-
-.others:hover {
-    cursor: pointer;
-    background-color: #816BD8;
-}
-
-#container {
-    position: fixed;
-    margin-top: 250px;
-    color: white;
-    width: 18%;
+.main-wraper {
+    padding-bottom: 200px;
 }
 
 #top {
@@ -62,77 +131,13 @@ a {
     position: fixed;
     height: 100px;
     z-index: 98;
-    width: 82%;
+    top: 0;
+    left: calc(250px);
+    width: calc(100% - 250px);
 }
 
-#menu {
-    z-index: 99;
-    margin-top: -50vh;
-    background-color: #6952C8;
-    width: 100%;
-    position: fixed;
-    height: 50vh;
-    transition: 1s;
-}
-
-#lista-lista {
-    display: block;
-}
-
-.lista {
-    display: block;
-    color: white;
-    font-size: 12px;
-    text-align: justify;
-    padding: 10px;
-    width: 100%;
-    transition: 0.5s;
-}
-
-.lista:hover {
-    background-color: #816BD8;
-    cursor: pointer;
-}
-
-#atual {
-    background-color: #816BD8;
-}
-
-#logo-menu {
-    display: block;
-    top: 10px;
-    left: 10px;
-    width: 100%;
-    height: 50px;
-}
-
-#logo-icon-menu {
-    width: 30px;
-    height: 30px;
+#bar-button {
     float: left;
-    margin: 10px;
-}
-
-#logotype-menu {
-    font-size: 15px;
-    font-weight: bold;
-    float: left;
-}
-
-#irparamenu {
-    background-color: #6952C8;
-    border-radius: 30px;
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    float: left;
-    border: none;
-    margin: 20px;
-}
-
-#menu-icon {
-    height: 25px;
-    width: 25px
 }
 
 #searching-bar {
@@ -142,10 +147,19 @@ a {
     height: 40px;
     border: 0px;
     border-radius: 20px;
-    background-color: lightgray;
+    background-color: white;
     box-shadow: 5px 5px 5px rgb(17, 17, 17);
     margin: 30px;
     margin-right: 10px;
+}
+
+#magnifying-glass {
+    float: left;
+    z-index: 98;
+    width: 32px;
+    height: 25px;
+    margin-top: 9px;
+    margin-left: 10px;
 }
 
 input {
@@ -153,10 +167,11 @@ input {
     border: none;
     padding: 10px;
     outline: none;
-    font-size: 18px;
-    width: 45%;
-    position: absolute;
+    font-size: 16px;
+    font-family: circular-light;
+    width: calc(100% - 50px);
     z-index: 99;
+    float: left;
 }
 
 #search {
@@ -166,7 +181,8 @@ input {
     color: white;
     border: none;
     background-color: gray;
-    font-family: 'Popings';
+    font-family: circular-bold;
+    font-size: 16px;
     float: left;
     margin: 30px;
     margin-left: 0px;
@@ -177,7 +193,7 @@ input {
 }
 
 #search:active {
-    background-color: black;
+    background-color: rgb(27, 27, 27);
 }
 
 #bar_button {
@@ -185,154 +201,177 @@ input {
     height: 40px;
 }
 
-#searching-icon {
-    float: left;
-    z-index: 98;
-    width: 25px;
-    height: 25px;
-    margin-top: 9px;
-    margin-left: 10px;
-}
-
 #profile {
     display: block;
     position: absolute;
     float: left;
-    top: 20px;
+    font-size: 18px;
+    top: 18px;
     right: 10px;
-    font-size: 20px;
     color: white;
     width: 22.5%;
     height: 10%;
+    padding: 20px 0;
 }
 
 #profile:hover {
     cursor: pointer;
 }
 
-#username {
-    float: left;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-#img {
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin: 10px;
-}
-
-#logo {
-    position: fixed;
-    width: 18%;
-}
-
-#logo-icon {
-    width: 30px;
-    height: 30px;
-    float: left;
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-#logotype {
-    font-size: 16px;
-    font-weight: bold;
-    float: left;
-    margin: 10px;
-}
-
 #results {
     margin: 30px;
     margin-top: 120px;
-    margin-left: 50px;
     color: white;
     font-size: 20px;
-    font-weight: bold;
 }
 
 .song {
-    width: 80%;
-    height: 100px;
-    background-color: rgb(95, 95, 95);
+    width: 90%;
+    height: 80px;
     margin: 30px;
     margin-left: 10px;
     border-radius: 10px;
+    background-color: rgb(60, 60, 60);
 }
 
-.items-song {
-    float: left;
-}
-
-audio {
-    width: 250px;
-    height: 45px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-audio::-webkit-media-controls-mute-button {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-slider {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container.closed {
-    display: none !important;
-}
-
-audio::-webkit-media-controls-volume-control-container {
-    display: none !important;
-}
-
-#s-image {
+.song-empty {
+    width: 90%;
     height: 80px;
-    width: 80px;
-    margin: 10px;
 }
 
-.imagem {
+.s-image {
+    float: left;
+    height: 70px;
+    width: 70px;
+    margin: 5px;
+}
+
+.s-image>img {
     width: 100%;
 }
 
-#s-data {
-    width: 55%;
+.s-data {
+    width: calc(100% - 200px);
+    float: left;
 }
 
-#s-time {
-    margin-top: 25px;
-}
-
-h1 {
+.s-data h1 {
     color: white;
     font-size: 14px;
+    margin: 10px;
 }
 
-h2 {
+.s-data h2 {
     color: rgb(153, 153, 153);
     font-size: 12px;
+    margin: 10px;
 }
 
-.preview {
-    display: none;
+.s-buttons {
+    float: left;
 }
 
-::-webkit-scrollbar {
+.s-buttons button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.s-buttons button:hover {
+    cursor: pointer;
+}
+
+.player {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    background-color: rgb(60, 60, 60);
+    padding: 10px;
+}
+
+.player-artist {
+    width: 30%;
+    height: 80px;
+}
+
+.pa-image {
+    width: 90px;
+    height: 90px;
+    vertical-align: middle;
+    float: left;
+}
+
+.pa-image img {
+    width: 100%;
+}
+
+.pa-data {
+    width: calc(100% - 100px);
+    float: left;
+}
+
+.pa-data h1 {
+    color: white;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.pa-data h2 {
+    color: rgb(153, 153, 153);
+    font-size: 14px;
+    margin: 5px;
+}
+
+.player-control {
+    width: 60%;
+    text-align: center;
+}
+
+.player-contro-buttons a {
+    color: white;
+    margin: 8px 15px;
+    font-size: 18px;
+}
+
+.player-control-progress {
+    width: 100%;
+    max-width: 600px;
+    height: 7px;
+    margin-top: 20px;
+    position: relative;
+    border-radius: 8px;
+    display: inline-block;
+    background-color: rgb(130, 130, 130);
+}
+
+.player-control-progress-2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 7px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+ ::-webkit-scrollbar {
     width: 12.5px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background-color: lightgray;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
-::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 
@@ -358,129 +397,21 @@ audio::-webkit-media-controls-volume-control-container {
     display: none !important;
 }
 
-
 @media screen and (max-width: 1700px) {
-    #irparamenu {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 1062px) {
-    #logo-icon {
-        width: 25px;
-        height: 25px;
-    }
-    
-    #logotype {
-        font-size: 14px;
-    }
-
-    #s-time{
-        display: none;
-    }
-
-    #s-data{
-        width: 45%;
-    }
-
-    .song {
-        width: 90%;
-        height: 100px;
-        margin-left: 25px;
-    }
-
-    #results {
-        margin-top: 100px;
-        font-size: 16px;
-        margin-left: 25px;
+    .main-col {
+        width: 20%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    main {
+    .main {
         width: 100%;
     }
-
-    aside {
+    .sidebar {
         display: none;
     }
-
-    #searching-bar {
-        height: 30px;
-        width: 70%;
-        margin-left: 85px;
-    }
-
-    #searching-icon {
-        width: 20px;
-        height: 20px;
-        margin-top: 6px;
-    }
-
-    #profile {
-        display: none;
-    }
-
-    #top {
-        width: 100%;
-        height: 90px;
-    }
-
-    #irparamenu {
-        display: inline;
-    }
-
-    #results {
-        margin-top: 100px;
-        font-size: 16px;
-        margin-left: 25px;
-    }
-
-    .song{
-        height: 75px;
-    }
-
-    .items-song {
-        margin: 10px;
-        float: left;
-    } 
-
-    #s-image {
-        height: 60px;
-        width: 60px;
-        margin: 7.5px;
-    }
-
-    #s-data {
-        width: 45%;
-        margin: 0px;
-    }
-
-    #s-time {
-        display: none;
-    }
-
-    h1 {
-        color: white;
-        font-size: 11px;
-    }
-
-    h2 {
-        color: rgb(153, 153, 153);
-        font-size: 9px;
-    }
-
-    #search {
-        display: none;
-    }
-
-    input {
-        padding: 7px;
-        font-size: 14px;
-        width: 50%;
-    }
-
-    audio {
-        margin: 10px;
+    .main-col {
+        width: 48%;
+        margin-right: 2%;
     }
 }
