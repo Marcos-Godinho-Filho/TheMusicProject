@@ -1,269 +1,254 @@
 @font-face {
-    font-family: 'Popings';
-    src: url("Fontes/Poppins/Poppins-Medium.ttf");
+    font-family: circular-bold;
+    src: url("spotifyFont/GothamBold.ttf");
 }
-body{
-    margin: 0px;
-    font-family: 'Popings';
-    min-height: 100vh;
+
+@font-face {
+    font-family: circular-light;
+    src: url("spotifyFont/GothamLight.ttf");
 }
-aside{
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: circular-bold;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+aside {
     float: left;
-    background-color: #6952C8;
-    height: 100vh;
-    width: 18%;
+    width: 250px;
+    padding: 10px 10px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: black;
 }
-main{
-    float: right;
-    background-color: #353535;
-    height: 100vh;
-    width: 82%;
+
+.sidebar-wrapper {
+    padding-bottom: 200px;
 }
-a{
+
+.sidebar-menu {
+    margin-top: 50px;
+}
+
+.sidebar-menu a {
+    color: rgb(190, 190, 190);
     text-decoration: none;
-}
-#current{
-    background-color: #816BD8;
-}
-#current:hover{
-    cursor: default;
-}
-.others{
     display: block;
-    padding: 10px;
-    transition: 0.5s;
-    text-decoration: none;
-    color: white;
+    padding: 10px 0;
 }
-.others:hover{
+
+.sidebar-menu a.sidebar-menu-selected {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu svg {
+    margin: 0 20px;
+}
+
+.sidebar-logo img {
+    max-width: 250px;
+    width: 100%;
+}
+
+.sidebar-menu a.sidebar-menu-selecionado {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu-item {
+    margin-top: 12px;
+    margin-bottom: 12px;
     cursor: pointer;
-    background-color: #816BD8;
+    vertical-align: middle;
 }
-#container{
-    position: fixed;
-    margin-top: 15%;
+
+.sidebar-menu-item-component {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin: 8px;
+}
+
+.sidebar-menu-item span {
+    color: rgb(190, 190, 190);
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.sidebar-menu-item img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sidebar-playlists {
+    padding: 20px 0;
+    border-top: 1px solid rgb(40, 40, 40);
+}
+
+.sidebar-playlists a {
+    display: block;
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+}
+
+.sidebar-playlists a:hover {
     color: white;
-    width: 18%;
 }
-#top{
+
+main {
+    width: calc(100% - 250px);
+    background-color: rgb(30, 30, 30);
+    height: 100%;
+    float: left;
+    padding: 15px 50px;
+    overflow-y: auto;
+}
+
+.main-wraper {
+    padding-bottom: 200px;
+}
+
+#top {
     background-color: black;
     position: fixed;
     height: 100px;
     z-index: 98;
-    width: 82%;
-}
-#menu{
-    z-index: 99;
-    margin-top: -50vh;
-    background-color: #6952C8;
-    width: 100%;
-    position: fixed;
-    height: 50vh;
-    transition: 1s;
-}
-#lista-lista{
-    display: block;
-}
-.lista{
-    display: block;
-    color: white;
-    font-size: 12px;
-    text-align: justify;
-    padding: 10px;
-    width: 100%;
-    transition: 0.5s;
-}
-.lista:hover{
-    background-color: #816BD8;
-    cursor: pointer;
-}
-#atual{
-    background-color: #816BD8;
-}
-#logo-menu{
-    display: block;
-    top: 10px;
-    left: 10px;
-    width: 100%;
-    height: 50px;
-}
-#logo-icon-menu{
-    width: 30px;
-    height: 30px;
-    float: left;
-    margin: 10px;
-}
-#logotype-menu{
-    font-size: 10px;
-    font-weight: bold;
-    float: left;
+    top: 0;
+    left: calc(250px);
+    width: calc(100% - 250px);
 }
 
-#irparamenu{
-    background-color: #6952C8;
-    border-radius: 30px;
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    float: left;
-    border: none;
-    margin: 20px;
-}
-#menu-icon{
-    height: 25px;
-    width: 25px
-}
-#searching-bar{
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    float: left;
-    width: 70%;
-    height: 40px;
-    border: 0px;
-    padding-left: 10px;
-    border-radius: 20px;
-    background-color: lightgray;
-    box-shadow: 5px 5px 5px rgb(17, 17, 17);
-}
-input{
-    float: left;
-    background-color: transparent;
-    border: none;
-    padding: 10px;
-    outline: none;
-    font-size: 18px;
-    width: 90%;
-}
-#searching-icon{
-    float: left;
-    z-index: 98;
-    width: 25px;
-    height: 25px;
-    margin-top: 9px;
-}
-#profile{
+#profile {
     display: block;
     position: absolute;
     float: left;
-    top: 20px;
+    font-size: 18px;
+    top: 18px;
     right: 10px;
-    font-size: 20px;
     color: white;
     width: 22.5%;
     height: 10%;
+    padding: 20px 0;
 }
-#profile:hover{
+
+#profile:hover {
     cursor: pointer;
 }
-#username{
-    float: left;
+
+#results {
+    margin: 30px;
+    margin-top: 120px;
+    color: white;
     font-size: 20px;
+}
+
+.song {
+    width: 90%;
+    height: 80px;
+    margin: 30px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgb(60, 60, 60);
+}
+
+.song-empty {
+    width: 90%;
+    height: 80px;
+}
+
+.s-image {
+    float: left;
+    height: 70px;
+    width: 70px;
+    margin: 5px;
+}
+
+.s-image>img {
+    width: 100%;
+}
+
+.s-data {
+    width: calc(100% - 200px);
+    float: left;
+}
+
+.s-data h1 {
+    color: white;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.s-data h2 {
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    margin: 10px;
+}
+
+.s-buttons {
+    float: left;
+}
+
+.s-buttons button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 10px;
     margin-top: 20px;
 }
-#img{
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin: 10px;
-}
-#middle-sentence{
-    margin-top: 25%;
-    margin-left: 35%;
-    width: 35%;
-    text-align: center;
-}
-#advice{
-    display: block;  
-    color: #6A6A6A;
-    font-weight: bold;
-    font-size: 18px;
-}
-#discover{
-    display: block;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 1s;
-}
-#discover:hover{
-    transform: translateX(10px);
+
+.s-buttons button:hover {
     cursor: pointer;
 }
-#logo{
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 10%;
-}
-#logo-icon{
-    width: 50px;
-    height: 50px;
-    float: left;
-    margin: 10px;
-}
-#logotype{
-    font-size: 20px;
-    font-weight: bold;
-    float: left;
-}
 
-
-::-webkit-scrollbar{
+ ::-webkit-scrollbar {
     width: 12.5px;
 }
-::-webkit-scrollbar-track{
+
+ ::-webkit-scrollbar-track {
     background-color: lightgray;
 }
-::-webkit-scrollbar-thumb{
+
+ ::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
-::-webkit-scrollbar-thumb:hover {
+
+ ::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
-@media screen and (max-width: 1700px){
-    #irparamenu{
-        display: none;
+
+@media screen and (max-width: 1700px) {
+    .main-col {
+        width: 20%;
     }
 }
-@media screen and (max-width: 768px){
-    #middle-sentence{
-        margin: auto;
-        margin-top: 75%;
-        width: 50%;
-    }
-    main{ 
+
+@media screen and (max-width: 768px) {
+    .main {
         width: 100%;
     }
-    #advice, #discover{
-        font-size: 14px;
-    }
-    aside{
+    .sidebar {
         display: none;
     }
-    #searching-bar{
-        height: 30px;
-        width: 70%;
-        margin-left: 10%;
+    .main-col {
+        width: 48%;
+        margin-right: 2%;
     }
-    input{
-        padding: 7px;
-        font-size: 14px;
-        width: 80%;
-    }
-    #searching-icon{
-        width: 20px;
-        height: 20px;
-        margin-top: 6px;
-    }
-    #profile{
-        display: none;
-    }
-    #top{
-        width: 100%;
-        height: 100px;
-    }
-    #irparamenu{
-        display: inline;
-    }
-} 
+}

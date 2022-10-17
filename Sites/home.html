@@ -6,66 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheMusicProject - Home</title>
+    <link rel="icon" type="image/x-icon" href="photos/icon.ico">
     <link rel="stylesheet" href="home-style.css">
-    
 </head>
 
 <body>
     <aside id="aside">
-        <div id="container">
-            <a id="current" class="others">Home</a>
-            <a class="others" href="search.html">Search</a>
-            <a class="others">Sua Playlist</a>
-        </div>
-        <div id="logo">
-            <img id="logo-icon" src="Imagens/logo.png" alt="">
-            <p id="logotype">TheMusicProject</p>
+        <div class="sidebar-wrapper">
+            <div class="sidebar-logo">
+                <img src="photos/THEmusicPROJECT.png" alt="logo">
+            </div>
+            <div class="sidebar-menu">
+                <a class="sidebar-menu-selected" href=" ">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="index.html">
+                    <i class="fa-solid fa-magnifying-glass "></i> Buscar
+                </a>
+                <a href=" ">
+                    <i class="fas fa-database"></i> Biblioteca
+                </a>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-menu-item">
+                    <div class="sidebar-menu-item-component ">
+                        +
+                    </div>
+                    <span>Criar Playlist</span>
+                </div>
+                <div class="sidebar-playlists">
+                    <a href=" "> Playlist 1</a>
+                    <a href=" "> Playlist 2</a>
+                    <a href=" "> Playlist 3</a>
+                    <a href=" "> Playlist 4</a>
+                    <a href=" "> Playlist 5</a>
+                </div>
+            </div>
         </div>
     </aside>
     <main id="main">
-        <div id="top">
-            <button id="irparamenu" onclick="carregarMenu()">
-                <img id="menu-icon" src="Imagens/menu-icon.png" alt="menu-icon">
-            </button>
-
-            <div id="menu">
-                <div id="logo-menu">
-                    <img id="logo-icon-menu" src="Imagens/logo.png" alt="">
-                    <p id="logotype-menu">Dukh</p>
-                </div>
-                <div id="lista-lista">
-                    <a id="atual" class="lista">Home</a>
-                    <a href="search.html" class="lista">Search</a>
-                    <a class="lista">Playlists</a>
-                    <a class="lista">Perfil</a>
-                    <a class="lista" onclick="voltar()">Voltar</a>
-                </div>
+        <div class="main-wrapper">
+            <div id="top">
+                <a id="profile">
+                    <i class="fa-solid fa-user"></i> Username
+                </a>
             </div>
-
-            <div id="searching-bar">
-                <img id='searching-icon' src="Imagens/searching-icon.png" alt="searching-icon">
-                <input type="text" placeholder="Digite aqui para pesquisar">
-            </div>
-            <a id="profile">
-                <img id="img" src="Imagens/user-icon.png" alt="">
-                <p id="username">Mcvsk</p>
-            </a>
-        </div>
-
-        <div id="middle-sentence">
-            <p id="advice">Não há músicas sendo tocadas no momento.</p>
-            <a href="descobrir.html" id="discover">Descubra ></a>
+            <div id="tips"> </div>
         </div>
     </main>
-
-    <script>
-        function carregarMenu() {
-            document.getElementById('menu').style.marginTop = '0vh';
-        }
-        function voltar(){
-            document.getElementById('menu').style.marginTop = '-50vh';
-        }
-    </script>
+        
+    <script src="all.min.js"></script>
 </body>
 
 </html>
