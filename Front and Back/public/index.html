@@ -129,21 +129,19 @@
             postInfo();
             getInfo();
 
-            async function postInfo(e) // async --> funciona ao mesmo tempo (assincrono)
-            {
+            async function postInfo(e) {
                 if (inpBx.value == " ") {
                     return
                 }
-                const res = await fetch(baseUrl, // espera executar a função para poder continuar
-                    {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type ": 'application/json'
-                        },
-                        body: JSON.stringify({
-                            parcel: inpBx.value
-                        })
-                    });
+                const res = await fetch(baseUrl, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type ": 'application/json'
+                    },
+                    body: JSON.stringify({
+                        parcel: inpBx.value
+                    })
+                });
             }
 
             async function getInfo(e) {
