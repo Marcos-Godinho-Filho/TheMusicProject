@@ -83,10 +83,8 @@ function buscar(e) {
                         <h2>${album}</h2>
                     </div>
                     <div class="items-song">
-                        <audio controls>
-                            <source id="audio" src=${preview}>
-                            Your browser does not support the audio tag.
-                        </audio>
+                        <a href="${preview}">
+                        </a>
                     </div>
                 </div>
                 `;

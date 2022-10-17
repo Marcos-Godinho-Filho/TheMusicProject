@@ -27,7 +27,6 @@
                 </a>
             </div>
             <div class="sidebar-menu">
-                <p class="sidebar-menu-title"> Playlists</p>
                 <div class="sidebar-menu-item">
                     <div class="sidebar-menu-item-component">
                         +
@@ -58,7 +57,22 @@
                     <i class="fa-solid fa-user"></i> Username
                 </a>
             </div>
-            <div id="results"></div>
+            <div id="results">
+                <div class="song">
+                    <div class="items-song" id="s-image">
+                        <img src="${image}" alt="" class="image">
+                    </div>
+                    <div class="items-song" id="s-data">
+                        <h1>${title}</h1>
+                        <h2>${artist}</h2>
+                        <h2>${album}</h2>
+                    </div>
+                    <div class="items-song">
+                        <span> + </span>
+                    </div>
+                    <a href="${preview}"></a>
+                </div>
+            </div>
         </div>
     </main>
     <div class="player">
