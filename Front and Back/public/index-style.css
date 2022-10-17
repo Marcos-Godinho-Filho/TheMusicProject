@@ -246,7 +246,7 @@ input {
     margin: 5px;
 }
 
-.s-image img {
+.s-image>img {
     width: 100%;
 }
 
@@ -298,30 +298,50 @@ input {
     width: 20%;
 }
 
-.item-pa {
+.pa-image {
+    width: 80px;
+    height: 80px;
+    vertical-align: middle;
+    float: left;
+    margin: 10px;
+}
+
+.pa-image img {
+    width: 100%;
+}
+
+.pa-data {
+    width: 30%;
+    padding: 10px;
     float: left;
 }
 
-.p-image {}
-
-.player-artist img {
-    max-width: 70px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.player-artist h3 {
-    display: inline-block;
+.pa-data h1 {
     color: white;
-    font-weight: normal;
-    font-size: 20px;
-    vertical-align: middle;
-    margin-left: 10px;
+    font-size: 16px;
+    margin: 10px;
 }
 
-.player-artist h3>span {
-    color: rgb(200, 200, 200);
-    font-size: 13px;
+.pa-data h2 {
+    color: rgb(153, 153, 153);
+    font-size: 14px;
+    margin: 10px;
+}
+
+.pa-buttons {
+    float: left;
+}
+
+.pa-buttons button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.pa-buttons button:hover {
+    cursor: pointer;
 }
 
 .player-control {
