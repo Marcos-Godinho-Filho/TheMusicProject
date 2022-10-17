@@ -227,11 +227,11 @@ input {
 
 .song {
     width: 80%;
-    height: 100px;
+    height: 80px;
     margin: 30px;
     margin-left: 10px;
     border-radius: 10px;
-    background-color: gray;
+    background-color: rgb(60, 60, 60);
 }
 
 .items-song {
@@ -239,9 +239,9 @@ input {
 }
 
 #s-image {
-    height: 80px;
-    width: 80px;
-    margin: 10px;
+    height: 70px;
+    width: 70px;
+    margin: 5px;
 }
 
 .image {
@@ -249,7 +249,7 @@ input {
 }
 
 #s-data {
-    width: 50%;
+    width: calc(100% - 200px);
 }
 
 h1 {
@@ -266,6 +266,18 @@ h2 {
 
 .preview {
     display: none;
+}
+
+.items-song button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.items-song button:hover {
+    cursor: pointer;
 }
 
 .player {
