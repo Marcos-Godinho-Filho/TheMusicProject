@@ -61,7 +61,7 @@
             <div id="results">
                 <div class="song">
                     <div class="items-song" id="s-image">
-                        <img src="${image}" alt=" " class="image">
+                        <img src="" alt=" " class="image">
                     </div>
                     <div class="items-song" id="s-data">
                         <h1>Lose Yourself</h1>
@@ -106,17 +106,6 @@
     <script src="all.min.js "></script>
 
     <script>
-        function carregarMenu() {
-            document.querySelector('#menu').style.marginTop = '0vh';
-        }
-
-        function voltar() {
-            document.querySelector('#menu').style.marginTop = '-50vh';
-        }
-
-        document.querySelector('#irparamenu').onclick = carregarMenu();
-        document.querySelector('#voltar').onclick = voltar();
-
         let buscarBtn = document.querySelector("#search");
         let inpBx = document.querySelector("#inputBox");
         let results = document.querySelector("#results");
