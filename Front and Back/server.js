@@ -11,17 +11,17 @@ app.use(express.json());
 app.get('/info/:dynamic', (req, res) => {
     const { dynamic } = req.params;
     const { key } = req.query;
-    console.log(dynamic, key);
+    // console.log(dynamic, key);
     res.status(200).json({ info: retorno });
     retorno = [];
 });
 
 app.post('/', (req, res) => {
-    
+
     retorno = [];
-    
+
     const { parcel } = req.body;
-    console.log(parcel);
+    // console.log(parcel);
 
     const optionsAxios = {
         method: 'GET',
@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
         }
     };
 
-    axios.request(optionsAxios).then(function (response) {
+    axios.request(optionsAxios).then(function(response) {
         function convertSecToMinutes(sec) {
             const totalSeconds = sec;
 
@@ -51,12 +51,12 @@ app.post('/', (req, res) => {
         }
         for (let musica of response.data['data']) {
 
-            console.log(musica["title_short"]);
-            console.log(musica["artist"]["name"]);
-            console.log(musica["album"]["title"]);
-            console.log(convertSecToMinutes(musica["duration"]));
-            console.log(musica["album"]["cover_medium"]);
-            console.log(musica["preview"]);
+            // console.log(musica["title_short"]);
+            // console.log(musica["artist"]["name"]);
+            // console.log(musica["album"]["title"]);
+            // console.log(convertSecToMinutes(musica["duration"]));
+            // console.log(musica["album"]["cover_medium"]);
+            // console.log(musica["preview"]);
             //retorno = musica["preview"];
             retorno.push({
                 "title_short": musica["title_short"],
@@ -68,7 +68,7 @@ app.post('/', (req, res) => {
             });
 
         }
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error(error);
     });
     if (!parcel) {
@@ -78,4 +78,4 @@ app.post('/', (req, res) => {
 
 });
 
-app.listen(port, () => console.log('Server has started on port ' + port)); 
+app.listen(port, () => console.log('Server has started on port ' + port));
