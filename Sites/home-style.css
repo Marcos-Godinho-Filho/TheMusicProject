@@ -18,6 +18,7 @@
 html,
 body {
     height: 100%;
+    overflow: hidden;
 }
 
 aside {
@@ -25,9 +26,8 @@ aside {
     width: 250px;
     padding: 10px 10px;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: black;
+    background-color: #1d1d1d;
+    display: block;
 }
 
 .sidebar-wrapper {
@@ -118,7 +118,6 @@ main {
     background-color: rgb(30, 30, 30);
     height: 100%;
     float: left;
-    overflow-y: auto;
 }
 
 .main-wraper {
@@ -153,7 +152,7 @@ main {
 
 #slider{
     margin-top: 32px;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -188,24 +187,31 @@ main {
     z-index: 4;
     transition: 10s;
     width: 100%;
+    display: block;
 }
 
 #img2{
     z-index: 3;
     transition: 10s;
     width: 100%;
+    display: block;
+
 }
 
 #img3{
     z-index: 2;
     transition: 10s; 
     width: 100%;
+    display: block;
+
 }
 
 #img4{
     z-index: 1;
     transition: 10s;
     width: 100%;
+    display: block;
+
 }
 
  ::-webkit-scrollbar {
