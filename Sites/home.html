@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="home-style.css">
 </head>
 
-<body>
+<body onload="mudar()">
     <aside id="aside">
         <div class="sidebar-wrapper">
             <div class="sidebar-logo">
@@ -51,16 +51,17 @@
                     <i class="fa-solid fa-user"></i> Username
                 </a>
             </div>
-            <div id="tips"> 
-                <img src="photos/img1.png" alt="dica" id="img1">
-                <img src="photos/img2.png" alt="dica" id="img2">
-                <img src="photos/img3.png" alt="dica" id="img3">
-                <img src="photos/img4.png" alt="dica" id="img4">
+            <div id="slider">
+                <a class="slider-a" href="photos/img1.jpg"><img src="photos/img1.png" alt="dica" id="img1"></a>
+                <a class="slider-a" href="photos/img1.jpg"><img src="photos/img2.png" alt="dica" id="img2"></a>
+                <a class="slider-a" href="photos/img1.jpg"><img src="photos/img3.png" alt="dica" id="img3"></a>
+                <a class="slider-a" href="photos/img1.jpg"><img src="photos/img4.png" alt="dica" id="img4"></a>
             </div>
         </div>
     </main>
-        
+
     <script src="all.min.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
