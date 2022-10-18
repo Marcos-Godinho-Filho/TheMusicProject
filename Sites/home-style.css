@@ -166,14 +166,17 @@ main {
 
 #img2{
     z-index: 3;
+    margin-left: calc(-100% - 250px);
 }
 
 #img3{
     z-index: 2;
+    margin-left: calc(-100% - 250px);
 }
 
 #img4{
     z-index: 1;
+    margin-left: calc(-100% - 250px);
 }
 
  ::-webkit-scrollbar {
