@@ -128,7 +128,7 @@ playSong = (file) => {
 
 document.querySelectorAll('.main-col').forEach(item => {
 
-    item.addEventListener('click', event => {
+    item.addEventListener('click', (event) => {
 
         let image = item.getAttribute('data-image');
         let artist = item.getAttribute('data-artist');
