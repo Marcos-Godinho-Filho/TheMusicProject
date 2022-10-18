@@ -185,14 +185,14 @@ main {
 
 #img1{
     z-index: 4;
-    transition: 10s;
+    transition: 5s;
     width: 100%;
     display: block;
 }
 
 #img2{
     z-index: 3;
-    transition: 10s;
+    transition: 5s;
     width: 100%;
     display: block;
 
@@ -200,7 +200,7 @@ main {
 
 #img3{
     z-index: 2;
-    transition: 10s; 
+    transition: 5s; 
     width: 100%;
     display: block;
 
@@ -208,7 +208,7 @@ main {
 
 #img4{
     z-index: 1;
-    transition: 10s;
+    transition: 5s;
     width: 100%;
     display: block;
 
