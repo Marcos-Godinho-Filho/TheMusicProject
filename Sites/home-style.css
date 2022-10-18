@@ -153,7 +153,8 @@ main {
 
 #slider{
     margin-top: 32px;
-    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 #slider a{
@@ -165,18 +166,17 @@ main {
     animation-delay: 7s;
     animation-duration: 2s;
     z-index: 20;
+    width: calc(100% - 250px);
 }
 
 #slider a:nth-of-type(2){
     z-index: 10;
+    width: calc(100% - 250px);
 }
 
 #slider a:nth-of-type(n+3){
     display: none;
-}
-
-.slider-a img{
-    width: calc(100%);
+    width: calc(100% - 250px);
 }
 
 @keyframes fader {
@@ -187,22 +187,25 @@ main {
 #img1{
     z-index: 4;
     transition: 10s;
+    width: 100%;
 }
 
 #img2{
     z-index: 3;
     transition: 10s;
+    width: 100%;
 }
 
 #img3{
     z-index: 2;
-    transition: 10s;
-    
+    transition: 10s; 
+    width: 100%;
 }
 
 #img4{
     z-index: 1;
     transition: 10s;
+    width: 100%;
 }
 
  ::-webkit-scrollbar {
