@@ -57,7 +57,7 @@ function buscar(e) {
             results.innerHTML += `
                     <div class="song">
                         <div class="s-image">
-                            <img src="${image}" alt="">
+                            <img src="${image}" alt="" draggable="false">
                         </div>
                         <div class="s-data">
                             <h1>${title}</h1>
