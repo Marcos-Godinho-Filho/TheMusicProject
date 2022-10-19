@@ -25,9 +25,10 @@ aside {
     width: 250px;
     padding: 10px 10px;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     background-color: black;
+    display: block;
 }
 
 .sidebar-wrapper {
@@ -129,7 +130,7 @@ main {
 #top {
     background-color: black;
     position: fixed;
-    height: 100px;
+    height: 75px;
     z-index: 98;
     top: 0;
     left: calc(250px);
@@ -149,8 +150,8 @@ main {
     border-radius: 20px;
     background-color: white;
     box-shadow: 5px 5px 5px rgb(17, 17, 17);
-    margin: 30px;
-    margin-right: 10px;
+    margin: 20px;
+    /* margin-right: 10px; */
 }
 
 #magnifying-glass {
@@ -184,7 +185,7 @@ input {
     font-family: circular-bold;
     font-size: 16px;
     float: left;
-    margin: 30px;
+    margin: 20px;
     margin-left: 0px;
 }
 

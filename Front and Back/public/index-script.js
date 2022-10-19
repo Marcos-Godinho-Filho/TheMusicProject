@@ -78,7 +78,7 @@ function buscar(e) {
     }
 }
  
-function show (image, title, artist, album, preview){
+function show (image, title, artist, album, preview) {
     document.querySelector('#image').style.display = 'block';
 
     document.querySelector('#image').src = image;
