@@ -1,5 +1,5 @@
 const axios = require("axios");
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = 3000;
 
@@ -34,35 +34,11 @@ app.post('/', (req, res) => {
     };
 
     axios.request(optionsAxios).then(function(response) {
-        function convertSecToMinutes(sec) {
-            const totalSeconds = sec;
-
-            const minutes = Math.floor(totalSeconds / 60);
-
-            const seconds = totalSeconds % 60;
-
-            function padTo2Digits(num) {
-                return num.toString().padStart(2, '0');
-            }
-
-            const result = `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
-
-            return result;
-        }
         for (let musica of response.data['data']) {
-
-            // console.log(musica["title_short"]);
-            // console.log(musica["artist"]["name"]);
-            // console.log(musica["album"]["title"]);
-            // console.log(convertSecToMinutes(musica["duration"]));
-            // console.log(musica["album"]["cover_medium"]);
-            // console.log(musica["preview"]);
-            //retorno = musica["preview"];
             retorno.push({
                 "title_short": musica["title_short"],
                 "artist": musica["artist"]["name"],
                 "album": musica["album"]["title"],
-                "duration": convertSecToMinutes(musica["duration"]),
                 "image": musica["album"]["cover_medium"],
                 "preview": musica["preview"]
             });
