@@ -25,14 +25,11 @@ aside {
     width: 250px;
     padding: 10px 10px;
     height: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
-    background-color: black;
+    background-color: #0c0c0c;
     display: block;
-}
-
-.sidebar-wrapper {
-    padding-bottom: 200px;
+    margin: 0;
 }
 
 .sidebar-menu {
@@ -121,10 +118,6 @@ main {
     float: left;
     padding: 15px 50px;
     overflow-y: auto;
-}
-
-.main-wraper {
-    padding-bottom: 200px;
 }
 
 #top {
@@ -291,7 +284,7 @@ input {
     left: 0;
     bottom: 0;
     display: flex;
-    background-color: rgb(44, 44, 44);
+    background-color: black;
     padding: 15px 25px;
 }
 
