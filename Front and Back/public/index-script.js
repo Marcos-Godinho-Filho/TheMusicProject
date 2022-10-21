@@ -48,95 +48,65 @@ function buscar(e) {
         results.innerHTML = "";
 
         for (let pos = 0; pos < resultado.length; pos++) {
-            let title = resultado[pos]["title_short"];
-            let artist = resultado[pos]["artist"];
-            let album = resultado[pos]["album"];
-            let image = resultado[pos]["image"];
             let preview = resultado[pos]["preview"];
 
             results.innerHTML += `
                     <div class="song">
                         <div class="s-image">
-                            <img src="${image}" alt="">
+                            <img src="${resultado[pos]["image"]}" alt="" draggable="false">
                         </div>
                         <div class="s-data">
-                            <h1>${title}</h1>
-                            <h2>${artist}</h2>
-                            <h2>${album}</h2>
+                            <h1>${resultado[pos]["title_short"]}</h1>
+                            <h2>${resultado[pos]["artist"]}</h2>
+                            <h2>${resultado[pos]["album"]}</h2>
                         </div>
                         <div class="s-buttons">
                             <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;"> 
+                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${preview}')"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
                         </div>
-                        <a href="${preview}"></a>
                     </div>
                     `;
         }
 
         results.innerHTML += '<div class="song-empty"></div>'
     }
-
 }
 
-// var audioplayer = document.getElementById('audioplayer');
-// var loaded = false;
+let audioPlayer = document.querySelector('#audioPlayer');
 
-// var playBtn = document.getElementById('playBtn');
-// var pauseBtn = document.getElementById('pauseBtn');
+let playBtn = document.querySelector('#playBtn');
+let pauseBtn = document.querySelector('#pauseBtn');
 
-// playBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
+function show (image, title, artist, album, preview) {
+    document.querySelector('#image').style.display = 'block';
 
-//     playBtn.style.display = "none ";
-//     pauseBtn.style.display = "inline ";
+    document.querySelector('#image').src = image;
+    document.querySelector('#title').innerHTML = title;
+    document.querySelector('#artist').innerHTML = artist;
+    document.querySelector('#album').innerHTML = album;
+    document.querySelector('#preview').src = preview;
 
-// });
+    audioPlayer.play();
+    playBtn.style.display = "none";
+    pauseBtn.style.display = "inline";
+}
 
+playBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 
-// pauseBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
+    playBtn.style.display = "none";
+    pauseBtn.style.display = "inline";
 
-//     playBtn.style.display = "inline-block ";
-//     pauseBtn.style.display = "none ";
-//     audioplayer.pause();
+    audioPlayer.play();
+});
 
-// });
+pauseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 
-// playSong = (file) => {
+    playBtn.style.display = "inline";
+    pauseBtn.style.display = "none";
 
-//     if (loaded == false) {
-//         audioplayer.innerHTML = `<source src="` + file + ` " type="audio/mp3 " />`;
-//         loaded = true;
-//     }
-
-//     audioPlayer.play();
-
-//     playBtn.style.display = "none ";
-//     pauseBtn.style.display = "inline-block ";
-
-// }
-
-// document.querySelectorAll('.main-col').forEach(item => {
-
-//     item.addEventListener('click', event => {
-
-//         let image = item.getAttribute('data-image');
-//         let artist = item.getAttribute('data-artist');
-//         let song = item.getAttribute('data-song');
-//         let file = item.getAttribute('data-file');
-
-//         let playerArtistComponent = document.getElementsByClassName("player-artist ");
-
-//         playerArtistComponent[0].innerHTML = `
-
-//                 <img src="` + image + ` "/>
-//                 <h3>` + song + `<br><span>` + artist + `</span></h3>
-
-//                 `;
-
-//         playSong(file)
-//     });
-
-// })
+    audioPlayer.pause();
+});

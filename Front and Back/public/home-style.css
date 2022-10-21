@@ -18,6 +18,7 @@
 html,
 body {
     height: 100%;
+    overflow: hidden;
 }
 
 aside {
@@ -25,9 +26,8 @@ aside {
     width: 250px;
     padding: 10px 10px;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: black;
+    background-color: #1d1d1d;
+    display: block;
 }
 
 .sidebar-wrapper {
@@ -118,8 +118,6 @@ main {
     background-color: rgb(30, 30, 30);
     height: 100%;
     float: left;
-    padding: 15px 50px;
-    overflow-y: auto;
 }
 
 .main-wraper {
@@ -129,7 +127,7 @@ main {
 #top {
     background-color: black;
     position: fixed;
-    height: 100px;
+    height: 50px;
     z-index: 98;
     top: 0;
     left: calc(250px);
@@ -141,81 +139,69 @@ main {
     position: absolute;
     float: left;
     font-size: 18px;
-    top: 18px;
+    top: 14px;
     right: 10px;
     color: white;
     width: 22.5%;
     height: 10%;
-    padding: 20px 0;
 }
 
 #profile:hover {
     cursor: pointer;
 }
 
-#results {
-    margin: 30px;
-    margin-top: 120px;
-    color: white;
-    font-size: 20px;
+#slider{
+    margin-top: 32px;
+    height: 100vh;
+    object-fit: cover;
 }
 
-.song {
-    width: 90%;
-    height: 80px;
-    margin: 30px;
-    margin-left: 10px;
-    border-radius: 10px;
-    background-color: rgb(60, 60, 60);
+#slider a{
+    position: absolute;
 }
 
-.song-empty {
-    width: 90%;
-    height: 80px;
+#slider a:nth-of-type(1){
+    animation-name: fader;
+    animation-delay: 4s;
+    animation-duration: 2s;
+    z-index: 20;
+    width: calc(100% - 250px);
 }
 
-.s-image {
-    float: left;
-    height: 70px;
-    width: 70px;
-    margin: 5px;
+#slider a:nth-of-type(2){
+    z-index: 10;
+    width: calc(100% - 250px);
 }
 
-.s-image>img {
+#slider a:nth-of-type(n+3){
+    display: none;
+    width: calc(100% - 250px);
+}
+
+@keyframes fader {
+    from {opacity:1.0;}
+    to {opacity:0.0;}
+}
+
+.slider-img {
     width: 100%;
+    display: block;
 }
 
-.s-data {
-    width: calc(100% - 200px);
-    float: left;
+#img1{
+    z-index: 4;
 }
 
-.s-data h1 {
-    color: white;
-    font-size: 14px;
-    margin: 10px;
+#img2{
+    z-index: 3;
 }
 
-.s-data h2 {
-    color: rgb(153, 153, 153);
-    font-size: 12px;
-    margin: 10px;
+#img3{
+    z-index: 2;
 }
 
-.s-buttons {
-    float: left;
-}
-
-.s-buttons button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.s-buttons button:hover {
-    cursor: pointer;
+#img4{
+    z-index: 1;
 }
 
  ::-webkit-scrollbar {
