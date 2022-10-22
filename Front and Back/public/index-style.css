@@ -285,6 +285,7 @@ input {
     bottom: 0;
     display: flex;
     background-color: black;
+    padding: 15px 25px;
 }
 
 .player-artist {
