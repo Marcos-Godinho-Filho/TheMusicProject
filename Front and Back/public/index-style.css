@@ -285,7 +285,6 @@ input {
     bottom: 0;
     display: flex;
     background-color: black;
-    padding: 15px 25px;
 }
 
 .player-artist {
@@ -293,7 +292,7 @@ input {
     height: auto;
 }
 
-#image{
+#image {
     display: none;
 }
 
@@ -329,12 +328,18 @@ input {
 }
 
 .player-control {
-    width: 60%;
+    width: 70%;
     text-align: center;
+    float: left;
 }
 
-.player-contro-buttons a {
-    color: white;
+.player-control-buttons {
+    width: 70%;
+    float: left;
+}
+
+.player-control-buttons a {
+    color: rgb(80, 55, 55);
     margin: 8px 15px;
     font-size: 18px;
 }
@@ -342,37 +347,53 @@ input {
 .player-control-progress {
     width: 100%;
     max-width: 600px;
-    height: 7px;
-    margin-top: 20px;
     position: relative;
     border-radius: 8px;
-    display: inline-block;
-    background-color: rgb(130, 130, 130);
+    display: flex;
 }
 
-.player-control-progress-2 {
+.music-progress-bar{
+    width: 100%;
+}
+
+.current-time{
+    color: white;
+    font-size: 12px;
+    float: left;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 7px;
-    border-radius: 8px;
-    background-color: white;
 }
 
- ::-webkit-scrollbar {
+.duration {
+    color: white;
+    font-size: 12px;
+    float: right;
+    position: absolute;
+}
+
+.player-control-volume {
+    width: 25%;
+    float: left;
+}
+
+.volume-slider {
+    width: calc(100% - 80px);
+    position: relative;
+    float: right;
+}
+
+::-webkit-scrollbar {
     width: 12.5px;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background-color: lightgray;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 
@@ -408,9 +429,11 @@ audio::-webkit-media-controls-volume-control-container {
     .main {
         width: 100%;
     }
+
     .sidebar {
         display: none;
     }
+
     .main-col {
         width: 48%;
         margin-right: 2%;

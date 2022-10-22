@@ -71,21 +71,27 @@
         </div>
         <div class="player-control">
             <div class="player-control-buttons">
-                <a href=" ">
+                <a>
                     <i class="fas fa-backward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
-                <a style="display: none;" id="pauseBtn" href="# " style="color: #fff;">
+                <a style="display: none;" id="pauseBtn" style="color: #fff;">
                     <i class="fa-solid fa-pause" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
-                <a id="playBtn" href="#" style="color: #fff; display: inline-block;">
+                <a id="playBtn" style="color: #fff; display: inline-block;">
                     <i class="fa-solid fa-play" style="color: #fff; font-size: 30px; margin-inline: 20px "></i>
                 </a>
-                <a href=" ">
+                <a>
                     <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
+                <div class="player-control-progress">
+                    <input type="range" class="music-progress-bar" value="0"> <br>
+                    <p class="current-time">00 : 00</p>
+                    <p class="duration">00 : 00</p>
+                </div>
             </div>
-            <div class="player-control-progress">
-                <div style="width: 15%;" class="player-control-progress-2"></div>
+            <div class="player-control-volume">
+                <span class="fas fa-volume-high" style="color: #fff; font-size: 30px; margin-inline: 20px"></span>
+                <input type="range" class="volume-slider" max="1" value="1" step="0.1">
             </div>
         </div>
     </div>
