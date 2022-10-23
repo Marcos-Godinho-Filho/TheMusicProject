@@ -74,39 +74,75 @@ function buscar(e) {
     }
 }
 
-let audioPlayer = document.querySelector('#audioPlayer');
+let image = document.querySelector('#image');
+let title = document.querySelector('#title');
+let artist = document.querySelector('#artist');
+let album = document.querySelector('#album');
+
+let audio = document.querySelector('#audioPlayer');
+let preview = document.querySelector('#preview');
 
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
 
+let progressBar = document.querySelector('.music-progress-bar')
+let songDuration = document.querySelector('.duration');
+let songCurrentTime = document.querySelector('.current-time');
+
+let volumeSlider = document.querySelector('.volume-slider')
+
+let audioPlayer = document.querySelector('.audioPlayer');
+
 function show (image, title, artist, album, preview) {
     document.querySelector('#image').style.display = 'block';
 
-    document.querySelector('#image').src = image;
-    document.querySelector('#title').innerHTML = title;
-    document.querySelector('#artist').innerHTML = artist;
-    document.querySelector('#album').innerHTML = album;
-    document.querySelector('#preview').src = preview;
+    image.src = this.image;
+    title.innerHTML = this.title;
+    artist.innerHTML = this.artist;
+    album.innerHTML = this.album;
+    preview.src = this.preview;
 
-    audioPlayer.play();
-    playBtn.style.display = "none";
-    pauseBtn.style.display = "inline";
+    setTimeout(() => {
+        progressBar.max = music.duration;
+        songDuration.innerHTML = formatTime(audio.duration);
+    }, 300);
+    songCurrentTime.innerHTML = '00 : 00';
+
+    playBtn.click();
 }
 
-playBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+const formatTime = (time) => {
+    let min = Math.floor (time / 60);
+    if (min < 10){
+        min = `0` + min;
+    }
 
+    let sec = Math.floor(time % 60);
+    if (sec < 10){
+        sec = `0` + sec;
+    }
+
+    return `${min} : ${sec}`;
+}
+
+playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
 
     audioPlayer.play();
 });
 
-pauseBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
+pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
     pauseBtn.style.display = "none";
 
     audioPlayer.pause();
 });
+
+progressBar.addEventListener('change', () => {
+    audio.currentTime = progressBar.value;
+})
+
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+})

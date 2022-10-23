@@ -13,6 +13,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: circular-bold;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 html,
@@ -341,39 +345,40 @@ input {
 
 .player-control-buttons a {
     color: rgb(80, 55, 55);
-    margin: 8px 15px;
     font-size: 18px;
+    display: inline;
 }
 
 .player-control-progress {
     width: 100%;
-    max-width: 600px;
     position: relative;
     border-radius: 8px;
     display: flex;
+    top: 12px;
 }
 
-.music-progress-bar{
+.music-progress-bar {
     width: 100%;
 }
 
-.current-time{
+.current-time {
     color: white;
     font-size: 12px;
-    float: left;
+    right: calc(100% - 50px);
     position: absolute;
 }
 
 .duration {
     color: white;
     font-size: 12px;
-    float: right;
+    left: calc(100% - 50px);
     position: absolute;
 }
 
 .player-control-volume {
     width: 25%;
     float: left;
+    padding: 20px;
 }
 
 .volume-slider {
