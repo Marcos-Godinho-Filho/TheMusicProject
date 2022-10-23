@@ -340,8 +340,9 @@ input {
 }
 
 .player-control-buttons a {
-    color: rgb(80, 55, 55);
-    font-size: 18px;
+    color: #fff;
+    font-size: 30px;
+    margin-inline: 20px;
     display: inline;
 }
 
@@ -385,6 +386,16 @@ input {
     width: calc(100% - 80px);
     position: relative;
     float: right;
+}
+
+#volumeBtn {
+    color: #fff;
+    font-size: 30px;
+    margin-inline: 20px;
+}
+
+#volumeBtn:hover {
+    cursor: pointer;
 }
 
 #close {

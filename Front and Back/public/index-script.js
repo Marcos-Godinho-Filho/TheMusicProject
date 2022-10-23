@@ -105,7 +105,7 @@ function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     playBtn.click();
 
     progressBar.max = audioPlayer.duration;
-    songDuration.innerHTML = formatTime(30);
+    songDuration.innerHTML = formatTime(29);
     
     songCurrentTime.innerHTML = '00 : 00';
 }
@@ -143,28 +143,45 @@ backwardBtn.addEventListener('click', () => {
 })
 
 forwardBtn.addEventListener('click', () => {
-    audioPlayer.currentTime = formatTime(30);
+    audioPlayer.currentTime = 30;
 })
 
 setInterval(() => {
     songCurrentTime.innerHTML = formatTime(audioPlayer.currentTime);
-    progressBar.value = audioPlayer.currentTime;
+    progressBar.value = audioPlayer.currentTime * 3.4;
+
+    if (audioPlayer.currentTime >= 29) {
+        pauseBtn.click();
+    }
 }, 500)
 
 progressBar.addEventListener('change', () => {
-    audioPlayer.currentTime = progressBar.value;
+    audioPlayer.currentTime = progressBar.value / 3.4;
 })
 
-volumeSlider.addEventListener('input', () => {
+volumeSlider.addEventListener('change', () => {
     audioPlayer.volume = volumeSlider.value;
+})
+
+let previousVolume = 0;
+let volumeBtn = document.querySelector('#volumeBtn');
+
+volumeBtn.addEventListener('click', () => {
+    if (volumeSlider.value > 0) {
+        previousVolume = volumeSlider.value;
+
+        volumeSlider.value = 0;
+        audioPlayer.volume = 0;
+    }
+    else if (volumeSlider.value == 0) {
+        volumeSlider.value = previousVolume;
+        audioPlayer.volume = previousVolume;
+    }
 })
 
 let closeBtn = document.querySelector('#close');
 
 closeBtn.addEventListener('click', () => {
-    e.preventDefault();
-
-    alert('clicou');
     audioPlayer.pause();
     document.querySelector('.player').style.display = "none";
 })
