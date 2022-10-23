@@ -148,7 +148,6 @@ main {
     background-color: white;
     box-shadow: 5px 5px 5px rgb(17, 17, 17);
     margin: 20px;
-    /* margin-right: 10px; */
 }
 
 #magnifying-glass {
@@ -218,7 +217,7 @@ input {
 
 #results {
     margin: 30px;
-    margin-top: 120px;
+    margin-top: 100px;
     color: white;
     font-size: 20px;
 }
@@ -255,14 +254,20 @@ input {
 
 .s-data h1 {
     color: white;
-    font-size: 14px;
-    margin: 10px;
+    font-size: 14px;  
 }
 
 .s-data h2 {
     color: rgb(153, 153, 153);
     font-size: 12px;
+}
+
+.s-data h1, .s-data h2 {
     margin: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100% - 35px);
 }
 
 .s-buttons {
@@ -314,18 +319,23 @@ input {
     float: left;
 }
 
-.pa-data h1 {
+.pa-data>h1 {
     color: white;
-    font-size: 16px;
-    padding: 5px;
-    max-height: 30px;
+    font-size: 16px; 
 }
 
-.pa-data h2 {
+.pa-data>h2 {
     color: rgb(153, 153, 153);
     font-size: 14px;
+}
+
+.pa-data>h1, .pa-data>h2 {
     padding: 5px;
     max-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 80%;
 }
 
 .player-control {

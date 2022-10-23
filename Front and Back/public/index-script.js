@@ -140,6 +140,7 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
+    audioPlayer.play();
 })
 
 forwardBtn.addEventListener('click', () => {
@@ -155,11 +156,11 @@ setInterval(() => {
     }
 }, 500)
 
-progressBar.addEventListener('change', () => {
+progressBar.addEventListener('input', () => {
     audioPlayer.currentTime = progressBar.value / 3.4;
 })
 
-volumeSlider.addEventListener('change', () => {
+volumeSlider.addEventListener('input', () => {
     audioPlayer.volume = volumeSlider.value;
 })
 
@@ -167,6 +168,8 @@ let previousVolume = 0;
 let volumeBtn = document.querySelector('#volumeBtn');
 
 volumeBtn.addEventListener('click', () => {
+    let volumeIcon = document.querySelector('#volume-icon');
+
     if (volumeSlider.value > 0) {
         previousVolume = volumeSlider.value;
 
