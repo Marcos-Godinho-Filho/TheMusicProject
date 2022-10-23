@@ -297,10 +297,6 @@ input {
     height: auto;
 }
 
-#image {
-    display: none;
-}
-
 .pa-image {
     width: 90px;
     height: 90px;
@@ -349,6 +345,10 @@ input {
     display: inline;
 }
 
+.player-control-buttons a:hover {
+    cursor: pointer;
+}
+
 .player-control-progress {
     width: 100%;
     position: relative;
@@ -387,6 +387,19 @@ input {
     float: right;
 }
 
+#close {
+    color: white;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+#close:hover {
+    cursor: pointer;
+}
+
 ::-webkit-scrollbar {
     width: 12.5px;
 }
@@ -404,9 +417,11 @@ input {
 }
 
 audio {
-    width: 200px;
-    height: 45px;
-    margin: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -999;
+    opacity: 0;
 }
 
 audio::-webkit-media-controls-mute-button {

@@ -93,22 +93,21 @@ let volumeSlider = document.querySelector('.volume-slider')
 
 function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
-    image.style.display = 'block';
-
+   
     image.src = imageSrc;
     title.innerHTML = titleTxt;
     artist.innerHTML = artistTxt;
     album.innerHTML = albumTxt;
     preview.src = previewSrc;
 
-    setTimeout(() => {
-        alert(audioPlayer.duration)
-        progressBar.max = audioPlayer.duration;
-        songDuration.innerHTML = formatTime(audioPlayer.duration);
-    }, 300);
-    songCurrentTime.innerHTML = '00 : 00';
+    audioPlayer.load();
 
     playBtn.click();
+
+    progressBar.max = audioPlayer.duration;
+    songDuration.innerHTML = formatTime(30);
+    
+    songCurrentTime.innerHTML = '00 : 00';
 }
 
 const formatTime = (time) => {
@@ -144,12 +143,12 @@ backwardBtn.addEventListener('click', () => {
 })
 
 forwardBtn.addEventListener('click', () => {
-    audioPlayer.currentTime = Math.floor(audioPlayer.max);
+    audioPlayer.currentTime = formatTime(30);
 })
 
 setInterval(() => {
-    progressBar.value = audioPlayer.currentTime;
     songCurrentTime.innerHTML = formatTime(audioPlayer.currentTime);
+    progressBar.value = audioPlayer.currentTime;
 }, 500)
 
 progressBar.addEventListener('change', () => {
@@ -158,4 +157,14 @@ progressBar.addEventListener('change', () => {
 
 volumeSlider.addEventListener('input', () => {
     audioPlayer.volume = volumeSlider.value;
+})
+
+let closeBtn = document.querySelector('#close');
+
+closeBtn.addEventListener('click', () => {
+    e.preventDefault();
+
+    alert('clicou');
+    audioPlayer.pause();
+    document.querySelector('.player').style.display = "none";
 })

@@ -84,7 +84,7 @@
                     <i class="fas fa-forward" style="color: #fff; font-size: 30px; margin-inline: 20px"></i>
                 </a>
                 <div class="player-control-progress">
-                    <input type="range" class="music-progress-bar" value="0"> <br>
+                    <input type="range" class="music-progress-bar" min="0" max="300" value="0" step="1"> <br>
                     <p class="current-time">00 : 00</p>
                     <p class="duration">00 : 00</p>
                 </div>
@@ -93,10 +93,11 @@
                 <span class="fas fa-volume-high" style="color: #fff; font-size: 30px; margin-inline: 20px"></span>
                 <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
             </div>
+            <button id="close">X</button>
         </div>
     </div>
-    <audio id="audioPlayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;">
-        <source src="" id="preview">
+    <audio id="audioPlayer" controls>
+        <source src="" id="preview" type="audio/mpeg">
     </audio>
 
     <script src="index-script.js"></script>
