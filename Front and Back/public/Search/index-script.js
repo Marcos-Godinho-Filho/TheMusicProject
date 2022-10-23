@@ -60,8 +60,8 @@ function buscar(e) {
                         </div>
                         <div class="s-buttons">
                             <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
-                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
+                            <button onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}'); font-size: 28px;"> 
+                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px; font-size: 28px;"></i>
                             </button>
                         </div>
                     </div>

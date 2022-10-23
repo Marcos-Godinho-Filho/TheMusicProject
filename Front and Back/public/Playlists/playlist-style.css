@@ -125,13 +125,22 @@ main {
 }
 
 #top {
-    background-color: black;
-    position: fixed;
-    height: 75px;
+    background-color: #6952C8;
+    position: absolute;
+    height: 125px;
     z-index: 98;
     top: 0;
-    left: calc(250px);
+    left: 250px;
     width: calc(100% - 250px);
+}
+
+
+
+#songs {
+    margin: 30px;
+    margin-top: 100px;
+    color: white;
+    font-size: 20px;
 }
 
 .song {

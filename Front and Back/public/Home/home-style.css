@@ -126,7 +126,7 @@ main {
     height: 50px;
     z-index: 98;
     top: 0;
-    left: calc(250px);
+    left: 250px;
     width: calc(100% - 250px);
 }
 
