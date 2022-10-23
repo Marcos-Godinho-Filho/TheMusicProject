@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000/';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function(e) {
+inpBx.addEventListener('keyup', function (e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -48,8 +48,6 @@ function buscar(e) {
         results.innerHTML = "";
 
         for (let pos = 0; pos < resultado.length; pos++) {
-            let preview = resultado[pos]["preview"];
-
             results.innerHTML += `
                     <div class="song">
                         <div class="s-image">
@@ -62,7 +60,7 @@ function buscar(e) {
                         </div>
                         <div class="s-buttons">
                             <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${preview}')"> 
+                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
                         </div>
@@ -79,11 +77,13 @@ let title = document.querySelector('#title');
 let artist = document.querySelector('#artist');
 let album = document.querySelector('#album');
 
-let audio = document.querySelector('#audioPlayer');
+let audioPlayer = document.querySelector('#audioPlayer');
 let preview = document.querySelector('#preview');
 
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
+let backwardBtn = document.querySelector('#backwardBtn');
+let forwardBtn = document.querySelector('#forwardBtn');
 
 let progressBar = document.querySelector('.music-progress-bar')
 let songDuration = document.querySelector('.duration');
@@ -91,20 +91,19 @@ let songCurrentTime = document.querySelector('.current-time');
 
 let volumeSlider = document.querySelector('.volume-slider')
 
-let audioPlayer = document.querySelector('.audioPlayer');
+function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+    image.style.display = 'block';
 
-function show (image, title, artist, album, preview) {
-    document.querySelector('#image').style.display = 'block';
-
-    image.src = this.image;
-    title.innerHTML = this.title;
-    artist.innerHTML = this.artist;
-    album.innerHTML = this.album;
-    preview.src = this.preview;
+    image.src = imageSrc;
+    title.innerHTML = titleTxt;
+    artist.innerHTML = artistTxt;
+    album.innerHTML = albumTxt;
+    preview.src = previewSrc;
 
     setTimeout(() => {
-        progressBar.max = music.duration;
-        songDuration.innerHTML = formatTime(audio.duration);
+        alert(audioPlayer.duration)
+        progressBar.max = audioPlayer.duration;
+        songDuration.innerHTML = formatTime(audioPlayer.duration);
     }, 300);
     songCurrentTime.innerHTML = '00 : 00';
 
@@ -112,13 +111,13 @@ function show (image, title, artist, album, preview) {
 }
 
 const formatTime = (time) => {
-    let min = Math.floor (time / 60);
-    if (min < 10){
+    let min = Math.floor(time / 60);
+    if (min < 10) {
         min = `0` + min;
     }
 
     let sec = Math.floor(time % 60);
-    if (sec < 10){
+    if (sec < 10) {
         sec = `0` + sec;
     }
 
@@ -136,13 +135,26 @@ pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
     pauseBtn.style.display = "none";
 
-    audioPlayer.pause();
+    video.pause();
 });
 
+backwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = 0;
+})
+
+forwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = Math.floor(audioPlayer.max);
+})
+
+setInterval(() => {
+    progressBar.value = audioPlayer.currentTime;
+    songCurrentTime.innerHTML = formatTime(audioPlayer.currentTime);
+}, 500)
+
 progressBar.addEventListener('change', () => {
-    audio.currentTime = progressBar.value;
+    audioPlayer.currentTime = progressBar.value;
 })
 
 volumeSlider.addEventListener('input', () => {
-    audio.volume = volumeSlider.value;
+    audioPlayer.volume = volumeSlider.value;
 })
