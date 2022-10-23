@@ -287,7 +287,7 @@ input {
     position: absolute;
     left: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     background-color: black;
     padding: 15px 25px;
 }

@@ -92,6 +92,7 @@ let songCurrentTime = document.querySelector('.current-time');
 let volumeSlider = document.querySelector('.volume-slider')
 
 function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+    document.querySelector('.player').style.display = "flex";
     image.style.display = 'block';
 
     image.src = imageSrc;
@@ -135,7 +136,7 @@ pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
     pauseBtn.style.display = "none";
 
-    video.pause();
+    audioPlayer.pause();
 });
 
 backwardBtn.addEventListener('click', () => {

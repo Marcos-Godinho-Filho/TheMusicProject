@@ -91,12 +91,12 @@
             </div>
             <div class="player-control-volume">
                 <span class="fas fa-volume-high" style="color: #fff; font-size: 30px; margin-inline: 20px"></span>
-                <input type="range" class="volume-slider" max="1" value="1" step="0.1">
+                <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
             </div>
         </div>
     </div>
-    <audio id="audioPlayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;" controls>
-        <source src="" type="audio/mpeg" id="preview">
+    <audio id="audioPlayer" style="position: absolute; left: 0; top: 0; z-index: -999; opacity: 0;">
+        <source src="" id="preview">
     </audio>
 
     <script src="index-script.js"></script>
