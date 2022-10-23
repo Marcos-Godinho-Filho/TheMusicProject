@@ -13,6 +13,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: circular-bold;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 html,
@@ -25,14 +29,11 @@ aside {
     width: 250px;
     padding: 10px 10px;
     height: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
-    background-color: black;
+    background-color: #0c0c0c;
     display: block;
-}
-
-.sidebar-wrapper {
-    padding-bottom: 200px;
+    margin: 0;
 }
 
 .sidebar-menu {
@@ -123,10 +124,6 @@ main {
     overflow-y: auto;
 }
 
-.main-wraper {
-    padding-bottom: 200px;
-}
-
 #top {
     background-color: black;
     position: fixed;
@@ -151,7 +148,6 @@ main {
     background-color: white;
     box-shadow: 5px 5px 5px rgb(17, 17, 17);
     margin: 20px;
-    /* margin-right: 10px; */
 }
 
 #magnifying-glass {
@@ -221,7 +217,7 @@ input {
 
 #results {
     margin: 30px;
-    margin-top: 120px;
+    margin-top: 100px;
     color: white;
     font-size: 20px;
 }
@@ -258,14 +254,20 @@ input {
 
 .s-data h1 {
     color: white;
-    font-size: 14px;
-    margin: 10px;
+    font-size: 14px;  
 }
 
 .s-data h2 {
     color: rgb(153, 153, 153);
     font-size: 12px;
+}
+
+.s-data h1, .s-data h2 {
     margin: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100% - 35px);
 }
 
 .s-buttons {
@@ -290,18 +292,14 @@ input {
     position: absolute;
     left: 0;
     bottom: 0;
-    display: flex;
-    background-color: rgb(44, 44, 44);
+    display: none;
+    background-color: black;
     padding: 15px 25px;
 }
 
 .player-artist {
     width: 30%;
     height: auto;
-}
-
-#image{
-    display: none;
 }
 
 .pa-image {
@@ -321,72 +319,130 @@ input {
     float: left;
 }
 
-.pa-data h1 {
+.pa-data>h1 {
     color: white;
-    font-size: 16px;
-    padding: 5px;
-    max-height: 30px;
+    font-size: 16px; 
 }
 
-.pa-data h2 {
+.pa-data>h2 {
     color: rgb(153, 153, 153);
     font-size: 14px;
+}
+
+.pa-data>h1, .pa-data>h2 {
     padding: 5px;
     max-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 80%;
 }
 
 .player-control {
-    width: 60%;
+    width: 70%;
     text-align: center;
+    float: left;
 }
 
-.player-contro-buttons a {
-    color: white;
-    margin: 8px 15px;
-    font-size: 18px;
+.player-control-buttons {
+    width: 70%;
+    float: left;
+}
+
+.player-control-buttons a {
+    color: #fff;
+    font-size: 30px;
+    margin-inline: 20px;
+    display: inline;
+}
+
+.player-control-buttons a:hover {
+    cursor: pointer;
 }
 
 .player-control-progress {
     width: 100%;
-    max-width: 600px;
-    height: 7px;
-    margin-top: 20px;
     position: relative;
     border-radius: 8px;
-    display: inline-block;
-    background-color: rgb(130, 130, 130);
+    display: flex;
+    top: 12px;
 }
 
-.player-control-progress-2 {
+.music-progress-bar {
+    width: 100%;
+}
+
+.current-time {
+    color: white;
+    font-size: 12px;
+    right: calc(100% - 50px);
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 7px;
-    border-radius: 8px;
-    background-color: white;
 }
 
- ::-webkit-scrollbar {
+.duration {
+    color: white;
+    font-size: 12px;
+    left: calc(100% - 50px);
+    position: absolute;
+}
+
+.player-control-volume {
+    width: 25%;
+    float: left;
+    padding: 20px;
+}
+
+.volume-slider {
+    width: calc(100% - 80px);
+    position: relative;
+    float: right;
+}
+
+#volumeBtn {
+    color: #fff;
+    font-size: 30px;
+    margin-inline: 20px;
+}
+
+#volumeBtn:hover {
+    cursor: pointer;
+}
+
+#close {
+    color: white;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+#close:hover {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
     width: 12.5px;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background-color: lightgray;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 
 audio {
-    width: 200px;
-    height: 45px;
-    margin: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -999;
+    opacity: 0;
 }
 
 audio::-webkit-media-controls-mute-button {
@@ -415,9 +471,11 @@ audio::-webkit-media-controls-volume-control-container {
     .main {
         width: 100%;
     }
+
     .sidebar {
         display: none;
     }
+
     .main-col {
         width: 48%;
         margin-right: 2%;

@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000/';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function(e) {
+inpBx.addEventListener('keyup', function (e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -48,8 +48,6 @@ function buscar(e) {
         results.innerHTML = "";
 
         for (let pos = 0; pos < resultado.length; pos++) {
-            let preview = resultado[pos]["preview"];
-
             results.innerHTML += `
                     <div class="song">
                         <div class="s-image">
@@ -62,7 +60,7 @@ function buscar(e) {
                         </div>
                         <div class="s-buttons">
                             <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${preview}')"> 
+                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
                         </div>
@@ -74,39 +72,119 @@ function buscar(e) {
     }
 }
 
+let image = document.querySelector('#image');
+let title = document.querySelector('#title');
+let artist = document.querySelector('#artist');
+let album = document.querySelector('#album');
+
 let audioPlayer = document.querySelector('#audioPlayer');
+let preview = document.querySelector('#preview');
 
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
+let backwardBtn = document.querySelector('#backwardBtn');
+let forwardBtn = document.querySelector('#forwardBtn');
 
-function show (image, title, artist, album, preview) {
-    document.querySelector('#image').style.display = 'block';
+let progressBar = document.querySelector('.music-progress-bar')
+let songDuration = document.querySelector('.duration');
+let songCurrentTime = document.querySelector('.current-time');
 
-    document.querySelector('#image').src = image;
-    document.querySelector('#title').innerHTML = title;
-    document.querySelector('#artist').innerHTML = artist;
-    document.querySelector('#album').innerHTML = album;
-    document.querySelector('#preview').src = preview;
+let volumeSlider = document.querySelector('.volume-slider')
 
-    audioPlayer.play();
-    playBtn.style.display = "none";
-    pauseBtn.style.display = "inline";
+function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+    document.querySelector('.player').style.display = "flex";
+   
+    image.src = imageSrc;
+    title.innerHTML = titleTxt;
+    artist.innerHTML = artistTxt;
+    album.innerHTML = albumTxt;
+    preview.src = previewSrc;
+
+    audioPlayer.load();
+
+    playBtn.click();
+
+    progressBar.max = audioPlayer.duration;
+    songDuration.innerHTML = formatTime(29);
+    
+    songCurrentTime.innerHTML = '00 : 00';
 }
 
-playBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+const formatTime = (time) => {
+    let min = Math.floor(time / 60);
+    if (min < 10) {
+        min = `0` + min;
+    }
 
+    let sec = Math.floor(time % 60);
+    if (sec < 10) {
+        sec = `0` + sec;
+    }
+
+    return `${min} : ${sec}`;
+}
+
+playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
 
     audioPlayer.play();
 });
 
-pauseBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
+pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
     pauseBtn.style.display = "none";
 
     audioPlayer.pause();
 });
+
+backwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = 0;
+    audioPlayer.play();
+})
+
+forwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = 30;
+})
+
+setInterval(() => {
+    songCurrentTime.innerHTML = formatTime(audioPlayer.currentTime);
+    progressBar.value = audioPlayer.currentTime * 3.4;
+
+    if (audioPlayer.currentTime >= 29) {
+        pauseBtn.click();
+    }
+}, 500)
+
+progressBar.addEventListener('input', () => {
+    audioPlayer.currentTime = progressBar.value / 3.4;
+})
+
+volumeSlider.addEventListener('input', () => {
+    audioPlayer.volume = volumeSlider.value;
+})
+
+let previousVolume = 0;
+let volumeBtn = document.querySelector('#volumeBtn');
+
+volumeBtn.addEventListener('click', () => {
+    let volumeIcon = document.querySelector('#volume-icon');
+
+    if (volumeSlider.value > 0) {
+        previousVolume = volumeSlider.value;
+
+        volumeSlider.value = 0;
+        audioPlayer.volume = 0;
+    }
+    else if (volumeSlider.value == 0) {
+        volumeSlider.value = previousVolume;
+        audioPlayer.volume = previousVolume;
+    }
+})
+
+let closeBtn = document.querySelector('#close');
+
+closeBtn.addEventListener('click', () => {
+    audioPlayer.pause();
+    document.querySelector('.player').style.display = "none";
+})
