@@ -134,73 +134,6 @@ main {
     width: calc(100% - 250px);
 }
 
-#searching-bar {
-    float: left;
-    left: 40px;
-    width: 60%;
-    height: 40px;
-    border: 0px;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 5px 5px 5px rgb(17, 17, 17);
-    margin: 20px;
-}
-
-#magnifying-glass {
-    float: left;
-    z-index: 98;
-    width: 32px;
-    height: 25px;
-    margin-top: 9px;
-    margin-left: 10px;
-}
-
-input {
-    background-color: transparent;
-    border: none;
-    padding: 10px;
-    outline: none;
-    font-size: 16px;
-    font-family: circular-light;
-    width: calc(100% - 50px);
-    z-index: 99;
-    float: left;
-}
-
-#search {
-    height: 40px;
-    width: 70px;
-    border-radius: 20px;
-    color: white;
-    border: none;
-    background-color: gray;
-    font-family: circular-bold;
-    font-size: 16px;
-    float: left;
-    margin: 20px;
-    margin-left: 0px;
-}
-
-#search:hover {
-    cursor: pointer;
-}
-
-#search:active {
-    background-color: rgb(27, 27, 27);
-}
-
-#bar_button {
-    width: 90%;
-    height: 40px;
-}
-
-#results {
-    margin: 30px;
-    margin-top: 100px;
-    color: white;
-    font-size: 20px;
-}
-
 .song {
     width: 90%;
     height: 80px;
@@ -233,7 +166,7 @@ input {
 
 .s-data h1 {
     color: white;
-    font-size: 14px;  
+    font-size: 14px;
 }
 
 .s-data h2 {
@@ -241,7 +174,8 @@ input {
     font-size: 12px;
 }
 
-.s-data h1, .s-data h2 {
+.s-data h1,
+.s-data h2 {
     margin: 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -300,7 +234,7 @@ input {
 
 .pa-data>h1 {
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
 }
 
 .pa-data>h2 {
@@ -308,7 +242,8 @@ input {
     font-size: 14px;
 }
 
-.pa-data>h1, .pa-data>h2 {
+.pa-data>h1,
+.pa-data>h2 {
     padding: 5px;
     max-height: 30px;
     overflow: hidden;
