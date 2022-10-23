@@ -140,11 +140,12 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
-    audioPlayer.play();
+    
+    playBtn.click();
 })
 
 forwardBtn.addEventListener('click', () => {
-    audioPlayer.currentTime = 30;
+    audioPlayer.currentTime = 29;
 })
 
 setInterval(() => {
