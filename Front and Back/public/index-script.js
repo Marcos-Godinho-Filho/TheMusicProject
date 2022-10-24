@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000/';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function (e) {
+inpBx.addEventListener('keyup', function(e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -14,12 +14,12 @@ inpBx.addEventListener('keyup', function (e) {
 })
 
 function buscar(e) {
-    results.innerHTML = 'Buscando...';
-    setTimeout(getInfo, 2000);
+    results.innerHTML = '';
+    document.querySelector('.container-animation').style.display = 'flex';
 
     e.preventDefault();
     postInfo();
-    getInfo();
+    setTimeout(getInfo, 2000);
 
     async function postInfo(e) {
         if (inpBx.value == "") {
@@ -41,11 +41,9 @@ function buscar(e) {
             method: 'GET'
         });
 
-        // console.log(res);
         const data = await res.json();
 
         let resultado = data.info;
-        results.innerHTML = "";
 
         for (let pos = 0; pos < resultado.length; pos++) {
             results.innerHTML += `
@@ -67,8 +65,8 @@ function buscar(e) {
                     </div>
                     `;
         }
-
-        results.innerHTML += '<div class="song-empty"></div>'
+        results.innerHTML += '<div class="song-empty"></div>';
+        document.querySelector('.container-animation').style.display = 'none';
     }
 }
 
@@ -93,7 +91,7 @@ let volumeSlider = document.querySelector('.volume-slider')
 
 function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
-   
+
     image.src = imageSrc;
     title.innerHTML = titleTxt;
     artist.innerHTML = artistTxt;
@@ -106,7 +104,7 @@ function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
 
     progressBar.max = audioPlayer.duration;
     songDuration.innerHTML = formatTime(29);
-    
+
     songCurrentTime.innerHTML = '00 : 00';
 }
 
@@ -140,7 +138,7 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
-    
+
     playBtn.click();
 })
 
@@ -176,8 +174,7 @@ volumeBtn.addEventListener('click', () => {
 
         volumeSlider.value = 0;
         audioPlayer.volume = 0;
-    }
-    else if (volumeSlider.value == 0) {
+    } else if (volumeSlider.value == 0) {
         volumeSlider.value = previousVolume;
         audioPlayer.volume = previousVolume;
     }
