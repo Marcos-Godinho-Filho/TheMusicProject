@@ -49,23 +49,23 @@ function buscar(e) {
 
         for (let pos = 0; pos < resultado.length; pos++) {
             results.innerHTML += `
-                    <div class="song">
-                        <div class="s-image">
-                            <img src="${resultado[pos]["image"]}" alt="" draggable="false">
-                        </div>
-                        <div class="s-data">
-                            <h1>${resultado[pos]["title_short"]}</h1>
-                            <h2>${resultado[pos]["artist"]}</h2>
-                            <h2>${resultado[pos]["album"]}</h2>
-                        </div>
-                        <div class="s-buttons">
-                            <button style="font-size: 28px;"> + </button>
-                            <button onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}'); font-size: 28px;"> 
-                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px; font-size: 28px;"></i>
-                            </button>
-                        </div>
+                <div class="song">
+                    <div class="s-image">
+                        <img src="${resultado[pos]["image"]}" alt="" draggable="false">
                     </div>
-                    `;
+                    <div class="s-data">
+                        <h1>${resultado[pos]["title_short"]}</h1>
+                        <h2>${resultado[pos]["artist"]}</h2>
+                        <h2>${resultado[pos]["album"]}</h2>
+                    </div>
+                    <div class="s-buttons">
+                        <button style="font-size: 28px;"> + </button>
+                        <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                            <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
         }
 
         results.innerHTML += '<div class="song-empty"></div>'
@@ -93,7 +93,7 @@ let volumeSlider = document.querySelector('.volume-slider')
 
 function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
-   
+
     image.src = imageSrc;
     title.innerHTML = titleTxt;
     artist.innerHTML = artistTxt;
@@ -106,7 +106,7 @@ function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
 
     progressBar.max = audioPlayer.duration;
     songDuration.innerHTML = formatTime(29);
-    
+
     songCurrentTime.innerHTML = '00 : 00';
 }
 
