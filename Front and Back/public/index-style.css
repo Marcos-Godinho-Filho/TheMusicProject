@@ -269,6 +269,10 @@ input {
     background-color: rgb(60, 60, 60);
 }
 
+.song:hover {
+    background-color: rgb(120, 120, 120);
+}
+
 .song-empty {
     width: 90%;
     height: 80px;
