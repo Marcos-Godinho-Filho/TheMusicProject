@@ -477,23 +477,8 @@ audio::-webkit-media-controls-volume-control-container {
     display: none !important;
 }
 
-@media screen and (max-width: 1700px) {
-    .main-col {
-        width: 20%;
-    }
-}
-
 @media screen and (max-width: 768px) {
-    .main {
-        width: 100%;
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    .main-col {
-        width: 48%;
-        margin-right: 2%;
+    main {
+        padding: 15px 15px;
     }
 }

@@ -66,6 +66,9 @@ function buscar(e) {
                     `;
         }
         document.querySelector('.container-animation').style.display = 'none';
+        if (results.childNodes.length == 0) {
+            results.innerHTML = 'Sem resultados para a busca.'
+        }
     }
 }
 
