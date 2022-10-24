@@ -41,7 +41,7 @@ aside {
 }
 
 .sidebar-menu a {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
     display: block;
     padding: 10px 0;
@@ -49,7 +49,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selected {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -64,7 +64,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selecionado {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -88,7 +88,7 @@ aside {
 }
 
 .sidebar-menu-item span {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -102,12 +102,12 @@ aside {
 
 .sidebar-playlists {
     padding: 20px 0;
-    border-top: 1px solid rgb(40, 40, 40);
+    border-top: 1px solid #282828;
 }
 
 .sidebar-playlists a {
     display: block;
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
 }
 
@@ -115,32 +115,32 @@ aside {
     color: white;
 }
 
-main {
+header {
+    height: calc(250px + 80px);
     width: calc(100% - 250px);
-    background-color: rgb(30, 30, 30);
-    height: 100%;
+    left: 250px;
+    top: 0;
     float: left;
-    padding: 15px 50px;
-    overflow-y: auto;
 }
 
 #top {
-    background-color: #6952C8;
-    position: absolute;
-    height: 125px;
+    background-color: #505050;
+    height: calc(100% - 80px);
     z-index: 98;
-    top: 0;
-    left: 250px;
-    width: calc(100% - 250px);
+    width: 100%;
     color: #fff;
-    padding: 10px;
+    padding: 5px 25px;
 }
 
 #top-image {
     float: left;
-    height: 95px;
-    width: 95px;
+    max-height: 250px;
+    max-width: 250px;
     padding: 15px;
+}
+
+#t-img {
+    width: 100%;
 }
 
 #top-data {
@@ -148,24 +148,43 @@ main {
 }
 
 #title {
-    font-size: 32px;
-    padding: 5px;
+    font-size: 64px;
+    padding: 30px 7px;
 }
 
 #description {
     font-size: 16px;
     font-family: circular-light;
-    padding: 5px;
+    color: #bebebe;
+    padding: 7px;
 }
 
 #songCount {
     font-size: 16px;
-    padding: 5px;
+    padding: 7px;
+}
+
+#sub-top {
+    background-color: #3c3c3c;
+    height: 80px;
+    z-index: 98;
+    top: 250px;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+}
+
+main {
+    width: calc(100% - 250px);
+    background-color: #1e1e1e;
+    float: left;
+    height: calc(100% - 250px - 80px);
+    padding: 15px 50px;
+    overflow-y: auto;
 }
 
 #songs {
     margin: 30px;
-    margin-top: 150px;
     color: white;
     font-size: 20px;
 }
@@ -176,7 +195,7 @@ main {
     margin: 30px;
     margin-left: 10px;
     border-radius: 10px;
-    background-color: rgb(60, 60, 60);
+    background-color: #3c3c3c;
 }
 
 .song-empty {
@@ -206,7 +225,7 @@ main {
 }
 
 .s-data h2 {
-    color: rgb(153, 153, 153);
+    color: #999999;
     font-size: 12px;
 }
 
@@ -274,7 +293,7 @@ main {
 }
 
 .pa-data>h2 {
-    color: rgb(153, 153, 153);
+    color: #999999;
     font-size: 14px;
 }
 

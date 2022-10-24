@@ -41,7 +41,7 @@ aside {
 }
 
 .sidebar-menu a {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
     display: block;
     padding: 10px 0;
@@ -49,7 +49,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selected {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -64,7 +64,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selecionado {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -88,7 +88,7 @@ aside {
 }
 
 .sidebar-menu-item span {
-    color: rgb(190, 190, 190);
+    color: #bfbfbf;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -102,12 +102,12 @@ aside {
 
 .sidebar-playlists {
     padding: 20px 0;
-    border-top: 1px solid rgb(40, 40, 40);
+    border-top: 1px solid #282828;
 }
 
 .sidebar-playlists a {
     display: block;
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
 }
 
@@ -117,7 +117,7 @@ aside {
 
 main {
     width: calc(100% - 250px);
-    background-color: rgb(30, 30, 30);
+    background-color: #1e1e1e;
     height: 100%;
     float: left;
     padding: 15px 50px;
@@ -142,7 +142,7 @@ main {
     border: 0px;
     border-radius: 20px;
     background-color: white;
-    box-shadow: 5px 5px 5px rgb(17, 17, 17);
+    box-shadow: 5px 5px 5px #111111;
     margin: 20px;
 }
 
@@ -186,7 +186,7 @@ input {
 }
 
 #search:active {
-    background-color: rgb(27, 27, 27);
+    background-color: #1b1b1b;
 }
 
 #bar_button {
@@ -207,7 +207,7 @@ input {
     margin: 30px;
     margin-left: 10px;
     border-radius: 10px;
-    background-color: rgb(60, 60, 60);
+    background-color: #3c3c3c;
 }
 
 .song-empty {
@@ -237,7 +237,7 @@ input {
 }
 
 .s-data h2 {
-    color: rgb(153, 153, 153);
+    color: #999999;
     font-size: 12px;
 }
 
@@ -304,7 +304,7 @@ input {
 }
 
 .pa-data>h2 {
-    color: rgb(153, 153, 153);
+    color: #999999;
     font-size: 14px;
 }
 
