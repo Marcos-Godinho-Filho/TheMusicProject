@@ -240,6 +240,7 @@ input {
 }
 
 #playlist-select {
+    display: none;
     
 }
 
@@ -406,6 +407,7 @@ input {
     width: 25%;
     float: left;
     padding: 20px;
+    margin-left: 3%;
 }
 
 .volume-slider {
