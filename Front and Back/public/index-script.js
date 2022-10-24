@@ -191,7 +191,6 @@ let playlistSelectBox = document.querySelector("#playlist-select");
 
 function showPlaylistSelectBox() {
     playlistSelectBox.style.display = "block";
-    playlistSelectBox.style.opacity = "1";
 }
 
 let closePlaylistSelectBox = document.querySelector('#closePlaylistSelect');

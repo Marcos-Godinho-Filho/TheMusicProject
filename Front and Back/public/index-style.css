@@ -252,8 +252,6 @@ input {
     z-index: 99;
     height: 250px;
     overflow-y: auto;
-    opacity: 0;
-    transition: 0.5s;
 }
 
 #division {
