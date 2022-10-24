@@ -1,6 +1,6 @@
-let buscarBtn = document.querySelector(".search");
-let inpBx = document.querySelector(".inputBox");
-let results = document.querySelector(".results");
+let buscarBtn = document.querySelector("#search");
+let inpBx = document.querySelector("#inputBox");
+let results = document.querySelector("#results");
 
 const baseUrl = 'http://localhost:3000/';
 
@@ -70,18 +70,19 @@ function buscar(e) {
     }
 }
 
-let image = document.querySelector('.image');
-let title = document.querySelector('.title');
-let artist = document.querySelector('.artist');
-let album = document.querySelector('.album');
 
-let audioPlayer = document.querySelector('.audioPlayer');
-let preview = document.querySelector('.preview');
+let image = document.querySelector('#image');
+let title = document.querySelector('#title');
+let artist = document.querySelector('#artist');
+let album = document.querySelector('#album');
 
-let playBtn = document.querySelector('.playBtn');
-let pauseBtn = document.querySelector('.pauseBtn');
-let backwardBtn = document.querySelector('.backwardBtn');
-let forwardBtn = document.querySelector('.forwardBtn');
+let audioPlayer = document.querySelector('#audioPlayer');
+let preview = document.querySelector('#preview');
+
+let playBtn = document.querySelector('#playBtn');
+let pauseBtn = document.querySelector('#pauseBtn');
+let backwardBtn = document.querySelector('#backwardBtn');
+let forwardBtn = document.querySelector('#forwardBtn');
 
 let progressBar = document.querySelector('.music-progress-bar')
 let songDuration = document.querySelector('.duration');
@@ -163,7 +164,7 @@ volumeSlider.addEventListener('input', () => {
 })
 
 let previousVolume = 0;
-let volumeBtn = document.querySelector('.volumeBtn');
+let volumeBtn = document.querySelector('#volumeBtn');
 
 volumeBtn.addEventListener('click', () => {
     let volumeIcon = document.querySelector('#volume-icon');
@@ -180,7 +181,7 @@ volumeBtn.addEventListener('click', () => {
     }
 })
 
-let closeBtn = document.querySelector('.close');
+let closeBtn = document.querySelector('#close');
 
 closeBtn.addEventListener('click', () => {
     audioPlayer.pause();
