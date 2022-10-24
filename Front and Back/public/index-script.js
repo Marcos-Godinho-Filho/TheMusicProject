@@ -14,12 +14,12 @@ inpBx.addEventListener('keyup', function (e) {
 })
 
 function buscar(e) {
-    results.innerHTML = 'Buscando...';
-    setTimeout(getInfo, 2000);
+    results.innerHTML = '';
+    document.querySelector('.container-animation').style.display = 'flex';
 
     e.preventDefault();
     postInfo();
-    getInfo();
+    setTimeout(getInfo, 2000);
 
     async function postInfo(e) {
         if (inpBx.value == "") {
@@ -41,36 +41,35 @@ function buscar(e) {
             method: 'GET'
         });
 
-        // console.log(res);
         const data = await res.json();
 
         let resultado = data.info;
-        results.innerHTML = "";
 
         for (let pos = 0; pos < resultado.length; pos++) {
             results.innerHTML += `
-                <div class="song">
-                    <div class="s-image">
-                        <img src="${resultado[pos]["image"]}" alt="" draggable="false">
+                    <div class="song">
+                        <div class="s-image">
+                            <img src="${resultado[pos]["image"]}" alt="" draggable="false">
+                        </div>
+                        <div class="s-data">
+                            <h1>${resultado[pos]["title_short"]}</h1>
+                            <h2>${resultado[pos]["artist"]}</h2>
+                            <h2>${resultado[pos]["album"]}</h2>
+                        </div>
+                        <div class="s-buttons">
+                            <button style="font-size: 28px;"> + </button>
+                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="s-data">
-                        <h1>${resultado[pos]["title_short"]}</h1>
-                        <h2>${resultado[pos]["artist"]}</h2>
-                        <h2>${resultado[pos]["album"]}</h2>
-                    </div>
-                    <div class="s-buttons">
-                        <button style="font-size: 28px;"> + </button>
-                        <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
-                            <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
+                    `;
         }
-
-        results.innerHTML += '<div class="song-empty"></div>'
+        results.innerHTML += '<div class="song-empty"></div>';
+        document.querySelector('.container-animation').style.display = 'none';
     }
 }
+
 
 let image = document.querySelector('#image');
 let title = document.querySelector('#title');
