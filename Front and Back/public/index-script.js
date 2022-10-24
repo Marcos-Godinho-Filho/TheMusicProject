@@ -65,19 +65,9 @@ function buscar(e) {
                     </div>
                     `;
         }
-        results.innerHTML += '<div class="song-empty"></div>';
         document.querySelector('.container-animation').style.display = 'none';
     }
 }
-
-
-let image = document.querySelector('#image');
-let title = document.querySelector('#title');
-let artist = document.querySelector('#artist');
-let album = document.querySelector('#album');
-
-let audioPlayer = document.querySelector('#audioPlayer');
-let preview = document.querySelector('#preview');
 
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
@@ -92,14 +82,16 @@ let volumeSlider = document.querySelector('.volume-slider')
 
 function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
+    document.querySelector('#main').style.height = 'calc(100% - 75px - 125px)';
+    document.querySelector('#aside').style.height = 'calc(100% - 125px)';
 
-    image.src = imageSrc;
-    title.innerHTML = titleTxt;
-    artist.innerHTML = artistTxt;
-    album.innerHTML = albumTxt;
-    preview.src = previewSrc;
+    document.querySelector('#image').src = imageSrc;
+    document.querySelector('#title').innerHTML = titleTxt;
+    document.querySelector('#artist').innerHTML = artistTxt;
+    document.querySelector('#album').innerHTML = albumTxt;
+    document.querySelector('#preview').src = previewSrc;
 
-    audioPlayer.load();
+    document.querySelector('#audioPlayer').load();
 
     playBtn.click();
 
@@ -186,6 +178,8 @@ let closeBtn = document.querySelector('#close');
 closeBtn.addEventListener('click', () => {
     audioPlayer.pause();
     document.querySelector('.player').style.display = "none";
+    document.querySelector('#main').style.height = 'calc(100% - 75px)';
+    document.querySelector('#aside').style.height = '100%';
 })
 
 function showPlaylistSelectBox() {

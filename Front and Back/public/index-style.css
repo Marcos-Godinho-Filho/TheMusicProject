@@ -118,10 +118,11 @@ aside {
 main {
     width: calc(100% - 250px);
     background-color: #1e1e1e;
-    height: 100%;
+    height: calc(100% - 75px);
     float: left;
     padding: 15px 50px;
     overflow-y: auto;
+    margin-top: 75px;
 }
 
 #top {
@@ -196,13 +197,12 @@ input {
 
 #results {
     margin: 30px;
-    margin-top: 100px;
     color: white;
     font-size: 20px;
 }
 
 .container-animation {
-    margin-top: 50vh;
+    margin-top: 35vh;
     margin-left: 50%;
     transform: translate(-35%);
     display: none;
@@ -250,11 +250,6 @@ input {
     margin-left: 10px;
     border-radius: 10px;
     background-color: #3c3c3c;
-}
-
-.song-empty {
-    width: 90%;
-    height: 80px;
 }
 
 .s-image {
@@ -309,7 +304,7 @@ input {
 
 .player {
     width: 100%;
-    height: auto;
+    height: 125px;
     position: absolute;
     left: 0;
     bottom: 0;
