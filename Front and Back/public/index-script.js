@@ -57,7 +57,7 @@ function buscar(e) {
                             <h2>${resultado[pos]["album"]}</h2>
                         </div>
                         <div class="s-buttons">
-                            <button style="font-size: 28px;" onclick="showPlaylistSelectBox"> + </button>
+                            <button style="font-size: 28px;" onclick="showPlaylistSelectBox()"> + </button>
                             <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
@@ -81,7 +81,9 @@ let progressBar = document.querySelector('.music-progress-bar')
 let songDuration = document.querySelector('.duration');
 let songCurrentTime = document.querySelector('.current-time');
 
-let volumeSlider = document.querySelector('.volume-slider')
+let volumeSlider = document.querySelector('.volume-slider');
+
+let audioPlayer = document.querySelector('#audioPlayer');
 
 function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
@@ -94,7 +96,7 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('#album').innerHTML = albumTxt;
     document.querySelector('#preview').src = previewSrc;
 
-    document.querySelector('#audioPlayer').load();
+    audioPlayer.load();
 
     playBtn.click();
 
@@ -176,15 +178,24 @@ volumeBtn.addEventListener('click', () => {
     }
 })
 
-let closeBtn = document.querySelector('#close');
+let closeSong = document.querySelector('#closeSong');
 
-closeBtn.addEventListener('click', () => {
+closeSong.addEventListener('click', () => {
     audioPlayer.pause();
     document.querySelector('.player').style.display = "none";
     document.querySelector('#main').style.height = 'calc(100% - 75px)';
     document.querySelector('#aside').style.height = '100%';
 })
 
+let playlistSelectBox = document.querySelector("#playlist-select");
+
 function showPlaylistSelectBox() {
-    document.querySelector(".playlist-select").display = "block";
+    playlistSelectBox.style.display = "block";
+    playlistSelectBox.style.opacity = "1";
 }
+
+let closePlaylistSelectBox = document.querySelector('#closePlaylistSelect');
+
+closePlaylistSelectBox.addEventListener('click', () => {
+    playlistSelectBox.style.display = "none";
+})
