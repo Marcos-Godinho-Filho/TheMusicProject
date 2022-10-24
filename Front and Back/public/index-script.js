@@ -124,7 +124,12 @@ playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
 
-    audioPlayer.play();
+    if (audioPlayer.currentTime >= 29) {
+        backwardBtn.click();
+    }
+    else {
+        audioPlayer.play();
+    }
 });
 
 pauseBtn.addEventListener('click', () => {
@@ -140,7 +145,7 @@ backwardBtn.addEventListener('click', () => {
 })
 
 forwardBtn.addEventListener('click', () => {
-    audioPlayer.currentTime = 30;
+    audioPlayer.currentTime = 29;
 })
 
 setInterval(() => {
