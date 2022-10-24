@@ -1,6 +1,6 @@
-let buscarBtn = document.querySelector("#search");
-let inpBx = document.querySelector("#inputBox");
-let results = document.querySelector("#results");
+let buscarBtn = document.querySelector(".search");
+let inpBx = document.querySelector(".inputBox");
+let results = document.querySelector(".results");
 
 const baseUrl = 'http://localhost:3000/';
 
@@ -57,8 +57,8 @@ function buscar(e) {
                             <h2>${resultado[pos]["album"]}</h2>
                         </div>
                         <div class="s-buttons">
-                            <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                            <button style="font-size: 28px;" onclick="showPlaylistSelectBox"> + </button>
+                            <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
                         </div>
@@ -70,19 +70,18 @@ function buscar(e) {
     }
 }
 
+let image = document.querySelector('.image');
+let title = document.querySelector('.title');
+let artist = document.querySelector('.artist');
+let album = document.querySelector('.album');
 
-let image = document.querySelector('#image');
-let title = document.querySelector('#title');
-let artist = document.querySelector('#artist');
-let album = document.querySelector('#album');
+let audioPlayer = document.querySelector('.audioPlayer');
+let preview = document.querySelector('.preview');
 
-let audioPlayer = document.querySelector('#audioPlayer');
-let preview = document.querySelector('#preview');
-
-let playBtn = document.querySelector('#playBtn');
-let pauseBtn = document.querySelector('#pauseBtn');
-let backwardBtn = document.querySelector('#backwardBtn');
-let forwardBtn = document.querySelector('#forwardBtn');
+let playBtn = document.querySelector('.playBtn');
+let pauseBtn = document.querySelector('.pauseBtn');
+let backwardBtn = document.querySelector('.backwardBtn');
+let forwardBtn = document.querySelector('.forwardBtn');
 
 let progressBar = document.querySelector('.music-progress-bar')
 let songDuration = document.querySelector('.duration');
@@ -90,7 +89,7 @@ let songCurrentTime = document.querySelector('.current-time');
 
 let volumeSlider = document.querySelector('.volume-slider')
 
-function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
 
     image.src = imageSrc;
@@ -164,7 +163,7 @@ volumeSlider.addEventListener('input', () => {
 })
 
 let previousVolume = 0;
-let volumeBtn = document.querySelector('#volumeBtn');
+let volumeBtn = document.querySelector('.volumeBtn');
 
 volumeBtn.addEventListener('click', () => {
     let volumeIcon = document.querySelector('#volume-icon');
@@ -181,9 +180,13 @@ volumeBtn.addEventListener('click', () => {
     }
 })
 
-let closeBtn = document.querySelector('#close');
+let closeBtn = document.querySelector('.close');
 
 closeBtn.addEventListener('click', () => {
     audioPlayer.pause();
     document.querySelector('.player').style.display = "none";
 })
+
+function showPlaylistSelectBox() {
+    document.querySelector(".playlist-select").display = "block";
+}

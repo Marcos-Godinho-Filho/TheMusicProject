@@ -48,7 +48,7 @@ aside {
 }
 
 .sidebar-menu a.sidebar-menu-selected {
-    color: white;
+    color: #fff;
     background-color: #505050;
     border-radius: 5px;
 }
@@ -63,7 +63,7 @@ aside {
 }
 
 .sidebar-menu a.sidebar-menu-selecionado {
-    color: white;
+    color: #fff;
     background-color: #505050;
     border-radius: 5px;
 }
@@ -83,7 +83,7 @@ aside {
     display: inline-block;
     color: black;
     font-weight: bold;
-    background-color: white;
+    background-color: #fff;
     margin: 8px;
 }
 
@@ -112,7 +112,7 @@ aside {
 }
 
 .sidebar-playlists a:hover {
-    color: white;
+    color: #fff;
 }
 
 main {
@@ -124,7 +124,7 @@ main {
     overflow-y: auto;
 }
 
-#top {
+.top {
     background-color: black;
     position: fixed;
     height: 75px;
@@ -134,19 +134,19 @@ main {
     width: calc(100% - 250px);
 }
 
-#searching-bar {
+.searching-bar {
     float: left;
     left: 40px;
     width: 60%;
     height: 40px;
     border: 0px;
     border-radius: 20px;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 5px 5px 5px #111111;
     margin: 20px;
 }
 
-#magnifying-glass {
+.magnifying-glass {
     float: left;
     z-index: 98;
     width: 32px;
@@ -167,11 +167,11 @@ input {
     float: left;
 }
 
-#search {
+.search {
     height: 40px;
     width: 70px;
     border-radius: 20px;
-    color: white;
+    color: #fff;
     border: none;
     background-color: gray;
     font-family: circular-bold;
@@ -181,23 +181,23 @@ input {
     margin-left: 0px;
 }
 
-#search:hover {
+.search:hover {
     cursor: pointer;
 }
 
-#search:active {
+.search:active {
     background-color: #1b1b1b;
 }
 
-#bar_button {
+.bar_button {
     width: 90%;
     height: 40px;
 }
 
-#results {
+.results {
     margin: 30px;
     margin-top: 100px;
-    color: white;
+    color: #fff;
     font-size: 20px;
 }
 
@@ -239,6 +239,10 @@ input {
     }
 }
 
+.playlist-select {
+
+}
+
 .song {
     width: 90%;
     height: 80px;
@@ -270,7 +274,7 @@ input {
 }
 
 .s-data h1 {
-    color: white;
+    color: #fff;
     font-size: 14px;  
 }
 
@@ -294,7 +298,7 @@ input {
 .s-buttons button {
     background-color: transparent;
     border: none;
-    color: white;
+    color: #fff;
     margin: 10px;
     margin-top: 20px;
 }
@@ -337,7 +341,7 @@ input {
 }
 
 .pa-data>h1 {
-    color: white;
+    color: #fff;
     font-size: 16px; 
 }
 
@@ -390,14 +394,14 @@ input {
 }
 
 .current-time {
-    color: white;
+    color: #fff;
     font-size: 12px;
     right: calc(100% - 50px);
     position: absolute;
 }
 
 .duration {
-    color: white;
+    color: #fff;
     font-size: 12px;
     left: calc(100% - 50px);
     position: absolute;
@@ -415,18 +419,18 @@ input {
     float: right;
 }
 
-#volumeBtn {
+.volumeBtn {
     color: #fff;
     font-size: 30px;
     margin-inline: 20px;
 }
 
-#volumeBtn:hover {
+.volumeBtn:hover {
     cursor: pointer;
 }
 
-#close {
-    color: white;
+.close {
+    color: #fff;
     background-color: transparent;
     border: none;
     position: absolute;
@@ -434,7 +438,7 @@ input {
     top: 5px;
 }
 
-#close:hover {
+.close:hover {
     cursor: pointer;
 }
 
