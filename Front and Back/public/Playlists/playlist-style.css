@@ -184,6 +184,27 @@ header {
     cursor: pointer;
 }
 
+.appear {
+    display: block;
+}
+
+#editBox {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    top: 30%;
+    left: 35%;
+    background-color: #0c0c0c;
+}
+
+#edit-image {
+    float: left;
+}
+
+#edit-data {
+    float: left;
+}
+
 main {
     width: calc(100% - 250px);
     background-color: #1e1e1e;

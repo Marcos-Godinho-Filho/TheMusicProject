@@ -37,16 +37,15 @@ document.querySelector('#edit').addEventListener('click', () => {
     document.body.style.filter = 'blur(7px);';
     const editBox = document.querySelector('#editBox');
     editBox.style.filter = 'none;';
-    editBox.className = 'appear;';
+    editBox.className = 'appear';
     editBox.innerHTML = `
         <div id="edit-image">
-            <img id="edit-img" src="../photos/top50brazil.jpg" alt="Img">
+            <img id="edit-img" src="../photos/top50brazil.jpg" alt="Img"> <br>
             <input type="file">
         </div>
         <div id="edit-data">
-            <h1 id="title">Playlist 1</h1>
-            <h2 id="description">Uma playlist para ouvir quando estiver sozinho</h2>
-            <p id="songCount">2 músicas</p>
+            <input type="text" id="title"> Playlist 1 </input> <br>
+            <textarea id="description"> Uma playlist para ouvir quando estiver sozinho </textarea>
         </div>
     `;
 })
