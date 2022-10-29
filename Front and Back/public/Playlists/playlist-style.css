@@ -174,9 +174,14 @@ header {
     padding: 10px;
 }
 
-#play, #delete {
-    margin: 30px;
-    font-size: 35px;
+#play, #delete, #edit {
+    margin: 15px;
+    font-size: 25px;
+    display: inline-block;
+}
+
+#play, #delete, #edit:hover {
+    cursor: pointer;
 }
 
 main {
