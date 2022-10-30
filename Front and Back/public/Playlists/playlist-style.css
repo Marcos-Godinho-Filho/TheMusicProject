@@ -190,23 +190,31 @@ header {
     display: none;
     position: fixed;
     z-index: 99;
-    top: 30%;
+    top: 10%;
     left: 35%;
     background-color: #0c0c0c;
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
     transition: 0.5s;
     color: white;
 }
 
 #edit-image {
     float: left;
-    max-height: 200px;
-    max-width: 50%;
+    height: 50%;
+    width: 50%;
 }
 
 #edit-img {
     width: 80%;
+    height: 80%;
+    margin: 10px;
+}
+
+#edit-image input {
+    font-family: circular-bold;
+    background-color: #0c0c0c;
+    margin: 10px;
 }
 
 #edit-data {
@@ -215,12 +223,17 @@ header {
     width: 40%;
 }
 
+#edit-data label {
+    padding: 10px;
+}
+
 #edit-data input {
     width: 100%;
     background-color: #424242;
     font-size: 14px;
     padding: 10px;
     color: white;
+    margin: 10px;
 }
 
 #edit-data textarea {
@@ -229,6 +242,7 @@ header {
     background-color: #424242;
     color: white;
     font-family: circular-light;
+    margin: 10px;
 }
 
 #deletePlaylistConfirmation {
