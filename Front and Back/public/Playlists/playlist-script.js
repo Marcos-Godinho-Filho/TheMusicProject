@@ -3,46 +3,31 @@ document.querySelector('#play').addEventListener('click', () => {
 })
 
 document.querySelector('#delete').addEventListener('click', () => {
-    document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
-    document.querySelector('#main').style.filter = 'blur(7px)';
-    const deleteConfirmation = document.querySelector('#deletePlaylistConfirmation');
-    deleteConfirmation.innerHTML = `
+    let id = '#deletePlaylistBox';
+    let deletePlaylistBoxContent = `
         <h1> Você tem certeza que deseja deletar a Playlist? </h1>
         <button id="deletePlaylist"> Deletar </button>
         <button id="calcelDeletePlaylist"> Cancelar </button>
     `;
-    deleteConfirmation.style.display = 'block';
+    showBox(id, deletePlaylistBoxContent);
 
     document.querySelector('#deletePlaylist').addEventListener('click', () => {
-        document.querySelector('#aside').style.filter = 'none';
-        document.querySelector('#header').style.filter = 'none';
-        document.querySelector('#main').style.filter = 'none';
-        window.location.href = "../Home/home.html"
-        const deleteConfirmation = document.querySelector('#deletePlaylistConfirmation');
-        deleteConfirmation.style.display = 'none';
-        deleteConfirmation.innerHTML = '';
+        hideBox(id);
 
-        /* comandos para deletar no banco de dados */
+        /* comandos para deletar a playlist no BD */
+
+        window.location.href = "../Home/home.html"
     })
 
     document.querySelector('#cancelDeletePlaylist').addEventListener('click', () => {
-        document.querySelector('#aside').style.filter = 'none';
-        document.querySelector('#header').style.filter = 'none';
-        document.querySelector('#main').style.filter = 'none';
-        const deleteConfirmation = document.querySelector('#deletePlaylistConfirmation');
-        deleteConfirmation.style.display = 'none';
-        deleteConfirmation.innerHTML = '';
+        hideBox(id);
     })
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
-    document.querySelector('#main').style.filter = 'blur(7px)';
-    const editBox = document.querySelector('#editBox');
-    editBox.innerHTML = `
-        <h1 id="Editar">
+    let id = 'editBox';
+    let editBoxContent = `
+        <h1> Editar </h1>
         <div id="edit-image">
             <img id="edit-img" src="../photos/top50brazil.jpg" alt="Img"> <br>
             <input type="file" value="" id="fileReader" accept="image/*">
@@ -53,10 +38,10 @@ document.querySelector('#edit').addEventListener('click', () => {
             <label> Descrição: 
             <textarea id="description"> </textarea>
         </div>
-        <button id="editPlaylist"> </button>
-        <button id="calcelEditPlaylist"> </button>
+        <button id="saveEditPlaylist"> Salvar </button>
+        <button id="calcelEditPlaylist"> Cancelar </button>
         `;
-    editBox.style.display = 'block';
+    showBox(id, editBoxContent);
 
     const reader = new FileReader();
     const fileInput = document.querySelector("#fileReader");
@@ -70,15 +55,32 @@ document.querySelector('#edit').addEventListener('click', () => {
         const f = e.target.files[0];
         reader.readAsDataURL(f);
     })
+
+    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
+        hideBox(id);
+
+        /* comandos para salvar a edição no BD */
+    })
+
+    document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
+        hideBox(id);
+    })
 })
 
-// const reader = new FileReader();
-// const fileInput = document.getElementById("");
-// const img = document.getElementById("img");
-// reader.onload = e => {
-//   img.src = e.target.result;
-// }
-// fileInput.addEventListener('change', e => {
-//   const f = e.target.files[0];
-//   reader.readAsDataURL(f);
-// })
+let showBox = function (id, content) {
+    document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#header').style.filter = 'blur(7px)';
+    document.querySelector('#main').style.filter = 'blur(7px)';
+    const box = document.querySelector(id);
+    box.innerHTML = content;
+    box.style.display = 'block';
+}
+
+let hideBox = function (id) {
+    document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#header').style.filter = 'none';
+    document.querySelector('#main').style.filter = 'none';
+    const box = document.querySelector(id);
+    box.innerHTML = '';
+    box.style.display = 'none';
+}

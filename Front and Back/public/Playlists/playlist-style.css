@@ -199,6 +199,10 @@ header {
     color: white;
 }
 
+#editBox h1 {
+    font-size: 20px;
+}
+
 #edit-image {
     float: left;
     height: 50%;
@@ -245,7 +249,23 @@ header {
     margin: 10px;
 }
 
-#deletePlaylistConfirmation {
+#editBox button {
+    background-color: #505050;
+    border: none;
+    color: white;
+    font-family: circular-light;
+    font-size: 20px;
+    width: 20%;
+    height: 50px;
+    padding: 10px;
+}
+
+#editBox button:hover {
+    cursor: pointer;
+    background-color: #bebebe;
+}
+
+#deletePlaylistBox {
     display: none;
     height: 100px;
     width: 400px;
@@ -491,6 +511,7 @@ main {
 }
 
 audio {
+    /* display: none; */
     position: absolute;
     left: 0;
     top: 0;
