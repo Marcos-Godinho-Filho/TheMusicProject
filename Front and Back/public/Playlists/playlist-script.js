@@ -25,18 +25,18 @@ document.querySelector('#delete').addEventListener('click', () => {
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    let id = 'editBox';
+    let id = '#editBox';
     let editBoxContent = `
         <h1> Editar </h1>
         <div id="edit-image">
-            <img id="edit-img" src="../photos/top50brazil.jpg" alt="Img"> <br>
-            <input type="file" value="" id="fileReader" accept="image/*">
+            <button onclick="document.getElementById('fileReader').click()">
+                <img id="img-button" alt="foto" src="../photos/top50brazil.jpg">
+            </button>
+            <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <label> Playlist: </label>
-            <input type="text" id="title"> </input> 
-            <label> Descrição: 
-            <textarea id="description"> </textarea>
+            <input type="text" id="newTitle" value="Playlist 1"> </input> 
+            <textarea id="newDescription">Descrição</textarea>
         </div>
         <button id="saveEditPlaylist"> Salvar </button>
         <button id="calcelEditPlaylist"> Cancelar </button>
@@ -45,11 +45,11 @@ document.querySelector('#edit').addEventListener('click', () => {
 
     const reader = new FileReader();
     const fileInput = document.querySelector("#fileReader");
-    const img = document.querySelector("#edit-img");
+    const img = document.querySelector("#img-button");
     reader.onload = e => {
         img.src = e.target.result;
-        img.style.width = '80%';
-        img.style.height = '80%';
+        img.style.width = '200px';
+        img.style.height = '200px';
     }
     fileInput.addEventListener('change', e => {
         const f = e.target.files[0];
@@ -60,6 +60,10 @@ document.querySelector('#edit').addEventListener('click', () => {
         hideBox(id);
 
         /* comandos para salvar a edição no BD */
+
+        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
+        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value
+        document.querySelector('#t-img') = document.querySelector('#img-button').src
     })
 
     document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
