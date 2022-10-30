@@ -61,9 +61,9 @@ document.querySelector('#edit').addEventListener('click', () => {
 
         /* comandos para salvar a edição no BD */
 
-        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
-        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value
-        document.querySelector('#t-img') = document.querySelector('#img-button').src
+        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').getAttribute('value')
+        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').getAttribute('value');
+        document.querySelector('#t-img') = document.querySelector('#img-button').src;
     })
 
     document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {

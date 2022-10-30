@@ -266,6 +266,7 @@ header {
     font-family: circular-light;
     font-size: 18px;
     border: none;
+    padding: 7px;
 }
 
 #saveEditPlaylist, #calcelEditPlaylist {
@@ -288,14 +289,16 @@ header {
 
 #deletePlaylistBox {
     display: none;
-    height: 100px;
-    width: 400px;
-    background-color: black;
     position: fixed;
     z-index: 99;
     top: 10%;
-    left: 10%;
+    left: 35%;
+    background-color: #1e1e1e;
+    height: 100px;
+    width: 500px;
     transition: 0.5s;
+    color: white;
+    padding: 20px;
     border-radius: 5px;
 }
 
