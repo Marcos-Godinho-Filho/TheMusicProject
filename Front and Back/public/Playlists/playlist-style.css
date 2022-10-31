@@ -162,6 +162,7 @@ header {
     font-size: 16px;
     font-family: circular-light;
     color: #bebebe;
+    margin-top: 20px;
     padding: 7px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -201,7 +202,7 @@ header {
     display: none;
     position: fixed;
     z-index: 99;
-    left: 35%;
+    left: calc((100% - 500px) / 2);
     background-color: #1e1e1e;
     width: 500px;
     color: #ffffff;
@@ -212,7 +213,7 @@ header {
 }
 
 #editPlaylistBox {
-    top: 10%;
+    top: 20%;
     height: 400px;
 }
 
@@ -321,22 +322,20 @@ main {
     background-color: #1e1e1e;
     float: left;
     height: calc(100% - 270px - 80px);
-    padding: 15px 50px;
     overflow-y: auto;
     transition: 0.5s;
 }
 
 #songs {
-    margin: 30px;
+    padding: 10px 30px;
     color: #ffffff;
     font-size: 20px;
 }
 
 .song {
-    width: 90%;
+    width: 92%;
     height: 80px;
     margin: 30px;
-    margin-left: 10px;
     border-radius: 10px;
     background-color: #3c3c3c;
 }

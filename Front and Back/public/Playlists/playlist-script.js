@@ -22,7 +22,7 @@ document.querySelector('#delete').addEventListener('click', () => {
         window.location.href = "../Home/home.html"
     })
 
-    document.querySelector('#cancelDeletePlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
         hideBox(id);
     })
 })
@@ -48,11 +48,14 @@ document.querySelector('#edit').addEventListener('click', () => {
         `;
     showBox(id, editBoxContent);
 
+    let previousImg = '';
+
     const reader = new FileReader();
     const fileInput = document.querySelector("#fileReader");
     const img = document.querySelector("#img-button");
     reader.onload = e => {
         img.src = e.target.result;
+        previousImg = img.src;
         img.style.width = '200px';
         img.style.height = '200px';
     }
@@ -61,12 +64,11 @@ document.querySelector('#edit').addEventListener('click', () => {
         reader.readAsDataURL(f);
     })
 
-    let previousImg = '';
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
         previousImg = img.src;
         img.src = '../photos/browse.png';
         img.style.width = '200px';
-        img.style.height = '200px';     
+        img.style.height = '200px';
     })
     document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
         img.src = previousImg;
