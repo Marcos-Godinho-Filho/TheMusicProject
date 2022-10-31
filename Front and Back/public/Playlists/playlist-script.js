@@ -5,9 +5,12 @@ document.querySelector('#play').addEventListener('click', () => {
 document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deletePlaylistBox';
     let deletePlaylistBoxContent = `
-        <h1> Você tem certeza que deseja deletar a Playlist? </h1>
-        <button id="deletePlaylist"> Deletar </button>
-        <button id="calcelDeletePlaylist"> Cancelar </button>
+        <h1 class="boxTitle"> Deletar </h1>
+        <p> Tem certeza que deseja deletar a Playlist? </p>
+        <div class="options-buttons">
+            <button id="deletePlaylist"> Deletar </button>
+            <button id="calcelDeletePlaylist"> Cancelar </button>
+        </div>
     `;
     showBox(id, deletePlaylistBoxContent);
 
@@ -25,12 +28,12 @@ document.querySelector('#delete').addEventListener('click', () => {
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    let id = '#editBox';
+    let id = '#editPlaylistBox';
     let editBoxContent = `
-        <h1> Editar </h1>
+        <h1 class="boxTitle"> Editar </h1>
         <div id="edit-image">
-            <button onclick="document.getElementById('fileReader').click()">
-                <img id="img-button" alt="foto" src="../photos/top50brazil.jpg">
+            <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
+                <img id="img-button" alt="Browse" src="../photos/top50brazil.jpg">
             </button>
             <input type="file" id="fileReader" accept="image/*">
         </div>
@@ -38,8 +41,10 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="text" id="newTitle" value="Playlist 1"> </input> 
             <textarea id="newDescription">Descrição</textarea>
         </div>
-        <button id="saveEditPlaylist"> Salvar </button>
-        <button id="calcelEditPlaylist"> Cancelar </button>
+        <div class="options-buttons">
+            <button id="saveEditPlaylist"> Salvar </button>
+            <button id="calcelEditPlaylist"> Cancelar </button>
+        </div>
         `;
     showBox(id, editBoxContent);
 
@@ -56,14 +61,29 @@ document.querySelector('#edit').addEventListener('click', () => {
         reader.readAsDataURL(f);
     })
 
-    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        hideBox(id);
+    let previousImg = '';
+    document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
+        previousImg = img.src;
+        img.src = '../photos/browse.png';
+        img.style.width = '200px';
+        img.style.height = '200px';     
+    })
+    document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
+        img.src = previousImg;
+        img.style.width = '200px';
+        img.style.height = '200px';
+    })
 
+    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
         /* comandos para salvar a edição no BD */
 
-        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').getAttribute('value')
-        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').getAttribute('value');
-        document.querySelector('#t-img') = document.querySelector('#img-button').src;
+        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
+        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value;
+        const img = document.querySelector('#t-img');
+        img.src = document.querySelector('#img-button').src;
+        img.style.width = '220px';
+        img.style.height = '220px';
+        hideBox(id);
     })
 
     document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
