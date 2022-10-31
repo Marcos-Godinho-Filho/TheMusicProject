@@ -1,3 +1,11 @@
+document.window.onload = () => {
+    /* comandos para pegar os dados da playlist e as músicas da mesma no bd e mostrá-los na tela */
+
+    /* comandos para criar um vetor? que permita fazer a barra de música funcionar tocando as músicas uma em seguida da outra, permitindo ao usuário controlar essa fila de reprodução */
+
+    document.querySelector('#songCount').innerHTML = document.getElementsByClassName('.song').length + ' músicas';
+}
+
 document.querySelector('#play').addEventListener('click', () => {
 
 })
