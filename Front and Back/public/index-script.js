@@ -203,3 +203,61 @@ let closePlaylistSelectBox = document.querySelector('#closePlaylistSelect');
 closePlaylistSelectBox.addEventListener('click', () => {
     playlistSelectBox.style.display = "none";
 })
+
+document.querySelector('#selectPlaylistToAddBox').addEventListener('click', () => {
+    let id = '#selectPlaylistToAddBox';
+    let deletePlaylistBoxContent = `
+        <h1 class="boxTitle"> Adicionar </h1>
+        <p>Selecione a playlist desejada:</p>
+        <div id="division"> </div>
+    `; 
+
+    /* Comandos para pegar no banco de dados as playlists do usuário */
+
+    /* Comando de exemplo para mostrar a formatação: */
+    deletePlaylistBoxContent += `
+        <div class="playlist">Playlist 1</div>
+        <div class="playlist">Playlist 2</div>
+        <div class="playlist">Playlist 3</div>
+        <div class="playlist">Playlist 4</div>
+        <div class="playlist">Playlist 5</div>
+    `;
+        
+    deletePlaylistBoxContent += `
+        <div class="options-buttons">
+            <button id="deletePlaylist"> Deletar </button>
+            <button id="calcelDeletePlaylist"> Cancelar </button>
+        </div>
+    `;
+    showBox(id, deletePlaylistBoxContent);
+
+    document.querySelector('#deletePlaylist').addEventListener('click', () => {
+        hideBox(id);
+
+        /* comandos para inserir a música na playlist no BD */
+
+        window.location.href = "../Home/home.html"
+    })
+
+    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
+        hideBox(id);
+    })
+})
+
+let showBox = function (id, content) {
+    document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#header').style.filter = 'blur(7px)';
+    document.querySelector('#main').style.filter = 'blur(7px)';
+    const box = document.querySelector(id);
+    box.innerHTML = content;
+    box.style.display = 'block';
+}
+
+let hideBox = function (id) {
+    document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#header').style.filter = 'none';
+    document.querySelector('#main').style.filter = 'none';
+    const box = document.querySelector(id);
+    box.innerHTML = '';
+    box.style.display = 'none';
+}

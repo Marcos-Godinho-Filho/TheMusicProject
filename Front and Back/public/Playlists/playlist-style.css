@@ -213,7 +213,7 @@ header {
 }
 
 #editPlaylistBox {
-    top: 20%;
+    top: calc(100% - 400px / 2);
     height: 400px;
 }
 
@@ -305,7 +305,7 @@ header {
 }
 
 #deletePlaylistBox {
-    top: 30%;
+    top: calc(100% - 200px / 2);
     background-color: #1e1e1e;
     height: 200px;
 }
