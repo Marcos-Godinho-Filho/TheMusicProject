@@ -2,6 +2,7 @@ const axios = require("axios");
 const express = require('express');
 const app = express();
 const port = 3000;
+const controller = require('.\\controller.js');
 
 let retorno = [];
 
@@ -76,6 +77,20 @@ app.post('/', (req, res) => {
     }
     res.status(200).send({ status: 'received' });
 
+});
+
+app.post('/registration/', (req, res) => {
+    let parcel = req.body;
+    let nome = parcel[0];
+    let email = parcel[1];
+    let senha = parcel[2];
+
+    try 
+    { 
+        controller.insertNewUser(email, nome, senha);
+        res.redirect("./public/index.html"); // I dont know whether this is working or not
+    }
+    catch (error) { return res.statusMessage = 'Failed to signup'; } // Neither this
 });
 
 app.listen(port, () => console.log('Server has started on port ' + port)); 

@@ -61,13 +61,14 @@
                     <input type="submit" value="Concluir Cadastro" id="botaoCadastro"> 
                 </form>     
                 
-                <p><a href="#">Caso já tenha uma conta, faça login clicando aqui</a>!</p>
+                <p><a href="..\Login Page\index.html">Caso já tenha uma conta, faça login clicando aqui</a>!</p>
             </div>
             <div class="img-wrapper">
                 <img src="imgs/signup-img.svg" alt="Tela de Login">
             </div>         
         </div>
 
+        <script src="..\Front and Back\server.js"></script>
         <script>
 
             let inputBoxNome = document.querySelector("#name");
@@ -82,7 +83,7 @@
 
             let botaoCadastro = document.querySelector("#botaoCadastro");
 
-            //const BASE_URL = 'http://localhost:3000/'; 
+            const BASE_URL = 'http://localhost:3000/registration/'; 
             const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
             botaoCadastro.addEventListener('click', (e) => {
@@ -125,33 +126,27 @@
                         e.preventDefault();
                     }
                     else { mensagemErroConfirmarSenha.style.display = "none"; }
-
-                    //alert("Nao cadastramos");
+                    alert("Nao cadastramos");
                 }
-                else
-                {
-                    //alert("Cadastramos");
-                    //cadastrar(e);
-                }
+                else { alert("Cadastramos"); cadastrarNovoUsuario(e); }
 
-                /*
+                
                 function cadastrar(e)
                 {
                     e.preventDefault();
 
+                    // Armazenamos as informacoes passadas pelo usuario para um vetor e mandamos esse vetor como parcela para o backend
                     let info = [];
                     info.push(nomeDigitado);
                     info.push(emailDigitado);
                     info.push(senhaDigitada);
-                    info.push(confirmacaoSenhaDigitada);
 
                     postInfo(info);
-                    //getInfo();
-                    async function postInfo(info) // async --> funciona ao mesmo tempo (assincrono)
+                    async function postInfo(info) 
                     {
                         alert("Chegamos aqui");
                         if (info == "") { return }
-                        const res = await fetch(BASE_URL, // espera executar a função para poder continuar
+                        const res = await fetch(BASE_URL,
                         {
                             method: 'POST',
                             headers: {
@@ -161,20 +156,14 @@
                                 parcel: info
                             })
                         });
-                    }*/
-    
-                    // async function getInfo(e)
-                    // {
-                    //     alert("Aqui tambem!");
-                    //     //e.preventDefault();
-                    //     const res = await fetch(baseUrl + 'info/test?key=busca',
-                    //     {
-                    //         method: 'GET'
-                    //     });
-                    //     console.log(res);
-                    //     const data = await res.json();
-                    // }     
-                //}
+
+                        if (res.status.text == 'Failed to signup')
+                        {
+                            alert('deu merda');
+                        }
+                        else alert('deu bom');
+                    }                     
+                }
             });
 
 
