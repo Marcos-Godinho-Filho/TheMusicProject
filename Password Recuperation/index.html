@@ -10,15 +10,12 @@
     </head>
     <body>
         <div class="container">
-            <div class="img-wrapper">
-                <img src="imgs/login-img.svg" alt="Tela de Login">
-            </div>
             <div class="form-wrapper">
                 <div class="logo-container">
                     <img src="imgs/icon.ico" alt="Logo">
                     <p>TheMusicProject</p>
                 </div>
-                <h3>Faça seu Login</h3>
+                <h3>Insira seu email e sua nova senha</h3>
                 <form>
                     <span id="mensagemErroEmail" class="mensagemErro"></span>
                     <div class="input-box">
@@ -31,44 +28,56 @@
                     </div>
 
                  
-                    <span id="mensagemErroSenha" class="mensagemErro"></span>
+                    <span id="mensagemErroNovaSenha" class="mensagemErro"></span>
                     <div class="input-box">
                         <div class="icon-container">
                             <img src="imgs/password-icon.png" alt="Password Icon">
                         </div>
                         <div class="input-container">
-                            <input type="password" name="password" id="password" placeholder="Insira sua senha" required="true">     
+                            <input type="password" name="password" id="newpassword" placeholder="Digite uma nova senha" required="true">     
                         </div>
                     </div>
 
-                    <input type="submit" value="Entrar" id="botaoLogin"> 
+                    <span id="mensagemErroConfirmacaoNovaSenha" class="mensagemErro"></span>
+                    <div class="input-box">
+                        <div class="icon-container">
+                            <img src="imgs/password-icon.png" alt="Password Icon">
+                        </div>
+                        <div class="input-container">
+                            <input type="password" name="password" id="confnewpassword" placeholder="Confirme sua nova senha" required="true">     
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Entrar" id="botaoRecuperar"> 
 
                     <p class="result" style="display: none; margin-block: 20px;">Dados de login incorretos, tente novamente!</p>
                 </form>
                 
-                <p><a href="..\Sign Up Page\index.html">Ou crie uma conta clicando aqui</a>!</p>
-                <p><a href="..\Password Recuperation\index.html">Esqueceu sua senha? Clique aqui para recuperar</a>!</p>
+                <p><a href="..\Login Page\index.html">Voltar para Login</a></p>
             </div>
         </div>
 
         <script>
 
             let inputBoxEmail = document.querySelector("#email");
-            let inputBoxSenha = document.querySelector("#password");
+            let inputBoxNovaSenha = document.querySelector("#newpassword");
+            let inputBoxConfNovaSenha = document.querySelector("#confnewpassword");
 
             let mensagemErroEmail = document.querySelector("#mensagemErroEmail");
-            let mensagemErroSenha = document.querySelector("#mensagemErroSenha");
+            let mensagemErroNovaSenha = document.querySelector("#mensagemErroNovaSenha");
+            let mensagemErroConfirmacaoNovaSenha = document.querySelector("#mensagemErroConfirmacaoNovaSenha");
 
-            let botaoLogar = document.querySelector("#botaoLogin");
+            let botaoRecuperar = document.querySelector("#botaoRecuperar");
 
             const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-            botaoLogar.addEventListener('click', (e) => {
+            botaoRecuperar.addEventListener('click', (e) => {
 
                 let emailDigitado = inputBoxEmail.value + "";
-                let senhaDigitada = inputBoxSenha.value + "";
+                let novaSenhaDigitada = inputBoxNovaSenha.value + "";
+                let confNovaSenhaDigitada = inputBoxConfNovaSenha.value + "";
 
-                if (!emailDigitado.match(EMAIL_PATTERN) || senhaDigitada.length < 8)
+                if (!emailDigitado.match(EMAIL_PATTERN) || novaSenhaDigitada.length < 8 || novaSenhaDigitada != confNovaSenhaDigitada)
                 {
                     if (!emailDigitado.match(EMAIL_PATTERN))
                     {
@@ -79,21 +88,28 @@
                     else { mensagemErroEmail.style.display = "none"; }
 
 
-                    if (senhaDigitada.length < 8)
+                    if (novaSenhaDigitada.length < 8)
                     {
                         e.preventDefault();
-                        mensagemErroSenha.style.display = "block";
-                        mensagemErroSenha.innerHTML = "Senha inválida";
+                        mensagemErroNovaSenha.style.display = "block";
+                        mensagemErroNovaSenha.innerHTML = "Senha inválida";
                     }
                     else
-                    { mensagemErroSenha.style.display = "none"; }
+                    {mensagemErroNovaSenha.style.display = "none"; }
+
                     
-                    //alert("Nao logamos");
+                    if (novaSenhaDigitada != confNovaSenhaDigitada)
+                    {
+                        e.preventDefault();
+                        mensagemErroConfirmacaoNovaSenha.style.display = "block";
+                        mensagemErroConfirmacaoNovaSenha.innerHTML = "Confirmação de Senha diferente de Senha";
+                    }
+                    else
+                    {mensagemErroConfirmacaoNovaSenha.style.display = "none"; }
                 }
                 else
                 {
-                    //alert("Logamos");
-                    //cadastrar(e);
+                    alert("Logamos");
                 }
             });
 
