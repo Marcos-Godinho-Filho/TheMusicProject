@@ -240,6 +240,12 @@ input {
     }
 }
 
+#noResults {
+    margin: 20% 20%;
+    text-align: center;
+    font-size: 26px;
+}
+
 .box {
     display: none;
     position: fixed;
@@ -283,7 +289,7 @@ input {
     background-color: #999999;
 }
 
-#selectPlaylistToAddBox {
+#selectPlaylistBox {
     top: calc(100% - 400px / 2);
     height: 250px;
 }
@@ -294,13 +300,16 @@ input {
     background-color: #afafaf
 }
 
-.playlist,
-#playlist-select p {
-    padding: 10px;
-    font-family: circular-light;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+#selectPlaylistBox p {
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    margin: 2% 10%;
+}
+
+.playlist {
+    font-size: 16px;
+    margin: 10px 50px;
 }
 
 .playlist:hover {

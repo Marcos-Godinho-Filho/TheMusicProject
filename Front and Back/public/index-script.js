@@ -57,7 +57,7 @@ function buscar(e) {
                             <h2>${resultado[pos]["album"]}</h2>
                         </div>
                         <div class="s-buttons">
-                            <button style="font-size: 28px;" onclick="showPlaylistSelectBox()"> + </button>
+                            <button style="font-size: 28px;" onclick="showSelectPlaylistBox()"> + </button>
                             <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
                                 <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
                             </button>
@@ -67,7 +67,7 @@ function buscar(e) {
         }
         document.querySelector('.container-animation').style.display = 'none';
         if (results.childNodes.length == 0) {
-            results.innerHTML = 'Sem resultados para a busca.'
+            results.innerHTML = '<div id="noResults"> Sem resultados para a busca. </div>'
         }
     }
 }
@@ -141,7 +141,7 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
-    audioPlayer.play();
+    playBtn.click();
 })
 
 forwardBtn.addEventListener('click', () => {
@@ -192,23 +192,11 @@ closeSong.addEventListener('click', () => {
     document.querySelector('#aside').style.height = '100%';
 })
 
-let playlistSelectBox = document.querySelector("#playlist-select");
-
-function showPlaylistSelectBox() {
-    playlistSelectBox.style.display = "block";
-}
-
-let closePlaylistSelectBox = document.querySelector('#closePlaylistSelect');
-
-closePlaylistSelectBox.addEventListener('click', () => {
-    playlistSelectBox.style.display = "none";
-})
-
-document.querySelector('#selectPlaylistToAddBox').addEventListener('click', () => {
-    let id = '#selectPlaylistToAddBox';
+let showSelectPlaylistBox = function() {
+    let id = '#selectPlaylistBox';
     let deletePlaylistBoxContent = `
         <h1 class="boxTitle"> Adicionar </h1>
-        <p>Selecione a playlist desejada:</p>
+        <p> Selecione a playlist desejada: </p>
         <div id="division"> </div>
     `; 
 
@@ -225,7 +213,7 @@ document.querySelector('#selectPlaylistToAddBox').addEventListener('click', () =
         
     deletePlaylistBoxContent += `
         <div class="options-buttons">
-            <button id="deletePlaylist"> Deletar </button>
+            <button id="deletePlaylist"> Adicionar </button>
             <button id="calcelDeletePlaylist"> Cancelar </button>
         </div>
     `;
@@ -242,11 +230,10 @@ document.querySelector('#selectPlaylistToAddBox').addEventListener('click', () =
     document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
         hideBox(id);
     })
-})
+}
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
     document.querySelector('#main').style.filter = 'blur(7px)';
     const box = document.querySelector(id);
     box.innerHTML = content;
@@ -255,7 +242,6 @@ let showBox = function (id, content) {
 
 let hideBox = function (id) {
     document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#header').style.filter = 'none';
     document.querySelector('#main').style.filter = 'none';
     const box = document.querySelector(id);
     box.innerHTML = '';
