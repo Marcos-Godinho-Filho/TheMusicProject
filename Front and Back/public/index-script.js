@@ -74,6 +74,12 @@ function buscar(e) {
     }
 }
 
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    /* comandos para criar uma nova playlist no BD com nome "Nova Playlist + idAtual", descrição nula e imagem nula, id é identity */
+
+    /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
+})
+
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
 let backwardBtn = document.querySelector('#backwardBtn');
@@ -196,7 +202,7 @@ closeSong.addEventListener('click', () => {
 
 let showSelectPlaylistBox = function() {
     let id = '#selectPlaylistBox';
-    let deletePlaylistBoxContent = `
+    let showSelectPlaylistBoxContent = `
         <h1 class="boxTitle"> Adicionar às playlists </h1>
         <p> Selecione a playlist desejada: </p>
         <div id="division"> </div>
@@ -205,14 +211,14 @@ let showSelectPlaylistBox = function() {
     /* Comandos para pegar no banco de dados as playlists do usuário */
 
     /* Comando de exemplo para mostrar a formatação: */
-    deletePlaylistBoxContent += `
+    showSelectPlaylistBoxContent += `
         <div id="playlists">
             <ul>
-                <li class="playlist">Playlist 1</li>
-                <li class="playlist">Playlist 2</li>
-                <li class="playlist">Playlist 3</li>
-                <li class="playlist">Playlist 4</li>
-                <li class="playlist">Playlist 5</li>
+                <li class="playlist" onclick="select(0)">Playlist 1</li>
+                <li class="playlist" onclick="select(1)">Playlist 2</li>
+                <li class="playlist" onclick="select(2)">Playlist 3</li>
+                <li class="playlist" onclick="select(3)">Playlist 4</li>
+                <li class="playlist" onclick="select(4)">Playlist 5</li>
             <ul>
         </div>
     `;
@@ -222,15 +228,26 @@ let showSelectPlaylistBox = function() {
         <p> Você ainda não criou nenhuma playlist. Clique no botão "Criar Playlist" na barra lateral para poder salvar suas músicas favoritas. </p> 
     `;*/
         
-    deletePlaylistBoxContent += `
+    showSelectPlaylistBoxContent += `
         <div class="options-buttons">
-            <button id="deletePlaylist"> Adicionar </button>
+            <button id="addSongToPlaylist"> Adicionar </button>
             <button id="calcelDeletePlaylist"> Cancelar </button>
         </div>
     `;
-    showBox(id, deletePlaylistBoxContent);
+    showBox(id, showSelectPlaylistBoxContent);
 
-    document.querySelector('#deletePlaylist').addEventListener('click', () => {
+    let selectedPlaylist;
+
+    function select(pos) {
+        const playlists = document.getElementsByClassName('playlist');
+
+        selectedPlaylist.style.backgroundColor = 'transparent';
+        
+        selectedPlaylist = playlists[pos];
+        selectedPlaylist.style.backgroundColor = '#505050';
+    }
+
+    document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
         /* comandos para inserir a música na playlist no BD */
 
         hideBox(id);

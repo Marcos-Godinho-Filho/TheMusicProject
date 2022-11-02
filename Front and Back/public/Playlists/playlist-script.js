@@ -6,6 +6,132 @@
 //     document.querySelector('#songCount').innerHTML = document.getElementsByClassName('.song').length + ' músicas';
 // }
 
+let playBtn = document.querySelector('#playBtn');
+let pauseBtn = document.querySelector('#pauseBtn');
+let backwardBtn = document.querySelector('#backwardBtn');
+let forwardBtn = document.querySelector('#forwardBtn');
+
+let progressBar = document.querySelector('.music-progress-bar')
+let songDuration = document.querySelector('.duration');
+let songCurrentTime = document.querySelector('.current-time');
+
+let volumeSlider = document.querySelector('.volume-slider');
+
+let audioPlayer = document.querySelector('#audioPlayer');
+
+function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+    document.querySelector('.player').style.display = "flex";
+    document.querySelector('#main').style.height = 'calc(100% - 75px - 125px)';
+    document.querySelector('#aside').style.height = 'calc(100% - 125px)';
+
+    document.querySelector('#image').src = imageSrc;
+    document.querySelector('#title').innerHTML = titleTxt;
+    document.querySelector('#artist').innerHTML = artistTxt;
+    document.querySelector('#album').innerHTML = albumTxt;
+    document.querySelector('#preview').src = previewSrc;
+
+    audioPlayer.load();
+
+    playBtn.click();
+
+    progressBar.max = audioPlayer.duration;
+    songDuration.innerHTML = formatTime(29);
+
+    songCurrentTime.innerHTML = '00 : 00';
+}
+
+const formatTime = (time) => {
+    let min = Math.floor(time / 60);
+    if (min < 10) {
+        min = `0` + min;
+    }
+
+    let sec = Math.floor(time % 60);
+    if (sec < 10) {
+        sec = `0` + sec;
+    }
+
+    return `${min} : ${sec}`;
+}
+
+playBtn.addEventListener('click', () => {
+    playBtn.style.display = "none";
+    pauseBtn.style.display = "inline";
+
+    if (audioPlayer.currentTime >= 29) {
+        backwardBtn.click();
+    }
+    else {
+        audioPlayer.play();
+    }
+});
+
+pauseBtn.addEventListener('click', () => {
+    playBtn.style.display = "inline";
+    pauseBtn.style.display = "none";
+
+    audioPlayer.pause();
+});
+
+backwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = 0;
+    playBtn.click();
+})
+
+forwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = 29;
+})
+
+setInterval(() => {
+    songCurrentTime.innerHTML = formatTime(audioPlayer.currentTime);
+    progressBar.value = audioPlayer.currentTime * 3.4;
+
+    if (audioPlayer.currentTime >= 29) {
+        pauseBtn.click();
+    }
+}, 500)
+
+progressBar.addEventListener('input', () => {
+    audioPlayer.currentTime = progressBar.value / 3.4;
+})
+
+volumeSlider.addEventListener('input', () => {
+    audioPlayer.volume = volumeSlider.value;
+})
+
+let previousVolume = 0;
+let volumeBtn = document.querySelector('#volumeBtn');
+
+volumeBtn.addEventListener('click', () => {
+    let volumeIcon = document.querySelector('#volume-icon');
+
+    if (volumeSlider.value > 0) {
+        previousVolume = volumeSlider.value;
+
+        volumeSlider.value = 0;
+        audioPlayer.volume = 0;
+    }
+    else if (volumeSlider.value == 0) {
+        volumeSlider.value = previousVolume;
+        audioPlayer.volume = previousVolume;
+    }
+})
+
+let closeSong = document.querySelector('#closeSong');
+
+closeSong.addEventListener('click', () => {
+    audioPlayer.pause();
+    document.querySelector('.player').style.display = "none";
+    document.querySelector('#main').style.height = 'calc(100% - 75px)';
+    document.querySelector('#aside').style.height = '100%';
+})
+
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    /* comandos para criar uma nova playlist no BD com nome "Nova Playlist + idAtual", descrição nula e imagem nula, id é identity */
+
+    /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
+})
+
 document.querySelector('#play').addEventListener('click', () => {
 
 })
