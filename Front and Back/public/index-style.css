@@ -34,6 +34,7 @@ aside {
     background-color: #0c0c0c;
     display: block;
     margin: 0;
+    transition: 0.5s;
 }
 
 .sidebar-menu {
@@ -115,16 +116,7 @@ aside {
     color: white;
 }
 
-main {
-    width: calc(100% - 250px);
-    background-color: #1e1e1e;
-    height: calc(100% - 75px);
-    float: left;
-    overflow-y: auto;
-    margin-top: 75px;
-}
-
-#top {
+header {
     background-color: black;
     position: fixed;
     height: 75px;
@@ -132,6 +124,7 @@ main {
     top: 0;
     left: 250px;
     width: calc(100% - 250px);
+    transition: 0.5s;
 }
 
 #searching-bar {
@@ -171,14 +164,18 @@ input {
     height: 40px;
     width: 70px;
     border-radius: 20px;
-    color: white;
-    border: none;
-    background-color: gray;
+    color: #ffffff;
+    background-color: #505050;
+    border: 1px solid #999999;
     font-family: circular-bold;
     font-size: 16px;
     float: left;
     margin: 20px;
     margin-left: 0px;
+}
+#search:hover {
+    cursor: pointer;
+    background-color: #999999;
 }
 
 #search:hover {
@@ -192,6 +189,16 @@ input {
 #bar_button {
     width: 90%;
     height: 40px;
+}
+
+main {
+    width: calc(100% - 250px);
+    background-color: #1e1e1e;
+    height: calc(100% - 75px);
+    float: left;
+    overflow-y: auto;
+    margin-top: 75px;
+    transition: 0.5s;
 }
 
 #results {
@@ -250,9 +257,9 @@ input {
     display: none;
     position: fixed;
     z-index: 99;
-    left: calc((100% - 500px) / 2);
+    left: calc((100% - 400px) / 2);
     background-color: #1e1e1e;
-    width: 500px;
+    width: 400px;
     color: #ffffff;
     padding: 20px;
     border-radius: 5px;
@@ -276,10 +283,10 @@ input {
     border: 1px solid #999999;
     color: #ffffff;
     font-family: circular-bold;
-    font-size: 20px;
+    font-size: 18px;
     width: 30%;
     height: 50px;
-    padding: 10px;
+    padding: 7px;
     margin: 10px;
     border-radius: 25px;
 }
@@ -290,8 +297,8 @@ input {
 }
 
 #selectPlaylistBox {
-    top: calc(100% - 400px / 2);
-    height: 250px;
+    top: 20%;
+    height: 325px;
 }
 
 #division {
@@ -307,13 +314,21 @@ input {
     margin: 2% 10%;
 }
 
+#playlists {
+    overflow-y: auto;
+    height: 50%;
+}
+
 .playlist {
     font-size: 16px;
-    margin: 10px 50px;
+    padding: 10px 30px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .playlist:hover {
-    background-color: #282828;
+    background-color: #3c3c3c;
     cursor: pointer;
 }
 
@@ -337,7 +352,7 @@ input {
 }
 
 .s-data {
-    width: calc(100% - 200px);
+    width: calc(100% - 250px);
     float: left;
 }
 
@@ -362,14 +377,14 @@ input {
 
 .s-buttons {
     float: left;
+    margin: 25px;
 }
 
 .s-buttons button {
     background-color: transparent;
     border: none;
     color: white;
-    margin: 10px;
-    margin-top: 20px;
+    margin-inline: 20px;
 }
 
 .s-buttons button:hover {

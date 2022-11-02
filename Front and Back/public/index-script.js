@@ -47,23 +47,25 @@ function buscar(e) {
 
         for (let pos = 0; pos < resultado.length; pos++) {
             results.innerHTML += `
-                    <div class="song">
-                        <div class="s-image">
-                            <img src="${resultado[pos]["image"]}" alt="" draggable="false">
-                        </div>
-                        <div class="s-data">
-                            <h1>${resultado[pos]["title_short"]}</h1>
-                            <h2>${resultado[pos]["artist"]}</h2>
-                            <h2>${resultado[pos]["album"]}</h2>
-                        </div>
-                        <div class="s-buttons">
-                            <button style="font-size: 28px;" onclick="showSelectPlaylistBox()"> + </button>
-                            <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
-                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
-                            </button>
-                        </div>
+                <div class="song">
+                    <div class="s-image">
+                        <img src="${resultado[pos]["image"]}" alt="" draggable="false">
                     </div>
-                    `;
+                    <div class="s-data">
+                        <h1>${resultado[pos]["title_short"]}</h1>
+                        <h2>${resultado[pos]["artist"]}</h2>
+                        <h2>${resultado[pos]["album"]}</h2>
+                    </div>
+                    <div class="s-buttons">
+                        <button style="font-size: 20px;" onclick="showSelectPlaylistBox()">
+                            <i class="fa-solid fa-plus" style="color: #fff;"></i>
+                        </button>
+                        <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                            <i class="fa-solid fa-play" style="color: #fff;"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
         }
         document.querySelector('.container-animation').style.display = 'none';
         if (results.childNodes.length == 0) {
@@ -195,7 +197,7 @@ closeSong.addEventListener('click', () => {
 let showSelectPlaylistBox = function() {
     let id = '#selectPlaylistBox';
     let deletePlaylistBoxContent = `
-        <h1 class="boxTitle"> Adicionar </h1>
+        <h1 class="boxTitle"> Adicionar às playlists </h1>
         <p> Selecione a playlist desejada: </p>
         <div id="division"> </div>
     `; 
@@ -204,12 +206,21 @@ let showSelectPlaylistBox = function() {
 
     /* Comando de exemplo para mostrar a formatação: */
     deletePlaylistBoxContent += `
-        <div class="playlist">Playlist 1</div>
-        <div class="playlist">Playlist 2</div>
-        <div class="playlist">Playlist 3</div>
-        <div class="playlist">Playlist 4</div>
-        <div class="playlist">Playlist 5</div>
+        <div id="playlists">
+            <ul>
+                <li class="playlist">Playlist 1</li>
+                <li class="playlist">Playlist 2</li>
+                <li class="playlist">Playlist 3</li>
+                <li class="playlist">Playlist 4</li>
+                <li class="playlist">Playlist 5</li>
+            <ul>
+        </div>
     `;
+
+    /* Caso não haja nenhuma playlist criada, mostrar uma instrução ao usuário: */
+    /* deletePlaylistBoxContent += 
+        <p> Você ainda não criou nenhuma playlist. Clique no botão "Criar Playlist" na barra lateral para poder salvar suas músicas favoritas. </p> 
+    `;*/
         
     deletePlaylistBoxContent += `
         <div class="options-buttons">
@@ -220,11 +231,9 @@ let showSelectPlaylistBox = function() {
     showBox(id, deletePlaylistBoxContent);
 
     document.querySelector('#deletePlaylist').addEventListener('click', () => {
-        hideBox(id);
-
         /* comandos para inserir a música na playlist no BD */
 
-        window.location.href = "../Home/home.html"
+        hideBox(id);
     })
 
     document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
@@ -234,6 +243,7 @@ let showSelectPlaylistBox = function() {
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#header').style.filter = 'blur(7px)';
     document.querySelector('#main').style.filter = 'blur(7px)';
     const box = document.querySelector(id);
     box.innerHTML = content;
@@ -242,6 +252,7 @@ let showBox = function (id, content) {
 
 let hideBox = function (id) {
     document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#header').style.filter = 'none';
     document.querySelector('#main').style.filter = 'none';
     const box = document.querySelector(id);
     box.innerHTML = '';

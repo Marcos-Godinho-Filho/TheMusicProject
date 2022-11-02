@@ -213,7 +213,7 @@ header {
 }
 
 #editPlaylistBox {
-    top: calc((100% - 400px) / 2);
+    top: calc((100vh - 400px) / 2);
     height: 400px;
 }
 
@@ -305,7 +305,7 @@ header {
 }
 
 #deletePlaylistBox {
-    top: calc((100% - 200px) / 2);
+    top: calc((100vh - 200px) / 2);
     background-color: #1e1e1e;
     height: 200px;
 }
@@ -340,11 +340,6 @@ main {
     background-color: #3c3c3c;
 }
 
-.song-empty {
-    width: 90%;
-    height: 80px;
-}
-
 .s-image {
     float: left;
     height: 70px;
@@ -362,7 +357,7 @@ main {
 }
 
 .s-data h1 {
-    color: #ffffff;
+    color: white;
     font-size: 14px;
 }
 
@@ -382,14 +377,14 @@ main {
 
 .s-buttons {
     float: left;
+    margin: 25px;
 }
 
 .s-buttons button {
     background-color: transparent;
     border: none;
-    color: #ffffff;
-    margin: 10px;
-    margin-top: 20px;
+    color: white;
+    margin-inline: 20px;
 }
 
 .s-buttons button:hover {
