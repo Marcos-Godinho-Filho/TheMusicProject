@@ -85,7 +85,6 @@ let title = document.querySelector('#title');
 let artist = document.querySelector('#artist');
 let album = document.querySelector('#album');
 
-let audioPlayer = document.querySelector('#audioPlayer');
 let preview = document.querySelector('#preview');
 
 let playBtn = document.querySelector('#playBtn');
@@ -146,6 +145,7 @@ playBtn.addEventListener('click', () => {
     else {
         audioPlayer.play();
     }
+})
 
 pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
