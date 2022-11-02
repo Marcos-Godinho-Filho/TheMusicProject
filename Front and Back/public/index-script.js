@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000/';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function (e) {
+inpBx.addEventListener('keyup', function(e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -80,6 +80,14 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
 })
 
+let image = document.querySelector('#image');
+let title = document.querySelector('#title');
+let artist = document.querySelector('#artist');
+let album = document.querySelector('#album');
+
+let audioPlayer = document.querySelector('#audioPlayer');
+let preview = document.querySelector('#preview');
+
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
 let backwardBtn = document.querySelector('#backwardBtn');
@@ -131,14 +139,13 @@ const formatTime = (time) => {
 playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
-
+    
     if (audioPlayer.currentTime >= 29) {
         backwardBtn.click();
     }
     else {
         audioPlayer.play();
     }
-});
 
 pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
@@ -149,6 +156,7 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
+
     playBtn.click();
 })
 
@@ -184,7 +192,7 @@ volumeBtn.addEventListener('click', () => {
 
         volumeSlider.value = 0;
         audioPlayer.volume = 0;
-    }
+    } 
     else if (volumeSlider.value == 0) {
         volumeSlider.value = previousVolume;
         audioPlayer.volume = previousVolume;

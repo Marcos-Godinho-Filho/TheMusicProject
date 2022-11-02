@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheMusicProject - Buscar</title>
+
     <link rel="icon" type="image/x-icon" href="photos/icon.ico">
     <link rel="stylesheet" href="index-style.css">
 </head>
@@ -22,18 +23,21 @@
             <a class="sidebar-menu-selected">
                 <i class="fa-solid fa-magnifying-glass"></i> Buscar
             </a>
+
             <a href="Profile/profile.html" draggable="false">
                 <i class="fa-solid fa-user"></i> Perfil
             </a>
         </div>
         <div class="sidebar-menu">
+        
             <div class="sidebar-menu-item" id="createPlaylist">
+
                 <div class="sidebar-menu-item-component ">
                     +
                 </div>
-                <span>Criar Playlist</span>
+                    <span>Criar Playlist</span>
             </div>
-            <div class="sidebar-playlists">
+        <div class="sidebar-playlists">
                 <a href="Playlists/playlist.html"> Playlist 1</a>
                 <a href="Playlists/playlist.html"> Playlist 2</a>
                 <a href="Playlists/playlist.html"> Playlist 3</a>
@@ -60,6 +64,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
         </div>
+
         <div id="results"></div>
     </main>
 
@@ -102,7 +107,9 @@
                 </a>
                 <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
             </div>
+
             <button id="closeSong">X</button>
+
         </div>
     </div>
     <audio id="audioPlayer" controls>
@@ -110,7 +117,9 @@
     </audio>
 
     <script src="index-script.js"></script>
+
     <script src="all.min.js"></script>
+
 </body>
 
 </html>

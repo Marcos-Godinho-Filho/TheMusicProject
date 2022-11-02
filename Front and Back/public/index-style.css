@@ -173,6 +173,7 @@ input {
     margin: 20px;
     margin-left: 0px;
 }
+
 #search:hover {
     cursor: pointer;
     background-color: #999999;
@@ -237,11 +238,9 @@ main {
     0% {
         transform: translateY(0px);
     }
-
     50% {
         transform: translateY(-50px);
     }
-
     100% {
         transform: translateY(0px);
     }
