@@ -69,10 +69,11 @@
 
     <div class="box" id="deletePlaylistBox"> </div>
     <div class="box" id="editPlaylistBox"> </div>
+    <div class="box" id="removeSongBox"> </div>
 
     <main id="main">
         <div id="songs">
-            <div class="song">
+            <div class="song" id="song1">
                 <div class="s-image">
                     <img src="" alt="Img" draggable="false">
                 </div>
@@ -82,15 +83,15 @@
                     <h2>Álbum </h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px;">
-                        <i class="fa-solid fa-plus" style="color: #fff;"></i>
+                    <button style="font-size: 20px;" onclick="removeSong('#song1')">
+                        <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
                     <button style="font-size: 20px;"> 
                         <i class="fa-solid fa-play" style="color: #fff;"></i>
                     </button>
                 </div>
             </div>
-            <div class="song">
+            <div class="song" id="song2">
                 <div class="s-image">
                     <img src="" alt="Img" draggable="false">
                 </div>
@@ -100,8 +101,8 @@
                     <h2>Álbum </h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px;">
-                        <i class="fa-solid fa-plus" style="color: #fff;"></i>
+                    <button style="font-size: 20px;" onclick="removeSong('#song2')">
+                        <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
                     <button style="font-size: 20px;"> 
                         <i class="fa-solid fa-play" style="color: #fff;"></i>
@@ -146,7 +147,7 @@
                     </a>
                     <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
                 </div>
-                <button id="close">X</button>
+                <button id="closeSong">X</button>
             </div>
         </div>
         <audio id="audioPlayer" controls>

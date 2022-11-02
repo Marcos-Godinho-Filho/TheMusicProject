@@ -212,16 +212,45 @@ header {
     box-shadow: #0c0c0c 0px 5px 40px;
 }
 
-#editPlaylistBox {
-    top: calc((100vh - 400px) / 2);
-    height: 400px;
-}
-
 .boxTitle {
     font-size: 26px;
     width: 100%;
     padding: 10px;
     text-align: center;
+}
+
+.options-buttons {
+    text-align: center;
+}
+
+.options-buttons button {
+    background-color: #505050;
+    border: 1px solid #999999;
+    color: #ffffff;
+    font-family: circular-bold;
+    font-size: 20px;
+    width: 30%;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.options-buttons button:hover {
+    cursor: pointer;
+    background-color: #999999;
+}
+
+.message {
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    margin: 2% 10%;
+}
+
+#editPlaylistBox {
+    top: calc((100vh - 400px) / 2);
+    height: 400px;
 }
 
 #edit-image {
@@ -241,7 +270,6 @@ header {
 
 #edit-image button:hover {
     cursor: pointer;
-
 }
 
 #img-button {
@@ -282,39 +310,14 @@ header {
     padding: 7px;
 }
 
-.options-buttons {
-    text-align: center;
-}
-
-.options-buttons button {
-    background-color: #505050;
-    border: 1px solid #999999;
-    color: #ffffff;
-    font-family: circular-bold;
-    font-size: 20px;
-    width: 30%;
-    height: 50px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 25px;
-}
-
-.options-buttons button:hover {
-    cursor: pointer;
-    background-color: #999999;
-}
-
 #deletePlaylistBox {
     top: calc((100vh - 200px) / 2);
-    background-color: #1e1e1e;
     height: 200px;
 }
 
-#deletePlaylistBox p {
-    width: 80%;
-    text-align: center;
-    font-size: 16px;
-    margin: 2% 10%;
+#removeSongBox {
+    top: calc((100vh - 200px) / 2);
+    height: 200px;
 }
 
 main {

@@ -139,8 +139,8 @@ document.querySelector('#play').addEventListener('click', () => {
 document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deletePlaylistBox';
     let deletePlaylistBoxContent = `
-        <h1 class="boxTitle"> Deletar </h1>
-        <p> Tem certeza que deseja deletar a Playlist? </p>
+        <h1 class="boxTitle"> Deletar Playlist </h1>
+        <p class="message"> Tem certeza que deseja deletar a Playlist? </p>
         <div class="options-buttons">
             <button id="deletePlaylist"> Deletar </button>
             <button id="calcelDeletePlaylist"> Cancelar </button>
@@ -164,7 +164,7 @@ document.querySelector('#delete').addEventListener('click', () => {
 document.querySelector('#edit').addEventListener('click', () => {
     let id = '#editPlaylistBox';
     let editBoxContent = `
-        <h1 class="boxTitle"> Editar </h1>
+        <h1 class="boxTitle"> Editar Playlist </h1>
         <div id="edit-image">
             <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
                 <img id="img-button" alt="Browse" src="../photos/top50brazil.jpg">
@@ -226,6 +226,32 @@ document.querySelector('#edit').addEventListener('click', () => {
         hideBox(id);
     })
 })
+
+let removeSong = function(idSong) {
+    let id = '#removeSongBox';
+    let removeSongBoxContent = `
+        <h1 class="boxTitle"> Remover música </h1>
+        <p class="message"> Tem certeza que deseja remover a música da Playlist? </p>
+        <div class="options-buttons">
+            <button id="removeSong"> Remover </button>
+            <button id="calcelRemoveSong"> Cancelar </button>
+        </div>
+    `;
+    showBox(id, removeSongBoxContent);
+
+    document.querySelector('#removeSong').addEventListener('click', () => {
+        /* comandos para remover a música da playlist no BD */
+
+        let removedSong = document.querySelector(idSong);
+        removedSong.remove();
+
+        hideBox(id);
+    })
+
+    document.querySelector('#calcelRemoveSong').addEventListener('click', () => {
+        hideBox(id);
+    })
+}
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
