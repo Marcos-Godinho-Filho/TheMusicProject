@@ -39,7 +39,7 @@ aside {
 }
 
 .sidebar-menu a {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
     display: block;
     padding: 10px 0;
@@ -47,7 +47,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selected {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -62,7 +62,7 @@ aside {
 
 .sidebar-menu a.sidebar-menu-selecionado {
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -86,7 +86,7 @@ aside {
 }
 
 .sidebar-menu-item span {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -100,12 +100,12 @@ aside {
 
 .sidebar-playlists {
     padding: 20px 0;
-    border-top: 1px solid rgb(40, 40, 40);
+    border-top: 1px solid #282828;
 }
 
 .sidebar-playlists a {
     display: block;
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
 }
 
@@ -115,7 +115,7 @@ aside {
 
 main {
     width: calc(100% - 250px);
-    background-color: rgb(30, 30, 30);
+    background-color: #1e1e1e;
     height: 100%;
     float: left;
 }
@@ -126,24 +126,8 @@ main {
     height: 50px;
     z-index: 98;
     top: 0;
-    left: calc(250px);
+    left: 250px;
     width: calc(100% - 250px);
-}
-
-#profile {
-    display: block;
-    position: absolute;
-    float: left;
-    font-size: 18px;
-    top: 14px;
-    right: 10px;
-    color: white;
-    width: 22.5%;
-    height: 10%;
-}
-
-#profile:hover {
-    cursor: pointer;
 }
 
 #slider{

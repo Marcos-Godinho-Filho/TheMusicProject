@@ -9,3 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 }, false);
+
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    /* comandos para criar uma nova playlist no BD com nome "Nova Playlist + idAtual", descrição nula e imagem nula, id é identity */
+
+    /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
+})

@@ -47,28 +47,38 @@ function buscar(e) {
 
         for (let pos = 0; pos < resultado.length; pos++) {
             results.innerHTML += `
-                    <div class="song">
-                        <div class="s-image">
-                            <img src="${resultado[pos]["image"]}" alt="" draggable="false">
-                        </div>
-                        <div class="s-data">
-                            <h1>${resultado[pos]["title_short"]}</h1>
-                            <h2>${resultado[pos]["artist"]}</h2>
-                            <h2>${resultado[pos]["album"]}</h2>
-                        </div>
-                        <div class="s-buttons">
-                            <button style="font-size: 28px;"> + </button>
-                            <button style="font-size: 20px;" onclick="show('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
-                                <i class="fa-solid fa-play" style="color: #fff; margin-inline: 16px"></i>
-                            </button>
-                        </div>
+                <div class="song">
+                    <div class="s-image">
+                        <img src="${resultado[pos]["image"]}" alt="" draggable="false">
                     </div>
-                    `;
+                    <div class="s-data">
+                        <h1>${resultado[pos]["title_short"]}</h1>
+                        <h2>${resultado[pos]["artist"]}</h2>
+                        <h2>${resultado[pos]["album"]}</h2>
+                    </div>
+                    <div class="s-buttons">
+                        <button style="font-size: 20px;" onclick="showSelectPlaylistBox()">
+                            <i class="fa-solid fa-plus" style="color: #fff;"></i>
+                        </button>
+                        <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                            <i class="fa-solid fa-play" style="color: #fff;"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
         }
-        results.innerHTML += '<div class="song-empty"></div>';
         document.querySelector('.container-animation').style.display = 'none';
+        if (results.childNodes.length == 0) {
+            results.innerHTML = '<div id="noResults"> Sem resultados para a busca. </div>'
+        }
     }
 }
+
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    /* comandos para criar uma nova playlist no BD com nome "Nova Playlist + idAtual", descrição nula e imagem nula, id é identity */
+
+    /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
+})
 
 let image = document.querySelector('#image');
 let title = document.querySelector('#title');
@@ -87,16 +97,20 @@ let progressBar = document.querySelector('.music-progress-bar')
 let songDuration = document.querySelector('.duration');
 let songCurrentTime = document.querySelector('.current-time');
 
-let volumeSlider = document.querySelector('.volume-slider')
+let volumeSlider = document.querySelector('.volume-slider');
 
-function show(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+let audioPlayer = document.querySelector('#audioPlayer');
+
+function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex";
+    document.querySelector('#main').style.height = 'calc(100% - 75px - 125px)';
+    document.querySelector('#aside').style.height = 'calc(100% - 125px)';
 
-    image.src = imageSrc;
-    title.innerHTML = titleTxt;
-    artist.innerHTML = artistTxt;
-    album.innerHTML = albumTxt;
-    preview.src = previewSrc;
+    document.querySelector('#image').src = imageSrc;
+    document.querySelector('#title').innerHTML = titleTxt;
+    document.querySelector('#artist').innerHTML = artistTxt;
+    document.querySelector('#album').innerHTML = albumTxt;
+    document.querySelector('#preview').src = previewSrc;
 
     audioPlayer.load();
 
@@ -125,9 +139,13 @@ const formatTime = (time) => {
 playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
-
-    audioPlayer.play();
-});
+    
+    if (audioPlayer.currentTime >= 29) {
+        backwardBtn.click();
+    }
+    else {
+        audioPlayer.play();
+    }
 
 pauseBtn.addEventListener('click', () => {
     playBtn.style.display = "inline";
@@ -174,15 +192,94 @@ volumeBtn.addEventListener('click', () => {
 
         volumeSlider.value = 0;
         audioPlayer.volume = 0;
-    } else if (volumeSlider.value == 0) {
+    } 
+    else if (volumeSlider.value == 0) {
         volumeSlider.value = previousVolume;
         audioPlayer.volume = previousVolume;
     }
 })
 
-let closeBtn = document.querySelector('#close');
+let closeSong = document.querySelector('#closeSong');
 
-closeBtn.addEventListener('click', () => {
+closeSong.addEventListener('click', () => {
     audioPlayer.pause();
     document.querySelector('.player').style.display = "none";
+    document.querySelector('#main').style.height = 'calc(100% - 75px)';
+    document.querySelector('#aside').style.height = '100%';
 })
+
+let showSelectPlaylistBox = function() {
+    let id = '#selectPlaylistBox';
+    let showSelectPlaylistBoxContent = `
+        <h1 class="boxTitle"> Adicionar às playlists </h1>
+        <p> Selecione a playlist desejada: </p>
+        <div id="division"> </div>
+    `; 
+
+    /* Comandos para pegar no banco de dados as playlists do usuário */
+
+    /* Comando de exemplo para mostrar a formatação: */
+    showSelectPlaylistBoxContent += `
+        <div id="playlists">
+            <ul>
+                <li class="playlist" onclick="select(0)">Playlist 1</li>
+                <li class="playlist" onclick="select(1)">Playlist 2</li>
+                <li class="playlist" onclick="select(2)">Playlist 3</li>
+                <li class="playlist" onclick="select(3)">Playlist 4</li>
+                <li class="playlist" onclick="select(4)">Playlist 5</li>
+            <ul>
+        </div>
+    `;
+
+    /* Caso não haja nenhuma playlist criada, mostrar uma instrução ao usuário: */
+    /* deletePlaylistBoxContent += 
+        <p> Você ainda não criou nenhuma playlist. Clique no botão "Criar Playlist" na barra lateral para poder salvar suas músicas favoritas. </p> 
+    `;*/
+        
+    showSelectPlaylistBoxContent += `
+        <div class="options-buttons">
+            <button id="addSongToPlaylist"> Adicionar </button>
+            <button id="calcelDeletePlaylist"> Cancelar </button>
+        </div>
+    `;
+    showBox(id, showSelectPlaylistBoxContent);
+
+    let selectedPlaylist;
+
+    function select(pos) {
+        const playlists = document.getElementsByClassName('playlist');
+
+        selectedPlaylist.style.backgroundColor = 'transparent';
+        
+        selectedPlaylist = playlists[pos];
+        selectedPlaylist.style.backgroundColor = '#505050';
+    }
+
+    document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
+        /* comandos para inserir a música na playlist no BD */
+
+        hideBox(id);
+    })
+
+    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
+        hideBox(id);
+    })
+}
+
+let showBox = function (id, content) {
+    document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#header').style.filter = 'blur(7px)';
+    document.querySelector('#main').style.filter = 'blur(7px)';
+    const box = document.querySelector(id);
+    box.innerHTML = content;
+    box.style.display = 'block';
+}
+
+let hideBox = function (id) {
+    document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#header').style.filter = 'none';
+    document.querySelector('#main').style.filter = 'none';
+    const box = document.querySelector(id);
+    box.innerHTML = '';
+    box.style.display = 'none';
+}
