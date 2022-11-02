@@ -79,6 +79,8 @@ app.post('/', (req, res) => {
 
 });
 
+
+// Cadastro
 app.post('/registration/', (req, res) => {
     let parcel = req.body;
     let nome = parcel[0];
@@ -90,7 +92,37 @@ app.post('/registration/', (req, res) => {
         controller.insertNewUser(email, nome, senha);
         res.redirect("./public/index.html"); // I dont know whether this is working or not
     }
-    catch (error) { return res.statusMessage = 'Failed to signup'; } // Neither this
+    catch (error) { return res.send('Failed to signup'); } // Neither this
+});
+
+
+// Recuperacao de senha
+app.post('/password-registration/', (req, res) => {
+    let parcel = req.body;
+    let email = parcel[0];
+    let novaSenha = parcel[1];
+
+    try
+    {
+        controller.recoverPassword(email, novaSenha);
+        res.statusMessage = 'Password recovery worked out well';
+    }
+    catch (error) { return res.send('Fail in the process'); };
+});
+
+
+// Logar
+app.post('/authentication/', (req, res) => {
+    let parcel = req.body;
+
+    try
+    {
+        if (controller.checkValidation(parcel))
+            res.redirect('./public/index.html');
+        else
+            res.send('User not registered');
+    }
+    catch (error) { return res.send('Failed while trying to login'); }
 });
 
 app.listen(port, () => console.log('Server has started on port ' + port)); 

@@ -50,7 +50,7 @@
 
                     <input type="submit" value="Entrar" id="botaoRecuperar"> 
 
-                    <p class="result" style="display: none; margin-block: 20px;">Dados de login incorretos, tente novamente!</p>
+                    <p class="result" style="display: none; margin-block: 20px;"></p>
                 </form>
                 
                 <p><a href="..\Login Page\index.html">Voltar para Login</a></p>
@@ -62,6 +62,7 @@
             let inputBoxEmail = document.querySelector("#email");
             let inputBoxNovaSenha = document.querySelector("#newpassword");
             let inputBoxConfNovaSenha = document.querySelector("#confnewpassword");
+            let result = document.querySelector('.result');
 
             let mensagemErroEmail = document.querySelector("#mensagemErroEmail");
             let mensagemErroNovaSenha = document.querySelector("#mensagemErroNovaSenha");
@@ -69,6 +70,7 @@
 
             let botaoRecuperar = document.querySelector("#botaoRecuperar");
 
+            const BASE_URL = 'http://localhost:3000/password-recuperation/';
             const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
             botaoRecuperar.addEventListener('click', (e) => {
@@ -107,13 +109,51 @@
                     else
                     {mensagemErroConfirmacaoNovaSenha.style.display = "none"; }
                 }
-                else
+                else { alert("Logamos"); recuperarSenha(e); }
+
+
+
+                function recuperarSenha(e)
                 {
-                    alert("Logamos");
+                    e.preventDefault();
+
+                    let info = [];
+                    info.push(emailDigitado);
+                    info.push(novaSenhaDigitada);
+
+                    postInfo(info);
+                    async function postInfo(info)
+                    {
+                        alert("Chegamos aqui");
+                        if (info == "") return;
+                        const res = await fetch(BASE_URL,
+                        {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": 'application/json'
+                            },
+                            body: JSON.stringify({
+                                parcel: info
+                            })
+                        });
+
+                        if (res.status.text == 'Fail in the process')
+                        {
+                            alert('deu merda');
+                            result.style.display = 'block';
+                            result.innerHTML = 'Fail to recover password, please try again later!';
+                        }
+                        else if (res.status.text == 'Password recovery worked out well')
+                        {
+                            alert('deu bom');
+                            result.style.display = 'block';
+                            result.innerHTML = 'Password recovery worked out well, now login with the new password!';
+                        }
+                    }
                 }
             });
 
-
+            
 
 
 

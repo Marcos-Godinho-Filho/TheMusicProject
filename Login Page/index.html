@@ -61,6 +61,7 @@
 
             let botaoLogar = document.querySelector("#botaoLogin");
 
+            const BASE_URL = 'http://localhost:3000/authentication/'; 
             const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
             botaoLogar.addEventListener('click', (e) => {
@@ -87,13 +88,34 @@
                     }
                     else
                     { mensagemErroSenha.style.display = "none"; }
-                    
-                    //alert("Nao logamos");
                 }
-                else
+                else { loginUser(e); }
+
+                function loginUser(e)
                 {
-                    //alert("Logamos");
-                    //cadastrar(e);
+                    e.preventDefault();
+
+                    postInfo();
+                    async function postInfo() 
+                    {
+                        alert("Chegamos aqui");
+                        const res = await fetch(BASE_URL,
+                        {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": 'application/json'
+                            },
+                            body: JSON.stringify({
+                                parcel: emailDigitado
+                            })
+                        });
+
+                        if (res.status.text == 'Failed to login')
+                        {
+                            alert('deu merda');
+                        }
+                        else alert('deu bom');
+                    } 
                 }
             });
 
