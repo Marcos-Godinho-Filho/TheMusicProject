@@ -173,7 +173,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         </div>
         <div id="edit-data">
             <input type="text" id="newTitle" value="Playlist 1"> </input> 
-            <textarea id="newDescription">Descrição</textarea>
+            <textarea id="newDescription" resize="none">Descrição</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditPlaylist"> Salvar </button>
