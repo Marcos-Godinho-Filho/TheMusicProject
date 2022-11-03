@@ -167,7 +167,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         <h1 class="boxTitle"> Editar Playlist </h1>
         <div id="edit-image">
             <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
-                <img id="img-button" alt="Browse" src="../photos/top50brazil.jpg">
+                <img id="img-button" alt="Browse" src="${document.querySelector('#t-img').src}">
             </button>
             <input type="file" id="fileReader" accept="image/*">
         </div>
