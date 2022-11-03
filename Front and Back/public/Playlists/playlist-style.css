@@ -308,6 +308,7 @@ header {
     font-size: 18px;
     border: none;
     padding: 7px;
+    resize: none;
 }
 
 #deletePlaylistBox {
