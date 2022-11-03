@@ -1,11 +1,11 @@
 @font-face {
     font-family: circular-bold;
-    src: url("spotifyFont/GothamBold.ttf");
+    src: url("../spotifyFont/GothamBold.ttf");
 }
 
 @font-face {
     font-family: circular-light;
-    src: url("spotifyFont/GothamLight.ttf");
+    src: url("../spotifyFont/GothamLight.ttf");
 }
 
 * {
@@ -49,7 +49,7 @@ aside {
 }
 
 .sidebar-menu a.sidebar-menu-selected {
-    color: white;
+    color: #ffffff;
     background-color: #505050;
     border-radius: 5px;
 }
@@ -64,7 +64,7 @@ aside {
 }
 
 .sidebar-menu a.sidebar-menu-selecionado {
-    color: white;
+    color: #ffffff;
     background-color: #505050;
     border-radius: 5px;
 }
@@ -84,12 +84,12 @@ aside {
     display: inline-block;
     color: black;
     font-weight: bold;
-    background-color: white;
+    background-color: #ffffff;
     margin: 8px;
 }
 
 .sidebar-menu-item span {
-    color: #bfbfbf;
+    color: #bebebe;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -113,152 +113,98 @@ aside {
 }
 
 .sidebar-playlists a:hover {
-    color: white;
+    color: #ffffff;
 }
 
 header {
-    background-color: black;
-    position: fixed;
-    height: 75px;
-    z-index: 98;
-    top: 0;
-    left: 250px;
+    height: calc(270px + 80px);
     width: calc(100% - 250px);
+    left: 250px;
+    top: 0;
+    float: left;
     transition: 0.5s;
 }
 
-#searching-bar {
-    float: left;
-    left: 40px;
-    width: 60%;
-    height: 40px;
-    border: 0px;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 5px 5px 5px #111111;
-    margin: 20px;
-}
-
-#magnifying-glass {
-    float: left;
+#top {
+    background-color: #505050;
+    height: calc(100% - 80px);
     z-index: 98;
-    width: 32px;
-    height: 25px;
-    margin-top: 9px;
-    margin-left: 10px;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
 }
 
-input {
-    background-color: transparent;
-    border: none;
-    padding: 10px;
-    outline: none;
+#top-image {
+    float: left;
+    max-height: 250px;
+    max-width: 250px;
+    padding: 15px;
+}
+
+#t-img {
+    width: 100%;
+    height: 100%;
+}
+
+#top-data {
+    float: left;
+}
+
+#title {
+    font-size: 64px;
+    padding: 30px 7px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#description {
     font-size: 16px;
     font-family: circular-light;
-    width: calc(100% - 50px);
-    z-index: 99;
-    float: left;
+    color: #bebebe;
+    margin-top: 20px;
+    padding: 7px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-#search {
-    height: 40px;
-    width: 70px;
-    border-radius: 20px;
-    color: #ffffff;
-    background-color: #505050;
-    border: 1px solid #999999;
-    font-family: circular-bold;
+#songCount {
     font-size: 16px;
-    float: left;
-    margin: 20px;
-    margin-left: 0px;
+    padding: 7px;
 }
 
-#search:hover {
+#sub-top {
+    background-color: #424242;
+    height: 80px;
+    z-index: 98;
+    top: 250px;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+}
+
+#play,
+#delete,
+#edit {
+    margin: 15px;
+    font-size: 25px;
+    display: inline-block;
+}
+
+#play,
+#delete,
+#edit:hover {
     cursor: pointer;
-    background-color: #999999;
-}
-
-#search:hover {
-    cursor: pointer;
-}
-
-#search:active {
-    background-color: #1b1b1b;
-}
-
-#bar_button {
-    width: 90%;
-    height: 40px;
-}
-
-main {
-    width: calc(100% - 250px);
-    background-color: #1e1e1e;
-    height: calc(100% - 75px);
-    float: left;
-    overflow-y: auto;
-    margin-top: 75px;
-    transition: 0.5s;
-}
-
-#results {
-    padding: 10px 30px;
-    color: white;
-    font-size: 20px;
-}
-
-.container-animation {
-    margin-top: 35vh;
-    margin-left: 50%;
-    transform: translate(-35%);
-    display: none;
-    gap: 40px;
-}
-
-.dot {
-    background: #fff;
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px #fff;
-    animation-delay: 0s;
-    animation: load 2s ease infinite;
-}
-
-.dot:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.dot:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-@keyframes load {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-50px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-#noResults {
-    margin: 20% 20%;
-    text-align: center;
-    font-size: 26px;
 }
 
 .box {
     display: none;
     position: fixed;
     z-index: 99;
-    left: calc((100% - 400px) / 2);
+    left: calc((100% - 500px) / 2);
     background-color: #1e1e1e;
-    width: 400px;
+    width: 500px;
     color: #ffffff;
     padding: 20px;
     border-radius: 5px;
@@ -282,10 +228,10 @@ main {
     border: 1px solid #999999;
     color: #ffffff;
     font-family: circular-bold;
-    font-size: 18px;
+    font-size: 20px;
     width: 30%;
     height: 50px;
-    padding: 7px;
+    padding: 10px;
     margin: 10px;
     border-radius: 25px;
 }
@@ -295,40 +241,99 @@ main {
     background-color: #999999;
 }
 
-#selectPlaylistBox {
-    top: 20%;
-    height: 325px;
-}
-
-#division {
-    height: 1.5px;
-    width: 100%;
-    background-color: #afafaf
-}
-
-#selectPlaylistBox p {
+.message {
     width: 80%;
     text-align: center;
     font-size: 16px;
     margin: 2% 10%;
 }
 
-#playlists {
-    overflow-y: auto;
-    height: 50%;
+#editPlaylistBox {
+    top: calc((100vh - 400px) / 2);
+    height: 400px;
 }
 
-.playlist {
-    font-size: 16px;
-    padding: 10px 30px;
-    overflow-x: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+#edit-image {
+    float: left;
+    width: 50%;
+    height: 65%;
+    padding: 5px;
 }
 
-.playlist:hover {
-    background-color: #3c3c3c;
+#edit-image button {
+    height: 200px;
+    width: 200px;
+    display: block;
+    border: none;
+    background-color: transparent;
+}
+
+#edit-image button:hover {
     cursor: pointer;
+}
+
+#img-button {
+    width: 200px;
+    height: 200px;
+}
+
+#fileReader {
+    display: none;
+}
+
+#edit-data {
+    float: left;
+    padding: 5px;
+    width: 50%;
+    height: 65%;
+}
+
+#edit-data input {
+    width: 100%;
+    height: 50px;
+    background-color: #424242;
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    border: 1px none;
+    padding: 7px;
+}
+
+#edit-data textarea {
+    width: 100%;
+    height: calc(200px - 75px);
+    background-color: #424242;
+    color: #ffffff;
+    font-family: circular-light;
+    font-size: 18px;
+    border: none;
+    padding: 7px;
+    resize: none;
+}
+
+#deletePlaylistBox {
+    top: calc((100vh - 200px) / 2);
+    height: 200px;
+}
+
+#removeSongBox {
+    top: calc((100vh - 200px) / 2);
+    height: 200px;
+}
+
+main {
+    width: calc(100% - 250px);
+    background-color: #1e1e1e;
+    float: left;
+    height: calc(100% - 270px - 80px);
+    overflow-y: auto;
+    transition: 0.5s;
+}
+
+#songs {
+    padding: 10px 30px;
+    color: #ffffff;
+    font-size: 20px;
 }
 
 .song {
@@ -392,7 +397,7 @@ main {
 
 .player {
     width: 100%;
-    height: 125px;
+    height: auto;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -424,7 +429,7 @@ main {
 }
 
 .pa-data>h1 {
-    color: white;
+    color: #ffffff;
     font-size: 16px;
 }
 
@@ -485,7 +490,7 @@ main {
 }
 
 .duration {
-    color: white;
+    color: #ffffff;
     font-size: 12px;
     left: calc(100% - 50px);
     position: absolute;
@@ -495,7 +500,6 @@ main {
     width: 25%;
     float: left;
     padding: 20px;
-    margin-left: 3%;
 }
 
 .volume-slider {
@@ -514,8 +518,8 @@ main {
     cursor: pointer;
 }
 
-#closeSong {
-    color: white;
+#close {
+    color: #ffffff;
     background-color: transparent;
     border: none;
     position: absolute;
@@ -523,7 +527,7 @@ main {
     top: 5px;
 }
 
-#closeSong:hover {
+#close:hover {
     cursor: pointer;
 }
 
@@ -544,6 +548,7 @@ main {
 }
 
 audio {
+    /* display: none; */
     position: absolute;
     left: 0;
     top: 0;
@@ -567,8 +572,23 @@ audio::-webkit-media-controls-volume-control-container {
     display: none !important;
 }
 
+@media screen and (max-width: 1700px) {
+    .main-col {
+        width: 20%;
+    }
+}
+
 @media screen and (max-width: 768px) {
-    main {
-        padding: 15px 15px;
+    .main {
+        width: 100%;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-col {
+        width: 48%;
+        margin-right: 2%;
     }
 }
