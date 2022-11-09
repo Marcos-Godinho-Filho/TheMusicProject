@@ -1,0 +1,376 @@
+@font-face {
+    font-family: circular-bold;
+    src: url("../spotifyFont/GothamBold.ttf");
+}
+
+@font-face {
+    font-family: circular-light;
+    src: url("../spotifyFont/GothamLight.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: circular-bold;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+aside {
+    float: left;
+    width: 250px;
+    padding: 10px 10px;
+    height: 100%;
+    background-color: #0c0c0c;
+    display: block;
+}
+
+.sidebar-menu {
+    margin-top: 50px;
+}
+
+.sidebar-menu a {
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.sidebar-menu a.sidebar-menu-selected {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu svg {
+    margin: 0 20px;
+}
+
+.sidebar-logo img {
+    max-width: 250px;
+    width: 100%;
+}
+
+.sidebar-menu a.sidebar-menu-selecionado {
+    color: white;
+    background-color: rgb(80, 80, 80);
+    border-radius: 5px;
+}
+
+.sidebar-menu-item {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sidebar-menu-item-component {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin: 8px;
+}
+
+.sidebar-menu-item span {
+    color: rgb(190, 190, 190);
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.sidebar-menu-item img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sidebar-playlists {
+    padding: 20px 0;
+    border-top: 1px solid rgb(40, 40, 40);
+}
+
+.sidebar-playlists a {
+    display: block;
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+}
+
+.sidebar-playlists a:hover {
+    color: white;
+}
+
+main {
+    width: calc(100% - 250px);
+    background-color: rgb(30, 30, 30);
+    height: 100%;
+    float: left;
+}
+marquee{
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 25px;
+    filter: drop-shadow(0 0 20px rgb(255, 255, 255));
+}
+
+#top {
+    background-color: rgb(0, 0, 0);
+    position: fixed;
+    height: 75px;
+    z-index: 98;
+    top: 0;
+    left: calc(250px);
+    width: calc(100% - 250px);
+}
+
+#profile {
+    display: block;
+    position: absolute;
+    float: left;
+    font-size: 18px;
+    top: 14px;
+    right: 10px;
+    color: white;
+    width: 22.5%;
+    height: 10%;
+}
+
+#profile:hover {
+    cursor: pointer;
+}
+
+#slider{
+    margin-top: 32px;
+    height: 100vh;
+    object-fit: cover;
+}
+
+#slider a{
+    position: absolute;
+}
+
+#slider a:nth-of-type(1){
+    animation-name: fader;
+    animation-delay: 4s;
+    animation-duration: 2s;
+    z-index: 20;
+    width: calc(100% - 250px);
+}
+
+#slider a:nth-of-type(2){
+    z-index: 10;
+    width: calc(100% - 250px);
+}
+
+#slider a:nth-of-type(n+3){
+    display: none;
+    width: calc(100% - 250px);
+}
+
+@keyframes fader {
+    from {opacity:1.0;}
+    to {opacity:0.0;}
+}
+
+@font-face {
+    font-family: spotify;
+    src: url(./font/Utah-Condensed-Bold-Font/Gotham-Black.otf);
+}
+
+@font-face {
+    font-family: spotify;
+    src: url(./font/Utah-Condensed-Bold-Font/Gotham-Black.otf);
+}
+
+.card{
+    font-family: spotify;
+    width: 500px;
+    height: 450px;
+    background: rgb(37, 37, 37);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    margin-top: 250px;
+    margin-left: 250px;
+}
+
+#cor {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: rgb(37, 37, 37);
+}
+#cor:focus{
+    border: none;
+}
+
+.card-image {
+    background-color: rgb(48, 45, 88);
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;   
+}
+
+.profile-image img{
+    z-index: 1;
+    width: 120px;
+    height: 120px; 
+    position: relative;
+    margin-top: -75px;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100px;
+    border: 3px solid rgb(63, 175, 76);
+    transition-duration: 0.1s;
+    transition-property: transform;
+}
+
+#edit-image {
+    float: left;
+    width: 50%;
+    height: 65%;
+    padding: 5px;
+}
+
+#edit-image button {
+    z-index: 1;
+    position: relative;
+    margin-top: -75px;
+    margin-left: 78%;
+    height: 120px;
+    width: 120px;
+    display: block;
+    border: none;
+    border-radius: 100px;
+}
+
+#edit-image button:hover {
+    cursor: pointer;
+
+}
+
+#img-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    border: 3px solid rgb(63, 175, 76);
+}
+
+#fileReader {
+    display: none;
+}
+
+.card-content h1{
+    font-size: 25px;
+    margin-top: 10px;
+    text-align: center;
+    margin: 0;
+    color: white;
+}
+
+.card-content textarea{
+    padding: 0 20px 5px 20px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 26%;
+    background-color: rgb(34, 34, 34);
+    color: white;
+    height: 35%;
+    width: 50%;
+    resize: none;
+    border: none;
+}
+
+.card-content p{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 12px;
+    padding: 0 20px 5px 20px;
+    color: white;
+}
+
+.icons{
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
+.icons a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 0 14px;
+    transition-duration: 0.4s;
+    transition-property: transform;
+}
+
+.icons a:hover{
+    color: rgb(119, 119, 119);
+    transform: scale(1.5);
+}
+
+.buttonColor{
+    position: relative;
+    width: 100px;
+    height: 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 2.5px 0 #39a2db59;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar {
+    width: 12.5px;
+}
+
+ ::-webkit-scrollbar-track {
+    background-color: lightgray;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background-color: #6952C8;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #2f178f;
+}
+
+@media screen and (max-width: 1700px) {
+    .main-col {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main {
+        width: 100%;
+    }
+    .sidebar {
+        display: none;
+    }
+    .main-col {
+        width: 48%;
+        margin-right: 2%;
+    }
+}
