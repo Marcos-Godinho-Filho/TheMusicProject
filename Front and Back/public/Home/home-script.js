@@ -15,3 +15,11 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
 })
+
+const baseUrl = 'http://localhost:3000/home';
+setTimeout(getInfo, 2000);
+
+async function getInfo(e) {
+    const res = await fetch(baseUrl, {
+        method: 'GET'
+    });

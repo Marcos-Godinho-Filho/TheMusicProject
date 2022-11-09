@@ -8,7 +8,7 @@ let retorno = [];
 app.use(express.static('public'));
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/info/:dynamic', (req, res) => {
     const { dynamic } = req.params;
     const { key } = req.query;
     // console.log(dynamic, key);

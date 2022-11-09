@@ -37,7 +37,7 @@ function buscar(e) {
     }
 
     async function getInfo(e) {
-        const res = await fetch(baseUrl, {
+        const res = await fetch(baseUrl + 'info/test?key=busca', {
             method: 'GET'
         });
 
