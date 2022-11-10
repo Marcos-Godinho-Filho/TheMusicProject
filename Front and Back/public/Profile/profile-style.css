@@ -205,8 +205,8 @@ marquee{
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
-    margin-top: 250px;
-    margin-left: 250px;
+    margin-top: calc((100vh - 450px) / 2);
+    margin-left: calc((100% - 500px) / 2);
 }
 
 #cor {
