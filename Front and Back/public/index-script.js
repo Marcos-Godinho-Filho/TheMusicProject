@@ -2,7 +2,7 @@ let buscarBtn = document.querySelector("#search");
 let inpBx = document.querySelector("#inputBox");
 let results = document.querySelector("#results");
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3000/search';
 
 buscarBtn.addEventListener('click', buscar);
 
@@ -37,7 +37,7 @@ function buscar(e) {
     }
 
     async function getInfo(e) {
-        const res = await fetch(baseUrl + 'info/test?key=busca', {
+        const res = await fetch(baseUrl, {
             method: 'GET'
         });
 

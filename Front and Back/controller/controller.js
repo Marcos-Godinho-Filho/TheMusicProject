@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 let Connection = require('tedious').Connection;
 
 let config =
@@ -33,7 +35,7 @@ let TYPES = require('tedious').TYPES;
 connection.on('debug', function (err) { console.log('debug:', err); });
 
 // Seleciona tudo da tabela
-function selectAllFrom(requiredSelection, from) {
+exports.selectAllFrom = (requiredSelection, from) => {
     try {
         request = new Request(`select ${requiredSelection} from tmp.${from};`, function (err) {
             if (err)
@@ -67,7 +69,7 @@ function selectAllFrom(requiredSelection, from) {
 
 
 // Seleciona a partir de uma condicao
-function selectFromWhere(requiredSelection, from, selectionCondition) {
+exports.selectFromWhere = (requiredSelection, from, selectionCondition) => {
     try {
         request = new Request(`select ${requiredSelection} from tmp.${from} where ${selectionCondition};`, function (err) {
             if (err)
@@ -100,7 +102,7 @@ function selectFromWhere(requiredSelection, from, selectionCondition) {
 }
 
 
-function deleteFromWhere(requiredDelete, from, deleteCondition) {
+exports.deleteFromWhere = (requiredDelete, from, deleteCondition) => {
     try {
         request = new Request(`delete ${requiredDelete} from tmp.${from} where ${deleteCondition};`, function (err) {
             if (err)
@@ -162,7 +164,7 @@ function deleteFromWhere(requiredDelete, from, deleteCondition) {
 // }
 
 // Insere um novo usuario
-function insertNewUser(email, nome, senha) {
+exports.insertNewUser = (email, nome, senha) => {
     try {
         if (checkValidation('Usuario', 'email = ' + email))
             throw new Error('User already registered');
@@ -196,7 +198,7 @@ function insertNewUser(email, nome, senha) {
     catch (erro) { throw new Error(erro); }
 }
 
-function insertNewSong(idMusica, nomeMusica, nomeArtista, nomeAlbum, previewMusica, imagemAlbum) {
+exports.insertNewSong = (idMusica, nomeMusica, nomeArtista, nomeAlbum, previewMusica, imagemAlbum) => {
     try {
         if (checkValidation('Musica', 'idMusica = ' + idMusica))
             throw new Error('Song already registered');
@@ -230,7 +232,7 @@ function insertNewSong(idMusica, nomeMusica, nomeArtista, nomeAlbum, previewMusi
     catch (erro) { throw new Error(erro); }
 }
 
-function insertNewPlaylist(idPlaylist, nome, descricao, imagem, email) {
+exports.insertNewPlaylist = (idPlaylist, nome, descricao, imagem, email) => {
     try {
         if (checkValidation('Playlist', 'idPlaylist = ' + idPlaylist))
             throw new Error('Playlist already registered');
@@ -264,7 +266,7 @@ function insertNewPlaylist(idPlaylist, nome, descricao, imagem, email) {
     catch (erro) { throw new Error(erro); }
 }
 
-function insertNewPlaylistSong(idPlaylist, idMusica) {
+exports.insertNewPlaylistSong = (idPlaylist, idMusica) => {
     if (checkValidation('PlaylistMusica', 'idPlaylist = ' + idPlaylist && 'idMusica = ' + idMusica))
         throw new Error('PlaylistMusica already registered');
     else {
@@ -299,7 +301,7 @@ function insertNewPlaylistSong(idPlaylist, idMusica) {
 }
 
 // Recuperacao de senha
-function recoverPassword(email, novaSenha) {
+exports.recoverPassword = (email, novaSenha) => {
     try {
         if (!checkValidation("Usuario", "email = " + email))
             throw new Error('User not found in database');
@@ -320,7 +322,7 @@ function recoverPassword(email, novaSenha) {
 
 
 // Checa se um email é válido (cadastrado)
-function checkValidation(from, condition) {
+exports.checkValidation = (from, condition) => {
     try {
         request = new Request(`select count(*) from tmp.${from} where ${condition};`, function (err) {
             if (err)
@@ -354,15 +356,47 @@ function checkValidation(from, condition) {
     catch (erro) { throw new Error(erro); }
 }
 
+let retorno = [];
+
+exports.searchFromAPI = ('/search/:parcel', async(req, res) => {
+
+    retorno = [];
+
+    const { parcel } = req.query.parcel;
+
+    const optionsAxios = {
+        method: 'GET',
+        url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+        params: { q: `${parcel}` },
+        headers: {
+            'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
+            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+        }
+    };
+
+    axios.request(optionsAxios).then(function(response) {
+        for (let musica of response.data['data']) {
+            retorno.push({
+                "title_short": musica["title_short"],
+                "artist": musica["artist"]["name"],
+                "album": musica["album"]["title"],
+                "image": musica["album"]["cover_medium"],
+                "preview": musica["preview"]
+            });
+
+        }
+    }).catch(function(error) {
+        console.error(error);
+    });
+    if (!parcel) {
+        return res.status(400).send({ status: 'failed' });
+    }
+    res.status(200).send({ status: 'received' });
+
+});
 
 
-//Exportando as funcoes
-exports.selectAllFrom = selectAllFrom;
-exports.selectFromWhere = selectFromWhere;
-exports.deleteFromWhere = deleteFromWhere;
-exports.insertNewUser = insertNewUser;
-exports.insertNewSong = insertNewSong;
-exports.insertNewPlaylist = insertNewPlaylist;
-exports.insertNewPlaylistSong = insertNewPlaylistSong;
-exports.recoverPassword = recoverPassword;
-exports.checkValidation = checkValidation;
+exports.getFromAPI = ('/search', async(req, res) => {
+    res.status(200).json({ info: retorno });
+    retorno = [];
+});
