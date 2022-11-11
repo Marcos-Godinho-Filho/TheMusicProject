@@ -200,7 +200,7 @@ document.querySelector('#edit').addEventListener('click', () => {
 
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
         previousImg = img.src;
-        img.src = '../photos/browse.png';
+        img.src = '../images/browse.png';
         img.style.width = '200px';
         img.style.height = '200px';
     })

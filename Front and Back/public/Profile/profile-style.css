@@ -343,6 +343,18 @@ marquee{
     color: white;
 }
 
+.card-buttons {
+    text-align: center;
+    color: #fff;
+    margin: 10px;
+}
+
+.card-content a {
+    margin: 15px;
+    font-size: 20px;
+    display: inline-block;
+}
+
 .card-content textarea{
     padding: 0 20px 5px 20px;
     font-size: 16px;
