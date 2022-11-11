@@ -197,6 +197,62 @@ marquee{
     src: url(./font/Utah-Condensed-Bold-Font/Gotham-Black.otf);
 }
 
+#play,
+#delete,
+#edit:hover {
+    cursor: pointer;
+}
+
+.box {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: calc((100% - 500px) / 2);
+    background-color: #1e1e1e;
+    width: 500px;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    transition: 0.5s;
+    box-shadow: #0c0c0c 0px 5px 40px;
+}
+
+.boxTitle {
+    font-size: 26px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.options-buttons {
+    text-align: center;
+}
+
+.options-buttons button {
+    background-color: #505050;
+    border: 1px solid #999999;
+    color: #ffffff;
+    font-family: circular-bold;
+    font-size: 20px;
+    width: 30%;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.options-buttons button:hover {
+    cursor: pointer;
+    background-color: #999999;
+}
+
+.message {
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    margin: 2% 10%;
+}
+
 .card{
     font-family: spotify;
     width: 500px;
