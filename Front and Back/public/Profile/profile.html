@@ -53,17 +53,21 @@
                 Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
         </div>
         <div class="card">
-            <div class="card-image">
+            <div class="card-color"> </div>
+            <!-- <div class="card-image">
                 <label for="cor">
                     <input type="color" name="cor" id="cor" class="cor" value="#ff0000">
                 </label>
+            </div> -->
+            <div class="card-image">
+                <img src="../images/default.jpg" alt="foto">
             </div>
-            <div id="edit-image">
+            <!-- <div id="edit-image">
                 <button onclick="document.getElementById('fileReader').click()">
                     <img id="img-button" alt="foto" src="../images/default.jpg">
                 </button>
                 <input type="file" id="fileReader" accept="image/*">
-            </div>
+            </div> -->
             <div class="card-content">
                 <div class="card-buttons">
                     <a id="delete">
@@ -74,8 +78,9 @@
                     </a>
                 </div>
                 <h1>USER</h1>
-                <textarea maxlength="30"></textarea>
-                <p>emailfake.mail@secmail</p>
+                <p id="bio">Bio</p>
+                <!-- <textarea max="30"></textarea> -->
+                <p id="email">emailfake.mail@secmail</p>
             </div>
             <div class="icons">
                 <a href="#" class="fab fa-facebook-f"></a>
