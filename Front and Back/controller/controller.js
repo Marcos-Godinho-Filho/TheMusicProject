@@ -69,7 +69,7 @@ exports.selectAllFrom = (requiredSelection, from) => {
 
 
 // Seleciona a partir de uma condicao
-exports.selectFromWhere = (requiredSelection, from, selectionCondition) => {
+exports.selectPlaylistFromUser = (requiredSelection, from, selectionCondition) => {
     try {
         request = new Request(`select ${requiredSelection} from tmp.${from} where ${selectionCondition};`, function (err) {
             if (err)
@@ -164,7 +164,12 @@ exports.deleteFromWhere = (requiredDelete, from, deleteCondition) => {
 // }
 
 // Insere um novo usuario
-exports.insertNewUser = (email, nome, senha) => {
+exports.insertNewUser = ('/registration', (req, res) => {
+
+    let email = req.body.email;
+    let nome  = req.body.username;
+    let senha = req.body.password;
+
     try {
         if (checkValidation('Usuario', 'email = ' + email))
             throw new Error('User already registered');
@@ -196,9 +201,17 @@ exports.insertNewUser = (email, nome, senha) => {
         }
     }
     catch (erro) { throw new Error(erro); }
-}
+})
 
-exports.insertNewSong = (idMusica, nomeMusica, nomeArtista, nomeAlbum, previewMusica, imagemAlbum) => {
+exports.insertNewSong = () => {
+    let idMusica = 1;
+    let nomeMusica = 1;
+    let nomeArtista = 1;
+    let nomeAlbum = 1;
+    let previewMusica = 1;
+    let imagemAlbum = 1;
+
+
     try {
         if (checkValidation('Musica', 'idMusica = ' + idMusica))
             throw new Error('Song already registered');
@@ -358,11 +371,11 @@ exports.checkValidation = (from, condition) => {
 
 let retorno = [];
 
-exports.searchFromAPI = ('/search/:parcel', async(req, res) => {
+exports.searchFromAPI = ('/search', async(req, res) => {
 
     retorno = [];
 
-    const { parcel } = req.query.parcel;
+    const { parcel } = req.body.parcel;
 
     const optionsAxios = {
         method: 'GET',
