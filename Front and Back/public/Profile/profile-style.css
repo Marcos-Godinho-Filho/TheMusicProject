@@ -209,52 +209,6 @@ marquee {
     height: 60%;
 }
 
-/* #cor {
-    height: 100%;
-    width: 100%;
-    border: none;
-    background-color: #252525;
-}
-
-#cor:focus{
-    border: none;
-} 
-
-.profile-image img{
-    z-index: 1;
-    width: 120px;
-    height: 120px; 
-    position: relative;
-    margin-top: -75px;
-    display: block;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 100px;
-    border: 3px solid rgb(63, 175, 76);
-    transition-duration: 0.1s;
-    transition-property: transform;
-} 
-
-#edit-image {
-    float: left;
-    width: 50%;
-    height: 65%;
-    padding: 5px;
-}
-
-#edit-image button {
-    z-index: 1;
-    position: relative;
-    margin-top: -75px;
-    margin-left: 78%;
-    height: 120px;
-    width: 120px;
-    display: block;
-    border: none;
-    border-radius: 100px;
-} */
-
 #edit-image button:hover {
     cursor: pointer;
 
@@ -391,6 +345,52 @@ marquee {
 
 #editUserBox {
 
+}
+
+#cor {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: #252525;
+}
+
+#cor:focus{
+    border: none;
+} 
+
+.profile-image img{
+    z-index: 1;
+    width: 120px;
+    height: 120px; 
+    position: relative;
+    margin-top: -75px;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100px;
+    border: 3px solid rgb(63, 175, 76);
+    transition-duration: 0.1s;
+    transition-property: transform;
+} 
+
+#edit-image {
+    float: left;
+    width: 50%;
+    height: 65%;
+    padding: 5px;
+}
+
+#edit-image button {
+    z-index: 1;
+    position: relative;
+    margin-top: -75px;
+    margin-left: 78%;
+    height: 120px;
+    width: 120px;
+    display: block;
+    border: none;
+    border-radius: 100px;
 }
 
 #newBio {
