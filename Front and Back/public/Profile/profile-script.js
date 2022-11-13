@@ -1,16 +1,3 @@
-// const reader = new FileReader();
-// const fileInput = document.querySelector("#fileReader");
-// const img = document.querySelector("#img-button");
-// reader.onload = e => {
-//     img.src = e.target.result;
-//     img.style.width = '120px';
-//     img.style.height = '120px';
-// }
-// fileInput.addEventListener('change', e => {
-//     const f = e.target.files[0];
-//     reader.readAsDataURL(f);
-// })
-
 document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deleteUserBox';
     let deleteUserBoxContent = `
@@ -127,3 +114,9 @@ let hideBox = function (id) {
     box.innerHTML = '';
     box.style.display = 'none';
 }
+
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    /* comandos para criar uma nova playlist no BD com nome "Nova Playlist + idAtual", descrição nula e imagem nula, id é identity */
+
+    /* comandos para redirecionar para a nova página, pegar os dados do BD e colocá-los no corpo da playlist */
+})

@@ -249,7 +249,8 @@ let showSelectPlaylistBox = function() {
     function select(pos) {
         const playlists = document.getElementsByClassName('playlist');
 
-        selectedPlaylist.style.backgroundColor = 'transparent';
+        if (selectedPlaylist != null)
+            selectedPlaylist.style.backgroundColor = 'transparent';
         
         selectedPlaylist = playlists[pos];
         selectedPlaylist.style.backgroundColor = '#505050';
