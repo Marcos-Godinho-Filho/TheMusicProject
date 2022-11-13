@@ -12,34 +12,43 @@ fileInput.addEventListener('change', e => {
 })
 
 document.querySelector('#delete').addEventListener('click', () => {
-    let id = '#deletePlaylistBox';
+    let id = '#deleteUserBox';
     let deletePlaylistBoxContent = `
-        <h1 class="boxTitle"> Deletar Playlist </h1>
-        <p class="message"> Tem certeza que deseja deletar a Playlist? </p>
+        <h1 class="boxTitle"> Deletar Usuário </h1>
+        <p class="message"> Tem certeza que deseja deletar o Usuário? (Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas) </p>
+        <div class="password">
+            <p class="message"> Digite sua senha para deletar: </p>
+            <input type="text">
+        </div>
         <div class="options-buttons">
-            <button id="deletePlaylist"> Deletar </button>
-            <button id="calcelDeletePlaylist"> Cancelar </button>
+            <button id="deleteUser"> Deletar </button>
+            <button id="calcelDeleteUser"> Cancelar </button>
         </div>
     `;
     showBox(id, deletePlaylistBoxContent);
 
-    document.querySelector('#deletePlaylist').addEventListener('click', () => {
+    document.querySelector('#deleteUser').addEventListener('click', () => {
         hideBox(id);
 
         /* comandos para deletar a playlist no BD */
 
-        window.location.href = "../Home/home.html"
+        window.location.href = "../Authentication/Login In Page.html"
     })
 
-    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
         hideBox(id);
     })
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    let id = '#editPlaylistBox';
+    let id = '#editUserBox';
     let editBoxContent = `
-        <h1 class="boxTitle"> Editar Playlist </h1>
+        <h1 class="boxTitle"> Editar Usuário </h1>
+        <div class="card-image">
+            <label for="cor">
+                <input type="color" name="cor" id="cor" class="cor" value="#ff0000">
+            </label>
+        </div> 
         <div id="edit-image">
             <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
                 <img id="img-button" alt="Browse" src="${document.querySelector('#t-img').src}">
@@ -47,12 +56,12 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newTitle" value="Playlist 1"> </input> 
-            <textarea id="newDescription">Descrição</textarea>
+            <input type="text" id="newUsername" value="Playlist 1"> </input> 
+            <textarea id="newBio">Descrição</textarea>
         </div>
         <div class="options-buttons">
-            <button id="saveEditPlaylist"> Salvar </button>
-            <button id="calcelEditPlaylist"> Cancelar </button>
+            <button id="saveEditUser"> Salvar </button>
+            <button id="calcelEditUser"> Cancelar </button>
         </div>
         `;
     showBox(id, editBoxContent);
@@ -104,7 +113,6 @@ document.querySelector('#edit').addEventListener('click', () => {
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
     document.querySelector('#main').style.filter = 'blur(7px)';
     const box = document.querySelector(id);
     box.innerHTML = content;
@@ -113,7 +121,6 @@ let showBox = function (id, content) {
 
 let hideBox = function (id) {
     document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#header').style.filter = 'none';
     document.querySelector('#main').style.filter = 'none';
     const box = document.querySelector(id);
     box.innerHTML = '';

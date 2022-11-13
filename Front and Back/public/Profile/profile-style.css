@@ -39,15 +39,15 @@ aside {
 }
 
 .sidebar-menu a {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
     display: block;
     padding: 10px 0;
 }
 
 .sidebar-menu a.sidebar-menu-selected {
-    color: white;
-    background-color: rgb(80, 80, 80);
+    color: #ffffff;
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -61,8 +61,8 @@ aside {
 }
 
 .sidebar-menu a.sidebar-menu-selecionado {
-    color: white;
-    background-color: rgb(80, 80, 80);
+    color: #ffffff;
+    background-color: #505050;
     border-radius: 5px;
 }
 
@@ -81,12 +81,12 @@ aside {
     display: inline-block;
     color: black;
     font-weight: bold;
-    background-color: white;
+    background-color: #ffffff;
     margin: 8px;
 }
 
 .sidebar-menu-item span {
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -100,36 +100,36 @@ aside {
 
 .sidebar-playlists {
     padding: 20px 0;
-    border-top: 1px solid rgb(40, 40, 40);
+    border-top: 1px solid #282828;
 }
 
 .sidebar-playlists a {
     display: block;
-    color: rgb(190, 190, 190);
+    color: #bebebe;
     text-decoration: none;
 }
 
 .sidebar-playlists a:hover {
-    color: white;
+    color: #ffffff;
 }
 
 main {
     width: calc(100% - 250px);
-    background-color: rgb(30, 30, 30);
+    background-color: #1e1e1e;
     height: 100%;
     float: left;
 }
 
-marquee{
+marquee {
     color: white;
     font-size: 25px;
     text-align: center;
     margin-top: 25px;
-    filter: drop-shadow(0 0 20px rgb(255, 255, 255));
+    filter: drop-shadow(0 0 20px #ffffff);
 }
 
 #top {
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
     position: fixed;
     height: 75px;
     z-index: 98;
@@ -145,56 +145,13 @@ marquee{
     font-size: 18px;
     top: 14px;
     right: 10px;
-    color: white;
+    color: #ffffff;
     width: 22.5%;
     height: 10%;
 }
 
 #profile:hover {
     cursor: pointer;
-}
-
-#slider{
-    margin-top: 32px;
-    height: 100vh;
-    object-fit: cover;
-}
-
-#slider a{
-    position: absolute;
-}
-
-#slider a:nth-of-type(1){
-    animation-name: fader;
-    animation-delay: 4s;
-    animation-duration: 2s;
-    z-index: 20;
-    width: calc(100% - 250px);
-}
-
-#slider a:nth-of-type(2){
-    z-index: 10;
-    width: calc(100% - 250px);
-}
-
-#slider a:nth-of-type(n+3){
-    display: none;
-    width: calc(100% - 250px);
-}
-
-@keyframes fader {
-    from {opacity:1.0;}
-    to {opacity:0.0;}
-}
-
-@font-face {
-    font-family: spotify;
-    src: url(./font/Utah-Condensed-Bold-Font/Gotham-Black.otf);
-}
-
-@font-face {
-    font-family: spotify;
-    src: url(./font/Utah-Condensed-Bold-Font/Gotham-Black.otf);
 }
 
 #play,
@@ -253,12 +210,12 @@ marquee{
     margin: 2% 10%;
 }
 
-.card{
+.card {
     font-family: spotify;
     width: 500px;
     height: 450px;
-    background: rgb(37, 37, 37);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background: #252525;
+    box-shadow: 0 0 20px #00000080;
     display: flex;
     flex-direction: column;
     margin-top: calc((100vh - 450px) / 2);
@@ -266,19 +223,21 @@ marquee{
 }
 
 .card-color {
-    background-color: rgb(48, 45, 88);
+    background-color: #ff3333;
     width: 100%;
-    height: 300%;
+    height: 40%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    object-fit: cover;   
+    object-fit: cover;
 }
 
 .card-image {
     float: left;
-    width: 50%;
-    height: 65%;
     padding: 5px;
+    width: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
 }
 
 .card-image img {
@@ -291,28 +250,27 @@ marquee{
     display: block;
     border: none;
     border-radius: 100px;
+    border: 3px solid #3faf4c;
+    transition-duration: 0.1s;
+    transition-property: transform;
 }
 
-#cor {
+.card-content {
+    height: 60%;
+}
+
+/* #cor {
     height: 100%;
     width: 100%;
     border: none;
-    background-color: rgb(37, 37, 37);
+    background-color: #252525;
 }
+
 #cor:focus{
     border: none;
-}
+} 
 
-.card-image {
-    background-color: rgb(48, 45, 88);
-    width: 100%;
-    height: 300%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;   
-}
-
-/* .profile-image img{
+.profile-image img{
     z-index: 1;
     width: 120px;
     height: 120px; 
@@ -356,15 +314,15 @@ marquee{
     width: 120px;
     height: 120px;
     border-radius: 100px;
-    border: 3px solid rgb(63, 175, 76);
+    border: 3px solid #3faf4c;
 }
 
 #fileReader {
     display: none;
 }
 
-.card-content h1{
-    font-size: 25px;
+.card-content h1 {
+    font-size: 30px;
     margin-top: 10px;
     text-align: center;
     margin: 0;
@@ -374,7 +332,7 @@ marquee{
 .card-buttons {
     text-align: center;
     color: #fff;
-    margin: 10px;
+    margin: 5px;
 }
 
 .card-content a {
@@ -383,29 +341,33 @@ marquee{
     display: inline-block;
 }
 
-.card-content textarea{
+/* .card-content textarea {
     padding: 0 20px 5px 20px;
     font-size: 16px;
     text-align: center;
     margin-top: 20px;
     margin-left: 26%;
-    background-color: rgb(34, 34, 34);
+    background-color: #222222;
     color: white;
     height: 35%;
     width: 50%;
     resize: none;
     border: none;
-}
+} */
 
-.card-content p{
+.card-content p {
     font-size: 16px;
     text-align: center;
     margin-top: 12px;
     padding: 0 20px 5px 20px;
-    color: white;
+    color: #ffffff;
 }
 
-.icons{
+#bio {
+    height: 30%;
+}
+
+.icons {
     margin-top: 20px;
     text-decoration: none;
     text-align: center;
@@ -413,7 +375,7 @@ marquee{
     padding-bottom: 30px;
 }
 
-.icons a{
+.icons a {
     text-decoration: none;
     font-size: 20px;
     color: #ffffff;
@@ -422,12 +384,12 @@ marquee{
     transition-property: transform;
 }
 
-.icons a:hover{
-    color: rgb(119, 119, 119);
+.icons a:hover {
+    color: #777777;
     transform: scale(1.5);
 }
 
-.buttonColor{
+.buttonColor {
     position: relative;
     width: 100px;
     height: 40px;
@@ -441,15 +403,16 @@ marquee{
     width: 12.5px;
 }
 
- ::-webkit-scrollbar-track {
-    background-color: lightgray;
+
+::-webkit-scrollbar-track {
+    background-color: #d3d3d3;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 
@@ -463,9 +426,11 @@ marquee{
     .main {
         width: 100%;
     }
+
     .sidebar {
         display: none;
     }
+
     .main-col {
         width: 48%;
         margin-right: 2%;
