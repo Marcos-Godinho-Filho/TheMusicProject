@@ -1,19 +1,19 @@
-const reader = new FileReader();
-const fileInput = document.querySelector("#fileReader");
-const img = document.querySelector("#img-button");
-reader.onload = e => {
-    img.src = e.target.result;
-    img.style.width = '120px';
-    img.style.height = '120px';
-}
-fileInput.addEventListener('change', e => {
-    const f = e.target.files[0];
-    reader.readAsDataURL(f);
-})
+// const reader = new FileReader();
+// const fileInput = document.querySelector("#fileReader");
+// const img = document.querySelector("#img-button");
+// reader.onload = e => {
+//     img.src = e.target.result;
+//     img.style.width = '120px';
+//     img.style.height = '120px';
+// }
+// fileInput.addEventListener('change', e => {
+//     const f = e.target.files[0];
+//     reader.readAsDataURL(f);
+// })
 
 document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deleteUserBox';
-    let deletePlaylistBoxContent = `
+    let deleteUserBoxContent = `
         <h1 class="boxTitle"> Deletar Usuário </h1>
         <p class="message"> Tem certeza que deseja deletar o Usuário? (Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas) </p>
         <div class="password">
@@ -25,7 +25,7 @@ document.querySelector('#delete').addEventListener('click', () => {
             <button id="calcelDeleteUser"> Cancelar </button>
         </div>
     `;
-    showBox(id, deletePlaylistBoxContent);
+    showBox(id, deleteUserBoxContent);
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
         hideBox(id);
@@ -44,20 +44,20 @@ document.querySelector('#edit').addEventListener('click', () => {
     let id = '#editUserBox';
     let editBoxContent = `
         <h1 class="boxTitle"> Editar Usuário </h1>
-        <div class="card-image">
+        <div class="card-color">
             <label for="cor">
                 <input type="color" name="cor" id="cor" class="cor" value="#ff0000">
             </label>
         </div> 
         <div id="edit-image">
             <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
-                <img id="img-button" alt="Browse" src="${document.querySelector('#t-img').src}">
+                <img id="img-button" alt="Browse" src="${document.querySelector('#profile-img').src}">
             </button>
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newUsername" value="Playlist 1"> </input> 
-            <textarea id="newBio">Descrição</textarea>
+            <input type="text" id="newUsername" value="User"> </input> 
+            <textarea id="newBio">Bio</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditUser"> Salvar </button>
@@ -66,35 +66,35 @@ document.querySelector('#edit').addEventListener('click', () => {
         `;
     showBox(id, editBoxContent);
 
-    let previousImg = '';
+    // let previousImg = '';
 
-    const reader = new FileReader();
-    const fileInput = document.querySelector("#fileReader");
-    const img = document.querySelector("#img-button");
-    reader.onload = e => {
-        img.src = e.target.result;
-        previousImg = img.src;
-        img.style.width = '200px';
-        img.style.height = '200px';
-    }
-    fileInput.addEventListener('change', e => {
-        const f = e.target.files[0];
-        reader.readAsDataURL(f);
-    })
+    // const reader = new FileReader();
+    // const fileInput = document.querySelector("#fileReader");
+    // const img = document.querySelector("#img-button");
+    // reader.onload = e => {
+    //     img.src = e.target.result;
+    //     previousImg = img.src;
+    //     img.style.width = '200px';
+    //     img.style.height = '200px';
+    // }
+    // fileInput.addEventListener('change', e => {
+    //     const f = e.target.files[0];
+    //     reader.readAsDataURL(f);
+    // })
 
-    document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
-        previousImg = img.src;
-        img.src = '../images/browse.png';
-        img.style.width = '200px';
-        img.style.height = '200px';
-    })
-    document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
-        img.src = previousImg;
-        img.style.width = '200px';
-        img.style.height = '200px';
-    })
+    // document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
+    //     previousImg = img.src;
+    //     img.src = '../images/browse.png';
+    //     img.style.width = '200px';
+    //     img.style.height = '200px';
+    // })
+    // document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
+    //     img.src = previousImg;
+    //     img.style.width = '200px';
+    //     img.style.height = '200px';
+    // })
 
-    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
+    document.querySelector('#saveEditUser').addEventListener('click', () => {
         /* comandos para salvar a edição no BD */
 
         document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
@@ -106,7 +106,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         hideBox(id);
     })
 
-    document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelEditUser').addEventListener('click', () => {
         hideBox(id);
     })
 })

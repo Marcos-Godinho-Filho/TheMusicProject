@@ -172,8 +172,8 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newTitle" value="Playlist 1"> </input> 
-            <textarea id="newDescription">Descrição</textarea>
+            <input type="text" id="newTitle" value="${document.querySelector('#title').innerHTML}"> </input> 
+            <textarea id="newDescription">${document.querySelector('#description').innerHTML}</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditPlaylist"> Salvar </button>
