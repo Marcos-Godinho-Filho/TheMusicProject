@@ -35,7 +35,8 @@ let TYPES = require('tedious').TYPES;
 connection.on('debug', function (err) { console.log('debug:', err); });
 
 // Seleciona tudo da tabela
-exports.selectAllFrom = (requiredSelection, from) => {
+function selectAllFrom(requiredSelection, from)
+{
     try {
         request = new Request(`select ${requiredSelection} from tmp.${from};`, function (err) {
             if (err)
@@ -162,46 +163,6 @@ exports.deleteFromWhere = (requiredDelete, from, deleteCondition) => {
 //     }
 //     catch (erro) { throw new Error(erro); }
 // }
-
-// Insere um novo usuario
-exports.insertNewUser = ('/registration', (req, res) => {
-
-    let email = req.body.email;
-    let nome  = req.body.username;
-    let senha = req.body.password;
-
-    try {
-        if (checkValidation('Usuario', 'email = ' + email))
-            throw new Error('User already registered');
-        else {
-            request = new Request(`insert into tmp.Usuario (email, nome, senha) values (${email},${nome},${senha});`, function (err) {
-                if (err)
-                    console.log(err);
-            });
-
-            // request.addParameter('Name', TYPES.NVarChar,'SQL Server Express 2014');  
-            // request.addParameter('Number', TYPES.NVarChar , 'SQLEXPRESS2014');  
-            // request.addParameter('Cost', TYPES.Int, 11);  
-            // request.addParameter('Price', TYPES.Int,11);  
-
-            request.on('row', function (columns) {
-                columns.forEach(function (column) {
-                    if (column.value === null)
-                        console.log('NULL');
-                    else
-                        console.log("Product id of inserted item is " + column.value);
-                });
-            });
-
-
-            request.on("requestCompleted", function (rowCount, more) {
-                connection.close();
-            });
-            connection.execSql(request);
-        }
-    }
-    catch (erro) { throw new Error(erro); }
-})
 
 exports.insertNewSong = () => {
     let idMusica = 1;
@@ -334,10 +295,13 @@ exports.recoverPassword = (email, novaSenha) => {
 }
 
 
+
 // Checa se um email é válido (cadastrado)
-exports.checkValidation = (from, condition) => {
-    try {
-        request = new Request(`select count(*) from tmp.${from} where ${condition};`, function (err) {
+function checkExistentUser(email)
+{
+    try 
+    {
+        request = new Request(`select * from tmp.Usuario where email = ${email};`, function (err) {
             if (err)
                 console.log(err);
         });
@@ -359,15 +323,16 @@ exports.checkValidation = (from, condition) => {
         });
         connection.execSql(request);
 
-        if (cont == 0) {
-            throw new Error('User not found in database');
-            return false; // is not valid
-        }
+        if (cont == 0) 
+            return false; // Nao existe no banco de dados
 
-        return true; // is valid, already in database
+        return true; // Existe no banco de dados
     }
     catch (erro) { throw new Error(erro); }
 }
+
+
+
 
 let retorno = [];
 
@@ -409,7 +374,91 @@ exports.searchFromAPI = ('/search', async(req, res) => {
 });
 
 
-exports.getFromAPI = ('/search', async(req, res) => {
+exports.getFromAPI = ('/:email/search', async(req, res) => {
+    let email = req.params.email;
     res.status(200).json({ info: retorno });
     retorno = [];
 });
+
+exports.getDataFromUser = ('/:email/profile', async(req, res) => {
+    let email = req.params.email;
+    selectAllFrom(Usuario, email);
+    // Mandar para o frontend
+});
+
+exports.getPlaylists = ('/:email/home', async(req, res) => {
+    let email = req.params.email;
+    res.json({ info: selectAllFrom(Playlist, email) });
+});
+
+
+exports.insertNewUser = ('/registration', async(req, res) => 
+{
+
+    let email = req.query.email;
+    let nome  = req.query.username;
+    let senha = req.query.password;
+
+    try 
+    {
+        if (checkExistentUser(email)) { throw new Error('User already registered'); }
+        else 
+        {
+            request = new Request(`insert into tmp.Usuario (email, nome, senha) values (${email},${nome},${senha});`, function (err) { if (err) console.log(err); });
+
+            // request.addParameter('Name', TYPES.NVarChar,'SQL Server Express 2014');  
+            // request.addParameter('Number', TYPES.NVarChar , 'SQLEXPRESS2014');  
+            // request.addParameter('Cost', TYPES.Int, 11);  
+            // request.addParameter('Price', TYPES.Int,11);  
+
+
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+        }
+    }
+    catch (erro) { throw new Error(erro); }
+
+    // Redirecionar o usuario para home
+});
+
+
+
+exports.checkValidation = ('/authentication', (req, res) => {
+
+    let email = req.query.email;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            res.json({ found: true }); // Usuario encontrado
+            // Redirecionar para home
+        }
+        else { res.json({ found: false });} // Usuario nao encontrado 
+    }
+    catch (erro) { throw new Error(erro); }
+});
+
+
+
+exports.setNewPassword = ('/password-recovery', (req, res) => {
+
+    let email = req.query.email;
+    let newPassword = req.query.password;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`update tmp.Usuario set senha = ${newPassword} where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Redirecionar para login
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+});
+
+
