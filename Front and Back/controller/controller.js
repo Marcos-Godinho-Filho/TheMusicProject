@@ -336,61 +336,109 @@ function checkExistentUser(email)
 
 let retorno = [];
 
-exports.searchFromAPI = ('/search', async(req, res) => {
+exports.searchFromAPI = ('/:email/search', async(req, res) => {
 
     retorno = [];
 
-    const { parcel } = req.body.parcel;
+    let email = req.params.email;
+    let parcel = req.query.parcel;
 
-    const optionsAxios = {
-        method: 'GET',
-        url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
-        params: { q: `${parcel}` },
-        headers: {
-            'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
-            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-        }
-    };
-
-    axios.request(optionsAxios).then(function(response) {
-        for (let musica of response.data['data']) {
-            retorno.push({
-                "title_short": musica["title_short"],
-                "artist": musica["artist"]["name"],
-                "album": musica["album"]["title"],
-                "image": musica["album"]["cover_medium"],
-                "preview": musica["preview"]
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            const optionsAxios = {
+                method: 'GET',
+                url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+                params: { q: `${parcel}` },
+                headers: {
+                    'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
+                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+                }
+            };
+        
+            axios.request(optionsAxios).then(function(response) {
+                for (let musica of response.data['data']) {
+                    retorno.push({
+                        "title_short": musica["title_short"],
+                        "artist": musica["artist"]["name"],
+                        "album": musica["album"]["title"],
+                        "image": musica["album"]["cover_medium"],
+                        "preview": musica["preview"]
+                    });
+        
+                }
+            }).catch(function(error) {
+                console.error(error);
             });
-
+            if (!parcel) {
+                return res.status(400).send({ status: 'failed' });
+            }
+            res.status(200).send({ status: 'received' });
         }
-    }).catch(function(error) {
-        console.error(error);
-    });
-    if (!parcel) {
-        return res.status(400).send({ status: 'failed' });
+        else { res.json({found: false}) }
     }
-    res.status(200).send({ status: 'received' });
-
+    catch (erro) { throw new Error(erro); }
 });
 
 
 exports.getFromAPI = ('/:email/search', async(req, res) => {
     let email = req.params.email;
-    res.status(200).json({ info: retorno });
-    retorno = [];
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            res.status(200).json({ info: retorno });
+            retorno = [];
+        }
+        else { res.json({found: false}) }
+    }
+    catch (erro) { throw new Error(erro); }
 });
+
 
 exports.getDataFromUser = ('/:email/profile', async(req, res) => {
     let email = req.params.email;
-    selectAllFrom(Usuario, email);
-    // Mandar para o frontend
+    try 
+    {
+        if (checkExistentUser(email))
+        {
+            res.json({ info: selectAllFrom(Usuario, email) });
+        } 
+        else { res.json({found: false}) }
+    }
+    catch (erro) { throw new Error(erro); }
 });
+
 
 exports.getPlaylists = ('/:email/home', async(req, res) => {
     let email = req.params.email;
-    res.json({ info: selectAllFrom(Playlist, email) });
+    try 
+    {
+        if (checkExistentUser(email))
+        {
+            res.json({ info: selectAllFrom(Playlist, email) });
+        } else { res.json({found: false}) }
+    }
+    catch (erro) { throw new Error(erro); }
+    
 });
 
+
+exports.getPlaylist = ('/:email/playlist/:id', (req, res) => {
+    let email = req.params.emai;
+    let id = req.params.id; // A pessoa sabe o id da playlist? Agt vai colocar na url quando ela estiver na pagina?
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            res.json({ info: selectAllFrom(Playlist, id) });
+        }
+        else { res.json({found: false}) }
+    }
+    catch (erro) { throw new Error(erro); }
+});
 
 exports.insertNewUser = ('/registration', async(req, res) => 
 {
@@ -462,3 +510,139 @@ exports.setNewPassword = ('/password-recovery', (req, res) => {
 });
 
 
+exports.updatePlaylist = ('/:email/playlist', (req, res) => {
+
+    let email = req.params.id;
+    let nome = req.query.playlistName;
+    let desc = req.query.description;
+    let image = req.query.image;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`update tmp.Playlist set Nome = ${nome} set Descricao = ${desc} set Image = ${image} where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Atualizar pagina
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+});
+
+
+exports.updateUser = ('/:email/profile', (req, res) => {
+
+    let email = req.params.id;
+    let nome = req.query.playlistName;
+    let senha = req.query.senha;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`update tmp.Playlist set Nome = ${nome} set Senha = ${senha} where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Atualizar pagina
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+});
+
+
+exports.deletePlaylist = ('/:email/playlist', (req, res) => {
+
+    let email = req.params.id;
+    let nome = req.query.playlistName;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`delete from tmp.Playlist where email = ${email} and Nome = ${nome};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Redirecionar para home
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+
+});
+
+
+exports.deleteUser = ('/:email/user', (req, res) => {
+
+    let email = req.params.id;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`delete from tmp.Usuario where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Redirecionar para home
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+
+});
+
+
+exports.createPlaylist = ('/:email/playlist', (req, res) => { //?
+
+    let email = req.params.id;
+    let nome = req.query.playlistName;
+    let desc = req.query.description;
+    let image = req.query.image;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`insert into tmp.Playlist (Nome, Descricao, Imagem) values (${nome},${desc},${image}) where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Redirecionar para home
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+});
+
+
+exports.insertMusicPlaylist = ('/:email/search/inserMusic', (req, res) => {
+
+    let email = req.params.id;
+    // Dados da musica
+    let nome = req.query.playlistName;
+    let desc = req.query.description;
+    let image = req.query.image;
+    let idPlaylist = req.query.playlistId;
+
+    try
+    {
+        if (checkExistentUser(email))
+        {
+            request = new Request(`insert into tmp.Playlist (Nome, Descricao, Imagem) values (${nome},${desc},${image}) where email = ${email};`, function (err) { if(err) console.log(err); });
+            request.on("requestCompleted", function (rowCount, more) { connection.close(); });
+            connection.execSql(request);
+            res.json({ sucess: true }); 
+            // Redirecionar para home
+        }
+        else { res.json({ found: false }); }
+    }
+    catch (erro) { throw new Error(erro); }
+
+
+});

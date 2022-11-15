@@ -19,6 +19,11 @@ PAGINAS:
     GET (getting data from backend and passing them to frontend)
     Registration, authentication and password-recovery don't need get since we're not passing data from back to front 
 */
+
+/*
+    Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
+*/
+
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + 'public/Authentication/SignUp Page/index.html'));
@@ -47,14 +52,20 @@ router.get('/:email/home',         controller.getPlaylists);    // Home     Page
 */
 router.post('/registraion', controller.insertNewUser);
 router.post('/authentication', controller.checkValidation);
+//Criar playlist é aqui?
+// Inserir musica é aqui?
+router.post('/:email/playlist', controller.createPlaylist);
+router.post('/:email/search/inserMusic', controller.insertMusicPlaylist);
+router.post('/:email/search', controller.searchFromAPI);
+
 /*
     PUT (updating data from backend)
     These datas are going to be updated according to whats passed in query
     Playlists will need (*nome, descricao, imagem)
     Users will need (nome, *email, senha)
 */
-router.put('/:email/playlist', controller.getFromAPI); // Playlist Page
-router.put('/:email/profile', controller.getFromAPI); // Profile Page
+router.put('/:email/playlist', controller.updatePlaylist); // Playlist Page
+router.put('/:email/profile', controller.updateUser); // Profile Page
 router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page
 
 /*
@@ -63,5 +74,5 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-router.delete('/:email/playlist', controller.getFromAPI); // Playlist Page
-router.delete('/:email/profile', controller.getFromAPI); // Profile Page
+router.delete('/:email/playlist', controller.deletePlaylist); // Playlist Page
+router.delete('/:email/profile', controller.deleteUser); // Profile Page
