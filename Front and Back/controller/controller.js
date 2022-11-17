@@ -1,4 +1,5 @@
 const axios = require('axios');
+const path = require('path');
 
 let Connection = require('tedious').Connection;
 
@@ -467,6 +468,7 @@ exports.insertNewUser = ('/registration', async(req, res) =>
     catch (erro) { throw new Error(erro); }
 
     // Redirecionar o usuario para home
+    res.sendFile(path.join(__dirname + 'public/Home/home.html'));
 });
 
 
@@ -481,6 +483,7 @@ exports.checkValidation = ('/authentication', (req, res) => {
         {
             res.json({ found: true }); // Usuario encontrado
             // Redirecionar para home
+            res.sendFile(path.join(__dirname + 'public/Home/home.html'));
         }
         else { res.json({ found: false });} // Usuario nao encontrado 
     }
@@ -503,6 +506,7 @@ exports.setNewPassword = ('/password-recovery', (req, res) => {
             connection.execSql(request);
             res.json({ sucess: true }); 
             // Redirecionar para login
+            res.sendFile(path.join(__dirname + 'public/Authentication/SignUp Page/index.html'));
         }
         else { res.json({ found: false }); }
     }
@@ -569,6 +573,7 @@ exports.deletePlaylist = ('/:email/playlist', (req, res) => {
             connection.execSql(request);
             res.json({ sucess: true }); 
             // Redirecionar para home
+            res.sendFile(path.join(__dirname + 'public/Authentication/Home/home.html'));
         }
         else { res.json({ found: false }); }
     }
@@ -589,7 +594,7 @@ exports.deleteUser = ('/:email/user', (req, res) => {
             request.on("requestCompleted", function (rowCount, more) { connection.close(); });
             connection.execSql(request);
             res.json({ sucess: true }); 
-            // Redirecionar para home
+            res.sendFile(path.join(__dirname + 'public/Authentication/SignUp Page/index.html'));
         }
         else { res.json({ found: false }); }
     }
@@ -621,7 +626,7 @@ exports.createPlaylist = ('/:email/playlist', (req, res) => { //?
 });
 
 
-exports.insertMusicPlaylist = ('/:email/search/inserMusic', (req, res) => {
+exports.insertMusicPlaylist = ('/:email/search/insertMusic', (req, res) => {
 
     let email = req.params.id;
     // Dados da musica

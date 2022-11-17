@@ -23,22 +23,22 @@ PAGINAS:
 /*
     Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
 */
-
+const pattern = __dirname.substring(0,44);
 // '/' --> go to registration page
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + 'public/Authentication/SignUp Page/index.html'));
+    res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
 });
 
 router.get('/registration', (req, res) => {
-    res.sendFile(path.join(__dirname + ''));
+    res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
 });
 
 router.get('/authentication', (req, res) => {
-    res.sendFile(path.join(__dirname + ''));
+    res.sendFile(path.join(pattern + '/public/Authentication/Login Page/index.html'));
 });
 
 router.get('/password-recovery', (req, res) => {
-    res.sendFile(path.join(__dirname + ''));
+    res.sendFile(path.join(pattern + '/public/Authentication/Password Recovery Page/index.html'));
 });
 
 
@@ -55,7 +55,7 @@ router.post('/authentication', controller.checkValidation);
 //Criar playlist é aqui?
 // Inserir musica é aqui?
 router.post('/:email/playlist', controller.createPlaylist);
-router.post('/:email/search/inserMusic', controller.insertMusicPlaylist);
+router.post('/:email/search/insertMusic', controller.insertMusicPlaylist);
 router.post('/:email/search', controller.searchFromAPI);
 
 /*
@@ -76,3 +76,6 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
 */
 router.delete('/:email/playlist', controller.deletePlaylist); // Playlist Page
 router.delete('/:email/profile', controller.deleteUser); // Profile Page
+
+
+module.exports = router;

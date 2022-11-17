@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,8 +12,10 @@
   "dependencies": {
     "axios": "^0.27.2",
     "express": "^4.18.1",
+    "fs": "^0.0.1-security",
     "jquery": "^3.6.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "tedious": "^15.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
