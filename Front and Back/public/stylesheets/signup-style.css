@@ -1,11 +1,11 @@
 @font-face {
     font-family: circular-bold;
-    src: url("../spotifyFont/GothamBold.ttf");
+    src: url("../fonts/GothamBold.ttf");
 }
 
 @font-face {
     font-family: circular-light;
-    src: url("../spotifyFont/GothamLight.ttf");
+    src: url("../fonts/GothamLight.ttf");
 }
 
 *

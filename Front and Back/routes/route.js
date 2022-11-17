@@ -3,7 +3,6 @@ const controller = require('../controller/controller');
 const router = express.Router();
 const path = require('path');
 
-
 /*
 PAGINAS:
 - registro

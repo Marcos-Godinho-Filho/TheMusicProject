@@ -382,8 +382,10 @@ exports.searchFromAPI = ('/:email/search', async(req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-
+const pattern = __dirname.substring(0,44);
 exports.getFromAPI = ('/:email/search', async(req, res) => {
+    res.sendFile(path.join(pattern + '/public/search/index.html'));
+
     let email = req.params.email;
     try
     {
@@ -399,6 +401,8 @@ exports.getFromAPI = ('/:email/search', async(req, res) => {
 
 
 exports.getDataFromUser = ('/:email/profile', async(req, res) => {
+    res.sendFile(path.join(pattern + '/public/Profile/html'))
+
     let email = req.params.email;
     try 
     {
@@ -413,6 +417,8 @@ exports.getDataFromUser = ('/:email/profile', async(req, res) => {
 
 
 exports.getPlaylists = ('/:email/home', async(req, res) => {
+    res.sendFile(path.join(pattern +'/public/Home/home.html'))
+
     let email = req.params.email;
     try 
     {
@@ -427,6 +433,8 @@ exports.getPlaylists = ('/:email/home', async(req, res) => {
 
 
 exports.getPlaylist = ('/:email/playlist/:id', (req, res) => {
+    res.sendFile(path.join(pattern+'/public/Playlists/playlist.html'))
+
     let email = req.params.emai;
     let id = req.params.id; // A pessoa sabe o id da playlist? Agt vai colocar na url quando ela estiver na pagina?
 
