@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public/stylesheets'));
 app.use(express.static(__dirname + '/public/imgs'));
 app.use(express.static(__dirname + '/public/spotifyFont'));
+app.use(express.static(__dirname + '/public/scripts'));
 app.use('/', rota);
 
 

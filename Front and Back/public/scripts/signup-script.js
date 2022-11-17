@@ -73,15 +73,12 @@ botaoCadastro.addEventListener('click', (e) => {
         {
             alert("Chegamos aqui");
             if (info == "") { return }
-            const res = await fetch(BASE_URL,
+            const res = await fetch(BASE_URL + "?email=bruna@gmail.com",
             {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
-                },
-                body: JSON.stringify({
-                    parcel: info
-                })
+                }
             });
 
             if (res.status.text == 'Failed to signup')
