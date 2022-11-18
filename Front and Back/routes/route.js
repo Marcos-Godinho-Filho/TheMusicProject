@@ -46,6 +46,10 @@ router.get('/:email/profile',      controller.getDataFromUser); // Profile  Page
 router.get('/:email/playlist/:id', controller.getPlaylist);     // Playlist Page
 router.get('/:email/home',         controller.getPlaylists);    // Home     Page
 
+
+router.get('/home', (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Home/home.html'));
+});
 /*
     POST (getting data from frontend and passing them to backend)
 */

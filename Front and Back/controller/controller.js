@@ -1,5 +1,7 @@
 const axios = require('axios');
 const path = require('path');
+const Request = require('tedious').Request;  
+const TYPES = require('tedious').TYPES; 
 
 let Connection = require('tedious').Connection;
 
@@ -30,8 +32,6 @@ connection.on('connect', function (err) {
 
 connection.connect();
 
-let request = require('tedious').Request;
-let TYPES = require('tedious').TYPES;
 
 connection.on('debug', function (err) { console.log('debug:', err); });
 
@@ -302,20 +302,18 @@ function checkExistentUser(email)
 {
     try 
     {
-        request = new Request(`select * from tmp.Usuario where email = ${email};`, function (err) {
+        request = new Request(`select * from tmp.Usuario where email = @email;`, function (err) {
             if (err)
                 console.log(err);
         });
 
+        request.addParameter('email', TYPES.VarChar, email);  
+
         let cont = 0;
         request.on('row', function (columns) {
             columns.forEach(function (column) {
-                if (column.value === null)
-                    console.log('NULL');
-                else {
-                    console.log("Product id of inserted item is " + column.value);
+                if (column.value !== null)
                     cont++;
-                }
             });
         });
 
@@ -329,7 +327,7 @@ function checkExistentUser(email)
 
         return true; // Existe no banco de dados
     }
-    catch (erro) { throw new Error(erro); }
+    catch (erro) { console.log(erro); }
 }
 
 
@@ -449,6 +447,8 @@ exports.getPlaylist = ('/:email/playlist/:id', (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
+
+
 exports.insertNewUser = ('/registration', async(req, res) => 
 {
     const parcel = req.body.parcel;
@@ -463,25 +463,24 @@ exports.insertNewUser = ('/registration', async(req, res) =>
 
     try 
     {
-        if (checkExistentUser(email)) { throw new Error('User already registered'); }
-        else 
-        {
-            request = new Request(`insert into tmp.Usuario (email, nome, senha, imagemUsuario, imagemFundo, bio) values (${email},${nome},${senha},null,null,null);`, function (err) { if (err) console.log(err); });
+        //if (checkExistentUser(email)) { throw new Error('User already registered'); }
+        //else 
+        //{
+            request = new Request(`insert into tmp.Usuario (email, nome, senha, imagemUsuario, imagemFundo, bio) values (@email,@nome,@senha,null,null,null);`, function (err) { if (err) console.log(err); });
 
-            // request.addParameter('Name', TYPES.NVarChar,'SQL Server Express 2014');  
-            // request.addParameter('Number', TYPES.NVarChar , 'SQLEXPRESS2014');  
-            // request.addParameter('Cost', TYPES.Int, 11);  
-            // request.addParameter('Price', TYPES.Int,11);  
-
+            request.addParameter('email', TYPES.VarChar, email);  
+            request.addParameter('nome', TYPES.VarChar, nome);  
+            request.addParameter('senha', TYPES.VarChar, senha);  
 
             request.on("requestCompleted", function (rowCount, more) { connection.close(); });
             connection.execSql(request);
-        }
+        //}
     }
     catch (erro) { console.log(erro); }
 
     // Redirecionar o usuario para home
-    res.sendFile(path.join(__dirname + 'public/Home/home.html'));
+    const pattern = __dirname.substring(0,44);
+    res.sendFile(path.join(pattern + '/public/Home/home.html'));
 });
 
 
