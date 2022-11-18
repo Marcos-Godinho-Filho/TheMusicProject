@@ -49,7 +49,7 @@ router.get('/:email/home',         controller.getPlaylists);    // Home     Page
 /*
     POST (getting data from frontend and passing them to backend)
 */
-router.post('/registraion', controller.insertNewUser);
+router.post('/registration', controller.insertNewUser);
 router.post('/authentication', controller.checkValidation);
 //Criar playlist é aqui?
 // Inserir musica é aqui?

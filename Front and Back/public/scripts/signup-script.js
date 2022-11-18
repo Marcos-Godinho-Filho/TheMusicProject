@@ -55,7 +55,7 @@ botaoCadastro.addEventListener('click', (e) => {
         else { mensagemErroConfirmarSenha.style.display = "none"; }
         alert("Nao cadastramos");
     }
-    else { alert("Cadastramos"); cadastrarNovoUsuario(e); }
+    else { alert("Cadastramos"); cadastrar(e); }
 
     
     function cadastrar(e)
@@ -73,12 +73,15 @@ botaoCadastro.addEventListener('click', (e) => {
         {
             alert("Chegamos aqui");
             if (info == "") { return }
-            const res = await fetch(BASE_URL + "?email=bruna@gmail.com",
+            const res = await fetch(BASE_URL,
             {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    parcel: info
+                })
             });
 
             if (res.status.text == 'Failed to signup')

@@ -451,17 +451,22 @@ exports.getPlaylist = ('/:email/playlist/:id', (req, res) => {
 
 exports.insertNewUser = ('/registration', async(req, res) => 
 {
+    const parcel = req.body.parcel;
 
-    let email = req.query.email;
-    let nome  = req.query.username;
-    let senha = req.query.password;
+    //let email = req.query.email;
+    //let nome  = req.query.username;
+    //let senha = req.query.password;
+    let email = parcel[0];
+    let nome = parcel[1];
+    let senha = parcel[2];
+    console.log(email, nome, senha);
 
     try 
     {
         if (checkExistentUser(email)) { throw new Error('User already registered'); }
         else 
         {
-            request = new Request(`insert into tmp.Usuario (email, nome, senha) values (${email},${nome},${senha});`, function (err) { if (err) console.log(err); });
+            request = new Request(`insert into tmp.Usuario (email, nome, senha, imagemUsuario, imagemFundo, bio) values (${email},${nome},${senha},null,null,null);`, function (err) { if (err) console.log(err); });
 
             // request.addParameter('Name', TYPES.NVarChar,'SQL Server Express 2014');  
             // request.addParameter('Number', TYPES.NVarChar , 'SQLEXPRESS2014');  
@@ -473,7 +478,7 @@ exports.insertNewUser = ('/registration', async(req, res) =>
             connection.execSql(request);
         }
     }
-    catch (erro) { throw new Error(erro); }
+    catch (erro) { console.log(erro); }
 
     // Redirecionar o usuario para home
     res.sendFile(path.join(__dirname + 'public/Home/home.html'));
@@ -495,7 +500,7 @@ exports.checkValidation = ('/authentication', (req, res) => {
         }
         else { res.json({ found: false });} // Usuario nao encontrado 
     }
-    catch (erro) { throw new Error(erro); }
+    catch (erro) { console.log(erro); }
 });
 
 
