@@ -7,7 +7,7 @@ let Connection = require('tedious').Connection;
 
 let config =
 {
-    server: 'REGULUS',  //update me
+    server: 'regulus.cotuca.unicamp.br',  //update me
     authentication:
     {
         type: 'default',
@@ -302,35 +302,36 @@ function checkExistentUser(email)
 {
     try 
     {
-        request = new Request(`select * from tmp.Usuario where email = @email;`, function (err) {
-            if (err)
-                console.log(err);
-        });
-
-        request.addParameter('email', TYPES.VarChar, email);  
-
-        let cont = 0;
-        request.on('row', function (columns) {
-            columns.forEach(function (column) {
-                if (column.value !== null)
-                    cont++;
+        let request = new Request("SELECT nome FROM tmp.Usuario;", function(err) {  
+            if (err) {  
+                console.log(err);}  
+            });  
+            var result = "";  
+            request.on('row', function(columns) {  
+                columns.forEach(function(column) {  
+                  if (column.value === null) {  
+                    console.log('NULL');  
+                  } else {  
+                    result+= column.value + " ";  
+                  } 
+                });  
+                console.log(result);  
+                result ="";  
+            });  
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            request.on('done', function(rowCount, more) {  
+            console.log(rowCount + ' rows returned');  
+            });  
+            
+            // Close the connection after the final event emitted by the request, after the callback passes
+            request.on("requestCompleted", function (rowCount, more) {
+                connection.close();
             });
-        });
+            connection.execSql(request);
 
-        request.on("requestCompleted", function (rowCount, more) {
-            connection.close();
-        });
-        connection.execSql(request);
-
-        if (cont == 0) 
-            return false; // Nao existe no banco de dados
-
-        return true; // Existe no banco de dados
     }
     catch (erro) { console.log(erro); }
 }
-
-
 
 
 let retorno = [];
@@ -380,7 +381,7 @@ exports.searchFromAPI = ('/:email/search', async(req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-const pattern = __dirname.substring(0,44);
+const pattern = __dirname.substring(0,84);
 exports.getFromAPI = ('/:email/search', async(req, res) => {
     res.sendFile(path.join(pattern + '/public/search/index.html'));
 
@@ -463,10 +464,13 @@ exports.insertNewUser = ('/registration', async(req, res) =>
 
     try 
     {
-        //if (checkExistentUser(email)) { throw new Error('User already registered'); }
-        //else 
-        //{
-            request = new Request(`insert into tmp.Usuario (email, nome, senha, imagemUsuario, imagemFundo, bio) values (@email,@nome,@senha,null,null,null);`, function (err) { if (err) console.log(err); });
+        console.log('--------------------------- 3');
+        if (checkExistentUser(email)) { console.log("NOT IN DATABASE"); }
+        else 
+        {
+            console.log('--------------------------- 4');
+            let request = new Request(`insert into tmp.Usuario (email, nome, senha, imagemUsuario, imagemFundo, bio) values (@email,@nome,@senha,null,null,null);`, 
+            function (err) { if (err) console.log(err); });
 
             request.addParameter('email', TYPES.VarChar, email);  
             request.addParameter('nome', TYPES.VarChar, nome);  
@@ -474,12 +478,13 @@ exports.insertNewUser = ('/registration', async(req, res) =>
 
             request.on("requestCompleted", function (rowCount, more) { connection.close(); });
             connection.execSql(request);
-        //}
+            console.log('--------------------------- 5');
+        }
     }
     catch (erro) { console.log(erro); }
 
     // Redirecionar o usuario para home
-    const pattern = __dirname.substring(0,44);
+    const pattern = __dirname.substring(0,84);
     res.sendFile(path.join(pattern + '/public/Home/home.html'));
 });
 

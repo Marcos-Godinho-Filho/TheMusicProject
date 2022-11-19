@@ -53,9 +53,8 @@ botaoCadastro.addEventListener('click', (e) => {
             e.preventDefault();
         }
         else { mensagemErroConfirmarSenha.style.display = "none"; }
-        alert("Nao cadastramos");
     }
-    else { alert("Cadastramos"); cadastrar(e); }
+    else { cadastrar(e); }
 
     
     function cadastrar(e)
@@ -64,14 +63,13 @@ botaoCadastro.addEventListener('click', (e) => {
 
         // Armazenamos as informacoes passadas pelo usuario para um vetor e mandamos esse vetor como parcela para o backend
         let info = [];
-        info.push(nomeDigitado);
         info.push(emailDigitado);
+        info.push(nomeDigitado);
         info.push(senhaDigitada);
 
         postInfo(info);
         async function postInfo(info) 
         {
-            alert("Chegamos aqui");
             if (info == "") { return }
             const res = await fetch(BASE_URL,
             {
