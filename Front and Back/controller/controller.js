@@ -5,7 +5,14 @@ const db = require('../database/db');
 const user = require('../models/user');
 const playlist = require('../models/playlist');
 const music = require('../models/music');
+const { runInNewContext } = require('vm');
 
+
+const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
+const Playlists = db.Mongoose.model('esquemaPlaylist', playlist.PlaylistSchema, 'playlists');
+const Musics = db.Mongoose.model('esquemaMusica', music.MusicSchema, 'musics');
+
+const pattern = __dirname.substring(0,84);
 
 
 let retorno = [];
@@ -55,7 +62,6 @@ exports.searchFromAPI = ('/:email/search', async(req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-const pattern = __dirname.substring(0,84);
 exports.getFromAPI = ('/:email/search', async(req, res) => {
     res.sendFile(path.join(pattern + '/public/search/index.html'));
 
@@ -71,3 +77,33 @@ exports.getFromAPI = ('/:email/search', async(req, res) => {
     }
     catch (erro) { throw new Error(erro); }
 });
+
+exports.insertNewUser = ('/registration', async(req, res) => {
+    
+    const parcel = req.body.parcel;
+    let email = parcel[0];
+    let nome  = parcel[1];
+    let senha = parcel[2];
+
+    // Errado, falta coisa que ta no esquema
+    let usuario = new Users({email,nome,senha});
+
+    try {
+        await usuario.save();
+        // Redirecionar para home
+    }
+    catch (err) { next(err); }
+});
+
+exports.setNewPassword = ('/password-recovery', async(req, res) => {
+
+    const parcel = req.body.parcel;
+
+    let email = parcel[0];
+    let novaSenha = parcel[1];
+
+    await Users.updateOne({email:email},{$set: {senha:novaSenha}});
+
+    // Redirecionar para home
+});
+
