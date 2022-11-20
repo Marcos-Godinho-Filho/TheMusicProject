@@ -48,7 +48,7 @@ botaoRecuperar.addEventListener('click', (e) => {
         else
         {mensagemErroConfirmacaoNovaSenha.style.display = "none"; }
     }
-    else { alert("Logamos"); recuperarSenha(e); }
+    else { recuperarSenha(e); }
 
 
 
@@ -60,14 +60,13 @@ botaoRecuperar.addEventListener('click', (e) => {
         info.push(emailDigitado);
         info.push(novaSenhaDigitada);
 
-        postInfo(info);
-        async function postInfo(info)
+        putInfo(info);
+        async function putInfo(info)
         {
-            alert("Chegamos aqui");
             if (info == "") return;
             const res = await fetch(BASE_URL,
             {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
@@ -76,7 +75,11 @@ botaoRecuperar.addEventListener('click', (e) => {
                 })
             });
 
-            if (res.status.text == 'Fail in the process')
+            console.log(res.statusText + '-----------------1');
+            console.log(res.json() + '-----------------2');
+            console.log(res.status + '-----------------3');
+
+            if (res.status.suce)
             {
                 alert('deu merda');
                 result.style.display = 'block';
