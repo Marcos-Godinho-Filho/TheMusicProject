@@ -8,4 +8,4 @@ const playlistSchema = new Schema({
     desc: String
 }, { collection: 'users' });
 
-module.exports = {PlaylistSchema: playlistSchema}
+module.exports = { PlaylistSchema: playlistSchema }

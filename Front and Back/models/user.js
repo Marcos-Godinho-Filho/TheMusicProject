@@ -10,4 +10,4 @@ const userSchema = new Schema({
     desc: String
 }, { collection: 'users' });
 
-module.exports = {UserSchema: userSchema}
+module.exports = { UserSchema: userSchema }
