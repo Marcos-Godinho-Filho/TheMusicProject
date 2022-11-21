@@ -5,7 +5,6 @@ const db = require('../database/db');
 const user = require('../models/user');
 const playlist = require('../models/playlist');
 const music = require('../models/music');
-const { runInNewContext } = require('vm');
 
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
@@ -78,6 +77,13 @@ exports.getFromAPI = ('/:email/search', async(req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
+isUserExistent = async(email) => {
+    if(await Users.findOne({email:email}) !== null) 
+        return true;
+    
+    return false;
+}
+
 exports.insertNewUser = ('/registration', async(req, res) => {
     
     const parcel = req.body.parcel;
@@ -85,15 +91,19 @@ exports.insertNewUser = ('/registration', async(req, res) => {
     let nome  = parcel[1];
     let senha = parcel[2];
 
-    // Errado, falta coisa que ta no esquema
-    let usuario = new Users({email,nome,senha});
+    if (!isUserExistent(email)) {
+        // Errado, falta coisa que ta no esquema
+        let usuario = new Users({email,nome,senha});
 
-    try {
-        await usuario.save();
-        // Redirecionar para home
+        try {
+            await usuario.save();
+            // Redirecionar para home
+        }
+        catch (err) { next(err); }
     }
-    catch (err) { next(err); }
+    else { res.json({success: false}); } // Existe no banco de dados
 });
+
 
 exports.setNewPassword = ('/password-recovery', async(req, res) => {
 
@@ -102,8 +112,36 @@ exports.setNewPassword = ('/password-recovery', async(req, res) => {
     let email = parcel[0];
     let novaSenha = parcel[1];
 
-    await Users.updateOne({email:email},{$set: {senha:novaSenha}});
-
-    // Redirecionar para home
+    if (isUserExistent(email)) {
+        await Users.updateOne({email:email},{$set: {senha:novaSenha}});
+        // Redirecionar para home
+    }
+    else { res.json({success: false}); } // Não existe no banco de dados
 });
 
+
+exports.checkValidation = ('/authentication', async(req, res) => {
+
+    const parcel = req.body.parcel;
+    let email = parcel[0];
+
+    if (isUserExistent(email)) res.json({success:true})
+    else res.json({success:false} )
+});
+
+
+exports.createPLaylist = ('/:id/playlist', async(req, res) => {
+
+    const parcel = req.body.parcel;
+
+    let nomePlaylist = parcel[0];
+    let img = parcel[1];
+    let desc = parcel[2];
+
+    let playlist = new Playlists({nomePlaylist, img, desc});
+    
+    try {
+        await playlist.save();
+        // Redirecionar para a playlist
+    } catch (erro) { next(erro); }
+});

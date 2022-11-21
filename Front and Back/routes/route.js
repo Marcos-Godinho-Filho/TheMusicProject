@@ -41,10 +41,10 @@ router.get('/password-recovery', (req, res) => {
 });
 
 
-router.get('/:email/search',       controller.getFromAPI);      // Search   Page
-router.get('/:email/profile',      controller.getDataFromUser); // Profile  Page
-router.get('/:email/playlist/:id', controller.getPlaylist);     // Playlist Page
-router.get('/:email/home',         controller.getPlaylists);    // Home     Page
+router.get('/:id/search',       controller.getFromAPI);      // Search   Page
+router.get('/:id/profile',      controller.getDataFromUser); // Profile  Page
+router.get('/:id/playlist/:idPl', controller.getPlaylist);     // Playlist Page
+router.get('/:id/home',         controller.getPlaylists);    // Home     Page
 
 
 router.get('/home', (req, res) => {
@@ -57,9 +57,9 @@ router.post('/registration', controller.insertNewUser);
 router.post('/authentication', controller.checkValidation);
 //Criar playlist é aqui?
 // Inserir musica é aqui?
-router.post('/:email/playlist', controller.createPlaylist);
-router.post('/:email/search/insertMusic', controller.insertMusicPlaylist);
-router.post('/:email/search', controller.searchFromAPI);
+router.post('/:id/playlist', controller.createPlaylist);
+router.post('/:id/search/insertMusic', controller.insertMusicPlaylist);
+router.post('/:id/search', controller.searchFromAPI);
 
 /*
     PUT (updating data from backend)
@@ -67,8 +67,8 @@ router.post('/:email/search', controller.searchFromAPI);
     Playlists will need (*nome, descricao, imagem)
     Users will need (nome, *email, senha)
 */
-router.put('/:email/playlist', controller.updatePlaylist); // Playlist Page
-router.put('/:email/profile', controller.updateUser); // Profile Page
+router.put('/:id/playlist', controller.updatePlaylist); // Playlist Page
+router.put('/:id/profile', controller.updateUser); // Profile Page
 router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page
 
 /*
@@ -77,8 +77,8 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-router.delete('/:email/playlist', controller.deletePlaylist); // Playlist Page
-router.delete('/:email/profile', controller.deleteUser); // Profile Page
+router.delete('/:id/playlist', controller.deletePlaylist); // Playlist Page
+router.delete('/:id/profile', controller.deleteUser); // Profile Page
 
 
 module.exports = router;
