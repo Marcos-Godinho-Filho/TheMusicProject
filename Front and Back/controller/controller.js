@@ -361,7 +361,7 @@ exports.deleteSong = ('id:/Playlist/DeleteSong'), async(req,res) => {
         {
 
         }
-    }
+    } catch (erro) { }
 } 
 
 
