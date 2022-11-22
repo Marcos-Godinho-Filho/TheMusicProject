@@ -168,19 +168,18 @@ exports.insertNewPlaylistIntoUser = ('/:id/home/insertPlaylist', async (req, res
 
     const parcel = req.body.parcel;
 
-    let idPlaylist = parcel[0];
-    let nomePlaylist = parcel[1];
-    let img = parcel[2];
-    let desc = parcel[3];
-    let songs = parcel[4];
-    let idUser = parcel[5];
+    let nomePlaylist = parcel[0];
+    let img = parcel[1];
+    let desc = parcel[2];
+    let songs = [];
+    let idUser = req.params.id;
 
-    let playlist = { idPlaylist, nomePlaylist, img, desc, songs };
+    let playlist = { nomePlaylist, img, desc, songs };
 
     let playlists;
     try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists;
+        const usuario = await Users.findById({ "_id": idUser })
+        playlists = usuario.playlists;
     } 
     catch (erro) 
     {
@@ -208,7 +207,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     let previewMusica = parcel[3];
     let imagem = parcel[4];
     let idUser = parcel[5];
-    let idPlaylist = parcel[6];
+    let pos = parcel[6];
 
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
@@ -223,7 +222,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
         res.json({ success: false });
     }
 
-    let songs = playlists.
+    playlists[pos][songs] = playlists[pos][songs].push(music);
 
     try {
         if (isUserExistent(idUser))
