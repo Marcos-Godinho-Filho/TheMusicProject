@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000/search';
 
 buscarBtn.addEventListener('click', buscar);
 
-inpBx.addEventListener('keyup', function(e) {
+inpBx.addEventListener('keyup', function (e) {
     e.preventDefault();
     let tecla = e.keyCode;
     if (tecla === 13)
@@ -138,7 +138,7 @@ const formatTime = (time) => {
 playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
-    
+
     if (audioPlayer.currentTime >= 29) {
         backwardBtn.click();
     }
@@ -192,7 +192,7 @@ volumeBtn.addEventListener('click', () => {
 
         volumeSlider.value = 0;
         audioPlayer.volume = 0;
-    } 
+    }
     else if (volumeSlider.value == 0) {
         volumeSlider.value = previousVolume;
         audioPlayer.volume = previousVolume;
@@ -208,13 +208,13 @@ closeSong.addEventListener('click', () => {
     document.querySelector('#aside').style.height = '100%';
 })
 
-let showSelectPlaylistBox = function() {
+let showSelectPlaylistBox = function () {
     let id = '#selectPlaylistBox';
     let showSelectPlaylistBoxContent = `
         <h1 class="boxTitle"> Adicionar às playlists </h1>
         <p> Selecione a playlist desejada: </p>
         <div id="division"> </div>
-    `; 
+    `;
 
     /* Comandos para pegar no banco de dados as playlists do usuário */
 
@@ -235,7 +235,7 @@ let showSelectPlaylistBox = function() {
     /* deletePlaylistBoxContent += 
         <p> Você ainda não criou nenhuma playlist. Clique no botão "Criar Playlist" na barra lateral para poder salvar suas músicas favoritas. </p> 
     `;*/
-        
+
     showSelectPlaylistBoxContent += `
         <div class="options-buttons">
             <button id="addSongToPlaylist"> Adicionar </button>
@@ -250,7 +250,7 @@ let showSelectPlaylistBox = function() {
         const playlists = document.getElementsByClassName('playlist');
 
         selectedPlaylist.style.backgroundColor = 'transparent';
-        
+
         selectedPlaylist = playlists[pos];
         selectedPlaylist.style.backgroundColor = '#505050';
     }

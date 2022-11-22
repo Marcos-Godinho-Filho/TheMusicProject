@@ -227,7 +227,7 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 })
 
-let removeSong = function(idSong) {
+let removeSong = function (idSong) {
     let id = '#removeSongBox';
     let removeSongBoxContent = `
         <h1 class="boxTitle"> Remover música </h1>
