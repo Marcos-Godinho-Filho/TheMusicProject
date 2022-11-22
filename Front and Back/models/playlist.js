@@ -7,6 +7,6 @@ const playlistSchema = new Schema({
     imagem: String,
     desc: String,  
     songs: Array
-}, { collection: 'users' });
+}, { collection: 'tmp' });
 
 module.exports = { PlaylistSchema: playlistSchema }

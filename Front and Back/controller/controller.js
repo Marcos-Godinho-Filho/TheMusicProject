@@ -4,14 +4,13 @@ const path = require('path');
 const db = require('../database/db');
 const user = require('../models/user');
 const playlist = require('../models/playlist');
-const music = require('../models/music');
 const { Schema } = require('mongoose');
 
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
 const Playlists = db.Mongoose.model('esquemaPlaylist', playlist.PlaylistSchema, 'playlists');
 
-const pattern = __dirname.substring(0, 84);
+const pattern = __dirname.substring(0, 45);
 
 
 let retorno = [];
@@ -104,10 +103,12 @@ exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
     
 })
 
-isUserExistent = async (email) => {
-    if (await Users.findOne({ email: email }) !== null)
-        return true;
+async function isUserExistent(email){
 
+    let listaUsuarios = await Users.find({email:email}).lean().exec();
+    console.log(listaUsuarios.length > 0);
+    if (listaUsuarios.length > 0) return true;
+    
     return false;
 }
 
@@ -118,12 +119,17 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     let nome = parcel[1];
     let senha = parcel[2];
 
-    if (!isUserExistent(email)) {
+    let result = await isUserExistent(email);
+    if (!result) {
         // Errado, falta coisa que ta no esquema
-        let usuario = new Users({ email, nome, senha });
+        let usuario = new Users({ nome, email, senha });
+        console.log(usuario);
 
         try {
-            await usuario.save();
+            //await usuario.save();
+            usuario.save((err) => {
+                if (err) return handleError(err); // saved!
+              });
             // Redirecionar para home
         }
         catch (err) { next(err); }
@@ -133,13 +139,13 @@ exports.insertNewUser = ('/registration', async (req, res) => {
 
 
 exports.setNewPassword = ('/password-recovery', async (req, res) => {
-
     const parcel = req.body.parcel;
 
     let email = parcel[0];
     let novaSenha = parcel[1];
 
-    if (isUserExistent(email)) {
+    let result = await isUserExistent(email);
+    if (result) {
         await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
         // Redirecionar para home
     }
@@ -151,9 +157,11 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 
     const parcel = req.body.parcel;
     let email = parcel[0];
+    let senha = parcel[1];
 
-    if (isUserExistent(email)) res.json({ success: true })
-    else res.json({ success: false })
+    let listaUsuarios = await Users.find({email:email,senha:senha}).lean().exec();
+    if (listaUsuarios.length > 0) { res.json({ success: true }); console.log("LOGADO"); }
+    else { res.json({ success: false }); console.log("NAO LOGADO"); }
 });
 
 isPlaylistExistent = async (idPlaylist) => {

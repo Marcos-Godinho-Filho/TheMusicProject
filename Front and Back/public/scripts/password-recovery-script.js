@@ -9,7 +9,7 @@ let mensagemErroConfirmacaoNovaSenha = document.querySelector("#mensagemErroConf
 
 let botaoRecuperar = document.querySelector("#botaoRecuperar");
 
-const BASE_URL = 'http://localhost:3000/password-recovery/';
+const BASE_URL = 'http://localhost:3000/password-recovery';
 const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
 botaoRecuperar.addEventListener('click', (e) => {
@@ -75,9 +75,7 @@ botaoRecuperar.addEventListener('click', (e) => {
                 })
             });
 
-            console.log(res.statusText + '-----------------1');
-            console.log(res.json() + '-----------------2');
-            console.log(res.status + '-----------------3');
+            console.log('-----------------1');
 
             if (res.status.suce)
             {

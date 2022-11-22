@@ -23,7 +23,7 @@ PAGINAS:
 /*
     Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
 */
-const pattern = __dirname.substring(0, 84);
+const pattern = __dirname.substring(0, 45);
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
@@ -42,15 +42,15 @@ router.get('/password-recovery', (req, res) => {
 });
 
 
-router.get('/:id/search', controller.getDataSearch); // Search Page
-router.get('/:id/profile', controller.getDataProfile); // Profile Page
-router.get('/:id/playlist/:idPl', controller.getDataPlaylist); // Playlist Page
-router.get('/:id/home', controller.getDataHome); // Home Page
+//router.get('/:id/search', controller.getDataSearch); // Search Page
+//router.get('/:id/profile', controller.getDataProfile); // Profile Page
+//router.get('/:id/playlist/:idPl', controller.getDataPlaylist); // Playlist Page
+//router.get('/:id/home', controller.getDataHome); // Home Page
 
 
-router.get('/home', (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Home/home.html'));
-});
+//router.get('/home', (req, res) => {
+//    res.sendFile(path.join(pattern + '/public/Home/home.html'));
+//});
 
 
 /*
@@ -60,12 +60,12 @@ router.post('/registration', controller.insertNewUser);
 router.post('/authentication', controller.checkValidation);
 // Criar playlist é aqui?
 // Inserir musica é aqui?
-router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/search/insertMusicIntoPlaylist', controller.insertNewMusicIntoPlaylist);
-router.post('/:id/search', controller.searchFromAPI);
+//router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist);
+//router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist);
+//router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist);
+//router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist);
+//router.post('/:id/search/insertMusicIntoPlaylist', controller.insertNewMusicIntoPlaylist);
+//router.post('/:id/search', controller.searchFromAPI);
 
 
 /*
@@ -74,8 +74,8 @@ router.post('/:id/search', controller.searchFromAPI);
     Playlists will need (*nome, descricao, imagem)
     Users will need (nome, *email, senha)
 */
-router.put('/:id/playlist', controller.updatePlaylist); // Playlist Page
-router.put('/:id/profile', controller.updateUser); // Profile Page
+//router.put('/:id/playlist', controller.updatePlaylist); // Playlist Page
+//router.put('/:id/profile', controller.updateUser); // Profile Page
 router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page
 
 
@@ -85,8 +85,8 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-router.delete('/:id/playlist', controller.deletePlaylist); // Playlist Page
-router.delete('/:id/profile', controller.deleteUser); // Profile Page
+//router.delete('/:id/playlist', controller.deletePlaylist); // Playlist Page
+//router.delete('/:id/profile', controller.deleteUser); // Profile Page
 
 
 module.exports = router;

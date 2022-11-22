@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/TheMusicProject');
+mongoose.connect('mongodb://localhost:27017/tmp');
 
 module.exports = { Mongoose: mongoose }

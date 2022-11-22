@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     nome: String,
     email: String,
-    senha: String,
-    imagemPerfil: String,
-    desc: String
-}, { collection: 'users' });
+    senha: String
+}, { collection: 'tmp' });
 
 module.exports = { UserSchema: userSchema }

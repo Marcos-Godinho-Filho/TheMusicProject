@@ -82,11 +82,12 @@ botaoCadastro.addEventListener('click', (e) => {
                 })
             });
 
-            if (res.status.text == 'Failed to signup')
+            let resp = await res.json();
+            if (resp.success = true)
             {
-                alert('deu merda');
+                alert('deu bom');
             }
-            else alert('deu bom');
+            else alert('deu merda');
         }                     
     }
 });

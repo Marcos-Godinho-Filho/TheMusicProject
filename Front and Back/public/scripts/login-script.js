@@ -40,10 +40,12 @@ botaoLogar.addEventListener('click', (e) => {
     {
         e.preventDefault();
 
-        postInfo();
-        async function postInfo() 
+        let info = [];
+        info.push(emailDigitado);
+        info.push(senhaDigitada);
+        postInfo(info);
+        async function postInfo(info) 
         {
-            alert("Chegamos aqui");
             const res = await fetch(BASE_URL,
             {
                 method: 'POST',
@@ -51,7 +53,7 @@ botaoLogar.addEventListener('click', (e) => {
                     "Content-Type": 'application/json'
                 },
                 body: JSON.stringify({
-                    parcel: emailDigitado
+                    parcel: info
                 })
             });
 
