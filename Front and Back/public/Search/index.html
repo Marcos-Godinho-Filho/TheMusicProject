@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheMusicProject - Buscar</title>
+
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="index-style.css">
+</head>
+
+<body>
+    <aside id="aside">
+        <div class="sidebar-logo">
+            <img src="../images/THEmusicPROJECT.png" alt="logo" draggable="false">
+        </div>
+        <div class="sidebar-menu">
+            <a href="../Home/home.html" draggable="false">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a class="sidebar-menu-selected">
+                <i class="fa-solid fa-magnifying-glass"></i> Buscar
+            </a>
+
+            <a href="../Profile/profile.html" draggable="false">
+                <i class="fa-solid fa-user"></i> Perfil
+            </a>
+        </div>
+        <div class="sidebar-menu">
+        
+            <div class="sidebar-menu-item" id="createPlaylist">
+
+                <div class="sidebar-menu-item-component ">
+                    +
+                </div>
+                    <span>Criar Playlist</span>
+            </div>
+        <div class="sidebar-playlists">
+                <a href="../Playlists/playlist.html"> Playlist 1</a>
+                <a href="../Playlists/playlist.html"> Playlist 2</a>
+                <a href="../Playlists/playlist.html"> Playlist 3</a>
+                <a href="../Playlists/playlist.html"> Playlist 4</a>
+                <a href="../Playlists/playlist.html"> Playlist 5</a>
+            </div>
+        </div>
+    </aside>
+
+    <header id="header">
+        <div id="bar_button">
+            <div id="searching-bar">
+                <img src="../images/magnifying_glass.png" alt="magnifying glass" id="magnifying-glass"
+                    draggable="false">
+                <input type="text" placeholder="Digite aqui para pesquisar " id="inputBox">
+            </div>
+            <button id="search">Search</button>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="container-animation">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div id="results"></div>
+    </main>
+
+    <div class="box" id="selectPlaylistBox"> </div>
+
+    <div class="player">
+        <div class="player-artist">
+            <div class="pa-image">
+                <img src="" alt="ícone" id="image" draggable="false">
+            </div>
+            <div class="pa-data">
+                <h1 id="title"></h1>
+                <h2 id="artist"></h2>
+                <h2 id="album"></h2>
+            </div>
+        </div>
+        <div class="player-control">
+            <div class="player-control-buttons">
+                <a id="backwardBtn">
+                    <i class="fas fa-backward"></i>
+                </a>
+                <a id="pauseBtn" style="display: none;">
+                    <i class="fa-solid fa-pause"></i>
+                </a>
+                <a id="playBtn" style="display: inline-block;">
+                    <i class="fa-solid fa-play"></i>
+                </a>
+                <a id="forwardBtn">
+                    <i class="fas fa-forward"></i>
+                </a>
+                <div class="player-control-progress">
+                    <input type="range" class="music-progress-bar" value="0"> <br>
+                    <p class="current-time">00 : 00</p>
+                    <p class="duration">00 : 00</p>
+                </div>
+            </div>
+            <div class="player-control-volume">
+                <a id="volumeBtn">
+                    <i class="fas fa-volume-high" id="volume-icon"></i>
+                </a>
+                <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
+            </div>
+
+            <button id="closeSong">X</button>
+
+        </div>
+    </div>
+    <audio id="audioPlayer" controls>
+        <source src="" id="preview" type="audio/mpeg">
+    </audio>
+
+    <script src="index-script.js"></script>
+    <script src="../all.min.js"></script>
+
+</body>
+
+</html>
