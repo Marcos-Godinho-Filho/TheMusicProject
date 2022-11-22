@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     nome: String,
     email: String,
-    senha: String
-}, { collection: 'tmp' });
+    senha: String,
+    imagemPerfil: String,
+    corFundo: String,
+    desc: String,
+    playlists: Array
+}, { collection: 'users' });
 
 module.exports = { UserSchema: userSchema }
