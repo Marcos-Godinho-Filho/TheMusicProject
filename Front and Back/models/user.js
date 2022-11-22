@@ -7,7 +7,9 @@ const userSchema = new Schema({
     email: String,
     senha: String,
     imagemPerfil: String,
-    desc: String
+    corFundo: String,
+    desc: String,
+    playlists: Array
 }, { collection: 'users' });
 
 module.exports = { UserSchema: userSchema }

@@ -60,9 +60,9 @@ router.post('/registration', controller.insertNewUser);
 router.post('/authentication', controller.checkValidation);
 // Criar playlist é aqui?
 // Inserir musica é aqui?
-router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist);
+router.post('/:id/home/insertPlaylist', controller.insertNewPlaylistIntoUser);
+router.post('/:id/search/insertPlaylist', controller.insertNewPlaylistIntoUser);
+router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylistIntoUser);
 router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist);
 router.post('/:id/search/insertMusicIntoPlaylist', controller.insertNewMusicIntoPlaylist);
 router.post('/:id/search', controller.searchFromAPI);

@@ -164,20 +164,38 @@ isPlaylistExistent = async (idPlaylist) => {
 }
 
 
-exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
+exports.insertNewPlaylistIntoUser = ('/:id/home/insertPlaylist', async (req, res) => {
 
     const parcel = req.body.parcel;
 
-    let nomePlaylist = parcel[0];
-    let img = parcel[1];
-    let desc = parcel[2];
+    let idPlaylist = parcel[0];
+    let nomePlaylist = parcel[1];
+    let img = parcel[2];
+    let desc = parcel[3];
+    let songs = parcel[4];
+    let idUser = parcel[5];
 
-    let playlist = new Playlists({ nomePlaylist, img, desc });
+    let playlist = { idPlaylist, nomePlaylist, img, desc, songs };
+
+    let playlists;
+    try {
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists;
+    } 
+    catch (erro) 
+    {
+        res.json({ success: false });
+    }
+    playlists.push(playlist);
 
     try {
-        await playlist.save();
-        // Redirecionar para a playlist
-    } catch (erro) { next(erro); }
+        if (isUserExistent(idUser))
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+    }
+    catch (erro)
+    {
+        res.json({ success: false });
+    }
 });
 
 exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async (req, res) => {
@@ -189,24 +207,27 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     let nomeAlbum = parcel[2];
     let previewMusica = parcel[3];
     let imagem = parcel[4];
-    let idPlaylist = parcel[5];
+    let idUser = parcel[5];
+    let idPlaylist = parcel[6];
+
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
-    let songs;
+    let playlists;
     try {
-        const registro = await Playlists.findById({ "_id": idPlaylist });
-        songs = registro.songs;
+        const registro = await Users.findById({ "_id": idUser }); 
+        playlists = registro.playlists; 
     } 
     catch (erro) 
     {
         res.json({ success: false });
     }
-    songs.push(music);
+
+    let songs = playlists.
 
     try {
-        if (isPlaylistExistent(idPlaylist))
-            await Playlists.updateOne({ "_id": idPlaylist }, { $set: { songs: songs} })
+        if (isUserExistent(idUser))
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro)
     {
