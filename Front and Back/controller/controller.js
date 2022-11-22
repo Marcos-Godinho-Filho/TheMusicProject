@@ -267,13 +267,8 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     let nomeAlbum = parcel[2];
     let previewMusica = parcel[3];
     let imagem = parcel[4];
-<<<<<<< HEAD
-    let idPlaylist = parcel[5];
-=======
     let posPlaylist = parcel[5];
     let idUser = req.params.id;
-
->>>>>>> 48be398a691a26e4a4a2fbc50a6713d1c466d4c3
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
