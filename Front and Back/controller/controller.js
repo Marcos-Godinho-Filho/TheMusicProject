@@ -10,10 +10,6 @@ const { Schema } = require('mongoose');
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
 const Playlists = db.Mongoose.model('esquemaPlaylist', playlist.PlaylistSchema, 'playlists');
-const Musics = db.Mongoose.model('esquemaMusica', music.MusicSchema, 'musics');
-
-// Como a gente vai fazer isso se o id o mongo gera automaticamente?
-// const PlaylistsMusics = db.Mongoose.model('esquemaPlaylistMusica', music.PlaylistMusicSchema, 'playlistMusic')
 
 const pattern = __dirname.substring(0, 84);
 
@@ -63,7 +59,7 @@ exports.searchFromAPI = ('/:email/search', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-exports.getDataAPI = ('/:email/search', async (req, res) => {
+exports.getDataSearch = ('/:email/search', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/search/index.html'));
 
     let email = req.params.email;
@@ -75,7 +71,38 @@ exports.getDataAPI = ('/:email/search', async (req, res) => {
         else { res.json({ found: false }) }
     }
     catch (erro) { throw new Error(erro); }
+
+    const playlists = await Playlists.find();
+
+    try {
+        res.status(200).json({ playlists: playlists });  
+    }
+    catch (erro) { throw new Error (erro); }
 });
+
+exports.getDataHome = ('/:id/home', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Home/home.html'));
+
+    const playlists = await Playlists.find();
+
+    try {
+        res.status(200).json({ playlists: playlists });  
+    }
+    catch (erro) { throw new Error (erro); }
+})
+
+exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
+
+    const playlists = await Playlists.find();
+
+    try {
+        res.status(200).json({ playlists: playlists });  
+    }
+    catch (erro) { throw new Error (erro); }
+
+    
+})
 
 isUserExistent = async (email) => {
     if (await Users.findOne({ email: email }) !== null)
@@ -129,7 +156,15 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     else res.json({ success: false })
 });
 
-exports.insertNewPlaylist = ('/:id/playlist', async (req, res) => {
+isPlaylistExistent = async (idPlaylist) => {
+    if (await Playlists.findById({ "_id": idPlaylist }) !== null)
+        return true;
+
+    return false;
+}
+
+
+exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
 
     const parcel = req.body.parcel;
 
@@ -144,13 +179,6 @@ exports.insertNewPlaylist = ('/:id/playlist', async (req, res) => {
         // Redirecionar para a playlist
     } catch (erro) { next(erro); }
 });
-
-isPlaylistExistent = async (idPlaylist) => {
-    if (await Playlists.findById({ "_id": idPlaylist }) !== null)
-        return true;
-
-    return false;
-}
 
 exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async (req, res) => {
 
@@ -185,16 +213,3 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
         res.json({ success: false });
     }
 })
-
-// No exemplo abaixo temos uma coleção chamada 'produtos', com os campos _id, descricao e valor. Temos também outra coleção chamada 'pedidos' com os campos _id, nome_cliente, cidade e id_produto. Este campo id_produto da coleção 'pedidos' será ligado ao campo _id da coleção 'produtos'.
-
-// playlist.aggregate([
-//     {
-//         $lookup:
-//         {
-//             from: "produtos",
-//             localField: "id_produto",
-//             foreignField: "_id",
-//             as: "desc_produto"
-//         }
-//     }])
