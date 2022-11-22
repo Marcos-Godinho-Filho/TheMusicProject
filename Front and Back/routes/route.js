@@ -23,7 +23,8 @@ PAGINAS:
 /*
     Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
 */
-const pattern = __dirname.substring(0, 45);
+// pattern no meu pc (do Marcos): 0, 45 + 27
+const pattern = __dirname.substring(0, 45 + 12 + 15);
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
@@ -85,9 +86,9 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-router.delete('/:id/playlist/deletePlaylist', controller.deletePlaylist); // Playlist Page // feito
-router.delete('/:id/profile/deleteUser', controller.deleteUser); // Profile Page // feito
-router.delete('/:id/playlist/deleteSong', controller.deleteSong); // Playlist Page // feito
+// router.delete('/:id/playlist/deletePlaylist', controller.deletePlaylist); // Playlist Page // feito
+// router.delete('/:id/profile/deleteUser', controller.deleteUser); // Profile Page // feito
+// router.delete('/:id/playlist/deleteSong', controller.deleteSong); // Playlist Page // feito
 
 
 module.exports = router;
