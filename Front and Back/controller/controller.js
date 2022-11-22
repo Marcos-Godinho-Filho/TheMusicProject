@@ -368,20 +368,10 @@ exports.deleteSong = ('id:/Playlist/DeleteSong'), async(req,res) => {
     catch(erro)
         { res.json({ success: false }) } 
     try{
-<<<<<<< Updated upstream
-        if(isPlaylistExistent(idPlaylist))
-        {
-
-        }
-    } catch (erro) { }
-} 
-
-=======
         const musicas = playlists[posicaoPlaylist][songs];
         const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica - 1)
         const halfAfterTheUnwantedElement = musicas(posicaoMusica);
         const remove = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
->>>>>>> Stashed changes
 
         playlists[posicaoPlaylist][songs] = remove
 
