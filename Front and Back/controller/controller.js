@@ -129,8 +129,7 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     else res.json({ success: false })
 });
 
-
-exports.createPLaylist = ('/:id/playlist', async (req, res) => {
+exports.insertNewPlaylist = ('/:id/playlist', async (req, res) => {
 
     const parcel = req.body.parcel;
 
@@ -146,6 +145,46 @@ exports.createPLaylist = ('/:id/playlist', async (req, res) => {
     } catch (erro) { next(erro); }
 });
 
+isPlaylistExistent = async (idPlaylist) => {
+    if (await Playlists.findById({ "_id": idPlaylist }) !== null)
+        return true;
+
+    return false;
+}
+
+exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async (req, res) => {
+
+    const parcel = req.body.parcel;
+
+    let nomeMusica = parcel[0];
+    let nomeArtista = parcel[1];
+    let nomeAlbum = parcel[2];
+    let previewMusica = parcel[3];
+    let imagem = parcel[4];
+    let idPlaylist = parcel[5];
+
+    let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
+
+    let songs;
+    try {
+        const registro = await Playlists.findById({ "_id": idPlaylist });
+        songs = registro.songs;
+    } 
+    catch (erro) 
+    {
+        res.json({ success: false });
+    }
+    songs.push(music);
+
+    try {
+        if (isPlaylistExistent(idPlaylist))
+            await Playlists.updateOne({ "_id": idPlaylist }, { $set: { songs: songs} })
+    }
+    catch (erro)
+    {
+        res.json({ success: false });
+    }
+})
 
 // No exemplo abaixo temos uma coleção chamada 'produtos', com os campos _id, descricao e valor. Temos também outra coleção chamada 'pedidos' com os campos _id, nome_cliente, cidade e id_produto. Este campo id_produto da coleção 'pedidos' será ligado ao campo _id da coleção 'produtos'.
 
@@ -159,5 +198,3 @@ exports.createPLaylist = ('/:id/playlist', async (req, res) => {
 //             as: "desc_produto"
 //         }
 //     }])
-
-

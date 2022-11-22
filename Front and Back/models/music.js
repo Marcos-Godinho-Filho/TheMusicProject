@@ -7,7 +7,7 @@ const musicSchema = new Schema({
     nomeArtista: String,
     nomeAlbum: String,
     previewMusica: String,
-    imagem: String
+    imagem: String,
 })
 
 module.exports = { MusicSchema: musicSchema }

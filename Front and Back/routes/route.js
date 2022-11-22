@@ -64,7 +64,7 @@ router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist);
 router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist);
 router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist);
 router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist);
-router.post('/:id/search/insertMusicInPlaylist', controller.insertMusicInPlaylist);
+router.post('/:id/search/insertMusicIntoPlaylist', controller.insertMusicInPlaylist);
 router.post('/:id/search', controller.searchFromAPI);
 
 
