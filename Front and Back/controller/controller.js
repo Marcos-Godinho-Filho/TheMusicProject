@@ -156,10 +156,15 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     else res.json({ success: false })
 });
 
-isPlaylistExistent = async (idPlaylist) => {
-    if (await Playlists.findById({ "_id": idPlaylist }) !== null)
-        return true;
+isPlaylistExistent = async (idUser, posPlaylist) => {
+    if (await Users.findById({ "_id": idUser }) !== null)
+    {    
+        if ((await Users.findById({ "_id": idUser })).playlists.length - 1 > pos)
+            return false;
 
+        return true;
+    }
+    
     return false;
 }
 
@@ -178,8 +183,11 @@ exports.insertNewPlaylistIntoUser = ('/:id/home/insertPlaylist', async (req, res
 
     let playlists;
     try {
-        const usuario = await Users.findById({ "_id": idUser })
-        playlists = usuario.playlists;
+        if (isUserExistent(idUser)) 
+        {
+            const usuario = await Users.findById({ "_id": idUser })
+            playlists = usuario.playlists;
+        }
     } 
     catch (erro) 
     {
@@ -195,6 +203,7 @@ exports.insertNewPlaylistIntoUser = ('/:id/home/insertPlaylist', async (req, res
     {
         res.json({ success: false });
     }
+
 });
 
 exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async (req, res) => {
@@ -214,22 +223,29 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
 
     let playlists;
     try {
-        const registro = await Users.findById({ "_id": idUser }); 
-        playlists = registro.playlists; 
+        if (isUserExistent(idUser)) {
+            const registro = await Users.findById({ "_id": idUser }); 
+            playlists = registro.playlists; 
+        }
     } 
     catch (erro) 
     {
         res.json({ success: false });
     }
 
-    playlists[pos][songs] = playlists[pos][songs].push(music);
-
-    try {
-        if (isUserExistent(idUser))
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-    }
-    catch (erro)
+    if (isPlaylistExistent(idUser, pos)) 
     {
+        playlists[pos][songs] = playlists[pos][songs].push(music);
+        try {
+            if (isUserExistent(idUser))
+                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+        catch (erro)
+        {
+            res.json({ success: false });
+        }
+    } 
+    else 
         res.json({ success: false });
-    }
+
 })

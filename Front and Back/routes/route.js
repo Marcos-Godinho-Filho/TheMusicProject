@@ -63,7 +63,7 @@ router.post('/authentication', controller.checkValidation);
 router.post('/:id/home/insertPlaylist', controller.insertNewPlaylistIntoUser);
 router.post('/:id/search/insertPlaylist', controller.insertNewPlaylistIntoUser);
 router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylistIntoUser);
-router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist);
+router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylistIntoUser);
 router.post('/:id/search/insertMusicIntoPlaylist', controller.insertNewMusicIntoPlaylist);
 router.post('/:id/search', controller.searchFromAPI);
 
@@ -87,6 +87,7 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
 */
 router.delete('/:id/playlist', controller.deletePlaylist); // Playlist Page
 router.delete('/:id/profile', controller.deleteUser); // Profile Page
+router.delete('/:id/playlist/deleteSong', controller.deleteSong); // Playlist Page
 
 
 module.exports = router;
