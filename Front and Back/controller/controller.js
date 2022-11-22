@@ -6,10 +6,10 @@ const user = require('../models/user');
 const playlist = require('../models/playlist');
 const music = require('../models/music');
 const { Schema } = require('mongoose');
+const { NONAME } = require('dns');
 
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
-const Playlists = db.Mongoose.model('esquemaPlaylist', playlist.PlaylistSchema, 'playlists');
 
 const pattern = __dirname.substring(0, 84);
 
@@ -143,7 +143,54 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
         await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
         // Redirecionar para home
     }
-    else { res.json({ success: false }); } // Não existe no banco de dados
+    else { res.json({ success: false }); } 
+});
+
+exports.updateUser = ('/:id/profile', async (req, res) => {
+
+    const parcel = req.body.parcel;
+
+    let nome = parcel[0]
+    let email = parcel[1];
+    let senha = parcel[2];
+    let imagemPerfil = parcel[3]
+    let descPerfil = parcel[4]
+    let corFundo = parcel[5]
+    let playlists = parcel[6]
+
+    if (isUserExistent(email, senha)) {
+        await Users.updateOne( { $set: { nome: nome }}, { $set: { email: email }}, { $set: { senha: senha}}, {$set:{ imagemPerfil: imagemPerfil}}, {$set:{ descPerfil: descPerfil}}, {$set:{ corFundo: corFundo}}, {$set:{ playlists: playlists}});
+    }
+    else { res.json({ success: false }); } 
+});
+
+exports.updatePlaylist = ('/:id/playlist', async (req, res) => {
+    const parcel = req.body.parcel;
+
+    let nomePlaylist = parcel[0]
+    let descPlaylist = parcel [1]
+    let imagem = parcel[2]
+    let songs = parcel[3]
+    let posicaoPlaylist = parcel[4]
+    let idUser = req.params.id
+    
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser})
+        playlists = registro.playlists
+    }
+    catch(erro)
+        { res.json({ success: false }); } 
+
+    playlists[posicaoPlaylist] = {nomePlaylist, descPlaylist, imagem, songs}
+
+    try{
+        if(isUserExistent(idUser)){
+            await Users.updateOne( { "_id": idUser}, { $set: { playlists: playlists } })
+        }
+    }
+    catch(erro)
+        { res.json({ success: false }) }    
 });
 
 
@@ -169,17 +216,13 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 }
 
 
-exports.insertNewPlaylistIntoUser = ('/:id/home/insertPlaylist', async (req, res) => {
+exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
 
     const parcel = req.body.parcel;
 
     let nomePlaylist = parcel[0];
     let img = parcel[1];
     let desc = parcel[2];
-    let songs = [];
-    let idUser = req.params.id;
-
-    let playlist = { nomePlaylist, img, desc, songs };
 
     let playlists;
     try {
@@ -215,13 +258,11 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     let nomeAlbum = parcel[2];
     let previewMusica = parcel[3];
     let imagem = parcel[4];
-    let idUser = parcel[5];
-    let pos = parcel[6];
-
+    let idPlaylist = parcel[5];
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
-    let playlists;
+    let songs;
     try {
         if (isUserExistent(idUser)) {
             const registro = await Users.findById({ "_id": idUser }); 
@@ -234,6 +275,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     }
 
     if (isPlaylistExistent(idUser, pos)) 
+
     {
         playlists[pos][songs] = playlists[pos][songs].push(music);
         try {
@@ -249,3 +291,68 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
         res.json({ success: false });
 
 })
+
+exports.deleteUser = (':id/Profile/DeleteUser', async(req, res) => {
+    const parcel= req.body.parcel;
+
+    let idUser = req.params.id;
+
+    await Users.deleteOne({ "_id": idUser})
+})
+
+exports.deletePlaylist = (':id/Playlist/DeletePlaylist'), async(req, res) => {
+    const parcel = req.body.parcel
+
+    let posicaoPlaylist = parcel[0]
+    let idUser = req.params.id
+
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser})
+        playlists = registro.playlists
+    }
+    catch(erro)
+        { res.json({ success: false }); } 
+
+        playlists.remove(playlists[posicaoPlaylist])
+    try{
+        if(isUserExistent(idUser)){
+            await Users.updateOne( { "_id": idUser}, { $set: { playlists: playlists } })
+        }
+    }
+    catch(erro)
+        { res.json({ success: false }) } 
+}
+
+exports.deleteSong = ('id:/Playlist/DeleteSong'), async(req,res) => {
+    const parcel = req.body.parcel
+
+    let posicaoPlaylist = parcel[0]
+    let idUser = req.params.id
+
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser})
+        playlists = registro.playlists
+    }
+    catch(erro)
+        { res.json({ success: false }); } 
+
+        playlists.remove(playlists[posicaoPlaylist])
+    try{
+        if(isUserExistent(idUser)){
+            await Users.updateOne( { "_id": idUser}, { $set: { playlists: playlists } })
+        }
+    }
+    catch(erro)
+        { res.json({ success: false }) } 
+    try{
+        if(isPlaylistExistent(idPlaylist))
+        {
+
+        }
+    }
+} 
+
+
+
