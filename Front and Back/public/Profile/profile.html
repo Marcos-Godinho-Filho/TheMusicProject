@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheMusicProject - Perfil</title>
-    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
-    <link rel="stylesheet" href="profile-style.css">
+    <title>TheMusicProject - Home</title>
+    <link rel="icon" type="image/x-icon" href="../imgs/icon.ico">
+    <link rel="stylesheet" href="../stylesheets/profile-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body>
     <aside id="aside">
         <div class="sidebar-logo">
-            <img src="../images/THEmusicPROJECT.png" alt="logo" draggable="false">
+            <img src="../imgs/THEmusicPROJECT.png" alt="logo" draggable="false">
         </div>
         <div class="sidebar-menu">
             <a href="../Home/home.html">
                 <i class="fa-solid fa-house"></i> Home
             </a>
-            <a href="../Search/index.html" draggable="false">
+            <a href="../search/index.html" draggable="false">
                 <i class="fa-solid fa-magnifying-glass"></i> Buscar
             </a>
             <a class="sidebar-menu-selected" draggable="false">
@@ -35,27 +35,35 @@
                 <span>Criar Playlist</span>
             </div>
             <div class="sidebar-playlists">
-                <a href="../Playlists/playlist.html"> Playlist 1</a>
-                <a href="../Playlists/playlist.html"> Playlist 2</a>
-                <a href="../Playlists/playlist.html"> Playlist 3</a>
-                <a href="../Playlists/playlist.html"> Playlist 4</a>
-                <a href="../Playlists/playlist.html"> Playlist 5</a>
+                <a href="../Playlist/playlist.html"> Playlist 1</a>
+                <a href="../Playlist/playlist.html"> Playlist 2</a>
+                <a href="../Playlist/playlist.html"> Playlist 3</a>
+                <a href="../Playlist/playlist.html"> Playlist 4</a>
+                <a href="../Playlist/playlist.html"> Playlist 5</a>
             </div>
         </div>
     </aside>
 
-    <div class="box" id="deleteUserBox"> </div>
-    <div class="box" id="editUserBox"> </div>
+    <div class="box" id="deletePlaylistBox"> </div>
+    <div class="box" id="editPlaylistBox"> </div>
 
     <main id="main">
         <div id="top">
             <marquee direction="">O mais novo site de musica | Aproveite sua estadia em nosso site | Está com problemas?
-                Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
+                Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp
+            </marquee>
         </div>
         <div class="card">
-            <div class="card-color"> </div>
             <div class="card-image">
-                <img id="profile-img" src="../images/default.jpg" alt="foto">
+                <label for="cor">
+                    <input type="color" name="cor" id="cor" class="cor" value="#ff0000">
+                </label>
+            </div>
+            <div id="edit-image">
+                <button onclick="document.getElementById('fileReader').click()">
+                    <img id="img-button" alt="foto" src="../imgs/default.jpg">
+                </button>
+                <input type="file" id="fileReader" accept="image/*">
             </div>
             <div class="card-content">
                 <div class="card-buttons">
@@ -66,9 +74,9 @@
                         <i class="fa-solid fa-edit"></i>
                     </a>
                 </div>
-                <h1 id="username">USER</h1>
-                <p id="bio">Bio</p>
-                <p id="email">emailfake.mail@secmail</p>
+                <h1>USER</h1>
+                <textarea maxlength="30"></textarea>
+                <p>emailfake.mail@secmail</p>
             </div>
             <div class="icons">
                 <a href="#" class="fab fa-facebook-f"></a>
@@ -80,7 +88,7 @@
         </div>
     </main>
 
-    <script src="profile-script.js"></script>
+    <script src="../scripts/profile-script.js"></script>
 </body>
 
 </html>
