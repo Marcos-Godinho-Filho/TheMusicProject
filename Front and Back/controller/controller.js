@@ -72,7 +72,8 @@ exports.getDataSearch = ('/:email/search', async (req, res) => {
     }
     catch (erro) { throw new Error(erro); }
 
-    const playlists = await Playlists.find();
+    let idUser = req.params.id;
+    const playlists = await Users.findById( { "_id": idUser} ).playlists;
 
     try {
         res.status(200).json({ playlists: playlists });  
@@ -83,7 +84,8 @@ exports.getDataSearch = ('/:email/search', async (req, res) => {
 exports.getDataHome = ('/:id/home', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Home/home.html'));
 
-    const playlists = await Playlists.find();
+    let idUser = req.params.id;
+    const playlists = await Users.findById( { "_id": idUser} ).playlists;
 
     try {
         res.status(200).json({ playlists: playlists });  
@@ -94,14 +96,17 @@ exports.getDataHome = ('/:id/home', async (req, res) => {
 exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
 
-    const playlists = await Playlists.find();
+    let idUser = req.params.id;
+    const playlists = await Users.findById( { "_id": idUser} ).playlists;
 
     try {
         res.status(200).json({ playlists: playlists });  
     }
     catch (erro) { throw new Error (erro); }
+})
 
-    
+exports.getDataProfile = ('/:id/profile', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Profile/'))
 })
 
 isUserExistent = async (email) => {
@@ -117,10 +122,14 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     let email = parcel[0];
     let nome = parcel[1];
     let senha = parcel[2];
+    let imagemPerfil = "";
+    let corFundo = "";
+    let desc = "";
+    let playlists = [];
 
     if (!isUserExistent(email)) {
         // Errado, falta coisa que ta no esquema
-        let usuario = new Users({ email, nome, senha });
+        let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists });
 
         try {
             await usuario.save();
@@ -159,7 +168,7 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 isPlaylistExistent = async (idUser, posPlaylist) => {
     if (await Users.findById({ "_id": idUser }) !== null)
     {    
-        if ((await Users.findById({ "_id": idUser })).playlists.length - 1 > pos)
+        if ((await Users.findById({ "_id": idUser })).playlists.length - 1 > posPlaylist)
             return false;
 
         return true;
