@@ -224,8 +224,8 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
     let nomeAlbum = parcel[2];
     let previewMusica = parcel[3];
     let imagem = parcel[4];
-    let idUser = parcel[5];
-    let pos = parcel[6];
+    let posPlaylist = parcel[5];
+    let idUser = req.params.id;
 
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
@@ -244,7 +244,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
 
     if (isPlaylistExistent(idUser, pos)) 
     {
-        playlists[pos][songs] = playlists[pos][songs].push(music);
+        playlists[posPlaylist][songs] = playlists[posPlaylist][songs].push(music);
         try {
             if (isUserExistent(idUser))
                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
