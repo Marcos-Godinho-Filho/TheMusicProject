@@ -265,7 +265,7 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
 
 });
 
-exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async (req, res) => {
+exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicIntoPlaylist', async (req, res) => {
 
     const parcel = req.body.parcel;
     let nomeMusica = parcel[0];
@@ -308,7 +308,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicInPlaylist', async 
 
 })
 
-exports.deleteUser = (':id/Profile/DeleteUser', async(req, res) => {
+exports.deleteUser = (':id/profile/deleteUser', async(req, res) => {
     const parcel= req.body.parcel;
 
     let idUser = req.params.id;
@@ -316,7 +316,7 @@ exports.deleteUser = (':id/Profile/DeleteUser', async(req, res) => {
     await Users.deleteOne({ "_id": idUser})
 })
 
-exports.deletePlaylist = (':id/Playlist/DeletePlaylist'), async(req, res) => {
+exports.deletePlaylist = (':id/playlist/deletePlaylist'), async(req, res) => {
     const parcel = req.body.parcel
 
     let posicaoPlaylist = parcel[0]
@@ -345,7 +345,7 @@ exports.deletePlaylist = (':id/Playlist/DeletePlaylist'), async(req, res) => {
         { res.json({ success: false }) } 
 }
 
-exports.deleteSong = ('id:/Playlist/DeleteSong'), async(req,res) => {
+exports.deleteSong = ('id:/playlist/deleteSong'), async(req,res) => {
     const parcel = req.body.parcel
 
     let posicaoPlaylist = parcel[0]
