@@ -1,11 +1,3 @@
-// document.window.onload = () => {
-//     /* comandos para pegar os dados da playlist e as músicas da mesma no bd e mostrá-los na tela */
-
-//     /* comandos para criar um vetor? que permita fazer a barra de música funcionar tocando as músicas uma em seguida da outra, permitindo ao usuário controlar essa fila de reprodução */
-
-//     document.querySelector('#songCount').innerHTML = document.getElementsByClassName('.song').length + ' músicas';
-// }
-
 document.addEventListener('load', getInfo);
 
 const BASE_URL = 'http://localhost:3000/:id/home/';
@@ -45,7 +37,7 @@ async function getInfo(e) {
 
     for (let i = 0; i < songs.length; i++) {
         main.innerHTML += `
-            <div class="song" id="song1">
+            <div class="song" id="song${i+1}">
                 <div class="s-image">
                     <img src="${imagem}" alt="Img" draggable="false">
                 </div>
@@ -58,7 +50,7 @@ async function getInfo(e) {
                     <button style="font-size: 20px;" onclick="removeSong('#song1')">
                         <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
-                    <button style="font-size: 20px;"> 
+                    <button style="font-size: 20px;" onclick="showSongData('${nomeMusica}', '${nomeArtista}', '${nomeAlbum}', '${imagem}', '${previewMusica}');">  
                         <i class="fa-solid fa-play" style="color: #fff;"></i>
                     </button>
                 </div>
