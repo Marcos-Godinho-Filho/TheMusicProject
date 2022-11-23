@@ -75,8 +75,8 @@ router.post('/:id/search', controller.searchFromAPI); // feito
     Playlists will need (*nome, descricao, imagem)
     Users will need (nome, *email, senha)
 */
-router.put('/:id/playlist', controller.updatePlaylist); // Playlist Page // feito
-router.put('/:id/profile', controller.updateUser); // Profile Page // feito
+router.put('/:id/playlist/:idPl/updatePlaylist', controller.updatePlaylist); // Playlist Page // feito
+router.put('/:id/profile/updatePlaylist', controller.updateUser); // Profile Page // feito
 router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page // feito
 
 

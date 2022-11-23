@@ -1,14 +1,15 @@
 document.addEventListener('load', getInfo);
 
-const BASE_URL = 'http://localhost:3000/:id/home/';
+const BASE_URL = 'http://localhost:3000/:id/playlist/:idPl';
 
+let songs = [];
 async function getInfo(e) {
     let playlists = document.querySelector('.sidebar-playlists');
     let title = document.querySelector('#title');
     let description = document.querySelector('#description');
     let songCount = document.querySelector("#songCount");
     let img = document.querySelector("#t-img");
-    let songs = document.querySelector('#songs');
+    let songsDiv = document.querySelector('#songs');
 
     const res = await fetch(BASE_URL, {
         method: 'GET'
@@ -22,13 +23,13 @@ async function getInfo(e) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
     }
 
-    let playlist = data.playlist
+    let playlist = data.playlist;
     title.innerHTML = playlist.nomePlaylist;
     description.innerHTML = playlist.desc;
     songCount.innerHTML = playlist.songs.length() + "";
     img.src = playlist.img;
 
-    let songs = playlist.songs;
+    songs = playlist.songs;
     let nomeMusica = songs.nomeMusica;
     let nomeArtista = songs.nomeArtista;
     let nomeAlbum = songs.nomeAlbum;
@@ -36,7 +37,7 @@ async function getInfo(e) {
     let imagem = songs.imagem;
 
     for (let i = 0; i < songs.length; i++) {
-        main.innerHTML += `
+        songsDiv.innerHTML += `
             <div class="song" id="song${i+1}">
                 <div class="s-image">
                     <img src="${imagem}" alt="Img" draggable="false">
@@ -47,14 +48,14 @@ async function getInfo(e) {
                     <h2>${nomeAlbum}</h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px;" onclick="removeSong('#song1')">
+                    <button style="font-size: 20px;" onclick="removeSong('#song${i+1}')">
                         <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
-                    <button style="font-size: 20px;" onclick="showSongData('${nomeMusica}', '${nomeArtista}', '${nomeAlbum}', '${imagem}', '${previewMusica}');">  
+                    <button style="font-size: 20px;" onclick="showSongData( '${imagem}', '${nomeMusica}', '${nomeArtista}', '${nomeAlbum}', '${previewMusica}');">  
                         <i class="fa-solid fa-play" style="color: #fff;"></i>
                     </button>
                 </div>
-            </div>`
+            </div>`;
     }
 }
 
@@ -224,8 +225,8 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newTitle" value="Playlist 1"> </input> 
-            <textarea id="newDescription">Descrição</textarea>
+            <input type="text" id="newTitle" value="${document.querySelector('#title').value}"> </input> 
+            <textarea id="newDescription">${document.querySelector('#description').value}</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditPlaylist"> Salvar </button>
@@ -263,7 +264,7 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 
     document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        /* comandos para salvar a edição no BD */
+        postInfo();
 
         document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
         document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value;
@@ -278,6 +279,12 @@ document.querySelector('#edit').addEventListener('click', () => {
         hideBox(id);
     })
 })
+ 
+async function postInfo(e) {
+    const res = await fetch(BASE_URL, {
+        method: 'POST';
+    });
+}
 
 let removeSong = function (idSong) {
     let id = '#removeSongBox';

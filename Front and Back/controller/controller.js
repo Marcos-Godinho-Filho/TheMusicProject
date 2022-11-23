@@ -195,14 +195,14 @@ exports.updateUser = ('/:id/profile', async (req, res) => {
     else { res.json({ success: false }); }
 });
 
-exports.updatePlaylist = ('/:id/playlist', async (req, res) => {
+exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
     const parcel = req.body.parcel;
 
     let nomePlaylist = parcel[0]
     let descPlaylist = parcel[1]
     let imagem = parcel[2]
     let songs = parcel[3]
-    let posicaoPlaylist = parcel[4]
+    let posicaoPlaylist = req.params.idPl;
     let idUser = req.params.id
 
     let playlists
