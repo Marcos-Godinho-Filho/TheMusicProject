@@ -6,6 +6,26 @@
 //     document.querySelector('#songCount').innerHTML = document.getElementsByClassName('.song').length + ' músicas';
 // }
 
+document.addEventListener('load', getInfo);
+
+const BASE_URL = 'http://localhost:3000/:id/home/';
+
+async function getInfo(e) {
+    let playlists = document.querySelector('.sidebar-playlists');
+
+    const res = await fetch(BASE_URL, {
+        method: 'GET'
+    });
+
+    const data = await res.json();
+    let resultado = data.playlists;
+    let id = data.idUser;
+
+    for (let i = 0; i < resultado.length; i++) {
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+    }
+}
+
 let playBtn = document.querySelector('#playBtn');
 let pauseBtn = document.querySelector('#pauseBtn');
 let backwardBtn = document.querySelector('#backwardBtn');

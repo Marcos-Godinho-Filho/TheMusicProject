@@ -1,3 +1,23 @@
+document.addEventListener('load', getInfoLoad);
+
+const BASE_URL = 'http://localhost:3000/:id/home/';
+
+async function getInfoLoad(e) {
+    let playlists = document.querySelector('.sidebar-playlists');
+
+    const res = await fetch(BASE_URL, {
+        method: 'GET'
+    });
+
+    const data = await res.json();
+    let resultado = data.playlists;
+    let id = data.idUser;
+
+    for (let i = 0; i < resultado.length; i++) {
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+    }
+}
+
 let buscarBtn = document.querySelector("#search");
 let inpBx = document.querySelector("#inputBox");
 let results = document.querySelector("#results");

@@ -86,7 +86,7 @@ exports.getDataHome = ('/:id/home', async (req, res) => {
     const playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
-        res.status(200).json({ playlists: playlists });
+        res.status(200).json({ playlists: playlists, idUser: idUser });
     }
     catch (erro) { throw new Error(erro); }
 })
@@ -235,6 +235,9 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
     let nomePlaylist = parcel[0];
     let img = parcel[1];
     let desc = parcel[2];
+    let idUser = req.params.id;
+
+    let playlist = {nomePlaylist, img, desc};
 
     let playlists;
     try {
@@ -271,7 +274,6 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicIntoPlaylist', asyn
 
     let music = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
-    let songs;
     try {
         if (isUserExistent(idUser)) {
             const registro = await Users.findById({ "_id": idUser });
@@ -283,7 +285,7 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicIntoPlaylist', asyn
     }
 
     if (isPlaylistExistent(idUser, pos)) {
-        playlists[posPlaylist][songs] = playlists[posPlaylist][songs].push(music);
+        playlists[posPlaylist].songs = playlists[posPlaylist].songs.push(music);
         try {
             if (isUserExistent(idUser))
                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
@@ -318,12 +320,11 @@ exports.deletePlaylist = (':id/playlist/deletePlaylist'), async (req, res) => {
     }
     catch (erro) { res.json({ success: false }); }
 
-    const playlist2 = playlists[posicaoPlaylist];
-    const halfBeforeTheUnwantedElement = playlist2.slice(posicaoPlaylist - 1)
-    const halfAfterTheUnwantedElement = playlist2(posicaoPlaylist);
-    const remove = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+    const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
+    const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1);
+    const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
 
-    playlists[posicaoPlaylist] = remove
+    playlists = copyWithoutRemovedElement;
     try {
         if (isUserExistent(idUser)) {
             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
@@ -353,12 +354,12 @@ exports.deleteSong = ('id:/playlist/deleteSong'), async (req, res) => {
     }
     catch (erro) { res.json({ success: false }) }
     try {
-        const musicas = playlists[posicaoPlaylist][songs];
-        const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica - 1)
-        const halfAfterTheUnwantedElement = musicas(posicaoMusica);
-        const remove = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+        const musicas = playlists[posicaoPlaylist].songs;
+        const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
+        const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1);
+        const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
 
-        playlists[posicaoPlaylist][songs] = remove
+        playlists[posicaoPlaylist].songs = copyWithoutRemovedElement;
 
         try {
             if (isUserExistent(idUser))
