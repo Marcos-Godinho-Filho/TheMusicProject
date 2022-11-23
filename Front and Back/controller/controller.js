@@ -248,9 +248,10 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
     let nomePlaylist = parcel[0];
     let img = parcel[1];
     let desc = parcel[2];
+    let songs = [];
     let idUser = req.params.id;
 
-    let playlist = {nomePlaylist, img, desc};
+    let playlist = {nomePlaylist, img, desc, songs };
 
     let playlists;
     try {

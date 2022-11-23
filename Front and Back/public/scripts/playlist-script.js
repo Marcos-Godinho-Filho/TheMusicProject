@@ -12,6 +12,11 @@ const BASE_URL = 'http://localhost:3000/:id/home/';
 
 async function getInfo(e) {
     let playlists = document.querySelector('.sidebar-playlists');
+    let title = document.querySelector('#title');
+    let description = document.querySelector('#description');
+    let songCount = document.querySelector("#songCount");
+    let img = document.querySelector("#t-img");
+    let songs = document.querySelector('#songs');
 
     const res = await fetch(BASE_URL, {
         method: 'GET'
@@ -23,6 +28,41 @@ async function getInfo(e) {
 
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+    }
+
+    let playlist = data.playlist
+    title.innerHTML = playlist.nomePlaylist;
+    description.innerHTML = playlist.desc;
+    songCount.innerHTML = playlist.songs.length() + "";
+    img.src = playlist.img;
+
+    let songs = playlist.songs;
+    let nomeMusica = songs.nomeMusica;
+    let nomeArtista = songs.nomeArtista;
+    let nomeAlbum = songs.nomeAlbum;
+    let previewMusica = songs.previewMusica;
+    let imagem = songs.imagem;
+
+    for (let i = 0; i < songs.length; i++) {
+        main.innerHTML += `
+            <div class="song" id="song1">
+                <div class="s-image">
+                    <img src="${imagem}" alt="Img" draggable="false">
+                </div>
+                <div class="s-data">
+                    <h1>${nomeMusica}</h1>
+                    <h2>${nomeArtista}</h2>
+                    <h2>${nomeAlbum}</h2>
+                </div>
+                <div class="s-buttons">
+                    <button style="font-size: 20px;" onclick="removeSong('#song1')">
+                        <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
+                    </button>
+                    <button style="font-size: 20px;"> 
+                        <i class="fa-solid fa-play" style="color: #fff;"></i>
+                    </button>
+                </div>
+            </div>`
     }
 }
 

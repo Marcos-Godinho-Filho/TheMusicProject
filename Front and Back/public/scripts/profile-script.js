@@ -4,6 +4,11 @@ const BASE_URL = 'http://localhost:3000/:id/home/';
 
 async function getInfo(e) {
     let playlists = document.querySelector('.sidebar-playlists');
+    let userTxt = document.querySelector('#user');
+    let bio = document.querySelector('#bio');
+    let email = document.querySelector('#email');
+    let img = document.querySelector('#img-button');
+    let corFundo = document.querySelector('#cor');
 
     const res = await fetch(BASE_URL, {
         method: 'GET'
@@ -16,6 +21,22 @@ async function getInfo(e) {
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
     }
+
+    let user = data.user;
+
+    userTxt.innerHTML = user.nome;
+    bio.innerHTML = user.desc;
+    email.innerHTML = user.email;
+
+    if (user.imagemPerfil == "")
+        img.src = "../imgs/user-icon.png"
+    else
+        img.src = user.imagemPerfil;
+
+    if (user.corFundo == "")
+        corFundo.value = user.corFundo;
+    else
+        corFundo.value = "#ff0000";
 }
 
 const reader = new FileReader();
