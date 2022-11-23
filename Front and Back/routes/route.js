@@ -24,7 +24,7 @@ PAGINAS:
     Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
 */
 // pattern no meu pc (do Marcos): 0, 45 + 27
-const pattern = __dirname.substring(0, 45 + 12 + 15);
+const pattern = __dirname.substring(0, 45);
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));

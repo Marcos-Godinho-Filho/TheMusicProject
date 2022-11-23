@@ -5,6 +5,7 @@ const db = require('../database/db');
 const user = require('../models/user');
 const { Schema } = require('mongoose');
 const { NONAME } = require('dns');
+const router = require('../routes/route');
 
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
@@ -130,6 +131,12 @@ async function isUserExistent(email) {
     return false;
 }
 
+async function getUserID(email) 
+{
+    let listaUsuarios = await Users.find({ email: email }).lean().exec();
+    console.log(listaUsuarios);
+}
+
 exports.insertNewUser = ('/registration', async (req, res) => {
 
     const parcel = req.body.parcel;
@@ -143,15 +150,12 @@ exports.insertNewUser = ('/registration', async (req, res) => {
 
     let result = await isUserExistent(email);
     if (!result) {
-        // Errado, falta coisa que ta no esquema
         let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists });
 
         try {
-            //await usuario.save();
-            usuario.save((err) => {
-                if (err) return handleError(err); // saved!
-            });
-            // Redirecionar para home
+            usuario.save((err) => { if (err) return handleError(err) });
+            // Redireciona para home com o id cadastrado
+            let id = await getUserID(email);
         }
         catch (err) { next(err); }
     }
