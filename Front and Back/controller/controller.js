@@ -71,7 +71,7 @@ exports.getDataSearch = ('/:email/search', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 
     let idUser = req.params.id;
-    const playlists = await Users.findById({ "_id": idUser }).playlists;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
         res.status(200).json({ playlists: playlists });
@@ -83,7 +83,7 @@ exports.getDataHome = ('/:id/home', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Home/home.html'));
 
     let idUser = req.params.id;
-    const playlists = await Users.findById({ "_id": idUser }).playlists;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
         res.status(200).json({ playlists: playlists, idUser: idUser });
@@ -95,16 +95,28 @@ exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
 
     let idUser = req.params.id;
-    const playlists = await Users.findById({ "_id": idUser }).playlists;
+    let idPlaylist = req.params.idPl;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
+    let playlist = playlists[idPlaylist];
 
     try {
-        res.status(200).json({ playlists: playlists });
+        res.status(200).json({ playlists: playlists, idUser: idUser, playlist: playlist });
     }
     catch (erro) { throw new Error(erro); }
 })
 
 exports.getDataProfile = ('/:id/profile', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Profile/'))
+    res.sendFile(path.join(pattern + '/public/Profile/'));
+
+    res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
+
+    let idUser = req.params.id;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
+
+    try {
+        res.status(200).json({ playlists: playlists, idUser: idUser });
+    }
+    catch (erro) { throw new Error(erro); }
 })
 
 async function isUserExistent(email) {
@@ -226,7 +238,6 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 
     return false;
 }
-
 
 exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
 
