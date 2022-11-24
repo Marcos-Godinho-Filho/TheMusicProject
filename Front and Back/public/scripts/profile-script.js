@@ -15,10 +15,12 @@
     showBox(id, deleteUserBoxContent);
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
+
+        async function deleteUser(e) {
+            const res = await fetch ('/:id/profile/deleteUser')
+        }
+ 
         hideBox(id);
-
-        /* comandos para deletar a playlist no BD */
-
         window.location.href = "../Authentication/Login In Page.html"
     })
 

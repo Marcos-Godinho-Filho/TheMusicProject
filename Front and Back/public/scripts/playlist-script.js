@@ -276,7 +276,7 @@ document.querySelector('#delete').addEventListener('click', () => {
 
         async function deletePlaylist(e) {
             const res = await fetch(BASE_URL, {
-                method: 'DELETE',
+                method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
