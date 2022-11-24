@@ -179,18 +179,14 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
 
 exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
 
-    const parcel = req.body.parcel;
-
-    let nome = parcel[0]
-    let email = parcel[1];
-    let senha = parcel[2];
-    let imagemPerfil = parcel[3];
-    let descPerfil = parcel[4];
-    let corFundo = parcel[5];
-    let playlists = parcel[6];
+    let nome = req.body.nome;
+    let email = req.body.email;
+    let imagemPerfil = req.body.imagemPerfil;
+    let descPerfil = req.body.descPerfil;
+    let corFundo = req.body.corFundo;
 
     if (isUserExistent(email, senha)) {
-        await Users.updateOne({ $set: { nome: nome } }, { $set: { email: email } }, { $set: { senha: senha } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } }, { $set: { playlists: playlists } });
+        await Users.updateOne({ $set: { nome: nome } }, { $set: { email: email } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } });
     }
     else { res.json({ success: false }); }
 });

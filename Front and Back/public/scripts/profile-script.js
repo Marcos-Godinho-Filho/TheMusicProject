@@ -1,4 +1,26 @@
--document.querySelector('#delete').addEventListener('click', () => {
+document.addEventListener('load', getInfo);
+
+const BASE_URL = 'http://localhost:3000/:id/profile/';
+
+let id;
+
+async function getInfo(e) {
+    let playlists = document.querySelector('.sidebar-playlists');
+
+    const res = await fetch(BASE_URL, {
+        method: 'GET'
+    });
+
+    const data = await res.json();
+    let resultado = data.playlists;
+    id = data.idUser;
+
+    for (let i = 0; i < resultado.length; i++) {
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
+    }
+}
+
+document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deleteUserBox';
     let deleteUserBoxContent = `
         <h1 class="boxTitle"> Deletar Usuário </h1>
@@ -15,13 +37,19 @@
     showBox(id, deleteUserBoxContent);
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
-
+        
         async function deleteUser(e) {
-            const res = await fetch ('/:id/profile/deleteUser')
+            const res = await fetch ('/:id/profile/deleteUser', {
+                method: 'DELETE', 
+                body: JSON.stringify({
+                    id: idUser
+                })
+            })
         }
  
+        deleteUser();
         hideBox(id);
-        window.location.href = "../Authentication/Login In Page.html"
+        window.location.href = "/localhost:3000/authentication/"
     })
 
     document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
@@ -84,7 +112,23 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 
     document.querySelector('#saveEditUser').addEventListener('click', () => {
-        /* comandos para salvar a edição no BD */
+        putUser();
+
+        async function putUser (e) {
+            const res = await fetch(BASE_URL + 'updateUser/', {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: document.querySelector('#newUsername').value,
+                    email: document.querySelector('#email').value,
+                    imagemPerfil: document.querySelector('#img-button').src,
+                    descPerfil: document.querySelector('#newBio').value,
+                    corFundo: document.querySelector('#color').value,
+                })
+            });
+        } 
 
         document.querySelector('#username').innerHTML = document.querySelector('#newUsername').value
         document.querySelector('#bio').innerHTML = document.querySelector('#newBio').value;
@@ -168,9 +212,9 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function postInfo(e) {
+        async function putPlaylist(e) {
             const res = await fetch(baseUrl, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
@@ -182,7 +226,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        postInfo();
+        putPlaylist();
 
         hideBox(id);
     })

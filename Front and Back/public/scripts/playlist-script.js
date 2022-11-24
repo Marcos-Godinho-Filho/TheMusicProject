@@ -229,7 +229,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function postInfo(e) {
+        async function putPlaylist(e) {
             const res = await fetch(baseUrl, {
                 method: 'POST',
                 headers: {
@@ -243,7 +243,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        postInfo();
+        putPlaylist();
 
         hideBox(id);
     })
@@ -345,9 +345,9 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 
     document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        putInfo();
+        putPlaylist();
 
-        async function putInfo(e) {
+        async function putPlaylist(e) {
             const res = await fetch(BASE_URL, {
                 method: 'PUT',
                 headers: {

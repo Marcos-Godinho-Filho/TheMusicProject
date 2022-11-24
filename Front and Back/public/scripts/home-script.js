@@ -1,3 +1,23 @@
+document.addEventListener('load', getInfo);
+
+const BASE_URL = 'http://localhost:3000/:id/home/';
+
+async function getInfo(e) {
+    let playlists = document.querySelector('.sidebar-playlists');
+
+    const res = await fetch(BASE_URL, {
+        method: 'GET'
+    });
+
+    const data = await res.json();
+    let resultado = data.playlists;
+    let id = data.idUser;
+
+    for (let i = 0; i < resultado.length; i++) {
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let fadeComplete = function (e) {
         stage.appendChild(arr[0]);
@@ -84,26 +104,6 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         hideBox(id);
     })
 })
-
-document.addEventListener('load', getInfo);
-
-const BASE_URL = 'http://localhost:3000/:id/home/';
-
-async function getInfo(e) {
-    let playlists = document.querySelector('.sidebar-playlists');
-
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    });
-
-    const data = await res.json();
-    let resultado = data.playlists;
-    let id = data.idUser;
-
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
-    }
-}
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
