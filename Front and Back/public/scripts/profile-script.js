@@ -1,102 +1,142 @@
-document.addEventListener('load', getInfo);
-
-const BASE_URL = 'http://localhost:3000/:id/home/';
-
-async function getInfo(e) {
-    let playlists = document.querySelector('.sidebar-playlists');
-    let userTxt = document.querySelector('#user');
-    let bio = document.querySelector('#bio');
-    let email = document.querySelector('#email');
-    let img = document.querySelector('#img-button');
-    let corFundo = document.querySelector('#cor');
-
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    });
-
-    const data = await res.json();
-    let resultado = data.playlists;
-    let id = data.idUser;
-
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
-    }
-
-    let user = data.user;
-
-    userTxt.innerHTML = user.nome;
-    bio.innerHTML = user.desc;
-    email.innerHTML = user.email;
-
-    if (user.imagemPerfil == "")
-        img.src = "../imgs/user-icon.png"
-    else
-        img.src = user.imagemPerfil;
-
-    if (user.corFundo == "")
-        corFundo.value = user.corFundo;
-    else
-        corFundo.value = "#ff0000";
-}
-
-const reader = new FileReader();
-const fileInput = document.querySelector("#fileReader");
-const img = document.querySelector("#img-button");
-reader.onload = e => {
-    img.src = e.target.result;
-    img.style.width = '120px';
-    img.style.height = '120px';
-}
-fileInput.addEventListener('change', e => {
-    const f = e.target.files[0];
-    reader.readAsDataURL(f);
-})
-
-document.querySelector('#delete').addEventListener('click', () => {
-    let id = '#deletePlaylistBox';
-    let deletePlaylistBoxContent = `
-        <h1 class="boxTitle"> Deletar Playlist </h1>
-        <p class="message"> Tem certeza que deseja deletar a Playlist? </p>
+-document.querySelector('#delete').addEventListener('click', () => {
+    let id = '#deleteUserBox';
+    let deleteUserBoxContent = `
+        <h1 class="boxTitle"> Deletar Usuário </h1>
+        <p class="warningMessage"> Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas. </p>
+        <div>
+            <p class="message"> Digite sua senha para confirmar a deleção: </p>
+            <input id="passwordToDeleteUser" type="password">
+        </div>
         <div class="options-buttons">
-            <button id="deletePlaylist"> Deletar </button>
-            <button id="calcelDeletePlaylist"> Cancelar </button>
+            <button id="deleteUser"> Deletar </button>
+            <button id="calcelDeleteUser"> Cancelar </button>
         </div>
     `;
-    showBox(id, deletePlaylistBoxContent);
+    showBox(id, deleteUserBoxContent);
 
-    document.querySelector('#deletePlaylist').addEventListener('click', () => {
+    document.querySelector('#deleteUser').addEventListener('click', () => {
+
+        async function deleteUser(e) {
+            const res = await fetch ('/:id/profile/deleteUser')
+        }
+ 
         hideBox(id);
-
-        /* comandos para deletar a playlist no BD */
-
-        window.location.href = "../Home/home.html"
+        window.location.href = "../Authentication/Login In Page.html"
     })
 
-    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
         hideBox(id);
     })
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    let id = '#editPlaylistBox';
+    let id = '#editUserBox';
     let editBoxContent = `
-        <h1 class="boxTitle"> Editar Playlist </h1>
+        <h1 class="boxTitle"> Editar Usuário </h1>
+        <div class="card-color-edit">
+            <label for="cor">
+                <input type="color" name="cor" id="color" value="#ff0000">
+            </label>
+        </div> 
         <div id="edit-image">
             <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
-                <img id="img-button" alt="Browse" src="${document.querySelector('#t-img').src}">
+                <img id="img-button" alt="Browse" src="${document.querySelector('#profile-img').src}">
             </button>
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newTitle" value="Playlist 1"> </input> 
-            <textarea id="newDescription">Descrição</textarea>
+            <input type="text" id="newUsername" value="${document.querySelector('#username').innerHTML}"> </input> 
+            <textarea id="newBio" resize="none">${document.querySelector('#bio').innerHTML}</textarea>
         </div>
         <div class="options-buttons">
-            <button id="saveEditPlaylist"> Salvar </button>
-            <button id="calcelEditPlaylist"> Cancelar </button>
+            <button id="saveEditUser"> Salvar </button>
+            <button id="calcelEditUser"> Cancelar </button>
         </div>
         `;
     showBox(id, editBoxContent);
+
+    let previousImg = '';
+
+    const reader = new FileReader();
+    const fileInput = document.querySelector("#fileReader");
+    const img = document.querySelector("#img-button");
+    reader.onload = e => {
+        img.src = e.target.result;
+        previousImg = img.src;
+        img.style.width = '120px';
+        img.style.height = '120px';
+    }
+    fileInput.addEventListener('change', e => {
+        const f = e.target.files[0];
+        reader.readAsDataURL(f);
+    })
+
+    document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
+        previousImg = img.src;
+        img.src = '../images/browse.png';
+        img.style.width = '120px';
+        img.style.height = '120px';
+    })
+    document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
+        img.src = previousImg;
+        img.style.width = '120px';
+        img.style.height = '120px';
+    })
+
+    document.querySelector('#saveEditUser').addEventListener('click', () => {
+        /* comandos para salvar a edição no BD */
+
+        document.querySelector('#username').innerHTML = document.querySelector('#newUsername').value
+        document.querySelector('#bio').innerHTML = document.querySelector('#newBio').value;
+        document.querySelector('.card-color').style.backgroundColor = document.querySelector('#color').value;
+        const img = document.querySelector('#profile-img');
+        img.src = document.querySelector('#img-button').src;
+        img.style.width = '120px';
+        img.style.height = '120px';
+        hideBox(id);
+    })
+
+    document.querySelector('#calcelEditUser').addEventListener('click', () => {
+        hideBox(id);
+    })
+})
+
+let showBox = function (id, content) {
+    document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#main').style.filter = 'blur(7px)';
+    const box = document.querySelector(id);
+    box.innerHTML = content;
+    box.style.display = 'block';
+}
+
+let hideBox = function (id) {
+    document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#main').style.filter = 'none';
+    const box = document.querySelector(id);
+    box.innerHTML = '';
+    box.style.display = 'none';
+}
+
+document.querySelector('#createPlaylist').addEventListener('click', () => {
+    let id = '#createPlaylistBox';
+    let createPlaylistBoxContent = `
+            <h1 class="boxTitle"> Criar Playlist </h1>
+            <div id="edit-image">
+                <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
+                    <img id="img-button" alt="Browse" src="../imgs/playlist-icon.png">
+                </button>
+                <input type="file" id="fileReader" accept="image/*">
+            </div>
+            <div id="edit-data">
+                <input type="text" id="newTitle" value="Nome"> </input> 
+                <textarea id="newDescription">Descrição</textarea>
+            </div>
+            <div class="options-buttons">
+                <button id="confirmCreatePlaylist"> Criar </button>
+                <button id="calcelCreatePlaylist"> Cancelar </button>
+            </div>
+            `;
+    showBox(id, createPlaylistBoxContent);
 
     let previousImg = '';
 
@@ -126,37 +166,28 @@ document.querySelector('#edit').addEventListener('click', () => {
         img.style.height = '200px';
     })
 
-    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        /* comandos para salvar a edição no BD */
+    document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
-        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value;
-        const img = document.querySelector('#t-img');
-        img.src = document.querySelector('#img-button').src;
-        img.style.width = '220px';
-        img.style.height = '220px';
+        async function postInfo(e) {
+            const res = await fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: document.querySelector('#newTitle').value,
+                    descricao: document.querySelector('#newDescription').value,
+                    imagem: document.querySelector('#img-button').src
+                })
+            });
+        }
+
+        postInfo();
+
         hideBox(id);
     })
 
-    document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
         hideBox(id);
     })
 })
-
-let showBox = function (id, content) {
-    document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
-    document.querySelector('#main').style.filter = 'blur(7px)';
-    const box = document.querySelector(id);
-    box.innerHTML = content;
-    box.style.display = 'block';
-}
-
-let hideBox = function (id) {
-    document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#header').style.filter = 'none';
-    document.querySelector('#main').style.filter = 'none';
-    const box = document.querySelector(id);
-    box.innerHTML = '';
-    box.style.display = 'none';
-}
