@@ -49,18 +49,11 @@ router.get('/:id/playlist/:idPl', controller.getDataPlaylist); // Playlist Page 
 router.get('/:id/home', controller.getDataHome); // Home Page // feito
 
 
-//router.get('/home', (req, res) => {
-//    res.sendFile(path.join(pattern + '/public/Home/home.html'));
-//});
-
-
 /*
     POST (getting data from frontend and passing them to backend)
 */
 router.post('/registration', controller.insertNewUser); // feito
 router.post('/authentication', controller.checkValidation); // feito
-// Criar playlist é aqui?
-// Inserir musica é aqui?
 router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist); // feito
 router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist); // feito
 router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist); // feito

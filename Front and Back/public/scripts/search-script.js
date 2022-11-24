@@ -43,7 +43,7 @@ function buscar(e) {
 
     async function postInfo(e) {
         if (inpBx.value == "") {
-            return
+            return;
         }
         const res = await fetch(baseUrl, {
             method: 'POST',

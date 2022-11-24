@@ -109,8 +109,6 @@ exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
 exports.getDataProfile = ('/:id/profile', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Profile/'));
 
-    res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
-
     let idUser = req.params.id;
     let user = await Users.findById({ "_id": idUser });
     let playlists = usuario.playlists;
@@ -176,17 +174,17 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
     else { res.json({ success: false }); }
 });
 
-exports.updateUser = ('/:id/profile', async (req, res) => {
+exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
 
     const parcel = req.body.parcel;
 
     let nome = parcel[0]
     let email = parcel[1];
     let senha = parcel[2];
-    let imagemPerfil = parcel[3]
-    let descPerfil = parcel[4]
-    let corFundo = parcel[5]
-    let playlists = parcel[6]
+    let imagemPerfil = parcel[3];
+    let descPerfil = parcel[4];
+    let corFundo = parcel[5];
+    let playlists = parcel[6];
 
     if (isUserExistent(email, senha)) {
         await Users.updateOne({ $set: { nome: nome } }, { $set: { email: email } }, { $set: { senha: senha } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } }, { $set: { playlists: playlists } });
@@ -195,12 +193,10 @@ exports.updateUser = ('/:id/profile', async (req, res) => {
 });
 
 exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
-    const parcel = req.body.parcel;
 
-    let nomePlaylist = parcel[0]
-    let descPlaylist = parcel[1]
-    let imagem = parcel[2]
-    let songs = parcel[3]
+    let namePlaylist = req.body.name;
+    let descPlaylist = req.body.description;
+    let image = req.body.img;
     let posicaoPlaylist = req.params.idPl;
     let idUser = req.params.id
 
@@ -211,7 +207,8 @@ exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
     }
     catch (erro) { res.json({ success: false }); }
 
-    playlists[posicaoPlaylist] = { nomePlaylist, descPlaylist, imagem, songs }
+    let music = playlists[posicaoPlaylist].songs
+    playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
 
     try {
         if (isUserExistent(idUser)) {
@@ -244,7 +241,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
     return false;
 }
 
-exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
+exports.insertNewPlaylist = ('/:id/home/insertPlaylist' || '/:id/playlist/:idPl/insertPlaylist' || '/:id/profile/insertPlaylist' || '/:id/search/insertPlaylist', async (req, res) => {
 
     const parcel = req.body.parcel;
 
@@ -275,7 +272,6 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
     catch (erro) {
         res.json({ success: false });
     }
-
 });
 
 exports.insertNewMusicIntoPlaylist = (':id/search/insertMusicIntoPlaylist', async (req, res) => {
@@ -351,11 +347,10 @@ exports.deletePlaylist = (':id/playlist/deletePlaylist'), async (req, res) => {
 }
 
 exports.deleteSong = ('id:/playlist/deleteSong'), async (req, res) => {
-    const parcel = req.body.parcel
 
-    let posicaoPlaylist = parcel[0]
-    let posicaoMusica = parcel[1]
-    let idUser = req.params.id
+    let posicaoPlaylist = req.body.posPl;
+    let posicaoMusica = req.body.posMs;
+    let idUser = req.params.id;
 
     let playlists
     try {

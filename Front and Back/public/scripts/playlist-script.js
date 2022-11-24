@@ -156,7 +156,6 @@ let previousVolume = 0;
 let volumeBtn = document.querySelector('#volumeBtn');
 
 volumeBtn.addEventListener('click', () => {
-    let volumeIcon = document.querySelector('#volume-icon');
 
     if (volumeSlider.value > 0) {
         previousVolume = volumeSlider.value;
@@ -215,6 +214,7 @@ document.querySelector('#delete').addEventListener('click', () => {
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
+
     let id = '#editPlaylistBox';
     let editBoxContent = `
         <h1 class="boxTitle"> Editar Playlist </h1>
@@ -264,7 +264,21 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 
     document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        postInfo();
+        putInfo();
+
+        async function putInfo(e) {
+            const res = await fetch(BASE_URL, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: {
+                    name: document.querySelector('#newTitle').value,
+                    description: document.querySelector('#newDescription').value,
+                    img: document.querySelector('#img-button').src
+                }
+            });
+        }
 
         document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
         document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value;
@@ -280,12 +294,6 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 })
 
-async function postInfo(e) {
-    const res = await fetch(BASE_URL, {
-        method: 'POST'
-    });
-}
-
 let removeSong = function (idSong) {
     let id = '#removeSongBox';
     let removeSongBoxContent = `
@@ -299,7 +307,21 @@ let removeSong = function (idSong) {
     showBox(id, removeSongBoxContent);
 
     document.querySelector('#removeSong').addEventListener('click', () => {
-        /* comandos para remover a música da playlist no BD */
+        
+        deleteSong();
+
+        async function deleteSong(e) {
+            const res = await fetch(BASE_URL, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: {
+                    posPl: ,
+                    posMs: idSong.slice(4)
+                }
+            });
+        }
 
         let removedSong = document.querySelector(idSong);
         removedSong.remove();
