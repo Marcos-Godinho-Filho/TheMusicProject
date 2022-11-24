@@ -58,7 +58,7 @@ router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist); // feito
 router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist); // feito
 router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist); // feito
 router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist); // feito
-router.post('/:id/search/insertMusicIntoPlaylist', controller.insertNewMusicIntoPlaylist); // feito
+router.post('/:id/search/insertMusic', controller.insertNewMusicIntoPlaylist); // feito
 router.post('/:id/search', controller.searchFromAPI); // feito
 
 

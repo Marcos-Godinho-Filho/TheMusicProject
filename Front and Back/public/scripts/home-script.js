@@ -1,8 +1,8 @@
-document.addEventListener('load', getInfo);
+document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
-async function getInfo(e) {
+async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
 
     const res = await fetch(BASE_URL, {

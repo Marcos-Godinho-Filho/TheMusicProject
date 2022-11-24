@@ -1,9 +1,9 @@
-document.addEventListener('load', getInfo);
+document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 let id;
 
-async function getInfo(e) {
+async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
 
     const res = await fetch(BASE_URL, {
@@ -38,7 +38,7 @@ document.querySelector('#delete').addEventListener('click', () => {
     document.querySelector('#deleteUser').addEventListener('click', () => {
         
         async function deleteUser(e) {
-            const res = await fetch ('/:id/profile/deleteUser', {
+            const res = await fetch (BASE_URL + '/deleteUser', {
                 method: 'DELETE', 
                 body: JSON.stringify({
                     id: idUser
@@ -48,7 +48,7 @@ document.querySelector('#delete').addEventListener('click', () => {
  
         deleteUser();
         hideBox(id);
-        window.location.href = "/localhost:3000/authentication/"
+        window.location.href = "/authentication/";
     })
 
     document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
@@ -212,7 +212,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
         async function putPlaylist(e) {
-            const res = await fetch(baseUrl, {
+            const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'

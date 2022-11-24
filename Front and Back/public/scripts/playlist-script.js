@@ -1,4 +1,4 @@
-document.addEventListener('load', getInfo);
+document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
@@ -6,7 +6,7 @@ let songs = [];
 let idUser;
 let posPl;
 
-async function getInfo(e) {
+async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
     let title = document.querySelector('#title');
     let description = document.querySelector('#description');
@@ -254,7 +254,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 })
 
 document.querySelector('#play').addEventListener('click', () => {
-
+    
 })
 
 document.querySelector('#delete').addEventListener('click', () => {

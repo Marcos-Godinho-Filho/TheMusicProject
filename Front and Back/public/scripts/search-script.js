@@ -2,6 +2,8 @@ document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
+let resultado;
+let idUser;
 async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
 
@@ -10,11 +12,11 @@ async function getInfoLoad(e) {
     });
 
     const data = await res.json();
-    let resultado = data.playlists;
-    let id = data.idUser;
+    resultado = data.playlists;
+    idUser = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
 }
 
@@ -31,6 +33,7 @@ inpBx.addEventListener('keyup', function (e) {
         buscarBtn.click();
 })
 
+let resultadoBusca;
 function buscar(e) {
     results.innerHTML = '';
     document.querySelector('.container-animation').style.display = 'flex';
@@ -61,24 +64,24 @@ function buscar(e) {
 
         const data = await res.json();
 
-        let resultado = data.info;
+        resultadoBusca = data.info;
 
-        for (let pos = 0; pos < resultado.length; pos++) {
+        for (let pos = 0; pos < resultadoBusca.length; pos++) {
             results.innerHTML += `
                 <div class="song">
                     <div class="s-image">
-                        <img src="${resultado[pos]["image"]}" alt="" draggable="false">
+                        <img src="${resultadoBusca[pos]["image"]}" alt="" draggable="false">
                     </div>
                     <div class="s-data">
-                        <h1>${resultado[pos]["title_short"]}</h1>
-                        <h2>${resultado[pos]["artist"]}</h2>
-                        <h2>${resultado[pos]["album"]}</h2>
+                        <h1>${resultadoBusca[pos]["title_short"]}</h1>
+                        <h2>${resultadoBusca[pos]["artist"]}</h2>
+                        <h2>${resultadoBusca[pos]["album"]}</h2>
                     </div>
                     <div class="s-buttons">
-                        <button style="font-size: 20px;" onclick="showSelectPlaylistBox()">
+                        <button style="font-size: 20px;" onclick="showSelectPlaylistBox(${pos})">
                             <i class="fa-solid fa-plus" style="color: #fff;"></i>
                         </button>
-                        <button style="font-size: 20px;" onclick="showSongData('${resultado[pos]["image"]}', '${resultado[pos]["title_short"]}', '${resultado[pos]["artist"]}', '${resultado[pos]["album"]}', '${resultado[pos]["preview"]}');"> 
+                        <button style="font-size: 20px;" onclick="showSongData('${resultadoBusca[pos]["image"]}', '${resultadoBusca[pos]["title_short"]}', '${resultadoBusca[pos]["artist"]}', '${resultadoBusca[pos]["album"]}', '${resultadoBusca[pos]["preview"]}');"> 
                             <i class="fa-solid fa-play" style="color: #fff;"></i>
                         </button>
                     </div>
@@ -295,55 +298,77 @@ closeSong.addEventListener('click', () => {
     document.querySelector('#aside').style.height = '100%';
 })
 
-let showSelectPlaylistBox = function () {
-    let id = '#selectPlaylistBox';
-    let showSelectPlaylistBoxContent = `
+let posicaoMusica;
+let showSelectPlaylistBox = function (pos) {
+    let idPlaylistBox = '#selectPlaylistBox';
+    let selectPlaylistBoxContent;
+    posicaoMusica = pos;
+
+    if (resultado.length == 0) {
+        selectPlaylistBoxContent = `
+        <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>`
+    }
+    else {
+        selectPlaylistBoxContent = `
         <h1 class="boxTitle"> Adicionar às playlists </h1>
         <p> Selecione a playlist desejada: </p>
         <div id="division"> </div>
-    `;
-
-    /* Comandos para pegar no banco de dados as playlists do usuário */
-
-    /* Comando de exemplo para mostrar a formatação: */
-    showSelectPlaylistBoxContent += `
         <div id="playlists">
-            <ul>
-                <li class="playlist" onclick="select(0)">Playlist 1</li>
-                <li class="playlist" onclick="select(1)">Playlist 2</li>
-                <li class="playlist" onclick="select(2)">Playlist 3</li>
-                <li class="playlist" onclick="select(3)">Playlist 4</li>
-                <li class="playlist" onclick="select(4)">Playlist 5</li>
-            <ul>
-        </div>
-    `;
+            <ul>`;
 
-    /* Caso não haja nenhuma playlist criada, mostrar uma instrução ao usuário: */
-    /* deletePlaylistBoxContent += 
-        <p> Você ainda não criou nenhuma playlist. Clique no botão "Criar Playlist" na barra lateral para poder salvar suas músicas favoritas. </p> 
-    `;*/
+        for (let i = 0; i < resultado.length; i++) {
+            selectPlaylistBoxContent += `
+                <li class="playlist" onclick="select(${i})">${resultado[i].nomePlaylist}</li>`;
+        }
 
-    showSelectPlaylistBoxContent += `
+        selectPlaylistBoxContent += `
+            <ul>
+        </div>`;
+
+        selectPlaylistBoxContent += `
         <div class="options-buttons">
             <button id="addSongToPlaylist"> Adicionar </button>
             <button id="calcelDeletePlaylist"> Cancelar </button>
-        </div>
-    `;
-    showBox(id, showSelectPlaylistBoxContent);
+        </div>`;
+    }
+
+    showBox(idPlaylistBox, selectPlaylistBoxContent);
 
     let selectedPlaylist;
 
+    let posPl;
     function select(pos) {
         const playlists = document.getElementsByClassName('playlist');
+        posPl = pos;
 
-        selectedPlaylist.style.backgroundColor = 'transparent';
+        if (selectedPlaylist !== undefined)
+            selectedPlaylist.style.backgroundColor = 'transparent';
 
-        selectedPlaylist = playlists[pos];
+        selectedPlaylist = playlists.item(pos);
         selectedPlaylist.style.backgroundColor = '#505050';
     }
 
     document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
-        /* comandos para inserir a música na playlist no BD */
+        
+        async function addSong(e) {
+            const res = await fetch(BASE_URL + '/insertMusic', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: {
+                    nomeMusica: resultadoBusca[posicaoMusica]["album"],
+                    nomeArtista: resultadoBusca[posicaoMusica]["artist"],
+                    nomeAlbum: resultadoBusca[posicaoMusica]["title_short"],
+                    previewMusica: resultadoBusca[posicaoMusica]["preview"],
+                    imagem: resultadoBusca[posicaoMusica]["image"],
+                    posPlaylist: posPl,
+                    idUser: idUser
+                }
+            })
+        }
+
+        addSong;
 
         hideBox(id);
     })
