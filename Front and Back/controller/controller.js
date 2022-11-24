@@ -325,9 +325,8 @@ exports.deleteUser = (':id/profile/deleteUser', async (req, res) => {
 })
 
 exports.deletePlaylist = (':id/playlist/deletePlaylist'), async (req, res) => {
-    const parcel = req.body.parcel
-
-    let posicaoPlaylist = parcel[0]
+    
+    let posicaoPlaylist = req.body.idPl
     let idUser = req.params.id
 
     let playlists

@@ -203,7 +203,19 @@ document.querySelector('#delete').addEventListener('click', () => {
     document.querySelector('#deletePlaylist').addEventListener('click', () => {
         hideBox(id);
 
-        /* comandos para deletar a playlist no BD */
+        deletePlaylist();
+
+        async function deletePlaylist(e) {
+            const res = await fetch(BASE_URL, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: {
+                    posPl: a
+                }
+            });
+        }
 
         window.location.href = "../Home/home.html"
     })
@@ -317,8 +329,8 @@ let removeSong = function (idSong) {
                     "Content-Type": 'application/json'
                 },
                 body: {
-                    posPl: ,
-                    posMs: idSong.slice(4)
+                    posPl: a,
+                    posMs: Number(idSong.slice(4))
                 }
             });
         }
