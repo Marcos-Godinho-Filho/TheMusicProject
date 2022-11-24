@@ -152,7 +152,11 @@ exports.insertNewUser = ('/registration', async (req, res) => {
         try {
             usuario.save((err) => { if (err) return handleError(err) });
             // Redireciona para home com o id cadastrado
-            let id = await getUserID(email);
+            let id = await getUserID(email)["_id"]; 
+            await res.fetch(`http://localhost:3000/${id}/home`); //????
+            // Ou isso: ???
+            req.url = `${id}/home`;
+            
         }
         catch (err) { next(err); }
     }

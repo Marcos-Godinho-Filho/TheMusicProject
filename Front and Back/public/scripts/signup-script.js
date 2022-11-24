@@ -75,6 +75,7 @@ botaoCadastro.addEventListener('click', (e) => {
                     })
                 });
 
+            // Funciona:
             let resp = await res.json();
             if (resp.success = true) {
                 alert('deu bom');
