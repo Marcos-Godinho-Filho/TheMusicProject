@@ -8,21 +8,18 @@
     src: url("../fonts/GothamLight.ttf");
 }
 
-*
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body
-{
+body {
     min-height: 100vh;
     min-width: 100vw;
 }
 
-.container
-{
+.container {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -30,8 +27,7 @@ body
     flex-wrap: wrap;
 }
 
-.container .img-wrapper
-{
+.container .img-wrapper {
     min-width: 50%;
     max-width: 50%;
     height: 100%;
@@ -52,20 +48,17 @@ body
     transform: translate(-50%);
 }
 
-.container .form-wrapper .logo-container img
-{
+.container .form-wrapper .logo-container img {
     width: 50px;
 }
 
-.container .form-wrapper .logo-container p
-{
+.container .form-wrapper .logo-container p {
     margin: 0;
     font-size: 1.3em;
     font-weight: 700;
 }
 
-.container .form-wrapper
-{
+.container .form-wrapper {
     position: relative;
     min-width: 50%;
     height: 100%;
@@ -79,22 +72,19 @@ body
     text-align: center;
 }
 
-.container .form-wrapper h3
-{
+.container .form-wrapper h3 {
     font-size: 2rem;
     margin-bottom: 3rem;
 }
 
-.container .form-wrapper form 
-{
+.container .form-wrapper form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.container .form-wrapper form .mensagemErro
-{
+.container .form-wrapper form .mensagemErro {
     display: none;
     font-size: 1.2em;
     font-weight: 600;
@@ -102,8 +92,7 @@ body
     text-align: left;
 }
 
-.container .form-wrapper form .input-box 
-{
+.container .form-wrapper form .input-box {
     width: 80%;
     border-radius: 125px;
     overflow: hidden;
@@ -111,8 +100,7 @@ body
     margin-bottom: 20px;
 }
 
-.container .form-wrapper form .input-box  .icon-container 
-{
+.container .form-wrapper form .input-box .icon-container {
     height: 100%;
     padding: 10px 20px;
     display: flex;
@@ -121,21 +109,18 @@ body
     background: #fff;
 }
 
-.container .form-wrapper form .input-box  .icon-container  img 
-{
+.container .form-wrapper form .input-box .icon-container img {
     position: relative;
     object-fit: cover;
     width: 25px;
 }
 
-.container .form-wrapper form .input-box  .input-container 
-{
+.container .form-wrapper form .input-box .input-container {
     width: 100%;
     height: 100%;
 }
 
-.container .form-wrapper form .input-box .input-container input
-{
+.container .form-wrapper form .input-box .input-container input {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -147,13 +132,11 @@ body
     padding: 0 10px;
 }
 
-.container .form-wrapper form .input-box .input-container input::placeholder
-{
+.container .form-wrapper form .input-box .input-container input::placeholder {
     font-family: circular-light;
 }
 
-.container .form-wrapper form input[type = "submit"]
-{
+.container .form-wrapper form input[type="submit"] {
     outline: none;
     border: none;
     border-radius: 25px;
@@ -170,77 +153,62 @@ body
     transition: linear 0.1s;
 }
 
-.container .form-wrapper form input[type = "submit"]:hover
-{
+.container .form-wrapper form input[type="submit"]:hover {
     background: #a749d9dc;
     background: linear-gradient(to right, #a44ad5dc, #a680d5);
     color: rgb(214, 214, 214);
     transform: scale(1.1);
 }
 
-.container .form-wrapper p 
-{
+.container .form-wrapper p {
     margin-top: 50px;
 }
 
-.container .form-wrapper p a 
-{
+.container .form-wrapper p a {
     color: #fff;
     text-decoration: none;
 }
 
-.container .form-wrapper p a:hover 
-{
+.container .form-wrapper p a:hover {
     text-decoration: underline solid #fff;
 }
 
 
-@media only screen and (max-width: 1250px)
-{
-    .container .img-wrapper img 
-    {
+@media only screen and (max-width: 1250px) {
+    .container .img-wrapper img {
         transform: scale(0.8);
     }
 
-    .container .form-wrapper form input
-    {
+    .container .form-wrapper form input {
         font-size: 1em;
     }
 
-    .container .form-wrapper form .input-box .input-container input
-    {
+    .container .form-wrapper form .input-box .input-container input {
         min-width: 70%;
     }
 }
 
-@media only screen and (max-width: 995px)
-{
-    .container .img-wrapper
-    {
+@media only screen and (max-width: 995px) {
+    .container .img-wrapper {
         display: none;
     }
 
-    .container .form-wrapper
-    {
+    .container .form-wrapper {
         min-width: 100%;
     }
 
-    .container .form-wrapper form .input-box .input-container input
-    {
+    .container .form-wrapper form .input-box .input-container input {
         min-width: 50%;
         font-size: 1.1em;
     }
 }
 
-@media only screen and (max-width: 566px)
-{
-    .container .form-wrapper form .input-box 
-    {
+@media only screen and (max-width: 566px) {
+    .container .form-wrapper form .input-box {
         min-width: 100%;
     }
 
-    .container .form-wrapper h3 
-    {
+    .container .form-wrapper h3 {
         font-size: 1.5em;
         margin-bottom: 2rem;
     }

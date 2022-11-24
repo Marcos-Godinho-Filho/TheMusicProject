@@ -112,7 +112,7 @@ exports.getDataProfile = ('/:id/profile', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
 
     let idUser = req.params.id;
-    let user = await Users.findById({ "_id" : idUser });
+    let user = await Users.findById({ "_id": idUser });
     let playlists = usuario.playlists;
 
     try {
@@ -131,8 +131,7 @@ async function isUserExistent(email) {
     return false;
 }
 
-async function getUserID(email) 
-{
+async function getUserID(email) {
     let listaUsuarios = await Users.find({ email: email }).lean().exec();
     console.log(listaUsuarios);
 }
@@ -255,7 +254,7 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist', async (req, res) => {
     let songs = [];
     let idUser = req.params.id;
 
-    let playlist = {nomePlaylist, img, desc, songs };
+    let playlist = { nomePlaylist, img, desc, songs };
 
     let playlists;
     try {

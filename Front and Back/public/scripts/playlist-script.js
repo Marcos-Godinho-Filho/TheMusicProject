@@ -38,7 +38,7 @@ async function getInfo(e) {
 
     for (let i = 0; i < songs.length; i++) {
         songsDiv.innerHTML += `
-            <div class="song" id="song${i+1}">
+            <div class="song" id="song${i + 1}">
                 <div class="s-image">
                     <img src="${imagem}" alt="Img" draggable="false">
                 </div>
@@ -48,7 +48,7 @@ async function getInfo(e) {
                     <h2>${nomeAlbum}</h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px;" onclick="removeSong('#song${i+1}')">
+                    <button style="font-size: 20px;" onclick="removeSong('#song${i + 1}')">
                         <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
                     <button style="font-size: 20px;" onclick="showSongData( '${imagem}', '${nomeMusica}', '${nomeArtista}', '${nomeAlbum}', '${previewMusica}');">  
@@ -279,10 +279,10 @@ document.querySelector('#edit').addEventListener('click', () => {
         hideBox(id);
     })
 })
- 
+
 async function postInfo(e) {
     const res = await fetch(BASE_URL, {
-        method: 'POST';
+        method: 'POST'
     });
 }
 

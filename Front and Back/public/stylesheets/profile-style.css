@@ -120,7 +120,7 @@ main {
     float: left;
 }
 
-marquee{
+marquee {
     color: white;
     font-size: 25px;
     text-align: center;
@@ -154,17 +154,17 @@ marquee{
     cursor: pointer;
 }
 
-#slider{
+#slider {
     margin-top: 32px;
     height: 100vh;
     object-fit: cover;
 }
 
-#slider a{
+#slider a {
     position: absolute;
 }
 
-#slider a:nth-of-type(1){
+#slider a:nth-of-type(1) {
     animation-name: fader;
     animation-delay: 4s;
     animation-duration: 2s;
@@ -172,19 +172,24 @@ marquee{
     width: calc(100% - 250px);
 }
 
-#slider a:nth-of-type(2){
+#slider a:nth-of-type(2) {
     z-index: 10;
     width: calc(100% - 250px);
 }
 
-#slider a:nth-of-type(n+3){
+#slider a:nth-of-type(n+3) {
     display: none;
     width: calc(100% - 250px);
 }
 
 @keyframes fader {
-    from {opacity:1.0;}
-    to {opacity:0.0;}
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: 0.0;
+    }
 }
 
 @font-face {
@@ -253,12 +258,12 @@ marquee{
     margin: 2% 10%;
 }
 
-.card{
+.card {
     font-family: spotify;
     width: 500px;
     height: 450px;
     background: rgb(37, 37, 37);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     margin-top: calc((100vh - 450px) / 2);
@@ -271,7 +276,8 @@ marquee{
     border: none;
     background-color: rgb(37, 37, 37);
 }
-#cor:focus{
+
+#cor:focus {
     border: none;
 }
 
@@ -281,13 +287,13 @@ marquee{
     height: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    object-fit: cover;   
+    object-fit: cover;
 }
 
-.profile-image img{
+.profile-image img {
     z-index: 1;
     width: 120px;
-    height: 120px; 
+    height: 120px;
     position: relative;
     margin-top: -75px;
     display: block;
@@ -335,7 +341,7 @@ marquee{
     display: none;
 }
 
-.card-content h1{
+.card-content h1 {
     font-size: 25px;
     margin-top: 10px;
     text-align: center;
@@ -355,7 +361,7 @@ marquee{
     display: inline-block;
 }
 
-.card-content textarea{
+.card-content textarea {
     padding: 0 20px 5px 20px;
     font-size: 16px;
     text-align: center;
@@ -369,7 +375,7 @@ marquee{
     border: none;
 }
 
-.card-content p{
+.card-content p {
     font-size: 16px;
     text-align: center;
     margin-top: 12px;
@@ -377,7 +383,7 @@ marquee{
     color: white;
 }
 
-.icons{
+.icons {
     margin-top: 20px;
     text-decoration: none;
     text-align: center;
@@ -385,7 +391,7 @@ marquee{
     padding-bottom: 30px;
 }
 
-.icons a{
+.icons a {
     text-decoration: none;
     font-size: 20px;
     color: #ffffff;
@@ -394,12 +400,12 @@ marquee{
     transition-property: transform;
 }
 
-.icons a:hover{
+.icons a:hover {
     color: rgb(119, 119, 119);
     transform: scale(1.5);
 }
 
-.buttonColor{
+.buttonColor {
     position: relative;
     width: 100px;
     height: 40px;
@@ -413,15 +419,15 @@ marquee{
     width: 12.5px;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background-color: lightgray;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #6952C8;
 }
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #2f178f;
 }
 
@@ -435,9 +441,11 @@ marquee{
     .main {
         width: 100%;
     }
+
     .sidebar {
         display: none;
     }
+
     .main-col {
         width: 48%;
         margin-right: 2%;
