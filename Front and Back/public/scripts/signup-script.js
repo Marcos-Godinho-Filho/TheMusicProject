@@ -65,15 +65,15 @@ botaoCadastro.addEventListener('click', (e) => {
         async function postInfo(info) {
             if (info == "") { return }
             const res = await fetch(BASE_URL,
-                {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify({
-                        parcel: info
-                    })
-                });
+            {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    parcel: info
+                })
+            });
 
             let resp = await res.json();
             if (resp.success == false) {
@@ -82,8 +82,13 @@ botaoCadastro.addEventListener('click', (e) => {
             }
             else 
             {
+                // This already works, but we must go to home, passing id as a parameter:
                 let id = resp.id;
                 window.location.href = 'http://localhost:3000/authentication';
+                // :: Testando com o id antes do home
+                goToHome();
+
+                function goToHome() { const res = fetch(`http://localhost:3000/${id}/home`, { method: 'GET' }) }
             }
         }
     }

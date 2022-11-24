@@ -1,11 +1,7 @@
 const axios = require('axios');
 const path = require('path');
-const url = require('url');
 const db = require('../database/db');
 const user = require('../models/user');
-const { Schema } = require('mongoose');
-const { NONAME } = require('dns');
-const router = require('../routes/route');
 
 
 
@@ -133,7 +129,7 @@ async function getUserID(email) {
     let listaUsuarios = await Users.find({}).lean().exec();
     for (let user of listaUsuarios) {
         if (user["email"] == email) {
-            return user["_id"]+""
+            return user["_id"] + ""
         }
     }
 }
@@ -158,7 +154,7 @@ exports.insertNewUser = ('/registration', async (req, res) => {
             await usuario.save();
             // Redireciona para home com o id cadastrado
             let id = await getUserID(email);
-            res.json({ sucess: true, id: id});
+            res.json({ success: true, id: id });
         }
         catch (err) { console.log(err); }
     }
@@ -175,7 +171,8 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
     let result = await isUserExistent(email);
     if (result) {
         await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
-        // Redirecionar para home
+        let id = await getUserID(email);
+        res.json({ success: true, id: id });
     }
     else { res.json({ success: false }); }
 });
@@ -232,7 +229,11 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     let senha = parcel[1];
 
     let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
-    if (listaUsuarios.length > 0) { res.json({ success: true }); console.log("LOGADO"); }
+    if (listaUsuarios.length > 0) 
+    { 
+        let id = await getUserID(email);
+        res.json({ success: true, id: id }); console.log("LOGADO"); 
+    }
     else { res.json({ success: false }); console.log("NAO LOGADO"); }
 });
 

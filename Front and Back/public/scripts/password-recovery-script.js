@@ -57,27 +57,29 @@ botaoRecuperar.addEventListener('click', (e) => {
         async function putInfo(info) {
             if (info == "") return;
             const res = await fetch(BASE_URL,
-                {
-                    method: 'PUT',
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify({
-                        parcel: info
-                    })
-                });
+            {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    parcel: info
+                })
+            });
 
-            console.log('-----------------1');
 
-            if (res.status.suce) {
-                alert('deu merda');
-                result.style.display = 'block';
-                result.innerHTML = 'Fail to recover password, please try again later!';
+            let resp = await res.json();
+            if (resp.success == false) 
+            {
+                mensagemErroEmail.style.display = "block";
+                mensagemErroEmail.innerHTML = "Email não cadastrado!";
             }
-            else if (res.status.text == 'Password recovery worked out well') {
-                alert('deu bom');
-                result.style.display = 'block';
-                result.innerHTML = 'Password recovery worked out well, now login with the new password!';
+            else 
+            {
+                let id = resp.id;
+                goToHome();
+                
+                function goToHome() { const res = fetch(`http://localhost:3000/${id}/home`, { method: 'GET' }); }
             }
         }
     }

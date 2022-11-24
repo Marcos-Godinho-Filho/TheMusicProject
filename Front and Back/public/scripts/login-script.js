@@ -41,20 +41,29 @@ botaoLogar.addEventListener('click', (e) => {
         postInfo(info);
         async function postInfo(info) {
             const res = await fetch(BASE_URL,
-                {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify({
-                        parcel: info
-                    })
-                });
+            {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    parcel: info
+                })
+            });
 
-            if (res.status.text == 'Failed to login') {
-                alert('deu merda');
+            let resp = await res.json();
+            if (resp.success == false) 
+            {
+                mensagemErroEmail.style.display = "block";
+                mensagemErroEmail.innerHTML = "Email não cadastrado!";
             }
-            else alert('deu bom');
+            else 
+            {
+                let id = resp.id;
+                goToHome();
+                
+                function goToHome() { const res = fetch(`http://localhost:3000/${id}/home`, { method: 'GET' }); }
+            }
         }
     }
 });
