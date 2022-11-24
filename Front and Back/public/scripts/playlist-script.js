@@ -3,6 +3,9 @@ document.addEventListener('load', getInfo);
 const BASE_URL = 'http://localhost:3000/:id/playlist/:idPl';
 
 let songs = [];
+let idUser;
+let posPl;
+
 async function getInfo(e) {
     let playlists = document.querySelector('.sidebar-playlists');
     let title = document.querySelector('#title');
@@ -17,41 +20,38 @@ async function getInfo(e) {
 
     const data = await res.json();
     let resultado = data.playlists;
-    let id = data.idUser;
+    idUser = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
 
     let playlist = data.playlist;
+    posPl = data.idPlaylist;
+
     title.innerHTML = playlist.nomePlaylist;
     description.innerHTML = playlist.desc;
     songCount.innerHTML = playlist.songs.length() + "";
     img.src = playlist.img;
 
     songs = playlist.songs;
-    let nomeMusica = songs.nomeMusica;
-    let nomeArtista = songs.nomeArtista;
-    let nomeAlbum = songs.nomeAlbum;
-    let previewMusica = songs.previewMusica;
-    let imagem = songs.imagem;
 
     for (let i = 0; i < songs.length; i++) {
         songsDiv.innerHTML += `
-            <div class="song" id="song${i + 1}">
+            <div class="song">
                 <div class="s-image">
-                    <img src="${imagem}" alt="Img" draggable="false">
+                    <img src="${songs[i].imagem}" alt="Img" draggable="false">
                 </div>
                 <div class="s-data">
-                    <h1>${nomeMusica}</h1>
-                    <h2>${nomeArtista}</h2>
-                    <h2>${nomeAlbum}</h2>
+                    <h1>${songs[i].nomeMusica}</h1>
+                    <h2>${songs[i].nomeArtista}</h2>
+                    <h2>${songs[i].nomeAlbum}</h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px;" onclick="removeSong('#song${i + 1}')">
+                    <button style="font-size: 20px;" onclick="removeSong(${i})">
                         <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                     </button>
-                    <button style="font-size: 20px;" onclick="showSongData( '${imagem}', '${nomeMusica}', '${nomeArtista}', '${nomeAlbum}', '${previewMusica}');">  
+                    <button style="font-size: 20px;" onclick="showSongData( '${songs[i].imagem}', '${songs[i].nomeMusica}', '${songs[i].nomeArtista}', '${songs[i].nomeAlbum}', '${songs[i].previewMusica}');">  
                         <i class="fa-solid fa-play" style="color: #fff;"></i>
                     </button>
                 </div>
@@ -229,7 +229,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function putPlaylist(e) {
+        async function createPlaylist(e) {
             const res = await fetch(baseUrl, {
                 method: 'POST',
                 headers: {
@@ -243,7 +243,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        putPlaylist();
+        createPlaylist();
 
         hideBox(id);
     })
@@ -281,12 +281,12 @@ document.querySelector('#delete').addEventListener('click', () => {
                     "Content-Type": 'application/json'
                 },
                 body: {
-                    posPl: a
+                    posPl: posPl
                 }
             });
         }
 
-        window.location.href = "../Home/home.html"
+        window.location.href = `/${idUser}/home`;
     })
 
     document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
@@ -345,9 +345,9 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 
     document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        putPlaylist();
+        editPlaylist();
 
-        async function putPlaylist(e) {
+        async function editPlaylist(e) {
             const res = await fetch(BASE_URL, {
                 method: 'PUT',
                 headers: {
@@ -375,7 +375,7 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 })
 
-let removeSong = function (idSong) {
+let removeSong = function (pos) {
     let id = '#removeSongBox';
     let removeSongBoxContent = `
         <h1 class="boxTitle"> Remover música </h1>
@@ -398,8 +398,9 @@ let removeSong = function (idSong) {
                     "Content-Type": 'application/json'
                 },
                 body: {
-                    posPl: a,
-                    posMs: Number(idSong.slice(4))
+                    idUser: idUser,
+                    posPl: posPl,
+                    posMs: document.getElementsByClassName('song')[pos]
                 }
             });
         }

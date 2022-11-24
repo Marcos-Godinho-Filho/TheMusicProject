@@ -352,7 +352,7 @@ exports.deleteSong = ('id:/playlist/deleteSong'), async (req, res) => {
 
     let posicaoPlaylist = req.body.posPl;
     let posicaoMusica = req.body.posMs;
-    let idUser = req.params.id;
+    let idUser = req.params.idUser;
 
     let playlists
     try {
