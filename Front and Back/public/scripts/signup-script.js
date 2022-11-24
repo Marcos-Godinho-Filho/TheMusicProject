@@ -75,12 +75,16 @@ botaoCadastro.addEventListener('click', (e) => {
                     })
                 });
 
-            // Funciona:
             let resp = await res.json();
-            if (resp.success = true) {
-                alert('deu bom');
+            if (resp.success == false) {
+                mensagemErroEmail.style.display = "block";
+                mensagemErroEmail.innerHTML = "Email já cadastrado";
             }
-            else alert('deu merda');
+            else 
+            {
+                let id = resp.id;
+                window.location.href = 'http://localhost:3000/authentication';
+            }
         }
     }
 });

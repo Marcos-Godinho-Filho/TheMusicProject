@@ -1,11 +1,12 @@
 const axios = require('axios');
 const path = require('path');
-
+const url = require('url');
 const db = require('../database/db');
 const user = require('../models/user');
 const { Schema } = require('mongoose');
 const { NONAME } = require('dns');
 const router = require('../routes/route');
+
 
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
@@ -123,20 +124,24 @@ exports.getDataProfile = ('/:id/profile', async (req, res) => {
 async function isUserExistent(email) {
 
     let listaUsuarios = await Users.find({ email: email }).lean().exec();
-    console.log(listaUsuarios.length > 0);
     if (listaUsuarios.length > 0) return true;
 
     return false;
 }
 
 async function getUserID(email) {
-    let listaUsuarios = await Users.find({ email: email }).lean().exec();
-    console.log(listaUsuarios);
+    let listaUsuarios = await Users.find({}).lean().exec();
+    for (let user of listaUsuarios) {
+        if (user["email"] == email) {
+            return user["_id"]+""
+        }
+    }
 }
 
 exports.insertNewUser = ('/registration', async (req, res) => {
 
     const parcel = req.body.parcel;
+    let url = req.url;
     let email = parcel[0];
     let nome = parcel[1];
     let senha = parcel[2];
@@ -150,17 +155,14 @@ exports.insertNewUser = ('/registration', async (req, res) => {
         let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists });
 
         try {
-            usuario.save((err) => { if (err) return handleError(err) });
+            await usuario.save();
             // Redireciona para home com o id cadastrado
-            let id = await getUserID(email)["_id"]; 
-            await res.fetch(`http://localhost:3000/${id}/home`); //????
-            // Ou isso: ???
-            req.url = `${id}/home`;
-            
+            let id = await getUserID(email);
+            res.json({ sucess: true, id: id});
         }
-        catch (err) { next(err); }
+        catch (err) { console.log(err); }
     }
-    else { res.json({ success: false }); } // Existe no banco de dados
+    else { res.json({ success: false }); return } // Já existe no banco de dados
 });
 
 
