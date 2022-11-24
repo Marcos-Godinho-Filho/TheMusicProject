@@ -12,24 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
     let id = '#createPlaylistBox';
-    let editBoxContent = `
+    let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image">
                 <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
-                    <img id="img-button" alt="Browse" src="${document.querySelector('#t-img').src}">
+                    <img id="img-button" alt="Browse" src="../imgs/playlist-icon.png">
                 </button>
                 <input type="file" id="fileReader" accept="image/*">
             </div>
             <div id="edit-data">
-                <input type="text" id="newTitle" value="Playlist 1"> </input> 
+                <input type="text" id="newTitle" value="Nome"> </input> 
                 <textarea id="newDescription">Descrição</textarea>
             </div>
             <div class="options-buttons">
-                <button id="saveEditPlaylist"> Salvar </button>
-                <button id="calcelEditPlaylist"> Cancelar </button>
+                <button id="confirmCreatePlaylist"> Criar </button>
+                <button id="calcelCreatePlaylist"> Cancelar </button>
             </div>
             `;
-    showBox(id, editBoxContent);
+    showBox(id, createPlaylistBoxContent);
 
     let previousImg = '';
 
@@ -59,19 +59,28 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         img.style.height = '200px';
     })
 
-    document.querySelector('#saveEditPlaylist').addEventListener('click', () => {
-        /* comandos para salvar a edição no BD */
+    document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        document.querySelector('#title').innerHTML = document.querySelector('#newTitle').value
-        document.querySelector('#description').innerHTML = document.querySelector('#newDescription').value;
-        const img = document.querySelector('#t-img');
-        img.src = document.querySelector('#img-button').src;
-        img.style.width = '220px';
-        img.style.height = '220px';
+        async function postInfo(e) {
+            const res = await fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: document.querySelector('#newTitle').value,
+                    descricao: document.querySelector('#newDescription').value,
+                    imagem: document.querySelector('#img-button').src
+                })
+            });
+        }
+
+        postInfo();
+
         hideBox(id);
     })
 
-    document.querySelector('#calcelEditPlaylist').addEventListener('click', () => {
+    document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
         hideBox(id);
     })
 })
