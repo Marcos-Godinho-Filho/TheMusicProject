@@ -1,6 +1,6 @@
 document.addEventListener('load', getInfo);
 
-const BASE_URL = 'http://localhost:3000/:id/home/';
+const BASE_URL = window.location.href;
 
 async function getInfo(e) {
     let playlists = document.querySelector('.sidebar-playlists');
@@ -14,7 +14,7 @@ async function getInfo(e) {
     let id = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${playlists[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
 }
 
@@ -81,8 +81,8 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function postInfo(e) {
-            const res = await fetch(baseUrl, {
+        async function criarPlaylist(e) {
+            const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -95,7 +95,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        postInfo();
+        criarPlaylist();
 
         hideBox(id);
     })

@@ -1,7 +1,6 @@
 document.addEventListener('load', getInfo);
 
-const BASE_URL = 'http://localhost:3000/:id/profile/';
-
+const BASE_URL = window.location.href;
 let id;
 
 async function getInfo(e) {

@@ -1,6 +1,6 @@
 document.addEventListener('load', getInfo);
 
-const BASE_URL = 'http://localhost:3000/:id/playlist/:idPl';
+const BASE_URL = window.location.href;
 
 let songs = [];
 let idUser;
@@ -230,7 +230,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
         async function createPlaylist(e) {
-            const res = await fetch(baseUrl, {
+            const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -275,7 +275,7 @@ document.querySelector('#delete').addEventListener('click', () => {
         deletePlaylist();
 
         async function deletePlaylist(e) {
-            const res = await fetch(BASE_URL, {
+            const res = await fetch(BASE_URL + '/deletePlaylist', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
@@ -348,7 +348,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         editPlaylist();
 
         async function editPlaylist(e) {
-            const res = await fetch(BASE_URL, {
+            const res = await fetch(BASE_URL + '/updatePlaylist', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
@@ -392,7 +392,7 @@ let removeSong = function (pos) {
         deleteSong();
 
         async function deleteSong(e) {
-            const res = await fetch(BASE_URL, {
+            const res = await fetch(BASE_URL + '/deleteSong', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'

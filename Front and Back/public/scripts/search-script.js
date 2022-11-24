@@ -1,6 +1,6 @@
 document.addEventListener('load', getInfoLoad);
 
-const BASE_URL = 'http://localhost:3000/:id/home/';
+const BASE_URL = window.location.href;
 
 async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
@@ -21,8 +21,6 @@ async function getInfoLoad(e) {
 let buscarBtn = document.querySelector("#search");
 let inpBx = document.querySelector("#inputBox");
 let results = document.querySelector("#results");
-
-const baseUrl = 'http://localhost:3000/search';
 
 buscarBtn.addEventListener('click', buscar);
 
@@ -45,7 +43,7 @@ function buscar(e) {
         if (inpBx.value == "") {
             return;
         }
-        const res = await fetch(baseUrl, {
+        const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
@@ -57,7 +55,7 @@ function buscar(e) {
     }
 
     async function getInfo(e) {
-        const res = await fetch(baseUrl, {
+        const res = await fetch(BASE_URL, {
             method: 'GET'
         });
 
@@ -145,8 +143,8 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function postInfo(e) {
-            const res = await fetch(baseUrl, {
+        async function createPlaylist(e) {
+            const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -159,7 +157,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        postInfo();
+        createPlaylist();
 
         hideBox(id);
     })
