@@ -255,9 +255,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        createPlaylist();
-
+        createPlaylist;
         hideBox(id);
+
+        window.location.href = `/${id}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
@@ -400,7 +401,7 @@ let removeSong = function (pos) {
     showBox(id, removeSongBoxContent);
 
     document.querySelector('#removeSong').addEventListener('click', () => {
-        
+
         deleteSong();
 
         async function deleteSong(e) {

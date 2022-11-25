@@ -36,16 +36,16 @@ document.querySelector('#delete').addEventListener('click', () => {
     showBox(id, deleteUserBoxContent);
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
-        
+
         async function deleteUser(e) {
-            const res = await fetch (BASE_URL + '/deleteUser', {
-                method: 'DELETE', 
+            const res = await fetch(BASE_URL + '/deleteUser', {
+                method: 'DELETE',
                 body: JSON.stringify({
                     id: idUser
                 })
             })
         }
- 
+
         deleteUser();
         hideBox(id);
         window.location.href = "/authentication/";
@@ -113,7 +113,7 @@ document.querySelector('#edit').addEventListener('click', () => {
     document.querySelector('#saveEditUser').addEventListener('click', () => {
         putUser();
 
-        async function putUser (e) {
+        async function putUser(e) {
             const res = await fetch(BASE_URL + 'updateUser/', {
                 method: 'PUT',
                 headers: {
@@ -127,7 +127,7 @@ document.querySelector('#edit').addEventListener('click', () => {
                     corFundo: document.querySelector('#color').value,
                 })
             });
-        } 
+        }
 
         document.querySelector('#username').innerHTML = document.querySelector('#newUsername').value
         document.querySelector('#bio').innerHTML = document.querySelector('#newBio').value;
@@ -211,7 +211,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function putPlaylist(e) {
+        async function createPlaylist(e) {
             const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'PUT',
                 headers: {
@@ -225,9 +225,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        putPlaylist();
-
+        createPlaylist;
         hideBox(id);
+
+        window.location.href = `/${id}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

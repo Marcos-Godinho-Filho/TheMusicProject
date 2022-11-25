@@ -2,6 +2,7 @@ document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
+let id;
 async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
 
@@ -11,7 +12,7 @@ async function getInfoLoad(e) {
 
     const data = await res.json();
     let resultado = data.playlists;
-    let id = data.idUser;
+    id = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
@@ -81,7 +82,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
 
-        async function criarPlaylist(e) {
+        async function createPlaylist(e) {
             const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {
@@ -95,9 +96,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        criarPlaylist();
-
+        createPlaylist;
         hideBox(id);
+
+        window.location.href = `/${id}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
@@ -121,4 +123,23 @@ let hideBox = function (id) {
     const box = document.querySelector(id);
     box.innerHTML = '';
     box.style.display = 'none';
+}
+
+let showDBResult = function(success) {
+    const box = document.querySelector('#dbResultBox');
+    box.display = "block";
+
+    if (success) {
+        box.innerHTML = "A operação feita com sucesso!";
+        box.style.backgroundColor = "#66ff99";
+    }
+    else { 
+        box.innerHTML = "Erro! A operação falhou!";
+        box.style.backgroundColor = " #ff8080";
+    }
+
+    setTimeout(() => { 
+        box.innerHTML = ""; 
+        box.display = "none;";
+    }, 3000);
 }

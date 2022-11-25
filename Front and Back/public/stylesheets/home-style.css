@@ -130,6 +130,137 @@ main {
     width: calc(100% - 250px);
 }
 
+.box {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: calc((100% - 500px) / 2);
+    background-color: #1e1e1e;
+    width: 500px;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    transition: 0.5s;
+    box-shadow: #0c0c0c 0px 5px 40px;
+}
+
+.boxTitle {
+    font-size: 26px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.options-buttons {
+    text-align: center;
+}
+
+.options-buttons button {
+    background-color: #505050;
+    border: 1px solid #999999;
+    color: #ffffff;
+    font-family: circular-bold;
+    font-size: 20px;
+    width: 30%;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.options-buttons button:hover {
+    cursor: pointer;
+    background-color: #999999;
+}
+
+.message {
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    margin: 2% 10%;
+}
+
+#createPlaylistBox {
+    top: calc((100vh - 400px) / 2);
+    height: 400px;
+}
+
+#edit-image {
+    float: left;
+    width: 50%;
+    height: 65%;
+    padding: 5px;
+}
+
+#edit-image button {
+    height: 200px;
+    width: 200px;
+    display: block;
+    border: none;
+    background-color: transparent;
+}
+
+#edit-image button:hover {
+    cursor: pointer;
+}
+
+#img-button {
+    width: 200px;
+    height: 200px;
+}
+
+#fileReader {
+    display: none;
+}
+
+#edit-data {
+    float: left;
+    padding: 5px;
+    width: 50%;
+    height: 65%;
+}
+
+#edit-data input {
+    width: 100%;
+    height: 50px;
+    background-color: #424242;
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    border: 1px none;
+    padding: 7px;
+}
+
+#edit-data textarea {
+    width: 100%;
+    height: calc(200px - 75px);
+    background-color: #424242;
+    color: #ffffff;
+    font-family: circular-light;
+    font-size: 18px;
+    border: none;
+    padding: 7px;
+    resize: none;
+}
+
+#dbResultBox {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: calc((100% - 500px) / 2);
+    background-color: #1e1e1e;
+    width: 250px;
+    padding: 20px;
+    border-radius: 5px;
+    transition: 0.5s;
+    box-shadow: #0c0c0c 0px 5px 40px;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    bottom: calc((100vh - 50px) / 2);
+    height: 50px;
+}
+
 #slider {
     margin-top: 32px;
     height: 100vh;

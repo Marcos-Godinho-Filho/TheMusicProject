@@ -101,7 +101,6 @@ exports.getDataProfile = ('/:id/profile', async (req, res) => {
         res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
     }
     catch (erro) { throw new Error(erro); }
-
 })
 
 exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
@@ -170,7 +169,6 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 
         return true;
     }
-
     return false;
 }
 

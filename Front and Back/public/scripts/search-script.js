@@ -160,9 +160,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             });
         }
 
-        createPlaylist();
-
+        createPlaylist;
         hideBox(id);
+
+        window.location.href = `/${id}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
@@ -349,12 +350,12 @@ let showSelectPlaylistBox = function (pos) {
     }
 
     document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
-        
+
         async function addSong(e) {
             const res = await fetch(BASE_URL + '/insertMusic', {
                 method: 'PUT',
                 headers: {
-                    'Content-Type' : 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: {
                     nomeMusica: resultadoBusca[posicaoMusica]["album"],
