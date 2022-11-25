@@ -121,13 +121,21 @@ main {
 }
 
 #top {
-    background-color: black;
+    background-color: #000000;
     position: fixed;
-    height: 50px;
+    height: 75px;
     z-index: 98;
     top: 0;
     left: 250px;
     width: calc(100% - 250px);
+}
+
+marquee {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 25px;
+    filter: drop-shadow(0 0 20px #ffffff);
 }
 
 .box {

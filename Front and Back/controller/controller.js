@@ -14,13 +14,13 @@ let retorno = [];
 // MÉTODOS GET
 
 exports.getDataHome = ('/:id/home', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Home/home.html'));
-
+    
+    // res.status(200).json({ playlists: playlists, idUser: idUser });
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
-
+    
     try {
-        res.status(200).json({ playlists: playlists, idUser: idUser });
+        res.sendFile(path.join(pattern + '/public/Home/home.html'));
     }
     catch (erro) { throw new Error(erro); }
 })

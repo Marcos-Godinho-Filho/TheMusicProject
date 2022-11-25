@@ -77,9 +77,7 @@ botaoRecuperar.addEventListener('click', (e) => {
             else 
             {
                 let id = resp.id;
-                goToHome();
-                
-                function goToHome() { const res = fetch(`http://localhost:3000/${id}/home`, { method: 'GET' }); }
+                document.location.href = `http://localhost:3000/${id}/home`;
             }
         }
     }

@@ -78,17 +78,12 @@ botaoCadastro.addEventListener('click', (e) => {
             let resp = await res.json();
             if (resp.success == false) {
                 mensagemErroEmail.style.display = "block";
-                mensagemErroEmail.innerHTML = "Email já cadastrado";
+                mensagemErroEmail.innerHTML = "Email já cadastrado!";
             }
             else 
             {
-                // This already works, but we must go to home, passing id as a parameter:
                 let id = resp.id;
-                window.location.href = 'http://localhost:3000/authentication';
-                // :: Testando com o id antes do home
-                goToHome();
-
-                function goToHome() { const res = fetch(`http://localhost:3000/${id}/home`, { method: 'GET' }) }
+                document.location.href = `http://localhost:3000/${id}/home`;
             }
         }
     }
