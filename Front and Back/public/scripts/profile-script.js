@@ -144,22 +144,6 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 })
 
-let showBox = function (id, content) {
-    document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#main').style.filter = 'blur(7px)';
-    const box = document.querySelector(id);
-    box.innerHTML = content;
-    box.style.display = 'block';
-}
-
-let hideBox = function (id) {
-    document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#main').style.filter = 'none';
-    const box = document.querySelector(id);
-    box.innerHTML = '';
-    box.style.display = 'none';
-}
-
 document.querySelector('#createPlaylist').addEventListener('click', () => {
     let id = '#createPlaylistBox';
     let createPlaylistBoxContent = `
@@ -235,3 +219,40 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         hideBox(id);
     })
 })
+
+let showBox = function (id, content) {
+    document.querySelector('#aside').style.filter = 'blur(7px)';
+    document.querySelector('#header').style.filter = 'blur(7px)';
+    document.querySelector('#main').style.filter = 'blur(7px)';
+    const box = document.querySelector(id);
+    box.innerHTML = content;
+    box.style.display = 'block';
+}
+
+let hideBox = function (id) {
+    document.querySelector('#aside').style.filter = 'none';
+    document.querySelector('#header').style.filter = 'none';
+    document.querySelector('#main').style.filter = 'none';
+    const box = document.querySelector(id);
+    box.innerHTML = '';
+    box.style.display = 'none';
+}
+
+let showDBResult = function(success) {
+    const box = document.querySelector('#dbResultBox');
+    box.display = "block";
+
+    if (success) {
+        box.innerHTML = "A operação feita com sucesso!";
+        box.style.backgroundColor = "#66ff99";
+    }
+    else { 
+        box.innerHTML = "Erro! A operação falhou!";
+        box.style.backgroundColor = " #ff8080";
+    }
+
+    setTimeout(() => { 
+        box.innerHTML = ""; 
+        box.display = "none;";
+    }, 3000);
+}

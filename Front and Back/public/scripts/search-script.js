@@ -396,3 +396,22 @@ let hideBox = function (id) {
     box.innerHTML = '';
     box.style.display = 'none';
 }
+
+let showDBResult = function(success) {
+    const box = document.querySelector('#dbResultBox');
+    box.display = "block";
+
+    if (success) {
+        box.innerHTML = "A operação feita com sucesso!";
+        box.style.backgroundColor = "#66ff99";
+    }
+    else { 
+        box.innerHTML = "Erro! A operação falhou!";
+        box.style.backgroundColor = " #ff8080";
+    }
+
+    setTimeout(() => { 
+        box.innerHTML = ""; 
+        box.display = "none;";
+    }, 3000);
+}
