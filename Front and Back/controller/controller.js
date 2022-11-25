@@ -4,13 +4,48 @@ const db = require('../database/db');
 const user = require('../models/user');
 
 
-
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
 
 const pattern = __dirname.substring(0, 45);
 
 
 let retorno = [];
+
+// MÉTODOS GET
+
+exports.getDataHome = ('/:id/home', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Home/home.html'));
+
+    let idUser = req.params.id;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
+
+    try {
+        res.status(200).json({ playlists: playlists, idUser: idUser });
+    }
+    catch (erro) { throw new Error(erro); }
+})
+
+exports.getDataSearch = ('/:email/search', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/search/index.html'));
+
+    let email = req.params.email;
+    try {
+        if (checkExistentUser(email)) {
+            res.status(200).json({ info: retorno });
+            retorno = [];
+        }
+        else { res.json({ found: false }) }
+    }
+    catch (erro) { throw new Error(erro); }
+
+    let idUser = req.params.id;
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
+
+    try {
+        res.status(200).json({ playlists: playlists });
+    }
+    catch (erro) { throw new Error(erro); }
+});
 
 exports.searchFromAPI = ('/:email/search', async (req, res) => {
 
@@ -55,38 +90,18 @@ exports.searchFromAPI = ('/:email/search', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-exports.getDataSearch = ('/:email/search', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/search/index.html'));
-
-    let email = req.params.email;
-    try {
-        if (checkExistentUser(email)) {
-            res.status(200).json({ info: retorno });
-            retorno = [];
-        }
-        else { res.json({ found: false }) }
-    }
-    catch (erro) { throw new Error(erro); }
+exports.getDataProfile = ('/:id/profile', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Profile/'));
 
     let idUser = req.params.id;
-    let playlists = await Users.findById({ "_id": idUser }).playlists;
+    let user = await Users.findById({ "_id": idUser });
+    let playlists = usuario.playlists;
 
     try {
-        res.status(200).json({ playlists: playlists });
+        res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
     }
     catch (erro) { throw new Error(erro); }
-});
 
-exports.getDataHome = ('/:id/home', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Home/home.html'));
-
-    let idUser = req.params.id;
-    let playlists = await Users.findById({ "_id": idUser }).playlists;
-
-    try {
-        res.status(200).json({ playlists: playlists, idUser: idUser });
-    }
-    catch (erro) { throw new Error(erro); }
 })
 
 exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
@@ -101,20 +116,6 @@ exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
         res.status(200).json({ playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist });
     }
     catch (erro) { throw new Error(erro); }
-})
-
-exports.getDataProfile = ('/:id/profile', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Profile/'));
-
-    let idUser = req.params.id;
-    let user = await Users.findById({ "_id": idUser });
-    let playlists = usuario.playlists;
-
-    try {
-        res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
-    }
-    catch (erro) { throw new Error(erro); }
-
 })
 
 async function isUserExistent(email) {
@@ -134,10 +135,11 @@ async function getUserID(email) {
     }
 }
 
+// MÉTODOS POST
+
 exports.insertNewUser = ('/registration', async (req, res) => {
 
     const parcel = req.body.parcel;
-    let url = req.url;
     let email = parcel[0];
     let nome = parcel[1];
     let senha = parcel[2];
@@ -161,78 +163,6 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     else { res.json({ success: false }); return } // Já existe no banco de dados
 });
 
-
-exports.setNewPassword = ('/password-recovery', async (req, res) => {
-    const parcel = req.body.parcel;
-
-    let email = parcel[0];
-    let novaSenha = parcel[1];
-
-    let result = await isUserExistent(email);
-    if (result) {
-        await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
-        let id = await getUserID(email);
-        res.json({ success: true, id: id });
-    }
-    else { res.json({ success: false }); }
-});
-
-exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
-
-    let nome = req.body.nome;
-    let email = req.body.email;
-    let imagemPerfil = req.body.imagemPerfil;
-    let descPerfil = req.body.descPerfil;
-    let corFundo = req.body.corFundo;
-
-    if (isUserExistent(email, senha)) {
-        await Users.updateOne({ $set: { nome: nome } }, { $set: { email: email } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } });
-    }
-    else { res.json({ success: false }); }
-});
-
-exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
-
-    let namePlaylist = req.body.name;
-    let descPlaylist = req.body.description;
-    let image = req.body.img;
-    let posicaoPlaylist = req.params.idPl;
-    let idUser = req.params.id
-
-    let playlists
-    try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists
-    }
-    catch (erro) { res.json({ success: false }); }
-
-    let music = playlists[posicaoPlaylist].songs
-    playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
-
-    try {
-        if (isUserExistent(idUser)) {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
-    }
-    catch (erro) { res.json({ success: false }) }
-});
-
-
-exports.checkValidation = ('/authentication', async (req, res) => {
-
-    const parcel = req.body.parcel;
-    let email = parcel[0];
-    let senha = parcel[1];
-
-    let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
-    if (listaUsuarios.length > 0) 
-    { 
-        let id = await getUserID(email);
-        res.json({ success: true, id: id }); console.log("LOGADO"); 
-    }
-    else { res.json({ success: false }); console.log("NAO LOGADO"); }
-});
-
 isPlaylistExistent = async (idUser, posPlaylist) => {
     if (await Users.findById({ "_id": idUser }) !== null) {
         if ((await Users.findById({ "_id": idUser })).playlists.length - 1 > posPlaylist)
@@ -246,11 +176,9 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 
 exports.insertNewPlaylist = ('/:id/home/insertPlaylist' || '/:id/playlist/:idPl/insertPlaylist' || '/:id/profile/insertPlaylist' || '/:id/search/insertPlaylist', async (req, res) => {
 
-    const parcel = req.body.parcel;
-
-    let nomePlaylist = parcel[0];
-    let img = parcel[1];
-    let desc = parcel[2];
+    let nomePlaylist = req.body.nome;
+    let img = req.body.imagem;
+    let desc = req.body.descricao;
     let songs = [];
     let idUser = req.params.id;
 
@@ -314,8 +242,81 @@ exports.insertNewMusicIntoPlaylist = (':id/search/insertMusic', async (req, res)
 
 })
 
-exports.deleteUser = (':id/profile/deleteUser', async (req, res) => {
+// MÉTODOS PUT
+
+exports.setNewPassword = ('/password-recovery', async (req, res) => {
     const parcel = req.body.parcel;
+
+    let email = parcel[0];
+    let novaSenha = parcel[1];
+
+    let result = await isUserExistent(email);
+    if (result) {
+        await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
+        let id = await getUserID(email);
+        res.json({ success: true, id: id });
+    }
+    else { res.json({ success: false }); }
+});
+
+exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
+
+    let nome = req.body.nome;
+    let email = req.body.email;
+    let imagemPerfil = req.body.imagemPerfil;
+    let descPerfil = req.body.descPerfil;
+    let corFundo = req.body.corFundo;
+
+    if (isUserExistent(email, senha)) {
+        await Users.updateOne({ $set: { nome: nome } }, { $set: { email: email } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } });
+    }
+    else { res.json({ success: false }); }
+});
+
+exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
+
+    let namePlaylist = req.body.name;
+    let descPlaylist = req.body.description;
+    let image = req.body.img;
+    let posicaoPlaylist = req.params.idPl;
+    let idUser = req.params.id
+
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists
+    }
+    catch (erro) { res.json({ success: false }); }
+
+    let music = playlists[posicaoPlaylist].songs
+    playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
+
+    try {
+        if (isUserExistent(idUser)) {
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+    }
+    catch (erro) { res.json({ success: false }) }
+});
+
+exports.checkValidation = ('/authentication', async (req, res) => {
+
+    const parcel = req.body.parcel;
+    let email = parcel[0];
+    let senha = parcel[1];
+
+    let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
+    if (listaUsuarios.length > 0) 
+    { 
+        let id = await getUserID(email);
+        res.json({ success: true, id: id }); console.log("LOGADO"); 
+    }
+    else { res.json({ success: false }); console.log("NAO LOGADO"); }
+});
+
+// MÉTODOS DELETE
+
+exports.deleteUser = (':id/profile/deleteUser', async (req, res) => {
 
     let idUser = req.params.id;
 

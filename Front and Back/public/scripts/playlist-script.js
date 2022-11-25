@@ -107,6 +107,8 @@ const formatTime = (time) => {
     return `${min} : ${sec}`;
 }
 
+let musicaAtual = 0;
+
 playBtn.addEventListener('click', () => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "inline";
@@ -129,6 +131,11 @@ pauseBtn.addEventListener('click', () => {
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0;
     playBtn.click();
+
+    if (musicaAtual != 0)
+        musicaAtual -= 1;
+
+    showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src);
 })
 
 forwardBtn.addEventListener('click', () => {
@@ -141,6 +148,11 @@ setInterval(() => {
 
     if (audioPlayer.currentTime >= 29) {
         pauseBtn.click();
+
+        if (songs.length > musicaAtual)
+            musicaAtual += 1;
+
+        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src);
     }
 }, 500)
 
@@ -254,7 +266,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 })
 
 document.querySelector('#play').addEventListener('click', () => {
-    
+    showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src);
 })
 
 document.querySelector('#delete').addEventListener('click', () => {
