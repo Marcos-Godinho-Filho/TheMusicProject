@@ -15,14 +15,15 @@ let retorno = [];
 
 exports.getDataHome = ('/:id/home', async (req, res) => {
     
-    // res.status(200).json({ playlists: playlists, idUser: idUser });
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
-    
+
     try {
+        console.log(" - GETADO - ");
+        res.json({id:idUser,playlists:playlists});
         res.sendFile(path.join(pattern + '/public/Home/home.html'));
     }
-    catch (erro) { throw new Error(erro); }
+    catch (erro) { console.log(erro); }
 })
 
 exports.getDataSearch = ('/:email/search', async (req, res) => {

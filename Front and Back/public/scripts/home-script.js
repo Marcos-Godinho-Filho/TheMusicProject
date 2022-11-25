@@ -1,4 +1,4 @@
-document.addEventListener('load', getInfoLoad);
+window.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
@@ -11,8 +11,10 @@ async function getInfoLoad(e) {
     });
 
     const data = await res.json();
+    alert(data);
     let resultado = data.playlists;
     id = data.idUser;
+    alert(resultado);
 
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
