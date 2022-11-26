@@ -6,7 +6,8 @@ const user = require('../models/user');
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
 
-const pattern = __dirname.substring(0, 0);
+// pattern no meu pc (do Marcos): 0, 45 + 27
+const pattern = __dirname.substring(0, 45 + 27);
 
 
 let retorno = [];
@@ -20,7 +21,7 @@ exports.getDataHome = ('/:id/home', async (req, res) => {
 
     try {
         console.log(" - GETADO - ");
-        res.json({id:idUser,playlists:playlists});
+        //res.json({id:idUser, playlists:playlists});
         res.sendFile(path.join(pattern + '/public/Home/home.html'));
     }
     catch (erro) { console.log(erro); }
@@ -30,20 +31,16 @@ exports.getDataSearch = ('/:email/search', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/search/index.html'));
 
     let email = req.params.email;
-    try {
-        if (checkExistentUser(email)) {
-            res.status(200).json({ info: retorno });
-            retorno = [];
-        }
-        else { res.json({ found: false }) }
-    }
-    catch (erro) { throw new Error(erro); }
 
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
-        res.status(200).json({ playlists: playlists });
+        if (checkExistentUser(email)) {
+            res.status(200).json({ info: retorno, playlists: playlists });
+            retorno = [];
+        }
+        else { res.json({ found: false }) }
     }
     catch (erro) { throw new Error(erro); }
 });

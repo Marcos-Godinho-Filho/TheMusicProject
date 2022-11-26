@@ -19,6 +19,9 @@ async function getInfoLoad(e) {
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
+
+    document.querySelector("search-link").href = `/${id}/search`;
+    document.querySelector("profile-link").href = `/${id}/profile`;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -72,7 +75,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
         previousImg = img.src;
-        img.src = '../images/browse.png';
+        img.src = '../imgs/browse.png';
         img.style.width = '200px';
         img.style.height = '200px';
     })
