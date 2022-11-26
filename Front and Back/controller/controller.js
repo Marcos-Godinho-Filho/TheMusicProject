@@ -6,7 +6,7 @@ const user = require('../models/user');
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users');
 
-const pattern = __dirname.substring(0, 45);
+const pattern = __dirname.substring(0, 0);
 
 
 let retorno = [];
