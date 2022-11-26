@@ -2,7 +2,7 @@ window.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
-let id;
+let id = BASE_URL.substring(0, 22);
 async function getInfoLoad(e) {
     let playlists = document.querySelector('.sidebar-playlists');
 
@@ -13,7 +13,6 @@ async function getInfoLoad(e) {
     const data = await res.json();
     alert(data);
     let resultado = data.playlists;
-    id = data.idUser;
     alert(resultado);
 
     for (let i = 0; i < resultado.length; i++) {
