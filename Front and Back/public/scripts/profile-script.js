@@ -222,7 +222,6 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#header').style.filter = 'blur(7px)';
     document.querySelector('#main').style.filter = 'blur(7px)';
     const box = document.querySelector(id);
     box.innerHTML = content;
@@ -231,7 +230,6 @@ let showBox = function (id, content) {
 
 let hideBox = function (id) {
     document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#header').style.filter = 'none';
     document.querySelector('#main').style.filter = 'none';
     const box = document.querySelector(id);
     box.innerHTML = '';

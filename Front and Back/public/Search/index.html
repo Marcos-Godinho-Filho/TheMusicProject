@@ -29,9 +29,7 @@
             </a>
         </div>
         <div class="sidebar-menu">
-
             <div class="sidebar-menu-item" id="createPlaylist">
-
                 <div class="sidebar-menu-item-component ">
                     +
                 </div>
@@ -68,57 +66,56 @@
             <div class="dot"></div>
         </div>
 
-        <div id="results"></div>
-    </main>
+        <div id="results"> </div>
 
-    <div class="player">
-        <div class="player-artist">
-            <div class="pa-image">
-                <img src="" alt="ícone" id="image" draggable="false">
-            </div>
-            <div class="pa-data">
-                <h1 id="title"></h1>
-                <h2 id="artist"></h2>
-                <h2 id="album"></h2>
-            </div>
-        </div>
-        <div class="player-control">
-            <div class="player-control-buttons">
-                <a id="backwardBtn">
-                    <i class="fas fa-backward"></i>
-                </a>
-                <a id="pauseBtn" style="display: none;">
-                    <i class="fa-solid fa-pause"></i>
-                </a>
-                <a id="playBtn" style="display: inline-block;">
-                    <i class="fa-solid fa-play"></i>
-                </a>
-                <a id="forwardBtn">
-                    <i class="fas fa-forward"></i>
-                </a>
-                <div class="player-control-progress">
-                    <input type="range" class="music-progress-bar" value="0"> <br>
-                    <p class="current-time">00 : 00</p>
-                    <p class="duration">00 : 00</p>
+        <div class="player">
+            <div class="player-artist">
+                <div class="pa-image">
+                    <img src="" alt="ícone" id="image" draggable="false">
+                </div>
+                <div class="pa-data">
+                    <h1 id="title"></h1>
+                    <h2 id="artist"></h2>
+                    <h2 id="album"></h2>
                 </div>
             </div>
-            <div class="player-control-volume">
-                <a id="volumeBtn">
-                    <i class="fas fa-volume-high" id="volume-icon"></i>
-                </a>
-                <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
+            <div class="player-control">
+                <div class="player-control-buttons">
+                    <a id="backwardBtn">
+                        <i class="fas fa-backward"></i>
+                    </a>
+                    <a id="pauseBtn" style="display: none;">
+                        <i class="fa-solid fa-pause"></i>
+                    </a>
+                    <a id="playBtn" style="display: inline-block;">
+                        <i class="fa-solid fa-play"></i>
+                    </a>
+                    <a id="forwardBtn">
+                        <i class="fas fa-forward"></i>
+                    </a>
+                    <div class="player-control-progress">
+                        <input type="range" class="music-progress-bar" value="0"> <br>
+                        <p class="current-time">00 : 00</p>
+                        <p class="duration">00 : 00</p>
+                    </div>
+                </div>
+                <div class="player-control-volume">
+                    <a id="volumeBtn">
+                        <i class="fas fa-volume-high" id="volume-icon"></i>
+                    </a>
+                    <input type="range" class="volume-slider" min="0" max="1" value="1" step="0.1">
+                </div>
+
+                <button id="closeSong">X</button>
+
             </div>
-
-            <button id="closeSong">X</button>
-
         </div>
-    </div>
-    <audio id="audioPlayer" controls>
-        <source src="" id="preview" type="audio/mpeg">
-    </audio>
+        <audio id="audioPlayer" controls>
+            <source src="" id="preview" type="audio/mpeg">
+        </audio>
+    </main>
 
     <script src="../scripts/search-script.js"></script>
-
     <script src="all.min.js"></script>
 
 </body>
