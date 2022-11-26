@@ -14,23 +14,21 @@ let retorno = [];
 
 // MÉTODOS GET
 
-exports.getDataHome = ('/:id/home', async (req, res) => {
+exports.getDataHome = ('/home/:id', async (req, res) => {
     
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
         console.log(" - GETADO - ");
-        //res.json({id:idUser, playlists:playlists});
         res.sendFile(path.join(pattern + '/public/Home/home.html'));
+        //res.json({id:idUser, playlists:playlists});
     }
     catch (erro) { console.log(erro); }
 })
 
-exports.getDataSearch = ('/:email/search', async (req, res) => {
+exports.getDataSearch = ('/search/:id', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/search/index.html'));
-
-    let email = req.params.email;
 
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
@@ -45,7 +43,7 @@ exports.getDataSearch = ('/:email/search', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-exports.searchFromAPI = ('/:email/search', async (req, res) => {
+exports.searchFromAPI = ('/search/:id', async (req, res) => {
 
     retorno = [];
 
@@ -88,7 +86,7 @@ exports.searchFromAPI = ('/:email/search', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-exports.getDataProfile = ('/:id/profile', async (req, res) => {
+exports.getDataProfile = ('/profile/:id', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Profile/'));
 
     let idUser = req.params.id;
@@ -101,7 +99,7 @@ exports.getDataProfile = ('/:id/profile', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 })
 
-exports.getDataPlaylist = ('/:id/playlist/:idPl', async (req, res) => {
+exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));
 
     let idUser = req.params.id;
@@ -170,7 +168,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
     return false;
 }
 
-exports.insertNewPlaylist = ('/:id/home/insertPlaylist' || '/:id/playlist/:idPl/insertPlaylist' || '/:id/profile/insertPlaylist' || '/:id/search/insertPlaylist', async (req, res) => {
+exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/insertPlaylist/:id' || '/search/insertPlaylist/:id', async (req, res) => {
 
     let nomePlaylist = req.body.nome;
     let img = req.body.imagem;
@@ -201,7 +199,7 @@ exports.insertNewPlaylist = ('/:id/home/insertPlaylist' || '/:id/playlist/:idPl/
     }
 });
 
-exports.insertNewMusicIntoPlaylist = (':id/search/insertMusic', async (req, res) => {
+exports.insertNewMusicIntoPlaylist = ('/search/insertMusic/:id/', async (req, res) => {
 
     let nomeMusica = req.body.nomeMusica;
     let nomeArtista = req.body.nomeArtista;
@@ -255,7 +253,7 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
     else { res.json({ success: false }); }
 });
 
-exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
+exports.updateUser = ('/profile/updateUser/:id', async (req, res) => {
 
     let nome = req.body.nome;
     let email = req.body.email;
@@ -269,7 +267,7 @@ exports.updateUser = ('/:id/profile/updateUser', async (req, res) => {
     else { res.json({ success: false }); }
 });
 
-exports.updatePlaylist = ('/:id/playlist/:idPl', async (req, res) => {
+exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
     let namePlaylist = req.body.name;
     let descPlaylist = req.body.description;
@@ -312,14 +310,14 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 
 // MÉTODOS DELETE
 
-exports.deleteUser = (':id/profile/deleteUser', async (req, res) => {
+exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
 
     let idUser = req.params.id;
 
     await Users.deleteOne({ "_id": idUser })
 })
 
-exports.deletePlaylist = (':id/playlist/deletePlaylist'), async (req, res) => {
+exports.deletePlaylist = ('/playlist/deletePlaylist/:id'), async (req, res) => {
     
     let posicaoPlaylist = req.body.idPl
     let idUser = req.params.id
@@ -344,7 +342,7 @@ exports.deletePlaylist = (':id/playlist/deletePlaylist'), async (req, res) => {
     catch (erro) { res.json({ success: false }) }
 }
 
-exports.deleteSong = ('id:/playlist/deleteSong'), async (req, res) => {
+exports.deleteSong = ('/playlist/deleteSong/id:'), async (req, res) => {
 
     let posicaoPlaylist = req.body.posPl;
     let posicaoMusica = req.body.posMs;

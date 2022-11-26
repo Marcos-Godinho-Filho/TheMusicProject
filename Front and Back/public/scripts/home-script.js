@@ -17,11 +17,11 @@ async function getInfoLoad(e) {
     alert(resultado);
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/playlist/${id}/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
 
-    document.querySelector("search-link").href = `/${id}/search`;
-    document.querySelector("profile-link").href = `/${id}/profile`;
+    document.querySelector("search-link").href = `/search/${id}`;
+    document.querySelector("profile-link").href = `/profile/${id}`;
 }
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -43,10 +43,10 @@ router.get('/password-recovery', (req, res) => {
 });
 
 
-router.get('/:id/search', controller.getDataSearch); // Search Page // feito
-router.get('/:id/profile', controller.getDataProfile); // Profile Page // feito
-router.get('/:id/playlist/:idPl', controller.getDataPlaylist); // Playlist Page // feito
-router.get('/:id/home', controller.getDataHome); // Home Page // feito
+router.get('/search/:id', controller.getDataSearch); // Search Page // feito
+router.get('profile/:id/', controller.getDataProfile); // Profile Page // feito
+router.get('playlist/:id/:idPl', controller.getDataPlaylist); // Playlist Page // feito
+router.get('/home/:id', controller.getDataHome); // Home Page // feito
 
 
 /*
@@ -54,12 +54,12 @@ router.get('/:id/home', controller.getDataHome); // Home Page // feito
 */
 router.post('/registration', controller.insertNewUser); // feito
 router.post('/authentication', controller.checkValidation); // feito
-router.post('/:id/home/insertPlaylist', controller.insertNewPlaylist); // feito
-router.post('/:id/search/insertPlaylist', controller.insertNewPlaylist); // feito
-router.post('/:id/profile/insertPlaylist', controller.insertNewPlaylist); // feito
-router.post('/:id/playlist/:idPl/insertPlaylist', controller.insertNewPlaylist); // feito
-router.post('/:id/search/insertMusic', controller.insertNewMusicIntoPlaylist); // feito
-router.post('/:id/search', controller.searchFromAPI); // feito
+router.post('/home/insertPlaylist/:id', controller.insertNewPlaylist); // feito
+router.post('/search/insertPlaylist/:id', controller.insertNewPlaylist); // feito
+router.post('/profile/insertPlaylist/:id', controller.insertNewPlaylist); // feito
+router.post('/playlist/insertPlaylist/:id', controller.insertNewPlaylist); // feito
+router.post('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist); // feito
+router.post('/search/:id', controller.searchFromAPI); // feito
 
 
 /*
@@ -68,8 +68,8 @@ router.post('/:id/search', controller.searchFromAPI); // feito
     Playlists will need (*nome, descricao, imagem)
     Users will need (nome, *email, senha)
 */
-router.put('/:id/playlist/:idPl/updatePlaylist', controller.updatePlaylist); // Playlist Page // feito
-router.put('/:id/profile/updatePlaylist', controller.updateUser); // Profile Page // feito
+router.put('/playlist/updatePlaylist/:id/:idPl', controller.updatePlaylist); // Playlist Page // feito
+router.put('/profile/updatePlaylist/:id', controller.updateUser); // Profile Page // feito
 router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page // feito
 
 
@@ -79,9 +79,9 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-// router.delete('/:id/playlist/deletePlaylist', controller.deletePlaylist); // Playlist Page // feito
-// router.delete('/:id/profile/deleteUser', controller.deleteUser); // Profile Page // feito
-// router.delete('/:id/playlist/deleteSong', controller.deleteSong); // Playlist Page // feito
+// router.delete('/playlist/deletePlaylist/:id', controller.deletePlaylist); // Playlist Page // feito
+// router.delete('/profile/deleteUser/:id', controller.deleteUser); // Profile Page // feito
+// router.delete('/playlist/deleteSong/:id', controller.deleteSong); // Playlist Page // feito
 
 
 module.exports = router;
