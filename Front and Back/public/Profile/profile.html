@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheMusicProject - Profile</title>
+    <title>TheMusicProject - Perfil</title>
     <link rel="icon" type="image/x-icon" href="../imgs/icon.ico">
     <link rel="stylesheet" href="../stylesheets/profile-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -46,20 +46,12 @@
     <main id="main">
         <div id="top">
             <marquee direction="">O mais novo site de musica | Aproveite sua estadia em nosso site | Está com problemas?
-                Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp
-            </marquee>
+                Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
         </div>
         <div class="card">
+            <div class="card-color"> </div>
             <div class="card-image">
-                <label for="cor">
-                    <input type="color" name="cor" id="cor" class="cor" value="#ff0000">
-                </label>
-            </div>
-            <div id="edit-image">
-                <button onclick="document.getElementById('fileReader').click()">
-                    <img id="img-button" alt="foto" src="../imgs/default.jpg">
-                </button>
-                <input type="file" id="fileReader" accept="image/*">
+                <img id="profile-img" src="../imgs/user-icon.png" alt="foto">
             </div>
             <div class="card-content">
                 <div class="card-buttons">
@@ -70,8 +62,8 @@
                         <i class="fa-solid fa-edit"></i>
                     </a>
                 </div>
-                <h1 id="user">USER</h1>
-                <textarea maxlength="30" id="bio"></textarea>
+                <h1 id="username">USER</h1>
+                <p id="bio">Bio</p>
                 <p id="email">emailfake.mail@secmail</p>
             </div>
             <div class="icons">
