@@ -43,8 +43,8 @@ router.get('/password-recovery', (req, res) => {
 });
 
 
-router.get('/search/:id/', controller.getDataSearch); // Search Page // feito
-router.get('/profile/:id/', controller.getDataProfile); // Profile Page // feito
+router.get('/search/:id', controller.getDataSearch); // Search Page // feito
+router.get('/profile/:id', controller.getDataProfile); // Profile Page // feito
 router.get('/playlist/:id/:idPl', controller.getDataPlaylist); // Playlist Page // feito
 router.get('/home/:id', controller.getDataHome); // Home Page // feito
 

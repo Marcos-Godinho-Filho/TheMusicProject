@@ -28,17 +28,15 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 })
 
 exports.getDataSearch = ('/search/:id', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Search/index.html'));
-
-    let idUser = req.params.id;
-    let playlists = await Users.findById({ "_id": idUser }).playlists;
-
+    // let idUser = req.params.id;
+    // let playlists = await Users.findById({ "_id": idUser }).playlists;
     try {
-        if (checkExistentUser(email)) {
-            res.status(200).json({ info: retorno, playlists: playlists });
-            retorno = [];
-        }
-        else { res.json({ found: false }) }
+        res.sendFile(path.join(pattern + '/public/Search/index.html'));
+        // if (checkExistentUser(email)) {
+        //     res.status(200).json({ info: retorno, playlists: playlists });
+        //     retorno = [];
+        // }
+        // else { res.json({ found: false }) }
     }
     catch (erro) { throw new Error(erro); }
 });

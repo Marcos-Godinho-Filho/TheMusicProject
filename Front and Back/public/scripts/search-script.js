@@ -1,4 +1,4 @@
-document.addEventListener('load', getInfoLoad);
+window.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
@@ -18,6 +18,9 @@ async function getInfoLoad(e) {
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
+
+    document.querySelector("#home-link").href = `/home/${id}`;
+    document.querySelector("#search-link").href = `/search/${id}`;
 }
 
 let buscarBtn = document.querySelector("#search");
