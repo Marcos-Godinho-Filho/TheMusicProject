@@ -1,14 +1,13 @@
-document.addEventListener('load', getInfoLoad);
+window.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
-let id = BASE_URL.substring(31);
+let idUsuario = BASE_URL.substring(30);
 async function getInfoLoad(e) {
+    const playlists = document.querySelector('.sidebar-playlists');
 
-    document.querySelector("#home-link").href = `/home/${id}`;
-    document.querySelector("#profile-link").href = `/profile/${id}`;
-
-    let playlists = document.querySelector('.sidebar-playlists');
+    document.querySelector("#home-link").href = `/home/${idUsuario}`;
+    document.querySelector("#search-link").href = `/search/${idUsuario}`;
 
     const res = await fetch(BASE_URL, {
         method: 'GET'
@@ -16,15 +15,14 @@ async function getInfoLoad(e) {
 
     const data = await res.json();
     let resultado = data.playlists;
-    id = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[i].nomePlaylist}</a>`;
     }
 }
 
 document.querySelector('#delete').addEventListener('click', () => {
-    let id = '#deleteUserBox';
+    let idBox = '#deleteUserBox';
     let deleteUserBoxContent = `
         <h1 class="boxTitle"> Deletar Usuário </h1>
         <p class="warningMessage"> Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas. </p>
@@ -37,7 +35,7 @@ document.querySelector('#delete').addEventListener('click', () => {
             <button id="calcelDeleteUser"> Cancelar </button>
         </div>
     `;
-    showBox(id, deleteUserBoxContent);
+    showBox(idBox, deleteUserBoxContent);
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
 
@@ -56,7 +54,7 @@ document.querySelector('#delete').addEventListener('click', () => {
     })
 
     document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
-        hideBox(id);
+        hideBox(idBox);
     })
 })
 
