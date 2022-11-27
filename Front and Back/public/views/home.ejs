@@ -33,7 +33,27 @@
                 </div>
                 <span>Criar Playlist</span>
             </div>
-            <div class="sidebar-playlists"> </div>
+            <div class="sidebar-playlists">
+                <% listaUsuarios.forEach((esquemaUsers)=> {
+                    %>
+                    <tr>
+                        <td>
+                            <%= esquemaUsers.username %>
+                        </td>
+                        <td>
+                            <%= esquemaUsers.email %>
+                        </td>
+                        <td>
+                            <strong>
+                                <a href="/editar/<%= esquemaUsers._id %>"><img src="/images/editar.png"></a>
+                                <a href="/excluir/<%= esquemaUsers._id %>"><img src="/images/lata.png"></a>
+                                28
+                                28
+                            </strong>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </div>
         </div>
     </aside>
 
