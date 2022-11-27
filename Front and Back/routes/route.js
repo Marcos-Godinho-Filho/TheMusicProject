@@ -65,7 +65,7 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     User --> email
 */
 router.delete('/profile/deleteUser/:id', controller.deleteUser); // Profile Page // feito
-// router.delete('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist); // Playlist Page // feito
-// router.delete('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong); // Playlist Page // feito
+// router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist); // Playlist Page // feito
+// router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong); // Playlist Page // feito
 
 module.exports = router;

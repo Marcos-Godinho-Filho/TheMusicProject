@@ -4,9 +4,12 @@ const port = 3000;
 const rota = require('./routes/route');
 
 
-app.use(express.static('public'));
+// app.set('view engine', 'ejs')
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(express.static('public'));
 app.use(express.static(__dirname + '/public/stylesheets'));
 app.use(express.static(__dirname + '/public/imgs'));
 app.use(express.static(__dirname + '/public/fonts'));
