@@ -28,7 +28,7 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 })
 
 exports.getDataSearch = ('/search/:id', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/search/index.html'));
+    res.sendFile(path.join(pattern + '/public/Search/index.html'));
 
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
