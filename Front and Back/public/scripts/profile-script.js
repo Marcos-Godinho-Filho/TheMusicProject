@@ -1,9 +1,13 @@
 document.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
-let id;
 
+let id = BASE_URL.substring(31);
 async function getInfoLoad(e) {
+
+    document.querySelector("#home-link").href = `/home/${id}`;
+    document.querySelector("#profile-link").href = `/profile/${id}`;
+
     let playlists = document.querySelector('.sidebar-playlists');
 
     const res = await fetch(BASE_URL, {

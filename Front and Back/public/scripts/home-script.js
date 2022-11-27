@@ -4,7 +4,7 @@ const BASE_URL = window.location.href;
 
 let id = BASE_URL.substring(27);
 async function getInfoLoad(e) {
-    let playlists = document.querySelector('.sidebar-playlists');
+    const playlists = document.querySelector('.sidebar-playlists');
 
     document.querySelector("#search-link").href = `/search/${id}`;
     document.querySelector("#profile-link").href = `/profile/${id}`;

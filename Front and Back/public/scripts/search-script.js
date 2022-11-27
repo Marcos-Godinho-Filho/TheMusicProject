@@ -3,9 +3,12 @@ window.addEventListener('load', getInfoLoad);
 const BASE_URL = window.location.href;
 
 let resultado;
-let idUser;
+let id = BASE_URL.substring(29);
 async function getInfoLoad(e) {
-    let playlists = document.querySelector('.sidebar-playlists');
+    const playlists = document.querySelector('.sidebar-playlists');
+
+    document.querySelector("#home-link").href = `/home/${id}`;
+    document.querySelector("#profile-link").href = `/profile/${id}`;
 
     const res = await fetch(BASE_URL, {
         method: 'GET'
@@ -13,14 +16,10 @@ async function getInfoLoad(e) {
 
     const data = await res.json();
     resultado = data.playlists;
-    idUser = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
         playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
     }
-
-    document.querySelector("#home-link").href = `/home/${id}`;
-    document.querySelector("#search-link").href = `/search/${id}`;
 }
 
 let buscarBtn = document.querySelector("#search");

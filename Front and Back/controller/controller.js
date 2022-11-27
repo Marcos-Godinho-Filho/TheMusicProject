@@ -28,10 +28,13 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 })
 
 exports.getDataSearch = ('/search/:id', async (req, res) => {
+
     // let idUser = req.params.id;
     // let playlists = await Users.findById({ "_id": idUser }).playlists;
+
     try {
         res.sendFile(path.join(pattern + '/public/Search/index.html'));
+    
         // if (checkExistentUser(email)) {
         //     res.status(200).json({ info: retorno, playlists: playlists });
         //     retorno = [];
@@ -85,14 +88,13 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
 });
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Profile/'));
 
-    let idUser = req.params.id;
-    let user = await Users.findById({ "_id": idUser });
-    let playlists = usuario.playlists;
+    // let user = await Users.findById({ "_id": idUser });
+    // let playlists = usuario.playlists;
 
     try {
-        res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
+        res.sendFile(path.join(pattern + '/public/Profile/profile.html'));
+        // res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
     }
     catch (erro) { throw new Error(erro); }
 })
