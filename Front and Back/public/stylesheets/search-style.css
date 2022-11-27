@@ -260,7 +260,7 @@ main {
     z-index: 99;
     left: calc((100% - 400px) / 2);
     background-color: #1e1e1e;
-    width: 400px;
+    width: 500px;
     color: #ffffff;
     padding: 20px;
     border-radius: 5px;
@@ -336,6 +336,64 @@ main {
 #createPlaylistBox {
     top: calc((100vh - 400px) / 2);
     height: 400px;
+}
+
+#edit-image {
+    float: left;
+    width: 50%;
+    height: 65%;
+    padding: 5px;
+}
+
+#edit-image button {
+    height: 200px;
+    width: 200px;
+    display: block;
+    border: none;
+    background-color: transparent;
+}
+
+#edit-image button:hover {
+    cursor: pointer;
+}
+
+#img-button {
+    width: 200px;
+    height: 200px;
+}
+
+#fileReader {
+    display: none;
+}
+
+#edit-data {
+    float: left;
+    padding: 5px;
+    width: 50%;
+    height: 65%;
+}
+
+#edit-data input {
+    width: 100%;
+    height: 50px;
+    background-color: #424242;
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    border: 1px none;
+    padding: 7px;
+}
+
+#edit-data textarea {
+    width: 100%;
+    height: calc(200px - 75px);
+    background-color: #424242;
+    color: #ffffff;
+    font-family: circular-light;
+    font-size: 18px;
+    border: none;
+    padding: 7px;
+    resize: none;
 }
 
 #playlists {

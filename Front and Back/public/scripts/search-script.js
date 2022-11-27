@@ -136,7 +136,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
         previousImg = img.src;
-        img.src = '../images/browse.png';
+        img.src = '../imgs/browse.png';
         img.style.width = '200px';
         img.style.height = '200px';
     })
