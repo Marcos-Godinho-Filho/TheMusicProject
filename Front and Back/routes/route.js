@@ -4,25 +4,10 @@ const router = express.Router();
 const path = require('path');
 
 /*
-PAGINAS:
-- registro
-- login
-- rec. senha
-- senha
-- home
-- perfil
-- busca
-- playlist
-*/
-
-/*
     GET (getting data from backend and passing them to frontend)
     Registration, authentication and password-recovery don't need get since we're not passing data from back to front 
 */
 
-/*
-    Isso vai entrar em um loop infinito? Pq se agt vai pra essa pagina atraves do diretorio, ele faz um get, ai manda agt pra pagin de novo, e ai faz outro get, etc???
-*/
 // pattern no meu pc (do Marcos): 0, 45 + 27
 const pattern = __dirname.substring(0, 45 + 27);
 // '/' --> go to registration page
@@ -79,9 +64,8 @@ router.put('/password-recovery', controller.setNewPassword); // Password-Recover
     Playlist --> nome
     User --> email
 */
-// router.delete('/playlist/deletePlaylist/:id', controller.deletePlaylist); // Playlist Page // feito
-// router.delete('/profile/deleteUser/:id', controller.deleteUser); // Profile Page // feito
-// router.delete('/playlist/deleteSong/:id', controller.deleteSong); // Playlist Page // feito
-
+router.delete('/profile/deleteUser/:id', controller.deleteUser); // Profile Page // feito
+// router.delete('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist); // Playlist Page // feito
+// router.delete('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong); // Playlist Page // feito
 
 module.exports = router;

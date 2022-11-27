@@ -15,7 +15,7 @@ let retorno = [];
 // MÉTODOS GET
 
 exports.getDataHome = ('/home/:id', async (req, res) => {
-    
+
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
 
@@ -157,13 +157,14 @@ exports.insertNewUser = ('/registration', async (req, res) => {
 });
 
 isPlaylistExistent = async (idUser, posPlaylist) => {
-    if (await Users.findById({ "_id": idUser }) !== null) {
-        if ((await Users.findById({ "_id": idUser })).playlists.length - 1 > posPlaylist)
-            return false;
-
-        return true;
+    try {
+        let usuario = await Users.findById({ "_id": idUser }).lean().exec()
+        if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
+            return true
+        else 
+            return false
     }
-    return false;
+    catch (err) { return false }
 }
 
 exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/insertPlaylist/:id' || '/search/insertPlaylist/:id', async (req, res) => {
@@ -298,10 +299,9 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     let senha = parcel[1];
 
     let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
-    if (listaUsuarios.length > 0) 
-    { 
+    if (listaUsuarios.length > 0) {
         let id = await getUserID(email);
-        res.json({ success: true, id: id }); console.log("LOGADO"); 
+        res.json({ success: true, id: id }); console.log("LOGADO");
     }
     else { res.json({ success: false }); console.log("NAO LOGADO"); }
 });
@@ -315,67 +315,67 @@ exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
     await Users.deleteOne({ "_id": idUser })
 })
 
-exports.deletePlaylist = ('/playlist/deletePlaylist/:id'), async (req, res) => {
-    
-    let posicaoPlaylist = req.body.idPl
-    let idUser = req.params.id
+exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => {
 
-    let playlists
-    try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists
-    }
-    catch (erro) { res.json({ success: false }); }
+    // let posicaoPlaylist = req.body.idPl
+    // let idUser = req.params.id
 
-    const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
-    const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1);
-    const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+    // let playlists
+    // try {
+    //     const registro = await Users.findById({ "_id": idUser })
+    //     playlists = registro.playlists
+    // }
+    // catch (erro) { res.json({ success: false }); }
 
-    playlists = copyWithoutRemovedElement;
-    try {
-        if (isUserExistent(idUser)) {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
-    }
-    catch (erro) { res.json({ success: false }) }
+    // const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
+    // const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1);
+    // const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+
+    // playlists = copyWithoutRemovedElement;
+    // try {
+    //     if (isUserExistent(idUser)) {
+    //         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+    //     }
+    // }
+    // catch (erro) { res.json({ success: false }) }
 }
 
-exports.deleteSong = ('/playlist/deleteSong/id:'), async (req, res) => {
+exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
 
-    let posicaoPlaylist = req.body.posPl;
-    let posicaoMusica = req.body.posMs;
-    let idUser = req.params.idUser;
+    // let posicaoPlaylist = req.body.idPl;
+    // let posicaoMusica = req.body.idSong;
+    // let idUser = req.params.id;
 
-    let playlists
-    try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists
-    }
-    catch (erro) { res.json({ success: false }); }
+    // let playlists
+    // try {
+    //     const registro = await Users.findById({ "_id": idUser })
+    //     playlists = registro.playlists
+    // }
+    // catch (erro) { res.json({ success: false }); }
 
-    try {
-        if (isUserExistent(idUser)) {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
-    }
-    catch (erro) { res.json({ success: false }) }
-    try {
-        const musicas = playlists[posicaoPlaylist].songs;
-        const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
-        const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1);
-        const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+    // try {
+    //     if (isUserExistent(idUser)) {
+    //         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+    //     }
+    // }
+    // catch (erro) { res.json({ success: false }) }
+    // try {
+    //     const musicas = playlists[posicaoPlaylist].songs;
+    //     const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
+    //     const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1);
+    //     const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
 
-        playlists[posicaoPlaylist].songs = copyWithoutRemovedElement;
+    //     playlists[posicaoPlaylist].songs = copyWithoutRemovedElement;
 
-        try {
-            if (isUserExistent(idUser))
-                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
-        catch (erro) {
-            res.json({ success: false });
-        }
-    }
-    catch (erro) {
-        res.json({ success: false });
-    }
+    //     try {
+    //         if (isUserExistent(idUser))
+    //             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+    //     }
+    //     catch (erro) {
+    //         res.json({ success: false });
+    //     }
+    // }
+    // catch (erro) {
+    //     res.json({ success: false });
+    // }
 }
