@@ -21,8 +21,8 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 
     try {
         res.sendFile(path.join(pattern + '/public/Home/home.html'));
-        // res.render('.sidebar-playlists')
-        // res.json({id:idUser, playlists:playlists});
+        res.render('.sidebar-playlists')
+        res.json({id:idUser, playlists:playlists});
     }
     catch (erro) { console.log(erro); }
 })
