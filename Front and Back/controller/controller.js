@@ -327,37 +327,42 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 
 // // MÉTODOS DELETE
 
-// exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
+exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
 
-//     let idUser = req.params.id;
+    let idUser = req.params.id;
 
-//     await Users.deleteOne({ "_id": idUser })
-// })
+    await Users.deleteOne({ "_id": idUser })
+    // Redirecionar para pagina de registro
+    res.render('../public/views/sign-up', {});
+})
 
-// exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => {
+exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => { // Agt ainda fetch com idPl no final?
 
-//     let posicaoPlaylist = req.body.idPl
-//     let idUser = req.params.id
+    let posicaoPlaylist = req.body.idPl
+    let idUser = req.params.id
 
-//     let playlists
-//     try {
-//         const registro = await Users.findById({ "_id": idUser })
-//         playlists = registro.playlists
-//     }
-//     catch (erro) { res.json({ success: false }); }
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists
+    }
+    catch (erro) { res.json({ success: false }); }
 
-//     const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
-//     const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1);
-//     const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
+    // Que que é tudo isso
+    const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
+    const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1);
+    const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement);
 
-//     playlists = copyWithoutRemovedElement;
-//     try {
-//         if (isUserExistent(idUser)) {
-//             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-//         }
-//     }
-//     catch (erro) { res.json({ success: false }) }
-// }
+    playlists = copyWithoutRemovedElement;
+    try {
+        if (isUserExistent(idUser)) {
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+    }
+    catch (erro) { res.json({ success: false }) }
+    // Redirecionar para home
+    res.render('../public/views/home', {idUser: idUser, playlists: playlists});
+}
 
 // exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
 

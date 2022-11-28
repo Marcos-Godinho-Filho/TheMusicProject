@@ -23,7 +23,7 @@ async function getInfoLoad(e) {
     idUser = data.idUser;
 
     for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
+        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`; // Ainda precisa disso?
     }
 
     let playlist = data.playlist;
