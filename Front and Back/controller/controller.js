@@ -280,7 +280,7 @@ exports.updateUser = ('/profile/updateUser/:id', async (req, res) => {
     let corFundo = req.body.corFundo
 
     if (isUserExistent(email, senha)) {
-        await Users.updateOne({ $set: { nome: nome } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } })
+        await Users.updateOne({ email: email }, { $set: { nome: nome } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } })
     }
     else { res.json({ success: false }) }
 })

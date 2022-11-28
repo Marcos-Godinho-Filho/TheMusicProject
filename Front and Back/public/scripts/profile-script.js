@@ -45,7 +45,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         <h1 class="boxTitle"> Editar Usuário </h1>
         <div class="card-color-edit">
             <label for="cor">
-                <input type="color" name="cor" id="color" value="${document.querySelector('#card-color').style.backgroundColor}">
+                <input type="color" name="cor" id="color" value="#ff0000">
             </label>
         </div> 
         <div id="edit-image">
@@ -55,8 +55,8 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newUsername" value="${document.querySelector('#username').innerHTML}"> </input> 
-            <textarea id="newBio" resize="none">${document.querySelector('#bio').innerHTML}</textarea>
+            <input type="text" id="newUsername" value="${document.querySelector('#username').innerHTML.trim()}"> </input> 
+            <textarea id="newBio" resize="none">${document.querySelector('#bio').innerHTML.trim()}</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditUser"> Salvar </button>
@@ -97,7 +97,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         putUser()
 
         async function putUser(e) {
-            const res = await fetch(BASE_URL + 'updateUser/', {
+            const res = await fetch(BASE_URL + '/updateUser/', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'

@@ -55,8 +55,8 @@
                 Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
         </div>
         <div class="card">
-            <% if (user.corFundo=="" ) { %>
-                <div class="card-color" style="background-color: #ff0000"> </div>
+            <% if (user.corFundo="" ) { %>
+                <div class="card-color"> </div>
                 <% } else { %>
                     <div class="card-color" style="background-color: '<%= user.corFundo %>'"> </div>
                     <% } %>
@@ -77,10 +77,10 @@
                                 </a>
                             </div>
                             <h1 id="username">
-                                <%= user.nome.trim() %>
+                                <%= user.nome %>
                             </h1>
                             <p id="bio">
-                                <%= user.desc.trim() %>
+                                <%= user.desc %>
                             </p>
                             <p id="email">
                                 <%= user.email %>

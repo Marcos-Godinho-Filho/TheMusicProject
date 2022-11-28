@@ -7,8 +7,12 @@ const rota = require('./routes/route');
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
+}));
+app.use(express.json({ limit: '50mb' }));
 
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/public/stylesheets'));
