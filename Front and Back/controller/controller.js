@@ -21,7 +21,7 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 
     try {
         // res.sendFile(path.join(pattern + '/public/Home/home.html'));
-        res.render('../public/views/home', {idUser: idUser, playlists: playlists})
+        res.render('../public/views/home', {idUser: idUser, playlists: playlists});
     }
     catch (erro) { console.log(erro); }
 })
@@ -112,50 +112,50 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 //     catch (erro) { throw new Error(erro); }
 // })
 
-// async function isUserExistent(email) {
+async function isUserExistent(email) {
 
-//     let listaUsuarios = await Users.find({ email: email }).lean().exec();
-//     if (listaUsuarios.length > 0) return true;
+    let listaUsuarios = await Users.find({ email: email }).lean().exec();
+    if (listaUsuarios.length > 0) return true;
 
-//     return false;
-// }
+    return false;
+}
 
-// async function getUserID(email) {
-//     let listaUsuarios = await Users.find({}).lean().exec();
-//     for (let user of listaUsuarios) {
-//         if (user["email"] == email) {
-//             return user["_id"] + ""
-//         }
-//     }
-// }
+async function getUserID(email) {
+    let listaUsuarios = await Users.find({}).lean().exec();
+    for (let user of listaUsuarios) {
+        if (user["email"] == email) {
+            return user["_id"] + ""
+        }
+    }
+}
 
 // // MÉTODOS POST
 
-// exports.insertNewUser = ('/registration', async (req, res) => {
+exports.insertNewUser = ('/registration', async (req, res) => {
 
-//     const parcel = req.body.parcel;
-//     let email = parcel[0];
-//     let nome = parcel[1];
-//     let senha = parcel[2];
-//     let imagemPerfil = "";
-//     let corFundo = "";
-//     let desc = "";
-//     let playlists = [];
+    const parcel = req.body.parcel;
+    let email = parcel[0];
+    let nome = parcel[1];
+    let senha = parcel[2];
+    let imagemPerfil = "";
+    let corFundo = "";
+    let desc = "";
+    let playlists = [];
 
-//     let result = await isUserExistent(email);
-//     if (!result) {
-//         let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists });
+    let result = await isUserExistent(email);
+    if (!result) {
+        let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists });
 
-//         try {
-//             await usuario.save();
-//             // Redireciona para home com o id cadastrado
-//             let id = await getUserID(email);
-//             res.json({ success: true, id: id });
-//         }
-//         catch (err) { console.log(err); }
-//     }
-//     else { res.json({ success: false }); return } // Já existe no banco de dados
-// });
+        try {
+            await usuario.save();
+            // Redireciona para home com o id cadastrado
+            let id = await getUserID(email);
+            res.json({ success: true, id: id });
+        }
+        catch (err) { console.log(err); }
+    }
+    else { res.json({ success: false }); return } // Já existe no banco de dados
+});
 
 // isPlaylistExistent = async (idUser, posPlaylist) => {
 //     try {
@@ -238,20 +238,20 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 
 // // MÉTODOS PUT
 
-// exports.setNewPassword = ('/password-recovery', async (req, res) => {
-//     const parcel = req.body.parcel;
+exports.setNewPassword = ('/password-recovery', async (req, res) => {
+    const parcel = req.body.parcel;
 
-//     let email = parcel[0];
-//     let novaSenha = parcel[1];
+    let email = parcel[0];
+    let novaSenha = parcel[1];
 
-//     let result = await isUserExistent(email);
-//     if (result) {
-//         await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
-//         let id = await getUserID(email);
-//         res.json({ success: true, id: id });
-//     }
-//     else { res.json({ success: false }); }
-// });
+    let result = await isUserExistent(email);
+    if (result) {
+        await Users.updateOne({ email: email }, { $set: { senha: novaSenha } });
+        let id = await getUserID(email);
+        res.json({ success: true, id: id });
+    }
+    else { res.json({ success: false }); }
+});
 
 // exports.updateUser = ('/profile/updateUser/:id', async (req, res) => {
 
@@ -293,19 +293,19 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 //     catch (erro) { res.json({ success: false }) }
 // });
 
-// exports.checkValidation = ('/authentication', async (req, res) => {
+exports.checkValidation = ('/authentication', async (req, res) => {
 
-//     const parcel = req.body.parcel;
-//     let email = parcel[0];
-//     let senha = parcel[1];
+    const parcel = req.body.parcel;
+    let email = parcel[0];
+    let senha = parcel[1];
 
-//     let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
-//     if (listaUsuarios.length > 0) {
-//         let id = await getUserID(email);
-//         res.json({ success: true, id: id }); console.log("LOGADO");
-//     }
-//     else { res.json({ success: false }); console.log("NAO LOGADO"); }
-// });
+    let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec();
+    if (listaUsuarios.length > 0) {
+        let id = await getUserID(email);
+        res.json({ success: true, id: id }); console.log("LOGADO");
+    }
+    else { res.json({ success: false }); console.log("NAO LOGADO"); }
+});
 
 // // MÉTODOS DELETE
 

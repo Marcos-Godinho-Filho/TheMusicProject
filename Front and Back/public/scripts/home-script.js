@@ -103,7 +103,17 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         createPlaylist;
         hideBox(id);
 
-        window.location.href = `/${idUser}/playlist`;
+        async function getPlaylists(e)
+        {
+            const res = await fetch(BASE_URL, {
+                method: 'GET'
+            });
+        
+            const data = await res.json();
+            let quantas = data.playlists.length() - 1;
+        }
+
+        window.location.href = `/playlist/${idUser}/${quantas}`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

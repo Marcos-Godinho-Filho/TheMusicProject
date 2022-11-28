@@ -12,19 +12,19 @@ const path = require('path');
 const pattern = __dirname.substring(0, 45 + 27);
 // '/' --> go to registration page
 router.get('/', (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
+    res.render(pattern + '/public/views/sign-up.ejs');
 });
 
 router.get('/registration', (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Authentication/SignUp Page/index.html'));
+    res.render(pattern + '/public/views/sign-up.ejs');
 });
 
 router.get('/authentication', (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Authentication/Login Page/index.html'));
+    res.render(pattern + '/public/views/login.ejs');
 });
 
 router.get('/password-recovery', (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Authentication/Password Recovery Page/index.html'));
+    res.render(pattern + '/public/views/password-recovery.ejs');
 });
 
 router.get('/home/:id', controller.getDataHome); // Home Page // feito
@@ -67,4 +67,4 @@ router.get('/home/:id', controller.getDataHome); // Home Page // feito
 // // router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist); // Playlist Page // feito
 // // router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong); // Playlist Page // feito
 
-// module.exports = router;
+module.exports = router;
