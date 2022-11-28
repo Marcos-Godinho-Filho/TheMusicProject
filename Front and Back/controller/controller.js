@@ -18,6 +18,8 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 
     let idUser = req.params.id;
     let playlists = await Users.findById({ "_id": idUser }).playlists;
+    if (playlists == undefined)
+        playlists = []
 
     try {
         // res.sendFile(path.join(pattern + '/public/Home/home.html'));
