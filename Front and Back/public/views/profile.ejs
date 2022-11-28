@@ -17,10 +17,10 @@
             <img src="../imgs/THEmusicPROJECT.png" alt="logo" draggable="false">
         </div>
         <div class="sidebar-menu">
-            <a href="" draggable="false" id="home-link">
+            <a href="/home/<%= idUser %>" draggable="false" id="home-link">
                 <i class="fa-solid fa-house"></i> Home
             </a>
-            <a href="" draggable="false" id="search-link">
+            <a href="/search/<%= idUser %>" draggable="false" id="search-link">
                 <i class="fa-solid fa-magnifying-glass"></i> Buscar
             </a>
             <a class="sidebar-menu-selected" draggable="false">
@@ -34,7 +34,13 @@
                 </div>
                 <span>Criar Playlist</span>
             </div>
-            <div class="sidebar-playlists"> </div>
+            <div class="sidebar-playlists">
+                <% for (let i=0; i < playlists.length; i++) { %>
+                    <a href="playlist/<%= idUser %>/<%= i %>">
+                        <%= playlists[i].nome %>
+                    </a>
+                    <% } %>
+            </div>
         </div>
     </aside>
 
@@ -48,10 +54,17 @@
             <marquee direction="">O mais novo site de musica | Aproveite sua estadia em nosso site | Está com problemas?
                 Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
         </div>
-        <div class="card">
-            <div class="card-color"> </div>
+        <div class="card">]
+            <% if (user.corFundo == "") { %>
+                
+            <% } %>
+            <div class="card-color" style="background-color: #fff"> </div>
             <div class="card-image">
-                <img id="profile-img" src="../imgs/user-icon.png" alt="foto">
+                <% if (user.imagemPerfil == "") { %>
+                    <img id="profile-img" src="../imgs/user-icon.png">
+                <% } else { %>
+                    <img id="profile-img" src="<%= user.imagemPerfil %>">
+                <% } %>
             </div>
             <div class="card-content">
                 <div class="card-buttons">
@@ -62,9 +75,15 @@
                         <i class="fa-solid fa-edit"></i>
                     </a>
                 </div>
-                <h1 id="username">USER</h1>
-                <p id="bio">Bio</p>
-                <p id="email">emailfake.mail@secmail</p>
+                <h1 id="username">
+                    <%= user.nome %>
+                </h1>
+                <p id="bio">
+                    <%= user.desc %>
+                </p>
+                <p id="email">
+                    <%= user.email %>
+                </p>
             </div>
             <div class="icons">
                 <a href="#" class="fab fa-facebook-f"></a>

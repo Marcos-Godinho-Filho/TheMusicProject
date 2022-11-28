@@ -36,7 +36,7 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
         playlists = [];
 
     try {
-        res.render(pattern + '/public/Search/index.html', {info: retorno, playlists: playlists});
+        res.render(pattern + '/public/views/search.ejs', {idUser: idUser, playlists: playlists, info: retorno});
     
         retorno = [];
 
@@ -49,60 +49,62 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
     catch (erro) { throw new Error(erro); }
 });
 
-// exports.searchFromAPI = ('/search/:id', async (req, res) => {
+exports.searchFromAPI = ('/search/:id', async (req, res) => {
 
-//     retorno = [];
+    retorno = [];
 
-//     let email = req.params.email;
-//     let parcel = req.query.parcel;
+    let email = req.params.email;
+    let parcel = req.query.parcel;
 
-//     try {
-//         if (checkExistentUser(email)) {
-//             const optionsAxios = {
-//                 method: 'GET',
-//                 url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
-//                 params: { q: `${parcel}` },
-//                 headers: {
-//                     'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
-//                     'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-//                 }
-//             };
+    try {
+        if (checkExistentUser(email)) {
+            const optionsAxios = {
+                method: 'GET',
+                url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+                params: { q: `${parcel}` },
+                headers: {
+                    'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
+                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+                }
+            };
 
-//             axios.request(optionsAxios).then(function (response) {
-//                 for (let musica of response.data['data']) {
-//                     retorno.push({
-//                         "title_short": musica["title_short"],
-//                         "artist": musica["artist"]["name"],
-//                         "album": musica["album"]["title"],
-//                         "image": musica["album"]["cover_medium"],
-//                         "preview": musica["preview"]
-//                     });
+            axios.request(optionsAxios).then(function (response) {
+                for (let musica of response.data['data']) {
+                    retorno.push({
+                        "title_short": musica["title_short"],
+                        "artist": musica["artist"]["name"],
+                        "album": musica["album"]["title"],
+                        "image": musica["album"]["cover_medium"],
+                        "preview": musica["preview"]
+                    });
 
-//                 }
-//             }).catch(function (error) {
-//                 console.error(error);
-//             });
-//             if (!parcel) {
-//                 return res.status(400).send({ status: 'failed' });
-//             }
-//             res.status(200).send({ status: 'received' });
-//         }
-//         else { res.json({ found: false }) }
-//     }
-//     catch (erro) { throw new Error(erro); }
-// });
+                }
+            }).catch(function (error) {
+                console.error(error);
+            });
+            if (!parcel) {
+                return res.status(400).send({ status: 'failed' });
+            }
+            res.status(200).send({ status: 'received' });
+        }
+        else { res.json({ found: false }) }
+    }
+    catch (erro) { throw new Error(erro); }
+});
 
-// exports.getDataProfile = ('/profile/:id', async (req, res) => {
+exports.getDataProfile = ('/profile/:id', async (req, res) => {
 
-//     // let user = await Users.findById({ "_id": idUser });
-//     // let playlists = usuario.playlists;
+    let idUser = req.params.id;
+    let user = await Users.findById({ "_id": idUser });
+    let playlists = user.playlists;
+    if (playlists == undefined)
+        playlists = [];
 
-//     try {
-//         res.sendFile(path.join(pattern + '/public/Profile/profile.html'));
-//         // res.status(200).json({ playlists: playlists, idUser: idUser, user: user });
-//     }
-//     catch (erro) { throw new Error(erro); }
-// })
+    try {
+        res.render(pattern + '/public/views/profile.ejs', { playlists: playlists, idUser: idUser, user: user });
+    }
+    catch (erro) { throw new Error(erro); }
+})
 
 // exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 //     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'));

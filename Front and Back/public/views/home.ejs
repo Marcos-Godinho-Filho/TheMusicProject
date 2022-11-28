@@ -34,9 +34,11 @@
                 <span>Criar Playlist</span>
             </div>
             <div class="sidebar-playlists">
-                <% for (let i = 0; i < playlists.length; i++) { %>
-                    <a href="playlist/<%= idUser %>/<%= i %>"><%= playlists[i].nome %></a>
-                <% } %>
+                <% for (let i=0; i < playlists.length; i++) { %>
+                    <a href="playlist/<%= idUser %>/<%= i %>">
+                        <%= playlists[i].nome %>
+                    </a>
+                    <% } %>
             </div>
         </div>
     </aside>

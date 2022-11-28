@@ -1,25 +1,6 @@
-window.addEventListener('load', getInfoLoad);
-
 const BASE_URL = window.location.href;
 
 let idUser = BASE_URL.substring(30);
-async function getInfoLoad(e) {
-    const playlists = document.querySelector('.sidebar-playlists');
-
-    document.querySelector("#home-link").href = `/home/${idUser}`;
-    document.querySelector("#search-link").href = `/search/${idUser}`;
-
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    });
-
-    const data = await res.json();
-    let resultado = data.playlists;
-
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[i].nomePlaylist}</a>`;
-    }
-}
 
 document.querySelector('#delete').addEventListener('click', () => {
     let idBox = '#deleteUserBox';
