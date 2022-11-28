@@ -1,26 +1,6 @@
-window.addEventListener('load', getInfoLoad);
-
 const BASE_URL = window.location.href;
 
-let resultado;
-let id = BASE_URL.substring(29);
-async function getInfoLoad(e) {
-    const playlists = document.querySelector('.sidebar-playlists');
-
-    document.querySelector("#home-link").href = `/home/${id}`;
-    document.querySelector("#profile-link").href = `/profile/${id}`;
-
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    });
-
-    const data = await res.json();
-    resultado = data.playlists;
-
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>`;
-    }
-}
+let idUser = BASE_URL.substring(29);
 
 let buscarBtn = document.querySelector("#search");
 let inpBx = document.querySelector("#inputBox");
@@ -165,7 +145,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         createPlaylist;
         hideBox(id);
 
-        window.location.href = `/${id}/playlist`;
+        window.location.href = `/${idUser}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
