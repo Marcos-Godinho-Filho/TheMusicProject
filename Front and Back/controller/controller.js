@@ -17,9 +17,7 @@ let retorno = [];
 exports.getDataHome = ('/home/:id', async (req, res) => {
 
     let idUser = req.params.id;
-    let playlists = await Users.findById({ "_id": idUser }).playlists;
-    if (playlists == undefined)
-        playlists = []
+    let playlists = getUsersPlaylists(idUser);
 
     try {
         // res.sendFile(path.join(pattern + '/public/Home/home.html'));
@@ -114,6 +112,17 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 //     catch (erro) { throw new Error(erro); }
 // })
 
+async function getUsersPlaylists(idUser) {
+
+    let playlists = await Users.findById({ "_id": idUser }).playlists;
+    if (playlists == undefined)
+        playlists = []
+
+    
+    return playlists
+}
+
+
 async function isUserExistent(email) {
 
     let listaUsuarios = await Users.find({ email: email }).lean().exec();
@@ -180,12 +189,13 @@ exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/
 
     let playlist = { nomePlaylist, img, desc, songs };
 
-    let playlists;
+    let playlists = [];
     try {
-        if (isUserExistent(idUser)) {
-            const usuario = await Users.findById({ "_id": idUser })
-            playlists = usuario.playlists;
-        }
+        // if (isUserExistent(idUser)) {
+        //     const usuario = await Users.findById({ "_id": idUser })
+        //     playlists = usuario.playlists;
+        // }
+        playlists = getUsersPlaylists(idUser);
     }
     catch (erro) {
         res.json({ success: false });
@@ -193,12 +203,18 @@ exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/
     playlists.push(playlist);
 
     try {
-        if (isUserExistent(idUser))
+        if (isUserExistent(idUser)) // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) {
         res.json({ success: false });
     }
+    // Direcionar para a pagina de playlist e ja carregar a playlist no aside 
+    try {
+        res.render('../public/views/playlist', {idUser: idUser, playlists: playlists, playlist: playlist});
+    }
+    catch (erro) { console.log(erro); }
+
 });
 
 // exports.insertNewMusicIntoPlaylist = ('/search/insertMusic/:id/', async (req, res) => {
