@@ -83,7 +83,7 @@ botaoCadastro.addEventListener('click', (e) => {
             else 
             {
                 let id = resp.id;
-                document.location.href = `http://localhost:3000/home/${id}`;
+                window.location.href = `http://localhost:3000/home/${id}`;
             }
         }
     }

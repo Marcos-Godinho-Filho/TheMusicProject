@@ -36,8 +36,8 @@ router.get('/home/:id', controller.getDataHome); // Home Page // feito
 // /*
 //     POST (getting data from frontend and passing them to backend)
 // */
-// router.post('/registration', controller.insertNewUser); // feito
-// router.post('/authentication', controller.checkValidation); // feito
+router.post('/registration', controller.insertNewUser); // feito
+router.post('/authentication', controller.checkValidation); // feito
 // router.post('/home/insertPlaylist/:id', controller.insertNewPlaylist); // feito
 // router.post('/search/insertPlaylist/:id', controller.insertNewPlaylist); // feito
 // router.post('/profile/insertPlaylist/:id', controller.insertNewPlaylist); // feito
@@ -54,7 +54,7 @@ router.get('/home/:id', controller.getDataHome); // Home Page // feito
 // */
 // router.put('/playlist/updatePlaylist/:id/:idPl', controller.updatePlaylist); // Playlist Page // feito
 // router.put('/profile/updatePlaylist/:id', controller.updateUser); // Profile Page // feito
-// router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page // feito
+router.put('/password-recovery', controller.setNewPassword); // Password-Recovery Page // feito
 
 
 // /*
