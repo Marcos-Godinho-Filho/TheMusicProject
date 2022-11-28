@@ -1,9 +1,9 @@
-const BASE_URL = window.location.href;
+const BASE_URL = window.location.href
 
-let idUser = BASE_URL.substring(30);
+let idUser = BASE_URL.substring(30)
 
 document.querySelector('#delete').addEventListener('click', () => {
-    let idBox = '#deleteUserBox';
+    let idBox = '#deleteUserBox'
     let deleteUserBoxContent = `
         <h1 class="boxTitle"> Deletar Usuário </h1>
         <p class="warningMessage"> Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas. </p>
@@ -15,8 +15,8 @@ document.querySelector('#delete').addEventListener('click', () => {
             <button id="deleteUser"> Deletar </button>
             <button id="calcelDeleteUser"> Cancelar </button>
         </div>
-    `;
-    showBox(idBox, deleteUserBoxContent);
+    `
+    showBox(idBox, deleteUserBoxContent)
 
     document.querySelector('#deleteUser').addEventListener('click', () => {
 
@@ -29,23 +29,23 @@ document.querySelector('#delete').addEventListener('click', () => {
             })
         }
 
-        deleteUser();
-        hideBox(id);
-        window.location.href = "/authentication/";
+        deleteUser()
+        hideBox(id)
+        window.location.href = "/authentication/"
     })
 
     document.querySelector('#calcelDeleteUser').addEventListener('click', () => {
-        hideBox(idBox);
+        hideBox(idBox)
     })
 })
 
 document.querySelector('#edit').addEventListener('click', () => {
-    let id = '#editUserBox';
+    let id = '#editUserBox'
     let editBoxContent = `
         <h1 class="boxTitle"> Editar Usuário </h1>
         <div class="card-color-edit">
             <label for="cor">
-                <input type="color" name="cor" id="color" value="#ff0000">
+                <input type="color" name="cor" id="color" value="${document.querySelector('#card-color').style.backgroundColor}">
             </label>
         </div> 
         <div id="edit-image">
@@ -62,39 +62,39 @@ document.querySelector('#edit').addEventListener('click', () => {
             <button id="saveEditUser"> Salvar </button>
             <button id="calcelEditUser"> Cancelar </button>
         </div>
-        `;
-    showBox(id, editBoxContent);
+        `
+    showBox(id, editBoxContent)
 
-    let previousImg = '';
+    let previousImg = ''
 
-    const reader = new FileReader();
-    const fileInput = document.querySelector("#fileReader");
-    const img = document.querySelector("#img-button");
+    const reader = new FileReader()
+    const fileInput = document.querySelector("#fileReader")
+    const img = document.querySelector("#img-button")
     reader.onload = e => {
-        img.src = e.target.result;
-        previousImg = img.src;
-        img.style.width = '120px';
-        img.style.height = '120px';
+        img.src = e.target.result
+        previousImg = img.src
+        img.style.width = '120px'
+        img.style.height = '120px'
     }
     fileInput.addEventListener('change', e => {
-        const f = e.target.files[0];
-        reader.readAsDataURL(f);
+        const f = e.target.files[0]
+        reader.readAsDataURL(f)
     })
 
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
-        previousImg = img.src;
-        img.src = '../imgs/browse.png';
-        img.style.width = '120px';
-        img.style.height = '120px';
+        previousImg = img.src
+        img.src = '../imgs/browse.png'
+        img.style.width = '120px'
+        img.style.height = '120px'
     })
     document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
-        img.src = previousImg;
-        img.style.width = '120px';
-        img.style.height = '120px';
+        img.src = previousImg
+        img.style.width = '120px'
+        img.style.height = '120px'
     })
 
     document.querySelector('#saveEditUser').addEventListener('click', () => {
-        putUser();
+        putUser()
 
         async function putUser(e) {
             const res = await fetch(BASE_URL + 'updateUser/', {
@@ -109,26 +109,26 @@ document.querySelector('#edit').addEventListener('click', () => {
                     descPerfil: document.querySelector('#newBio').value,
                     corFundo: document.querySelector('#color').value,
                 })
-            });
+            })
         }
 
         document.querySelector('#username').innerHTML = document.querySelector('#newUsername').value
-        document.querySelector('#bio').innerHTML = document.querySelector('#newBio').value;
-        document.querySelector('.card-color').style.backgroundColor = document.querySelector('#color').value;
-        const img = document.querySelector('#profile-img');
-        img.src = document.querySelector('#img-button').src;
-        img.style.width = '120px';
-        img.style.height = '120px';
-        hideBox(id);
+        document.querySelector('#bio').innerHTML = document.querySelector('#newBio').value
+        document.querySelector('.card-color').style.backgroundColor = document.querySelector('#color').value
+        const img = document.querySelector('#profile-img')
+        img.src = document.querySelector('#img-button').src
+        img.style.width = '120px'
+        img.style.height = '120px'
+        hideBox(id)
     })
 
     document.querySelector('#calcelEditUser').addEventListener('click', () => {
-        hideBox(id);
+        hideBox(id)
     })
 })
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
-    let id = '#createPlaylistBox';
+    let id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image-cp">
@@ -145,35 +145,35 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
                 <button id="confirmCreatePlaylist"> Criar </button>
                 <button id="calcelCreatePlaylist"> Cancelar </button>
             </div>
-            `;
-    showBox(id, createPlaylistBoxContent);
+            `
+    showBox(id, createPlaylistBoxContent)
 
-    let previousImg = '';
+    let previousImg = ''
 
-    const reader = new FileReader();
-    const fileInput = document.querySelector("#fileReader-cp");
-    const img = document.querySelector("#img-button-cp");
+    const reader = new FileReader()
+    const fileInput = document.querySelector("#fileReader-cp")
+    const img = document.querySelector("#img-button-cp")
     reader.onload = e => {
-        img.src = e.target.result;
-        previousImg = img.src;
-        img.style.width = '200px';
-        img.style.height = '200px';
+        img.src = e.target.result
+        previousImg = img.src
+        img.style.width = '200px'
+        img.style.height = '200px'
     }
     fileInput.addEventListener('change', e => {
-        const f = e.target.files[0];
-        reader.readAsDataURL(f);
+        const f = e.target.files[0]
+        reader.readAsDataURL(f)
     })
 
     document.querySelector('#edit-img-button-cp').addEventListener('mouseover', () => {
-        previousImg = img.src;
-        img.src = '../imgs/browse.png';
-        img.style.width = '200px';
-        img.style.height = '200px';
+        previousImg = img.src
+        img.src = '../imgs/browse.png'
+        img.style.width = '200px'
+        img.style.height = '200px'
     })
     document.querySelector('#edit-img-button-cp').addEventListener('mouseout', () => {
-        img.src = previousImg;
-        img.style.width = '200px';
-        img.style.height = '200px';
+        img.src = previousImg
+        img.style.width = '200px'
+        img.style.height = '200px'
     })
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
@@ -189,49 +189,49 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
                     descricao: document.querySelector('#newDescription').value,
                     imagem: document.querySelector('#img-button-cp').src
                 })
-            });
+            })
         }
 
-        createPlaylist;
-        hideBox(id);
+        createPlaylist
+        hideBox(id)
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
-        hideBox(id);
+        hideBox(id)
     })
 })
 
 let showBox = function (id, content) {
-    document.querySelector('#aside').style.filter = 'blur(7px)';
-    document.querySelector('#main').style.filter = 'blur(7px)';
-    const box = document.querySelector(id);
-    box.innerHTML = content;
-    box.style.display = 'block';
+    document.querySelector('#aside').style.filter = 'blur(7px)'
+    document.querySelector('#main').style.filter = 'blur(7px)'
+    const box = document.querySelector(id)
+    box.innerHTML = content
+    box.style.display = 'block'
 }
 
 let hideBox = function (id) {
-    document.querySelector('#aside').style.filter = 'none';
-    document.querySelector('#main').style.filter = 'none';
-    const box = document.querySelector(id);
-    box.innerHTML = '';
-    box.style.display = 'none';
+    document.querySelector('#aside').style.filter = 'none'
+    document.querySelector('#main').style.filter = 'none'
+    const box = document.querySelector(id)
+    box.innerHTML = ''
+    box.style.display = 'none'
 }
 
 let showDBResult = function(success) {
-    const box = document.querySelector('#dbResultBox');
-    box.display = "block";
+    const box = document.querySelector('#dbResultBox')
+    box.display = "block"
 
     if (success) {
-        box.innerHTML = "A operação feita com sucesso!";
-        box.style.backgroundColor = "#66ff99";
+        box.innerHTML = "A operação feita com sucesso!"
+        box.style.backgroundColor = "#66ff99"
     }
     else { 
-        box.innerHTML = "Erro! A operação falhou!";
-        box.style.backgroundColor = " #ff8080";
+        box.innerHTML = "Erro! A operação falhou!"
+        box.style.backgroundColor = " #ff8080"
     }
 
     setTimeout(() => { 
-        box.innerHTML = ""; 
-        box.display = "none;";
-    }, 3000);
+        box.innerHTML = "" 
+        box.display = "none"
+    }, 3000)
 }
