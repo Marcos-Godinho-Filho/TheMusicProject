@@ -20,8 +20,8 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
     let playlists = await Users.findById({ "_id": idUser }).playlists;
 
     try {
-        res.sendFile(path.join(pattern + '/public/Home/home.html'));
-        res.render('../public/views/home', {playlists})
+        // res.sendFile(path.join(pattern + '/public/Home/home.html'));
+        res.render('../public/views/home', {idUser: idUser, playlists: playlists})
     }
     catch (erro) { console.log(erro); }
 })

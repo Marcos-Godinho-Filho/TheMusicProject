@@ -35,7 +35,7 @@
             </div>
             <div class="sidebar-playlists">
                 <% playlists.forEach((playlist) => { %>
-                    <a href="playlist/playlist.idUsuario/playlist"><%= playlist.nome %></a>
+                    <a href="playlist/<%= idUser %>/<%= playlists.indexOf(playlist) %>"><%= playlist.nome %></a>
                 <% }) %>
             </div>
         </div>

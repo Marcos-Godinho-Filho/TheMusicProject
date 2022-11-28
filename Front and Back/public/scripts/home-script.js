@@ -2,25 +2,25 @@ window.addEventListener('load', getInfoLoad);
 
 const BASE_URL = window.location.href;
 
-let id = BASE_URL.substring(27);
+let idUser = BASE_URL.substring(27);
 async function getInfoLoad(e) {
-    const playlists = document.querySelector('.sidebar-playlists');
+    // const playlists = document.querySelector('.sidebar-playlists');
 
-    document.querySelector("#search-link").href = `/search/${id}`;
-    document.querySelector("#profile-link").href = `/profile/${id}`;
+    // document.querySelector("#search-link").href = `/search/${id}`;
+    // document.querySelector("#profile-link").href = `/profile/${id}`;
 
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    });
+    // const res = await fetch(BASE_URL, {
+    //     method: 'GET'
+    // });
 
-    const data = await res.json();
-    alert(data);
-    let resultado = data.playlists;
-    alert(resultado);
+    // const data = await res.json();
+    // alert(data);
+    // let resultado = data.playlists;
+    // alert(resultado);
 
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/playlist/${id}/${i}">${resultado[pos].nomePlaylist}</a>`;
-    }
+    // for (let i = 0; i < resultado.length; i++) {
+    //     playlists.innerHTML += `<a href="/playlist/${id}/${i}">${resultado[pos].nomePlaylist}</a>`;
+    // }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -103,7 +103,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         createPlaylist;
         hideBox(id);
 
-        window.location.href = `/${id}/playlist`;
+        window.location.href = `/${idUser}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
