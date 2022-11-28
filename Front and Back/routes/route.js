@@ -39,9 +39,9 @@ router.get('/profile/:id', controller.getDataProfile) // Profile Page // feito
 router.post('/registration', controller.insertNewUser) // feito
 router.post('/authentication', controller.checkValidation) // feito
 router.post('/search/:id', controller.searchFromAPI) // feito
-router.post('/home/insertPlaylist/:id', controller.insertNewPlaylist) // feito 
-//router.post('/search/insertPlaylist/:id', controller.insertNewPlaylist) // feito
-//router.post('/profile/insertPlaylist/:id', controller.insertNewPlaylist) // feito
+router.post('/home/:id/insertPlaylist', controller.insertNewPlaylist) // feito 
+router.post('/search/:id/insertPlaylist', controller.insertNewPlaylist) // feito
+router.post('/profile/:id/insertPlaylist', controller.insertNewPlaylist) // feito
 //router.post('/playlist/insertPlaylist/:id', controller.insertNewPlaylist) // feito
 // router.post('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) // feito
 

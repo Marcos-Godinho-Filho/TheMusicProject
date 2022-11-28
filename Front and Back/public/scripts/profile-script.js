@@ -128,11 +128,13 @@ document.querySelector('#edit').addEventListener('click', () => {
 })
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
+    alert(BASE_URL)
+
     let id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image-cp">
-                <button id="edit-img-button-cp" onclick="document.getElementById('fileReader').click()">
+                <button id="edit-img-button-cp" onclick="document.getElementById('fileReader-cp').click()">
                     <img id="img-button-cp" alt="Browse" src="../imgs/playlist-icon.png">
                 </button>
                 <input type="file" id="fileReader-cp" accept="image/*">
@@ -177,8 +179,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     })
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
+        alert('Clicked')
 
         async function createPlaylist(e) {
+            alert('called function createPlaylist')
             const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {
@@ -192,8 +196,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             })
         }
 
-        createPlaylist
+        createPlaylist()
         hideBox(id)
+
+        window.location.reload()
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

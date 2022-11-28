@@ -179,9 +179,12 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
     catch (err) { return false }
 }
 
-exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/insertPlaylist/:id' || '/search/insertPlaylist/:id', async (req, res) => {
+//'/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/'
+exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => {
+    alert("Olá!")
 
     let nomePlaylist = req.body.nome
+    alert(nomePlaylist)
     let img = req.body.imagem
     let desc = req.body.descricao
     let songs = []

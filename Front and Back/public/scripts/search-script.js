@@ -142,7 +142,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             })
         }
 
-        createPlaylist
+        createPlaylist()
         hideBox(id)
 
         window.location.href = `/${idUser}/playlist`
