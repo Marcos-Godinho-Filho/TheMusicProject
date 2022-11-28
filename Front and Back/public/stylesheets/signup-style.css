@@ -74,7 +74,7 @@ body {
 
 .container .form-wrapper h3 {
     font-size: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .container .form-wrapper form {
@@ -89,7 +89,8 @@ body {
     font-size: 1.2em;
     font-weight: 600;
     color: #ff6868;
-    text-align: left;
+    text-align: center;
+    width: 500px;
 }
 
 .container .form-wrapper form .input-box {
@@ -188,7 +189,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 995px) {
+@media only screen and (max-width: 1054px) {
     .container .img-wrapper {
         display: none;
     }

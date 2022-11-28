@@ -34,7 +34,7 @@
                 <span>Criar Playlist</span>
             </div>
             <div class="sidebar-playlists">
-                <% for (let i=0; i < playlists.length; i++) { %> 
+                <% for (let i=0; i < playlists.length; i++) { %>
                     <a href="playlist/<%= idUser %>/<%= i %>">
                         <%= playlists[i].nome %>
                     </a>
@@ -49,9 +49,15 @@
                 <img id="t-img" src="../imgs/top50brazil.jpg" alt="Img">
             </div>
             <div id="top-data">
-                <h1 id="title"><% playlist.nomePlaylist %></h1>
-                <h2 id="description"><% playlist.desc %></h2>
-                <p id="songCount"><% playlist.songs.length %></p>
+                <h1 id="title">
+                    <% playlist.nomePlaylist %>
+                </h1>
+                <h2 id="description">
+                    <% playlist.desc %>
+                </h2>
+                <p id="songCount">
+                    <% playlist.songs.length %>
+                </p>
             </div>
         </div>
         <div id="sub-top">

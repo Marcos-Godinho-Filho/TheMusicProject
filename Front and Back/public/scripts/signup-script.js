@@ -29,21 +29,21 @@ botaoCadastro.addEventListener('click', (e) => {
         else { mensagemErroNome.style.display = "none"; }
 
         if (!emailDigitado.match(EMAIL_PATTERN)) {
-            mensagemErroEmail.style.display = "block";
+            mensagemErroEmail.style.display = "flex";
             mensagemErroEmail.innerHTML = "Padrão de email incorreto";
             e.preventDefault();
         }
         else { mensagemErroEmail.style.display = "none"; }
 
         if (senhaDigitada.length < 8) {
-            mensagemErroSenha.style.display = "block";
+            mensagemErroSenha.style.display = "flex";
             mensagemErroSenha.innerHTML = "A senha deve ter no mínimo 8 caracteres";
             e.preventDefault();
         }
         else { mensagemErroSenha.style.display = "none"; }
 
         if (senhaDigitada != confirmacaoSenhaDigitada) {
-            mensagemErroConfirmarSenha.style.display = "block";
+            mensagemErroConfirmarSenha.style.display = "flex";
             mensagemErroConfirmarSenha.innerHTML = "A confirmação de senha deve ser a mesma que a senha digitada";
             e.preventDefault();
         }
@@ -77,7 +77,7 @@ botaoCadastro.addEventListener('click', (e) => {
 
             let resp = await res.json();
             if (resp.success == false) {
-                mensagemErroEmail.style.display = "block";
+                mensagemErroEmail.style.display = "flex";
                 mensagemErroEmail.innerHTML = "Email já cadastrado!";
             }
             else 
