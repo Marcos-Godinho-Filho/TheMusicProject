@@ -194,8 +194,6 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
         createPlaylist;
         hideBox(id);
-
-        window.location.href = `/${id}/playlist`;
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

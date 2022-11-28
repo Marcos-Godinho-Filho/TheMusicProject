@@ -39,12 +39,6 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
         res.render(pattern + '/public/views/search.ejs', {idUser: idUser, playlists: playlists, info: retorno});
     
         retorno = [];
-
-        // if (checkExistentUser(email)) {
-        //     res.status(200).json({ info: retorno, playlists: playlists });
-        //     retorno = [];
-        // }
-        // else { res.json({ found: false }) }
     }
     catch (erro) { throw new Error(erro); }
 });
@@ -165,47 +159,47 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     else { res.json({ success: false }); return } // Já existe no banco de dados
 });
 
-// isPlaylistExistent = async (idUser, posPlaylist) => {
-//     try {
-//         let usuario = await Users.findById({ "_id": idUser }).lean().exec()
-//         if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
-//             return true
-//         else 
-//             return false
-//     }
-//     catch (err) { return false }
-// }
+isPlaylistExistent = async (idUser, posPlaylist) => {
+    try {
+        let usuario = await Users.findById({ "_id": idUser }).lean().exec()
+        if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
+            return true
+        else 
+            return false
+    }
+    catch (err) { return false }
+}
 
-// exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/insertPlaylist/:id' || '/search/insertPlaylist/:id', async (req, res) => {
+exports.insertNewPlaylist = ('/home/insertPlaylist/:id' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/insertPlaylist/:id' || '/search/insertPlaylist/:id', async (req, res) => {
 
-//     let nomePlaylist = req.body.nome;
-//     let img = req.body.imagem;
-//     let desc = req.body.descricao;
-//     let songs = [];
-//     let idUser = req.params.id;
+    let nomePlaylist = req.body.nome;
+    let img = req.body.imagem;
+    let desc = req.body.descricao;
+    let songs = [];
+    let idUser = req.params.id;
 
-//     let playlist = { nomePlaylist, img, desc, songs };
+    let playlist = { nomePlaylist, img, desc, songs };
 
-//     let playlists;
-//     try {
-//         if (isUserExistent(idUser)) {
-//             const usuario = await Users.findById({ "_id": idUser })
-//             playlists = usuario.playlists;
-//         }
-//     }
-//     catch (erro) {
-//         res.json({ success: false });
-//     }
-//     playlists.push(playlist);
+    let playlists;
+    try {
+        if (isUserExistent(idUser)) {
+            const usuario = await Users.findById({ "_id": idUser })
+            playlists = usuario.playlists;
+        }
+    }
+    catch (erro) {
+        res.json({ success: false });
+    }
+    playlists.push(playlist);
 
-//     try {
-//         if (isUserExistent(idUser))
-//             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-//     }
-//     catch (erro) {
-//         res.json({ success: false });
-//     }
-// });
+    try {
+        if (isUserExistent(idUser))
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+    }
+    catch (erro) {
+        res.json({ success: false });
+    }
+});
 
 // exports.insertNewMusicIntoPlaylist = ('/search/insertMusic/:id/', async (req, res) => {
 
