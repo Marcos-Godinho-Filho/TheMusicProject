@@ -54,7 +54,6 @@ botaoCadastro.addEventListener('click', (e) => {
 
     function cadastrar(e) {
         e.preventDefault()
-
         // Armazenamos as informacoes passadas pelo usuario para um vetor e mandamos esse vetor como parcela para o backend
         let info = []
         info.push(emailDigitado)
@@ -64,7 +63,7 @@ botaoCadastro.addEventListener('click', (e) => {
         postInfo(info)
         async function postInfo(info) {
             if (info == "") { return }
-            const res = await fetch(BASE_URL,
+            const res = await fetch(window.location.href,
             {
                 method: 'POST',
                 headers: {
@@ -74,7 +73,7 @@ botaoCadastro.addEventListener('click', (e) => {
                     parcel: info
                 })
             })
-
+            console.log("----------------------4");
             let resp = await res.json()
             if (resp.success == false) {
                 mensagemErroEmail.style.display = "flex"

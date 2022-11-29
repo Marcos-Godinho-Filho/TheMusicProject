@@ -48,7 +48,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
     let parcel = req.query.parcel
 
     try {
-        if (checkExistentUser(email)) {
+        if (isUserExistent(email)) {
             const optionsAxios = {
                 method: 'GET',
                 url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
@@ -87,7 +87,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
         }
         else { res.json({ found: false }) }
     }
-    catch (erro) { throw new Error(erro) }
+    catch (erro) { console.log(erro); }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
@@ -140,9 +140,9 @@ function isUserExistent(email) {
     return false
 }
 
-function getUserID(email) {
+async function getUserID(email) {
 
-    let listaUsuarios = Users.find({}).lean().exec()
+    let listaUsuarios = await Users.find({}).lean().exec()
     for (let user of listaUsuarios) {
         if (user["email"] == email) {
             return user["_id"] + ""

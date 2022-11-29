@@ -21,8 +21,7 @@ function buscar(e) {
     document.querySelector('.container-animation').style.display = 'flex'
 
     e.preventDefault()
-    postInfo()
-    setTimeout(getInfo, 2000)
+    setTimeout(postInfo(), 2000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
