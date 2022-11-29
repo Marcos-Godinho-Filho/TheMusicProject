@@ -161,7 +161,7 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     let desc = ""
     let playlists = []
 
-    let result = await isUserExistent(email)
+    let result = isUserExistent(email)
     if (!result) {
         let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists })
 

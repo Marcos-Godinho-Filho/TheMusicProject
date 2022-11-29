@@ -63,7 +63,7 @@ botaoCadastro.addEventListener('click', (e) => {
         postInfo(info)
         async function postInfo(info) {
             if (info == "") { return }
-            const res = await fetch(window.location.href,
+            const res = await fetch('http://localhost:3000/registration',
             {
                 method: 'POST',
                 headers: {
@@ -73,7 +73,6 @@ botaoCadastro.addEventListener('click', (e) => {
                     parcel: info
                 })
             })
-            console.log("----------------------4");
             let resp = await res.json()
             if (resp.success == false) {
                 mensagemErroEmail.style.display = "flex"
