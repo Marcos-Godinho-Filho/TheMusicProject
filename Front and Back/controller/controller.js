@@ -21,7 +21,7 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 
     try {
         // res.sendFile(path.join(pattern + '/public/Home/home.html'))
-        res.render('../public/views/home', {idUser: idUser, playlists: playlists})
+        res.render('../public/views/home', { idUser: idUser, playlists: playlists })
     }
     catch (erro) { console.log(erro) }
 })
@@ -34,8 +34,8 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
         playlists = []
 
     try {
-        res.render(pattern + '/public/views/search.ejs', {idUser: idUser, playlists: playlists, info: retorno})
-    
+        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, info: retorno })
+
         retorno = []
     }
     catch (erro) { throw new Error(erro) }
@@ -114,11 +114,14 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 
 async function getUsersPlaylists(idUser) {
 
-    let playlists = await Users.findById({ "_id": idUser }).playlists
+    let playlists
+    if (isUserExistent(idUser)) {
+        playlists = await Users.findById({ "_id": idUser }).playlists
+    }
+
     if (playlists == undefined)
         playlists = []
 
-    
     return playlists
 }
 
@@ -173,7 +176,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
         let usuario = await Users.findById({ "_id": idUser }).lean().exec()
         if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
             return true
-        else 
+        else
             return false
     }
     catch (err) { return false }
@@ -181,23 +184,16 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 
 //'/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/'
 exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => {
-    alert("Olá!")
-
     let nomePlaylist = req.body.nome
-    alert(nomePlaylist)
     let img = req.body.imagem
     let desc = req.body.descricao
     let songs = []
     let idUser = req.params.id
 
-    let playlist = { nomePlaylist, img, desc, songs }
+    let playlist = { nomePlaylist: nomePlaylist, imagem: img, descricao: desc, musicas: songs }
 
     let playlists = []
     try {
-        // if (isUserExistent(idUser)) {
-        //     const usuario = await Users.findById({ "_id": idUser })
-        //     playlists = usuario.playlists
-        // }
         playlists = getUsersPlaylists(idUser)
     }
     catch (erro) {
@@ -206,18 +202,17 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     playlists.push(playlist)
 
     try {
-        if (isUserExistent(idUser)) // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
+        await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) {
         res.json({ success: false })
     }
     // Direcionar para a pagina de playlist e ja carregar a playlist no aside 
     try {
-        res.render('../public/views/playlist', {idUser: idUser, playlists: playlists, playlist: playlist})
+        res.render('../public/views/playlist', { idUser: idUser, playlists: playlists, playlist: playlist })
     }
     catch (erro) { console.log(erro) }
-
 })
 
 // exports.insertNewMusicIntoPlaylist = ('/search/insertMusic/:id/', async (req, res) => {
@@ -274,16 +269,17 @@ exports.setNewPassword = ('/password-recovery', async (req, res) => {
     else { res.json({ success: false }) }
 })
 
-exports.updateUser = ('/profile/updateUser/:id', async (req, res) => {
+exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
 
+    let idUser = req.params.id
     let nome = req.body.nome
     let email = req.body.email
     let imagemPerfil = req.body.imagemPerfil
     let descPerfil = req.body.descPerfil
     let corFundo = req.body.corFundo
 
-    if (isUserExistent(email, senha)) {
-        await Users.updateOne({ email: email }, { $set: { nome: nome } }, { $set: { imagemPerfil: imagemPerfil } }, { $set: { descPerfil: descPerfil } }, { $set: { corFundo: corFundo } })
+    if (isUserExistent(email)) {
+        await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
     }
     else { res.json({ success: false }) }
 })
@@ -364,7 +360,7 @@ exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res
     }
     catch (erro) { res.json({ success: false }) }
     // Redirecionar para home
-    res.render('../public/views/home', {idUser: idUser, playlists: playlists})
+    res.render('../public/views/home', { idUser: idUser, playlists: playlists })
 }
 
 // exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {

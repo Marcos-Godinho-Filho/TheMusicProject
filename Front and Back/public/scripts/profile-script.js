@@ -97,7 +97,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         putUser()
 
         async function putUser(e) {
-            const res = await fetch(BASE_URL + '/updateUser/', {
+            const res = await fetch(BASE_URL + '/updateUser', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
@@ -128,8 +128,6 @@ document.querySelector('#edit').addEventListener('click', () => {
 })
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
-    alert(BASE_URL)
-
     let id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
@@ -179,10 +177,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     })
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
-        alert('Clicked')
-
         async function createPlaylist(e) {
-            alert('called function createPlaylist')
             const res = await fetch(BASE_URL + '/insertPlaylist', {
                 method: 'POST',
                 headers: {

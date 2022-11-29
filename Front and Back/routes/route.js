@@ -53,7 +53,7 @@ router.post('/profile/:id/insertPlaylist', controller.insertNewPlaylist) // feit
 //     Users will need (nome, *email, senha)
 // */
 // router.put('/playlist/updatePlaylist/:id/:idPl', controller.updatePlaylist) // Playlist Page // feito
-router.put('/profile/updateUser/:id', controller.updateUser) // Profile Page // feito
+router.put('/profile/:id/updateUser', controller.updateUser) // Profile Page // feito
 router.put('/password-recovery', controller.setNewPassword) // Password-Recovery Page // feito
 
 
