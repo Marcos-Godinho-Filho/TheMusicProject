@@ -61,10 +61,10 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
             axios.request(optionsAxios).then(function (response) {
                 for (let musica of response.data['data']) {
                     retorno.push({
-                        "title_short": musica["title_short"],
-                        "artist": musica["artist"]["name"],
+                        "nome": musica["title_short"],
+                        "artista": musica["artist"]["name"],
                         "album": musica["album"]["title"],
-                        "image": musica["album"]["cover_medium"],
+                        "imagem": musica["album"]["cover_medium"],
                         "preview": musica["preview"]
                     })
 
@@ -76,6 +76,13 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
                 return res.status(400).send({ status: 'failed' })
             }
             res.status(200).send({ status: 'received' })
+
+            let idUser = req.params.id
+            let playlists = await Users.findById({ "_id": idUser }).playlists
+            if (playlists == undefined)
+                playlists = []
+            
+            res.render(pattern + '/public/views/search.ejs', { playlists: playlists, idUser: idUser, retorno: retorno })
         }
         else { res.json({ found: false }) }
     }

@@ -39,42 +39,42 @@ function buscar(e) {
         })
     }
 
-    async function getInfo(e) {
-        const res = await fetch(BASE_URL, {
-            method: 'GET'
-        })
+    // async function getInfo(e) {
+    //     const res = await fetch(BASE_URL, {
+    //         method: 'GET'
+    //     })
 
-        const data = await res.json()
+    //     const data = await res.json()
 
-        resultadoBusca = data.info
+    //     resultadoBusca = data.info
 
-        for (let pos = 0; pos < resultadoBusca.length; pos++) {
-            results.innerHTML += `
-                <div class="song">
-                    <div class="s-image">
-                        <img src="${resultadoBusca[pos]["image"]}" alt="" draggable="false">
-                    </div>
-                    <div class="s-data">
-                        <h1>${resultadoBusca[pos]["title_short"]}</h1>
-                        <h2>${resultadoBusca[pos]["artist"]}</h2>
-                        <h2>${resultadoBusca[pos]["album"]}</h2>
-                    </div>
-                    <div class="s-buttons">
-                        <button style="font-size: 20px" onclick="showSelectPlaylistBox(${pos})">
-                            <i class="fa-solid fa-plus" style="color: #fff"></i>
-                        </button>
-                        <button style="font-size: 20px" onclick="showSongData('${resultadoBusca[pos]["image"]}', '${resultadoBusca[pos]["title_short"]}', '${resultadoBusca[pos]["artist"]}', '${resultadoBusca[pos]["album"]}', '${resultadoBusca[pos]["preview"]}')"> 
-                            <i class="fa-solid fa-play" style="color: #fff"></i>
-                        </button>
-                    </div>
-                </div>
-                `
-        }
-        document.querySelector('.container-animation').style.display = 'none'
-        if (results.childNodes.length == 0) {
-            results.innerHTML = '<div id="noResults"> Sem resultados para a busca. </div>'
-        }
-    }
+    //     for (let pos = 0; pos < resultadoBusca.length; pos++) {
+    //         results.innerHTML += `
+    //             <div class="song">
+    //                 <div class="s-image">
+    //                     <img src="${resultadoBusca[pos]["image"]}" alt="" draggable="false">
+    //                 </div>
+    //                 <div class="s-data">
+    //                     <h1>${resultadoBusca[pos]["title_short"]}</h1>
+    //                     <h2>${resultadoBusca[pos]["artist"]}</h2>
+    //                     <h2>${resultadoBusca[pos]["album"]}</h2>
+    //                 </div>
+    //                 <div class="s-buttons">
+    //                     <button style="font-size: 20px" onclick="showSelectPlaylistBox(${pos})">
+    //                         <i class="fa-solid fa-plus" style="color: #fff"></i>
+    //                     </button>
+    //                     <button style="font-size: 20px" onclick="showSongData('${resultadoBusca[pos]["image"]}', '${resultadoBusca[pos]["title_short"]}', '${resultadoBusca[pos]["artist"]}', '${resultadoBusca[pos]["album"]}', '${resultadoBusca[pos]["preview"]}')"> 
+    //                         <i class="fa-solid fa-play" style="color: #fff"></i>
+    //                     </button>
+    //                 </div>
+    //             </div>
+    //             `
+    //     }
+    //     document.querySelector('.container-animation').style.display = 'none'
+    //     if (results.childNodes.length == 0) {
+    //         results.innerHTML = '<div id="noResults"> Sem resultados para a busca. </div>'
+    //     }
+    // }
 }
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
@@ -334,24 +334,24 @@ let showSelectPlaylistBox = function (pos) {
     document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
         async function addSong(e) {
-            const res = await fetch(BASE_URL + '/insertMusic', {
+            const res = await fetch(BASE_URL + `/${posPl}/insertMusic`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: {
-                    nomeMusica: resultadoBusca[posicaoMusica]["album"],
-                    nomeArtista: resultadoBusca[posicaoMusica]["artist"],
-                    nomeAlbum: resultadoBusca[posicaoMusica]["title_short"],
+                    nomeMusica: resultadoBusca[posicaoMusica]["nome"],
+                    nomeArtista: resultadoBusca[posicaoMusica]["artista"],
+                    nomeAlbum: resultadoBusca[posicaoMusica]["album"],
                     previewMusica: resultadoBusca[posicaoMusica]["preview"],
-                    imagem: resultadoBusca[posicaoMusica]["image"],
+                    imagem: resultadoBusca[posicaoMusica]["imagem"],
                     posPlaylist: posPl,
                     idUser: idUser
                 }
             })
         }
 
-        addSong
+        addSong()
 
         hideBox(id)
     })
