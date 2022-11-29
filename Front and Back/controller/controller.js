@@ -104,7 +104,6 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 })
 
 exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
-    res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'))
 
     let idUser = req.params.id
     let idPlaylist = req.params.idPl
@@ -112,7 +111,7 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     let playlist = playlists[idPlaylist]
 
     try {
-        res.status(200).json({ playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
+        res.render(pattern + '/public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
     }
     catch (erro) { throw new Error(erro) }
 })
@@ -293,31 +292,31 @@ exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
     else { res.json({ success: false }) }
 })
 
-// exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
+exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
-//     let namePlaylist = req.body.name
-//     let descPlaylist = req.body.description
-//     let image = req.body.img
-//     let posicaoPlaylist = req.params.idPl
-//     let idUser = req.params.id
+    let namePlaylist = req.body.name
+    let descPlaylist = req.body.description
+    let image = req.body.img
+    let posicaoPlaylist = req.params.idPl
+    let idUser = req.params.id
 
-//     let playlists
-//     try {
-//         const registro = await Users.findById({ "_id": idUser })
-//         playlists = registro.playlists
-//     }
-//     catch (erro) { res.json({ success: false }) }
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists
+    }
+    catch (erro) { res.json({ success: false }) }
 
-//     let music = playlists[posicaoPlaylist].songs
-//     playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
+    let music = playlists[posicaoPlaylist].songs
+    playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
 
-//     try {
-//         if (isUserExistent(idUser)) {
-//             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-//         }
-//     }
-//     catch (erro) { res.json({ success: false }) }
-// })
+    try {
+        if (isUserExistent(idUser)) {
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+    }
+    catch (erro) { res.json({ success: false }) }
+})
 
 exports.checkValidation = ('/authentication', async (req, res) => {
 
@@ -372,36 +371,36 @@ exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res
     res.render('../public/views/home', { idUser: idUser, playlists: playlists })
 }
 
-// exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
+exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
 
-//     let posicaoPlaylist = req.body.idPl
-//     let posicaoMusica = req.body.idSong
-//     let idUser = req.params.id
+    let posicaoPlaylist = req.body.idPl
+    let posicaoMusica = req.body.idSong
+    let idUser = req.params.id
 
-//     let playlists
-//     try {
-//         const registro = await Users.findById({ "_id": idUser })
-//         playlists = registro.playlists
-//     }
-//     catch (erro) { res.json({ success: false }) }
+    let playlists
+    try {
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists
+    }
+    catch (erro) { res.json({ success: false }) }
 
-//     try {
-//         const musicas = playlists[posicaoPlaylist].songs
-//         const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
-//         const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1)
-//         const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement)
+    try {
+        const musicas = playlists[posicaoPlaylist].songs
+        const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
+        const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1)
+        const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement)
 
-//         playlists[posicaoPlaylist].songs = copyWithoutRemovedElement
+        playlists[posicaoPlaylist].songs = copyWithoutRemovedElement
 
-//         try {
-//             if (isUserExistent(idUser))
-//                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-//         }
-//         catch (erro) {
-//             res.json({ success: false })
-//         }
-//     }
-//     catch (erro) {
-//         res.json({ success: false })
-//     }
-// }
+        try {
+            if (isUserExistent(idUser))
+                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+        catch (erro) {
+            res.json({ success: false })
+        }
+    }
+    catch (erro) {
+        res.json({ success: false })
+    }
+}

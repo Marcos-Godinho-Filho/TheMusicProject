@@ -10,7 +10,7 @@ let mensagemErroConfirmarSenha = document.querySelector("#mensagemErroConfirmarS
 
 let botaoCadastro = document.querySelector("#botaoCadastro")
 
-const BASE_URL = 'http://localhost:3000/registration/'
+const BASE_URL = window.location.href
 const EMAIL_PATTERN = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
 
 botaoCadastro.addEventListener('click', (e) => {
