@@ -33,7 +33,7 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
         playlists = []
 
     try {
-        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, info: retorno })
+        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
 
         retorno = []
     }
