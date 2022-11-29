@@ -1,63 +1,8 @@
-document.addEventListener('load', getInfoLoad)
-
 const BASE_URL = window.location.href
 
 let songs = []
 let idUser
 let posPl
-
-async function getInfoLoad(e) {
-    let playlists = document.querySelector('.sidebar-playlists')
-    let title = document.querySelector('#title')
-    let description = document.querySelector('#description')
-    let songCount = document.querySelector("#songCount")
-    let img = document.querySelector("#t-img")
-    let songsDiv = document.querySelector('#songs')
-
-    const res = await fetch(BASE_URL, {
-        method: 'GET'
-    })
-
-    const data = await res.json()
-    let resultado = data.playlists
-    idUser = data.idUser
-
-    for (let i = 0; i < resultado.length; i++) {
-        playlists.innerHTML += `<a href="/${id}/playlist/${i}">${resultado[pos].nomePlaylist}</a>` // Ainda precisa disso?
-    }
-
-    let playlist = data.playlist
-    posPl = data.idPlaylist
-
-    title.innerHTML = playlist.nomePlaylist
-    description.innerHTML = playlist.desc
-    songCount.innerHTML = playlist.songs.length() + ""
-    img.src = playlist.img
-
-    songs = playlist.songs
-
-    for (let i = 0; i < songs.length; i++) {
-        songsDiv.innerHTML += `
-            <div class="song">
-                <div class="s-image">
-                    <img src="${songs[i].imagem}" alt="Img" draggable="false">
-                </div>
-                <div class="s-data">
-                    <h1>${songs[i].nomeMusica}</h1>
-                    <h2>${songs[i].nomeArtista}</h2>
-                    <h2>${songs[i].nomeAlbum}</h2>
-                </div>
-                <div class="s-buttons">
-                    <button style="font-size: 20px" onclick="removeSong(${i})">
-                        <i class="fa-solid fa-trash-can" style="color: #fff"></i>
-                    </button>
-                    <button style="font-size: 20px" onclick="showSongData( '${songs[i].imagem}', '${songs[i].nomeMusica}', '${songs[i].nomeArtista}', '${songs[i].nomeAlbum}', '${songs[i].previewMusica}')">  
-                        <i class="fa-solid fa-play" style="color: #fff"></i>
-                    </button>
-                </div>
-            </div>`
-    }
-}
 
 let playBtn = document.querySelector('#playBtn')
 let pauseBtn = document.querySelector('#pauseBtn')

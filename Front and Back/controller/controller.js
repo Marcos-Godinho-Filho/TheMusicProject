@@ -1,5 +1,4 @@
 const axios = require('axios')
-const path = require('path')
 const db = require('../database/db')
 const user = require('../models/user')
 
@@ -104,19 +103,19 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
     catch (erro) { throw new Error(erro) }
 })
 
-// exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
-//     res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'))
+exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
+    res.sendFile(path.join(pattern + '/public/Playlist/playlist.html'))
 
-//     let idUser = req.params.id
-//     let idPlaylist = req.params.idPl
-//     let playlists = await Users.findById({ "_id": idUser }).playlists
-//     let playlist = playlists[idPlaylist]
+    let idUser = req.params.id
+    let idPlaylist = req.params.idPl
+    let playlists = await Users.findById({ "_id": idUser }).playlists
+    let playlist = playlists[idPlaylist]
 
-//     try {
-//         res.status(200).json({ playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
-//     }
-//     catch (erro) { throw new Error(erro) }
-// })
+    try {
+        res.status(200).json({ playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
+    }
+    catch (erro) { throw new Error(erro) }
+})
 
 function getUsersPlaylists(idUser) {
 
@@ -224,42 +223,42 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     catch (erro) { console.log(erro) }
 })
 
-// exports.insertNewMusicIntoPlaylist = ('/search/insertMusic/:id/', async (req, res) => {
+exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res) => {
 
-//     let nomeMusica = req.body.nomeMusica
-//     let nomeArtista = req.body.nomeArtista
-//     let nomeAlbum = req.body.nomeAlbum
-//     let previewMusica = req.body.previewMusica
-//     let imagem = req.body.imagem
-//     let posPlaylist = req.body.posPlaylist
-//     let idUser = req.body.idUser
+    let nomeMusica = req.body.nomeMusica
+    let nomeArtista = req.body.nomeArtista
+    let nomeAlbum = req.body.nomeAlbum
+    let previewMusica = req.body.previewMusica
+    let imagem = req.body.imagem
+    let posPlaylist = req.body.posPlaylist
+    let idUser = req.body.idUser
 
-//     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
+    let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
-//     try {
-//         if (isUserExistent(idUser)) {
-//             const registro = await Users.findById({ "_id": idUser })
-//             playlists = registro.playlists
-//         }
-//     }
-//     catch (erro) {
-//         res.json({ success: false })
-//     }
+    try {
+        if (isUserExistent(idUser)) {
+            const registro = await Users.findById({ "_id": idUser })
+            playlists = registro.playlists
+        }
+    }
+    catch (erro) {
+        res.json({ success: false })
+    }
 
-//     if (isPlaylistExistent(idUser, pos)) {
-//         playlists[posPlaylist].songs = playlists[posPlaylist].songs.push(song)
-//         try {
-//             if (isUserExistent(idUser))
-//                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-//         }
-//         catch (erro) {
-//             res.json({ success: false })
-//         }
-//     }
-//     else
-//         res.json({ success: false })
+    if (isPlaylistExistent(idUser, pos)) {
+        playlists[posPlaylist].songs = playlists[posPlaylist].songs.push(song)
+        try {
+            if (isUserExistent(idUser))
+                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        }
+        catch (erro) {
+            res.json({ success: false })
+        }
+    }
+    else
+        res.json({ success: false })
 
-// })
+})
 
 // // MÉTODOS PUT
 
