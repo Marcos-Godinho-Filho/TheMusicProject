@@ -6,7 +6,6 @@ const user = require('../models/user')
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users')
 
 const pattern = __dirname.replace('\\controller', '')
-console.log(pattern)
 
 let retorno = []
 
@@ -217,7 +216,7 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     }
     // Direcionar para a pagina de playlist e ja carregar a playlist no aside 
     try {
-        res.render('../public/views/playlist', { idUser: idUser, playlists: playlists, playlist: playlist })
+        res.render('../public/views/playlist.ejs', { idUser: idUser, playlists: playlists, playlist: playlist })
     }
     catch (erro) { console.log(erro) }
 })

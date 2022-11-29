@@ -56,7 +56,7 @@
                     <% playlist.desc %>
                 </h2>
                 <p id="songCount">
-                    <% playlist.songs.length() %>
+                    <% playlist.musicas %>
                 </p>
             </div>
         </div>
@@ -80,21 +80,21 @@
     <div id="#dbResultBox"> </div>
 
     <main id="main">
-        <% for (let i=0; i < playlist.songs.length(); i++) { %>
-            <div id="songs">
+        <% for (let i=0; i < playlist.musicas.length; i++) { %>
+            <div id="musicas">
                 <div class="song">
                     <div class="s-image">
-                        <img src="<%= playlists.songs[i].imagem %>" alt="Img" draggable="false">
+                        <img src="<%= playlists.musicas[i].imagem %>" alt="Img" draggable="false">
                     </div>
                     <div class="s-data">
                         <h1>
-                            <%= playlists.songs[i].nomeMusica %>
+                            <%= playlists.musicas[i].nomeMusica %>
                         </h1>
                         <h2>
-                            <%= playlists.songs[i].nomeArtista %>
+                            <%= playlists.musicas[i].nomeArtista %>
                         </h2>
                         <h2>
-                            <%= playlists.songs[i].nomeAlbum %>
+                            <%= playlists.musicas[i].nomeAlbum %>
                         </h2>
                     </div>
                     <div class="s-buttons">
@@ -102,7 +102,7 @@
                             <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                         </button>
                         <button style="font-size: 20px;"
-                            onclick="showSongData('<%= playlists.songs[i].imagem %>', '<%= playlists.songs[i].nomeMusica %>', '<%= playlists.songs[i].nomeArtista %>', '<%= playlists.songs[i].nomeAlbum %>', '<%= playlists.songs[i].previewMusica %>')">
+                            onclick="showSongData('<%= playlists.musicas[i].imagem %>', '<%= playlists.musicas[i].nomeMusica %>', '<%= playlists.musicas[i].nomeArtista %>', '<%= playlists.musicas[i].nomeAlbum %>', '<%= playlists.musicas[i].previewMusica %>')">
                             <i class="fa-solid fa-play" style="color: #fff;"></i>
                         </button>
                     </div>

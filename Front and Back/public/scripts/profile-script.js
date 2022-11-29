@@ -186,15 +186,13 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
                 body: JSON.stringify({
                     nome: document.querySelector('#newTitle').value,
                     descricao: document.querySelector('#newDescription').value,
-                    imagem: document.querySelector('#img-button-cp').src
+                    imagem: document.querySelector('#img-button-cp').src,
                 })
             })
         }
 
         createPlaylist()
         hideBox(id)
-
-        window.location.reload()
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

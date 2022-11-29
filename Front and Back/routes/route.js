@@ -8,7 +8,7 @@ const router = express.Router()
 */
 
 const pattern = __dirname.replace('\\routes', '')
-console.log(pattern)
+
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.render(pattern + '/public/views/sign-up.ejs')
