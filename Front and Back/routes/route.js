@@ -1,14 +1,13 @@
 const express = require('express')
 const controller = require('../controller/controller')
 const router = express.Router()
-const path = require('path')
 
 /*
     GET (getting data from backend and passing them to frontend)
     Registration, authentication and password-recovery don't need get since we're not passing data from back to front 
 */
 
-const pattern = __dirname.replace('\routes', '')
+const pattern = __dirname.replace('\\routes', '')
 console.log(pattern)
 // '/' --> go to registration page
 router.get('/', (req, res) => {
