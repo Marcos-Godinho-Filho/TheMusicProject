@@ -6,7 +6,7 @@ const user = require('../models/user')
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users')
 
-const pattern = __dirname.replace('\controller', '')
+const pattern = __dirname.replace('\\controller', '')
 console.log(pattern)
 
 let retorno = []

@@ -1,7 +1,6 @@
 const express = require('express')
 const controller = require('../controller/controller')
 const router = express.Router()
-const path = require('path')
 
 /*
     GET (getting data from backend and passing them to frontend)
