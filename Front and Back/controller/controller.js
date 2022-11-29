@@ -6,9 +6,7 @@ const user = require('../models/user')
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users')
 
-// pattern no meu pc (do Marcos): 0, 45 + 27
-const pattern = __dirname.substring(0, 45 + 27)
-
+const pattern = __dirname.replace('/routes', '')
 
 let retorno = []
 
@@ -112,27 +110,31 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 //     catch (erro) { throw new Error(erro) }
 // })
 
-async function getUsersPlaylists(idUser) {
+function getUsersPlaylists(idUser) {
 
     let playlists = []
     if (isUserExistent(idUser)) {
-        playlists = await Users.findById({ "_id": idUser }).playlists
+        playlists = Users.findById({ "_id": idUser }).playlists
     }
+    if (playlists == undefined) {
+        playlists = []
+    } 
 
     return playlists
 }
 
 
-async function isUserExistent(email) {
+function isUserExistent(email) {
 
-    let listaUsuarios = await Users.find({ email: email }).lean().exec()
+    let listaUsuarios = Users.find({ email: email }).lean().exec()
     if (listaUsuarios.length > 0) return true
 
     return false
 }
 
-async function getUserID(email) {
-    let listaUsuarios = await Users.find({}).lean().exec()
+function getUserID(email) {
+
+    let listaUsuarios = Users.find({}).lean().exec()
     for (let user of listaUsuarios) {
         if (user["email"] == email) {
             return user["_id"] + ""
@@ -169,6 +171,7 @@ exports.insertNewUser = ('/registration', async (req, res) => {
 })
 
 isPlaylistExistent = async (idUser, posPlaylist) => {
+
     try {
         let usuario = await Users.findById({ "_id": idUser }).lean().exec()
         if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
@@ -181,6 +184,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
 
 //'/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/'
 exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => {
+
     let nomePlaylist = req.body.nome
     let img = req.body.imagem
     let desc = req.body.descricao
@@ -196,8 +200,8 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     catch (erro) {
         res.json({ success: false })
     }
+    console.log(playlists)
     playlists.push(playlist)
-
     try {
         // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
@@ -252,6 +256,7 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
 // // MÉTODOS PUT
 
 exports.setNewPassword = ('/password-recovery', async (req, res) => {
+
     const parcel = req.body.parcel
 
     let email = parcel[0]

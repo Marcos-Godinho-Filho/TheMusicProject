@@ -8,8 +8,7 @@ const path = require('path')
     Registration, authentication and password-recovery don't need get since we're not passing data from back to front 
 */
 
-// pattern no meu pc (do Marcos): 0, 45 + 27
-const pattern = __dirname.substring(0, 45 + 27)
+const pattern = __dirname.replace('/routes', '')
 // '/' --> go to registration page
 router.get('/', (req, res) => {
     res.render(pattern + '/public/views/sign-up.ejs')
