@@ -114,13 +114,10 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 
 async function getUsersPlaylists(idUser) {
 
-    let playlists
+    let playlists = []
     if (isUserExistent(idUser)) {
         playlists = await Users.findById({ "_id": idUser }).playlists
     }
-
-    if (playlists == undefined)
-        playlists = []
 
     return playlists
 }
