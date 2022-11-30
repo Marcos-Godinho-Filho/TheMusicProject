@@ -205,7 +205,6 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     catch (erro) {
         res.json({ success: false })
     }
-    console.log(playlists)
     playlists.push(playlist)
     try {
         // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
@@ -216,7 +215,7 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     }
     // Direcionar para a pagina de playlist e ja carregar a playlist no aside 
     try {
-        res.render('../public/views/playlist.ejs', { idUser: idUser, playlists: playlists, playlist: playlist })
+         n.href = `playlist/${idUser}/${playlists.length() - 1}`
     }
     catch (erro) { console.log(erro) }
 })

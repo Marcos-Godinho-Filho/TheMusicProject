@@ -193,6 +193,22 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
         createPlaylist()
         hideBox(id)
+
+        async function getIdPlaylist (e) {
+            const res = await fetch(BASE_URL + '/insertPlaylist', {
+                method: 'GET',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: document.querySelector('#newTitle').value,
+                    descricao: document.querySelector('#newDescription').value,
+                    imagem: document.querySelector('#img-button-cp').src,
+                })
+            })
+        }
+
+        window.location.href = `playlist/${idUser}/${}`
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {
