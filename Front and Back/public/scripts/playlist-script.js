@@ -139,13 +139,13 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     let id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
-            <div id="edit-image">
-                <button id="edit-img-button" onclick="document.getElementById('fileReader').click()">
-                    <img id="img-button" alt="Browse" src="../imgs/playlist-icon.png">
+            <div id="edit-image-cp">
+                <button id="edit-img-button-cp" onclick="document.getElementById('fileReader-cp').click()">
+                    <img id="img-button-cp" alt="Browse" src="../imgs/playlist-icon.png">
                 </button>
-                <input type="file" id="fileReader" accept="image/*">
+                <input type="file" id="fileReader-cp" accept="image/*">
             </div>
-            <div id="edit-data">
+            <div id="edit-data-cp">
                 <input type="text" id="newTitle" value="Nome"> </input> 
                 <textarea id="newDescription">Descrição</textarea>
             </div>
@@ -159,8 +159,8 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     let previousImg = ''
 
     const reader = new FileReader()
-    const fileInput = document.querySelector("#fileReader")
-    const img = document.querySelector("#img-button")
+    const fileInput = document.querySelector("#fileReader-cp")
+    const img = document.querySelector("#img-button-cp")
     reader.onload = e => {
         img.src = e.target.result
         previousImg = img.src
@@ -172,38 +172,39 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         reader.readAsDataURL(f)
     })
 
-    document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
+    document.querySelector('#edit-img-button-cp').addEventListener('mouseover', () => {
         previousImg = img.src
-        img.src = '../images/browse.png'
+        img.src = '../imgs/browse.png'
         img.style.width = '200px'
         img.style.height = '200px'
     })
-    document.querySelector('#edit-img-button').addEventListener('mouseout', () => {
+    document.querySelector('#edit-img-button-cp').addEventListener('mouseout', () => {
         img.src = previousImg
         img.style.width = '200px'
         img.style.height = '200px'
     })
 
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
-
         async function createPlaylist(e) {
             const res = await fetch(BASE_URL + '/insertPlaylist', {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
                 body: JSON.stringify({
                     nome: document.querySelector('#newTitle').value,
                     descricao: document.querySelector('#newDescription').value,
-                    imagem: document.querySelector('#img-button').src
+                    imagem: document.querySelector('#img-button-cp').src,
                 })
             })
+
+            const data = await res.json()
+            let idPl = data.idPl
+            window.location.href = `http://localhost:3000/playlist/${idUser}/${idPl}`
         }
 
-        createPlaylist
+        createPlaylist()
         hideBox(id)
-
-        window.location.href = `/${id}/playlist`
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

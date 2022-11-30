@@ -46,17 +46,17 @@
     <header id="header">
         <div id="top">
             <div id="top-image">
-                <img id="t-img" src="../imgs/top50brazil.jpg" alt="Img">
+                <img id="t-img" src="<%= playlist.imagem %>" alt="Img">
             </div>
             <div id="top-data">
                 <h1 id="title">
-                    <% playlist.nomePlaylist %>
+                    <%= playlist.nomePlaylist %>
                 </h1>
                 <h2 id="description">
-                    <% playlist.desc %>
+                    <%= playlist.desc %>
                 </h2>
                 <p id="songCount">
-                    <% playlist.musicas %>
+                    <%= playlist.musicas.length %> músicas
                 </p>
             </div>
         </div>
@@ -116,9 +116,9 @@
                             <img src="" alt="ícone" id="pa-img" draggable="false">
                         </div>
                         <div class="pa-data">
-                            <h1 id="title"> Título 1 </h1>
-                            <h2 id="artist"> Artista 1 </h2>
-                            <h2 id="album"> Álbum 1 </h2>
+                            <h1 id="title"> </h1>
+                            <h2 id="artist"> </h2>
+                            <h2 id="album"> </h2>
                         </div>
                     </div>
                     <div class="player-control">

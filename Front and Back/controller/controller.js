@@ -17,9 +17,9 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
     let playlists = await getUsersPlaylists(idUser)
 
     try {
-        res.render('../public/views/home', { idUser: idUser, playlists: playlists })
+        res.render('../public/views/home.ejs', { idUser: idUser, playlists: playlists })
     }
-    catch (erro) { console.log(erro) }
+    catch (erro) { throw new Error(erro) }
 })
 
 exports.getDataSearch = ('/search/:id', async (req, res) => {
@@ -82,7 +82,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
         }
         else { res.json({ found: false }) }
     }
-    catch (erro) { console.log(erro); }
+    catch (erro) { throw new Error(erro) }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
@@ -186,8 +186,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
     catch (err) { return false }
 }
 
-//'/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/'
-exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => {
+exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/', async (req, res) => {
 
     let nomePlaylist = req.body.nome
     let img = req.body.imagem
