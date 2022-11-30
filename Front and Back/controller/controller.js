@@ -80,7 +80,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
             let playlists = await Users.findById({ "_id": idUser }).playlists
             if (playlists == undefined)
                 playlists = []
-            
+
             res.render(pattern + '/public/views/search.ejs', { playlists: playlists, idUser: idUser, retorno: retorno })
         }
         else { res.json({ found: false }) }
@@ -118,12 +118,12 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 function getUsersPlaylists(idUser) {
 
     let playlists = []
-    if (isUserExistent(idUser)) {
-        playlists = Users.findById({ "_id": idUser }).playlists
-    }
-    if (playlists == undefined) {
-        playlists = []
-    } 
+    // if (isIdExistent(idUser)) {
+    playlists = Users.findById({ "_id": idUser }).playlists
+    // }
+    // if (playlists == undefined) {
+    //     playlists = []
+    // }
 
     return playlists
 }
@@ -133,6 +133,15 @@ function isUserExistent(email) {
 
     let listaUsuarios = Users.find({ email: email }).lean().exec()
     if (listaUsuarios.length > 0) return true
+
+    return false
+}
+
+function isIdExistent(id) {
+
+    let listaUsuarios = Users.findById({ "_id": id }).lean().exec()
+    if (listaUsuarios.length > 0)
+        return true
 
     return false
 }
@@ -209,15 +218,11 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
     try {
         // Nao precisa testar se o usuario existe, ja que se ele chegou ate aqui, é pq ele tem o id necessario para isso
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+        res.json({ idPl: playlists.length - 1 })
     }
     catch (erro) {
         res.json({ success: false })
     }
-    // Direcionar para a pagina de playlist e ja carregar a playlist no aside 
-    try {
-         n.href = `playlist/${idUser}/${playlists.length() - 1}`
-    }
-    catch (erro) { console.log(erro) }
 })
 
 exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res) => {

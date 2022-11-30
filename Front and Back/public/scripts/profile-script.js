@@ -179,7 +179,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     document.querySelector('#confirmCreatePlaylist').addEventListener('click', () => {
         async function createPlaylist(e) {
             const res = await fetch(BASE_URL + '/insertPlaylist', {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
@@ -189,26 +189,14 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
                     imagem: document.querySelector('#img-button-cp').src,
                 })
             })
+
+            const data = await res.json()
+            let idPl = data.idPl
+            window.location.href = `playlist/${idUser}/${idPl}`
         }
 
         createPlaylist()
         hideBox(id)
-
-        async function getIdPlaylist (e) {
-            const res = await fetch(BASE_URL + '/insertPlaylist', {
-                method: 'GET',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify({
-                    nome: document.querySelector('#newTitle').value,
-                    descricao: document.querySelector('#newDescription').value,
-                    imagem: document.querySelector('#img-button-cp').src,
-                })
-            })
-        }
-
-        window.location.href = `playlist/${idUser}/${}`
     })
 
     document.querySelector('#calcelCreatePlaylist').addEventListener('click', () => {

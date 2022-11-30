@@ -38,11 +38,6 @@ router.get('/playlist/:id/:idPl', controller.getDataPlaylist) // Playlist Page /
 router.post('/registration', controller.insertNewUser) // feito
 router.post('/authentication', controller.checkValidation) // feito
 router.post('/search/:id', controller.searchFromAPI) // feito
-router.post('/home/:id/insertPlaylist', controller.insertNewPlaylist) // feito 
-router.post('/search/:id/insertPlaylist', controller.insertNewPlaylist) // feito
-router.post('/profile/:id/insertPlaylist', controller.insertNewPlaylist) // feito
-router.post('/playlist/insertPlaylist/:id', controller.insertNewPlaylist) // feito
-router.post('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) // feito
 
 
 // /*
@@ -54,6 +49,11 @@ router.post('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) //
 // router.put('/playlist/updatePlaylist/:id/:idPl', controller.updatePlaylist) // Playlist Page // feito
 router.put('/profile/:id/updateUser', controller.updateUser) // Profile Page // feito
 router.put('/password-recovery', controller.setNewPassword) // Password-Recovery Page // feito
+router.put('/home/:id/insertPlaylist', controller.insertNewPlaylist) // feito 
+router.put('/search/:id/insertPlaylist', controller.insertNewPlaylist) // feito
+router.put('/profile/:id/insertPlaylist', controller.insertNewPlaylist) // feito
+router.put('/playlist/insertPlaylist/:id', controller.insertNewPlaylist) // feito
+router.put('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) // feito
 
 
 // /*
