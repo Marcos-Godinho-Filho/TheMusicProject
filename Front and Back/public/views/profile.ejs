@@ -55,44 +55,40 @@
                 Conte-nos | Produzido por alunos do Colégio Técnico da Unicamp</marquee>
         </div>
         <div class="card">
-            <% if (user.corFundo="" ) { %>
-                <div class="card-color"> </div>
-                <% } else { %>
-                    <div class="card-color" style="background-color: '<%= user.corFundo %>'"> </div>
-                    <% } %>
-                        <div class="card-image">
-                            <% if (user.imagemPerfil=="" ) { %>
-                                <img id="profile-img" src="../imgs/user-icon.png">
-                                <% } else { %>
-                                    <img id="profile-img" src="<%= user.imagemPerfil %>">
-                                    <% } %>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-buttons">
-                                <a id="delete">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                                <a id="edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                            </div>
-                            <h1 id="username">
-                                <%= user.nome %>
-                            </h1>
-                            <p id="bio">
-                                <%= user.desc %>
-                            </p>
-                            <p id="email">
-                                <%= user.email %>
-                            </p>
-                        </div>
-                        <div class="icons">
-                            <a href="#" class="fab fa-facebook-f"></a>
-                            <a href="#" class="fab fa-twitch"></a>
-                            <a href="#" class="fab fa-instagram"></a>
-                            <a href="#" class="fab fa-twitter"></a>
-                            <a href="#" class="fab fa-whatsapp"></a>
-                        </div>
+            <div class="card-color" style="background-color: <%= user.corFundo %>"> </div>
+            <div class="card-image">
+                <% if (user.imagemPerfil=="" ) { %>
+                    <img id="profile-img" src="../imgs/user-icon.png">
+                    <% } else { %>
+                        <img id="profile-img" src="<%= user.imagemPerfil %>">
+                        <% } %>
+            </div>
+            <div class="card-content">
+                <div class="card-buttons">
+                    <a id="delete">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                    <a id="edit">
+                        <i class="fa-solid fa-edit"></i>
+                    </a>
+                </div>
+                <h1 id="username">
+                    <%= user.nome %>
+                </h1>
+                <p id="bio">
+                    <%= user.desc %>
+                </p>
+                <p id="email">
+                    <%= user.email %>
+                </p>
+            </div>
+            <div class="icons">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitch"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-whatsapp"></a>
+            </div>
         </div>
     </main>
 

@@ -26,9 +26,8 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 exports.getDataSearch = ('/search/:id', async (req, res) => {
 
     let idUser = req.params.id
-    let playlists = await Users.findById({ "_id": idUser }).playlists
-    if (playlists == undefined)
-        playlists = []
+    let user = await Users.findById({ "_id": idUser })
+    let playlists = user.playlists
 
     try {
         res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
@@ -93,8 +92,6 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
     let idUser = req.params.id
     let user = await Users.findById({ "_id": idUser })
     let playlists = user.playlists
-    if (playlists == undefined)
-        playlists = []
 
     try {
         res.render(pattern + '/public/views/profile.ejs', { playlists: playlists, idUser: idUser, user: user })
@@ -115,33 +112,25 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     catch (erro) { throw new Error(erro) }
 })
 
-function getUsersPlaylists(idUser) {
+async function getUsersPlaylists(idUser) {
 
     let playlists = []
-    // if (isIdExistent(idUser)) {
-    playlists = Users.findById({ "_id": idUser }).playlists
-    // }
-    // if (playlists == undefined) {
-    //     playlists = []
-    // }
+    let user = await Users.findById({ "_id": idUser })
+    console.log(user)
+
+    if (user == undefined || user == null)
+        throw new Error ("Erro! Usuário inexistente!")
+    
+    console.log("aqui: " + user)
+    playlists = user.playlists
 
     return playlists
 }
 
+async function isUserExistent(email) {
 
-function isUserExistent(email) {
-
-    let listaUsuarios = Users.find({ email: email }).lean().exec()
+    let listaUsuarios = await Users.find({ email: email }).lean().exec()
     if (listaUsuarios.length > 0) return true
-
-    return false
-}
-
-function isIdExistent(id) {
-
-    let listaUsuarios = Users.findById({ "_id": id }).lean().exec()
-    if (listaUsuarios.length > 0)
-        return true
 
     return false
 }
@@ -212,6 +201,7 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
         playlists = getUsersPlaylists(idUser)
     }
     catch (erro) {
+        console.log(erro)
         res.json({ success: false })
     }
     playlists.push(playlist)
