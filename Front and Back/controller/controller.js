@@ -116,13 +116,11 @@ async function getUsersPlaylists(idUser) {
 
     let playlists = []
     let user = await Users.findById({ "_id": idUser })
-    console.log(user)
 
-    if (user == undefined || user == null)
+    if (user == undefined)
         throw new Error ("Erro! Usuário inexistente!")
     
-    console.log("aqui: " + user)
-    playlists = user.playlists
+    playlists = user["playlists"]
 
     return playlists
 }
@@ -198,7 +196,7 @@ exports.insertNewPlaylist = ('/profile/:id/insertPlaylist', async (req, res) => 
 
     let playlists = []
     try {
-        playlists = getUsersPlaylists(idUser)
+        playlists = await getUsersPlaylists(idUser)
     }
     catch (erro) {
         console.log(erro)
@@ -228,10 +226,8 @@ exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res
     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
     try {
-        if (isUserExistent(idUser)) {
-            const registro = await Users.findById({ "_id": idUser })
-            playlists = registro.playlists
-        }
+        const registro = await Users.findById({ "_id": idUser })
+        playlists = registro.playlists
     }
     catch (erro) {
         res.json({ success: false })
