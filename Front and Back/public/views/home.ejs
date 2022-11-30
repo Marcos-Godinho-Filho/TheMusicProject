@@ -35,8 +35,8 @@
             </div>
             <div class="sidebar-playlists">
                 <% for (let i=0; i < playlists.length; i++) { %>
-                    <a href="playlist/<%= idUser %>/<%= i %>">
-                        <%= playlists[i].nome %>
+                    <a href="/playlist/<%= idUser %>/<%= i %>">
+                        <%= playlists[i].nomePlaylist %>
                     </a>
                     <% } %>
             </div>

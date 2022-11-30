@@ -14,10 +14,9 @@ let retorno = []
 exports.getDataHome = ('/home/:id', async (req, res) => {
 
     let idUser = req.params.id
-    let playlists = getUsersPlaylists(idUser)
+    let playlists = await getUsersPlaylists(idUser)
 
     try {
-        // res.sendFile(path.join(pattern + '/public/Home/home.html'))
         res.render('../public/views/home', { idUser: idUser, playlists: playlists })
     }
     catch (erro) { console.log(erro) }
@@ -26,8 +25,7 @@ exports.getDataHome = ('/home/:id', async (req, res) => {
 exports.getDataSearch = ('/search/:id', async (req, res) => {
 
     let idUser = req.params.id
-    let user = await Users.findById({ "_id": idUser })
-    let playlists = user.playlists
+    let playlists = await getUsersPlaylists(idUser)
 
     try {
         res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
@@ -93,6 +91,11 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
     let user = await Users.findById({ "_id": idUser })
     let playlists = user.playlists
 
+    if (user == undefined)
+        throw new Error ("Erro! Usuário inexistente!")
+    
+    playlists = user["playlists"]
+
     try {
         res.render(pattern + '/public/views/profile.ejs', { playlists: playlists, idUser: idUser, user: user })
     }
@@ -103,7 +106,7 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
     let idUser = req.params.id
     let idPlaylist = req.params.idPl
-    let playlists = await Users.findById({ "_id": idUser }).playlists
+    let playlists = await getUsersPlaylists(idUser)
     let playlist = playlists[idPlaylist]
 
     try {

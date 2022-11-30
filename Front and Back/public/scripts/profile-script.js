@@ -193,7 +193,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
             const data = await res.json()
             let idPl = data.idPl
-            window.location.href = `playlist/${idUser}/${idPl}`
+            window.location.href = `http://localhost:3000/playlist/${idUser}/${idPl}`
         }
 
         createPlaylist()
