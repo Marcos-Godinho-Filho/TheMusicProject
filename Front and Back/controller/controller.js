@@ -9,7 +9,7 @@ const pattern = __dirname.replace('\\controller', '')
 
 let retorno = []
 
-// MÉTODOS GET
+// SELECIONAR
 
 exports.getDataHome = ('/home/:id', async (req, res) => {
 
@@ -84,12 +84,19 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 
 exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
+    console.log("CHEGAMOS AQUI ------------------- 1");
     let idUser = req.params.id
-    let idPlaylist = req.params.idPl
+    let idPlaylist = Number(req.params.idPl)
+    console.log(idUser + "       " + idPlaylist);
     let playlists = await getUsersPlaylists(idUser)
     let playlist = playlists[idPlaylist]
+    console.log("CHEGAMOS AQUI ------------------- 2");
 
     try {
+        console.log(playlists);
+        console.log(idUser);
+        console.log(playlist);
+        console.log(idPlaylist);
         res.render(pattern + '/public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
     }
     catch (erro) { throw new Error(erro) }
@@ -126,7 +133,7 @@ async function getUserID(email) {
     }
 }
 
-// // MÉTODOS POST
+// INSERIR
 
 exports.insertNewUser = ('/registration', async (req, res) => {
 
@@ -173,6 +180,7 @@ exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/playlist/:id/:idPl/
     let nomePlaylist = req.body.nome
     let img = req.body.imagem
     let desc = req.body.descricao
+    console.log("CHEGAMOS AQUI ------------------- 5");
     let songs = []
     let idUser = req.params.id
 
@@ -197,7 +205,7 @@ exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/playlist/:id/:idPl/
     }
 })
 
-exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res) => {
+exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) => {
 
     let nomeMusica = req.body.nomeMusica
     let nomeArtista = req.body.nomeArtista
@@ -205,7 +213,7 @@ exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res
     let previewMusica = req.body.previewMusica
     let imagem = req.body.imagem
     let posPlaylist = req.body.posPlaylist
-    let idUser = req.body.idUser
+    let idUser = req.params.id
 
     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
 
@@ -218,7 +226,7 @@ exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res
     }
 
     if (isPlaylistExistent(idUser, pos)) {
-        playlists[posPlaylist].songs = playlists[posPlaylist].songs.push(song)
+        playlists[posPlaylist].musicas = playlists[posPlaylist].musicas.push(song)
         try {
             if (await isUserExistent(idUser))
                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
@@ -232,7 +240,7 @@ exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res
 
 })
 
-// // MÉTODOS PUT
+// EDITAR
 
 exports.setNewPassword = ('/password-recovery', async (req, res) => {
 
@@ -305,7 +313,7 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     else { res.json({ success: false }); console.log("NAO LOGADO") }
 })
 
-// // MÉTODOS DELETE
+// DELETAR
 
 exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
 
@@ -313,10 +321,10 @@ exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
 
     await Users.deleteOne({ "_id": idUser })
     // Redirecionar para pagina de registro
-    res.render('../public/views/sign-up', {})
+    res.render('../public/views/sign-up')
 })
 
-exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => { // Agt ainda fetch com idPl no final?
+exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => { 
 
     let posicaoPlaylist = req.body.idPl
     let idUser = req.params.id

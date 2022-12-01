@@ -46,14 +46,14 @@ router.post('/search/:id', controller.searchFromAPI) // feito
 //     Playlists will need (*nome, descricao, imagem)
 //     Users will need (nome, *email, senha)
 // */
-router.put('/playlist/updatePlaylist/:id/:idPl', controller.updatePlaylist) // Playlist Page // feito
+router.put('/playlist/:id/:idPl/updatePlaylist', controller.updatePlaylist) // Playlist Page // feito
 router.put('/profile/:id/updateUser', controller.updateUser) // Profile Page // feito
 router.put('/password-recovery', controller.setNewPassword) // Password-Recovery Page // feito
 router.put('/home/:id/insertPlaylist', controller.insertNewPlaylist) // feito 
 router.put('/search/:id/insertPlaylist', controller.insertNewPlaylist) // feito
 router.put('/profile/:id/insertPlaylist', controller.insertNewPlaylist) // feito
-router.put('/playlist/insertPlaylist/:id', controller.insertNewPlaylist) // feito
-router.put('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) // feito
+router.put('/playlist/:id/insertPlaylist', controller.insertNewPlaylist) // feito
+router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // feito
 
 
 // /*
@@ -63,7 +63,7 @@ router.put('/search/insertMusic/:id', controller.insertNewMusicIntoPlaylist) // 
 //     User --> email
 // */
 router.delete('/profile/deleteUser/:id', controller.deleteUser) // Profile Page // feito
-// router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist) // Playlist Page // feito
-// router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong) // Playlist Page // feito
+//router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist) // Playlist Page // feito
+//router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong) // Playlist Page // feito
 
 module.exports = router

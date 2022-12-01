@@ -77,8 +77,10 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
                 })
             })
 
+            console.log("CHEGAMOS AQUI ------------------- 3");
             const data = await res.json()
             let idPl = data.idPl
+            console.log("CHEGAMOS AQUI ------------------- 4");
             window.location.href = `http://localhost:3000/playlist/${idUser}/${idPl}`
         }
 
@@ -90,6 +92,12 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         hideBox(id)
     })
 })
+
+
+document.querySelector(".testeBotaoFuncionaPFV").addEventListener('click', () => {
+    console.log("--- CHEGAMOS AQUI PRINCIPAL ---");
+    console.log(document.querySelector(".testeBotaoFuncionaPFV").href);
+});
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)'
