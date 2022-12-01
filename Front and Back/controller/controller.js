@@ -108,7 +108,6 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     let idPlaylist = req.params.idPl
     let playlists = await getUsersPlaylists(idUser)
     let playlist = playlists[idPlaylist]
-    
 
     try {
         res.render(pattern + '/public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
