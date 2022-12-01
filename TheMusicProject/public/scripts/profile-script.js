@@ -105,7 +105,6 @@ document.querySelector('#edit').addEventListener('click', () => {
                 },
                 body: JSON.stringify({
                     nome: document.querySelector('#newUsername').value,
-                    email: document.querySelector('#email').value,
                     imagemPerfil: document.querySelector('#img-button').src,
                     descPerfil: document.querySelector('#newBio').value,
                     corFundo: document.querySelector('#color').value,

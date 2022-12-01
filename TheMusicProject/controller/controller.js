@@ -262,15 +262,11 @@ exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
 
     let idUser = req.params.id
     let nome = req.body.nome
-    let email = req.body.email
     let imagemPerfil = req.body.imagemPerfil
     let descPerfil = req.body.descPerfil
     let corFundo = req.body.corFundo
 
-    if (await isUserExistent(email)) {
-        await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
-    }
-    else { res.json({ success: false }) }
+    await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
 })
 
 exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {

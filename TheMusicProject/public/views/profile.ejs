@@ -57,10 +57,10 @@
         <div class="card">
             <div class="card-color" style="background-color: <%= user.corFundo %>"> </div>
             <div class="card-image">
-                <% if (user.imagemPerfil=="" ) { %>
-                    <img id="profile-img" src="../imgs/user-icon.png">
+                <% if (user.imagemPerfil=="") { %>
+                    <img id="profile-img" src="../imgs/user-icon.png" alt="profile-img">
                     <% } else { %>
-                        <img id="profile-img" src="<%= user.imagemPerfil %>">
+                        <img id="profile-img" src="<%= user.imagemPerfil %>" alt="profile-img">
                         <% } %>
             </div>
             <div class="card-content">
