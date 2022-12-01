@@ -21,13 +21,14 @@ function buscar(e) {
     document.querySelector('.container-animation').style.display = 'flex'
 
     e.preventDefault()
-    setTimeout(postInfo(), 2000)
+    postInfo();
+    setTimeout(getInfo(), 2000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
             return
         }
-        const res = await fetch(BASE_URL, {
+        await fetch(BASE_URL, {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
@@ -38,42 +39,15 @@ function buscar(e) {
         })
     }
 
-    // async function getInfo(e) {
-    //     const res = await fetch(BASE_URL, {
-    //         method: 'GET'
-    //     })
+    async function getInfo(e) {
+        await fetch(BASE_URL, {
+            method: 'GET'
+        })
 
-    //     const data = await res.json()
-
-    //     resultadoBusca = data.info
-
-    //     for (let pos = 0; pos < resultadoBusca.length; pos++) {
-    //         results.innerHTML += `
-    //             <div class="song">
-    //                 <div class="s-image">
-    //                     <img src="${resultadoBusca[pos]["image"]}" alt="" draggable="false">
-    //                 </div>
-    //                 <div class="s-data">
-    //                     <h1>${resultadoBusca[pos]["title_short"]}</h1>
-    //                     <h2>${resultadoBusca[pos]["artist"]}</h2>
-    //                     <h2>${resultadoBusca[pos]["album"]}</h2>
-    //                 </div>
-    //                 <div class="s-buttons">
-    //                     <button style="font-size: 20px" onclick="showSelectPlaylistBox(${pos})">
-    //                         <i class="fa-solid fa-plus" style="color: #fff"></i>
-    //                     </button>
-    //                     <button style="font-size: 20px" onclick="showSongData('${resultadoBusca[pos]["image"]}', '${resultadoBusca[pos]["title_short"]}', '${resultadoBusca[pos]["artist"]}', '${resultadoBusca[pos]["album"]}', '${resultadoBusca[pos]["preview"]}')"> 
-    //                         <i class="fa-solid fa-play" style="color: #fff"></i>
-    //                     </button>
-    //                 </div>
-    //             </div>
-    //             `
-    //     }
-    //     document.querySelector('.container-animation').style.display = 'none'
-    //     if (results.childNodes.length == 0) {
-    //         results.innerHTML = '<div id="noResults"> Sem resultados para a busca. </div>'
-    //     }
-    // }
+        document.querySelector('.container-animation').style.display = 'none'
+        if (results.childNodes.length == 0)
+            results.innerHTML = "<div id='noResults'> Sem resultados para a busca. </div>"
+    }
 }
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
@@ -379,7 +353,7 @@ let hideBox = function (id) {
     box.style.display = 'none'
 }
 
-let showDBResult = function(success) {
+let showDBResult = function (success) {
     const box = document.querySelector('#dbResultBox')
     box.display = "block"
 
@@ -387,13 +361,13 @@ let showDBResult = function(success) {
         box.innerHTML = "A operação feita com sucesso!"
         box.style.backgroundColor = "#66ff99"
     }
-    else { 
+    else {
         box.innerHTML = "Erro! A operação falhou!"
         box.style.backgroundColor = " #ff8080"
     }
 
-    setTimeout(() => { 
-        box.innerHTML = "" 
+    setTimeout(() => {
+        box.innerHTML = ""
         box.display = "none"
     }, 3000)
 }

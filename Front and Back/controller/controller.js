@@ -29,60 +29,40 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
 
     try {
         res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
-
-        retorno = []
     }
     catch (erro) { throw new Error(erro) }
 })
 
 exports.searchFromAPI = ('/search/:id', async (req, res) => {
 
-    retorno = []
-
-    let email = req.params.email
-    let parcel = req.query.parcel
+    let parcel = req.body.parcel
 
     try {
-        if (isUserExistent(email)) {
-            const optionsAxios = {
-                method: 'GET',
-                url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
-                params: { q: `${parcel}` },
-                headers: {
-                    'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
-                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-                }
+        const optionsAxios = {
+            method: 'GET',
+            url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+            params: { q: `${parcel}` },
+            headers: {
+                'X-RapidAPI-Key': 'b6673e4b40mshb71dfa28e006655p1cdcfdjsn1c72cddfef35',
+                'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
             }
-
-            axios.request(optionsAxios).then(function (response) {
-                for (let musica of response.data['data']) {
-                    retorno.push({
-                        "nome": musica["title_short"],
-                        "artista": musica["artist"]["name"],
-                        "album": musica["album"]["title"],
-                        "imagem": musica["album"]["cover_medium"],
-                        "preview": musica["preview"]
-                    })
-
-                }
-            }).catch(function (error) {
-                console.error(error)
-            })
-            if (!parcel) {
-                return res.status(400).send({ status: 'failed' })
-            }
-            res.status(200).send({ status: 'received' })
-
-            let idUser = req.params.id
-            let playlists = await Users.findById({ "_id": idUser }).playlists
-            if (playlists == undefined)
-                playlists = []
-
-            res.render(pattern + '/public/views/search.ejs', { playlists: playlists, idUser: idUser, retorno: retorno })
         }
-        else { res.json({ found: false }) }
+
+        axios.request(optionsAxios).then(function (response) {
+            for (let musica of response.data['data']) {
+                retorno.push({
+                    "nome": musica["title_short"],
+                    "artista": musica["artist"]["name"],
+                    "album": musica["album"]["title"],
+                    "imagem": musica["album"]["cover_medium"],
+                    "preview": musica["preview"]
+                })
+            }
+        }).catch(function (error) {
+            console.error(error)
+        })
     }
-    catch (erro) { throw new Error(erro) }
+    catch (erro) { console.log(erro) }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
@@ -159,7 +139,7 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     let desc = ""
     let playlists = []
 
-    let result = isUserExistent(email)
+    let result = await isUserExistent(email)
     if (!result) {
         let usuario = new Users({ email, nome, senha, imagemPerfil, corFundo, desc, playlists })
 
@@ -167,7 +147,9 @@ exports.insertNewUser = ('/registration', async (req, res) => {
             await usuario.save()
             // Redireciona para home com o id cadastrado
             let id = await getUserID(email)
+            console.log(" -- CADASTRADO -- ");
             res.json({ success: true, id: id })
+
         }
         catch (err) { console.log(err) }
     }
@@ -238,7 +220,7 @@ exports.insertNewMusicIntoPlaylist = ('/search/:id/insertMusic', async (req, res
     if (isPlaylistExistent(idUser, pos)) {
         playlists[posPlaylist].songs = playlists[posPlaylist].songs.push(song)
         try {
-            if (isUserExistent(idUser))
+            if (await isUserExistent(idUser))
                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
         catch (erro) {
@@ -277,7 +259,7 @@ exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
     let descPerfil = req.body.descPerfil
     let corFundo = req.body.corFundo
 
-    if (isUserExistent(email)) {
+    if (await isUserExistent(email)) {
         await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
     }
     else { res.json({ success: false }) }
@@ -302,7 +284,7 @@ exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
 
     try {
-        if (isUserExistent(idUser)) {
+        if (await isUserExistent(idUser)) {
             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
     }
@@ -353,7 +335,7 @@ exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res
 
     playlists = copyWithoutRemovedElement
     try {
-        if (isUserExistent(idUser)) {
+        if (await isUserExistent(idUser)) {
             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
     }
@@ -384,7 +366,7 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res
         playlists[posicaoPlaylist].songs = copyWithoutRemovedElement
 
         try {
-            if (isUserExistent(idUser))
+            if (await isUserExistent(idUser))
                 await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
         catch (erro) {
