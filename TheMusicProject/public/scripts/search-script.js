@@ -36,6 +36,8 @@ function buscar(e) {
                 parcel: inpBx.value
             })
         })
+
+        windowlocation.href = `http://localhost:3000/search/${res.json().idUser}/result`
     }
 
     async function getInfo(e) {

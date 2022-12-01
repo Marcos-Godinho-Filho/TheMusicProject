@@ -67,33 +67,7 @@
         </div>
 
         <div id="results">
-            <% for (let i=0; i < retorno.length; i++) { %>
-                <div class="song">
-                    <div class="s-image">
-                        <img src="<%=retorno[i].imagem%>" alt="" draggable="false">
-                    </div>
-                    <div class="s-data">
-                        <h1>
-                            <%=retorno[i].nome%>
-                        </h1>
-                        <h2>
-                            <%=retorno[i].artista%>
-                        </h2>
-                        <h2>
-                            <%=retorno[i].album%>
-                        </h2>
-                    </div>
-                    <div class="s-buttons">
-                        <button style="font-size: 20px" onclick="showSelectPlaylistBox(i)">
-                            <i class="fa-solid fa-plus" style="color: #fff"></i>
-                        </button>
-                        <button style="font-size: 20px"
-                            onclick="showSongData('<%=retorno[i].imagem%>', '<%=retorno[i].nome%>', '<%=retorno[i].artista%>', '<%=retorno[i].album%>', '<%=retorno[i].preview%>')">
-                            <i class="fa-solid fa-play" style="color: #fff"></i>
-                        </button>
-                    </div>
-                </div>
-                <% } %>
+            <%- include('../partials/results.ejs') %>
         </div>
 
         <div class="player">

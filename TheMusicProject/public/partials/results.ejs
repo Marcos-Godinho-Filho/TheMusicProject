@@ -1,4 +1,5 @@
-<div id="results">
+<% if (retorno != undefined) { %>
+
     <% for (let i=0; i < retorno.length; i++) { %>
         <div class="song">
             <div class="s-image">
@@ -26,4 +27,5 @@
             </div>
         </div>
         <% } %>
-</div>
+
+            <% } %>

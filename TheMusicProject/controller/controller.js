@@ -28,7 +28,7 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
     let playlists = await getUsersPlaylists(idUser)
 
     try {
-        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
+        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists})
     }
     catch (erro) { throw new Error(erro) }
 })
@@ -36,8 +36,6 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
 exports.searchFromAPI = ('/search/:id', async (req, res) => {
 
     let idUser = req.params.id
-    let playlists = await getUsersPlaylists(idUser)
-
     retorno = []
 
     let parcel = req.body.parcel
@@ -67,10 +65,18 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
             console.error(error)
         })
 
-        console.log('ola')
-        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
+        res.render(pattern + '/public/partials/results.ejs', { retorno: retorno })
+        res.json({idUser: idUser})
     }
     catch (erro) { console.log(erro) }
+})
+
+exports.getDataSearchResult = ('/search/:id/results', async (req, res) => {
+
+    try {
+        res.render(pattern + '/public/partials/results.ejs', { retorno: retorno })
+    }
+    catch (erro) { throw new Error(erro) }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
