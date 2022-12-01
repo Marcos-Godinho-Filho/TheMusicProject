@@ -35,6 +35,11 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
 
 exports.searchFromAPI = ('/search/:id', async (req, res) => {
 
+    let idUser = req.params.id
+    let playlists = await getUsersPlaylists(idUser)
+
+    retorno = []
+
     let parcel = req.body.parcel
 
     try {
@@ -49,7 +54,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
         }
 
         axios.request(optionsAxios).then(function (response) {
-            for (let musica of response.data['data']) {
+            for (let musica of response.data["data"]) {
                 retorno.push({
                     "nome": musica["title_short"],
                     "artista": musica["artist"]["name"],
@@ -61,6 +66,9 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
         }).catch(function (error) {
             console.error(error)
         })
+
+        console.log('ola')
+        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
     }
     catch (erro) { console.log(erro) }
 })

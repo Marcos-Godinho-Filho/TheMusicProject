@@ -41,7 +41,6 @@ document.querySelector('#delete').addEventListener('click', () => {
 
 document.querySelector('#edit').addEventListener('click', () => {
     let id = '#editUserBox'
-    let cor = document.querySelector('.card-color').style.backgroundColor
     let editBoxContent = `
         <h1 class="boxTitle"> Editar Usuário </h1>
         <div class="card-color-edit">

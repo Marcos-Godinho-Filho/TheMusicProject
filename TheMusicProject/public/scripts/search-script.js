@@ -15,20 +15,19 @@ inpBx.addEventListener('keyup', function (e) {
         buscarBtn.click()
 })
 
-let resultadoBusca
 function buscar(e) {
     results.innerHTML = ''
     document.querySelector('.container-animation').style.display = 'flex'
 
     e.preventDefault()
     postInfo();
-    setTimeout(getInfo(), 2000)
+    // setTimeout(getInfo(), 2000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
             return
         }
-        await fetch(BASE_URL, {
+        const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
@@ -40,10 +39,7 @@ function buscar(e) {
     }
 
     async function getInfo(e) {
-        await fetch(BASE_URL, {
-            method: 'GET'
-        })
-
+        location.reload()
         document.querySelector('.container-animation').style.display = 'none'
         if (results.childNodes.length == 0)
             results.innerHTML = "<div id='noResults'> Sem resultados para a busca. </div>"
