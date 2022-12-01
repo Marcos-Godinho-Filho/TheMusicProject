@@ -62,7 +62,7 @@ router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // fe
 //     Playlist --> nome
 //     User --> email
 // */
-router.delete('/profile/deleteUser/:id', controller.deleteUser) // Profile Page // feito
+router.delete('/profile/:id/deleteUser', controller.deleteUser) // Profile Page // feito
 //router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist) // Playlist Page // feito
 //router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong) // Playlist Page // feito
 

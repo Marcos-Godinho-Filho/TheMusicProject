@@ -7,10 +7,6 @@ document.querySelector('#delete').addEventListener('click', () => {
     let deleteUserBoxContent = `
         <h1 class="boxTitle"> Deletar Usuário </h1>
         <p class="warningMessage"> Esta ação é irreversível. Todas as suas playlists e músicas salvas serão perdidas. </p>
-        <div>
-            <p class="message"> Digite sua senha para confirmar a deleção: </p>
-            <input id="passwordToDeleteUser" type="password">
-        </div>
         <div class="options-buttons">
             <button id="deleteUser"> Deletar </button>
             <button id="calcelDeleteUser"> Cancelar </button>
@@ -30,7 +26,7 @@ document.querySelector('#delete').addEventListener('click', () => {
         }
 
         deleteUser()
-        hideBox(id)
+        hideBox(idBox)
         window.location.href = "/authentication/"
     })
 

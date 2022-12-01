@@ -319,13 +319,10 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 
 // DELETAR
 
-exports.deleteUser = ('/profile/deleteUser/:id', async (req, res) => {
+exports.deleteUser = ('/profile/:id/deleteUser', async (req, res) => {
 
     let idUser = req.params.id
-
     await Users.deleteOne({ "_id": idUser })
-    // Redirecionar para pagina de registro
-    res.render('../public/views/sign-up')
 })
 
 exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => { 
