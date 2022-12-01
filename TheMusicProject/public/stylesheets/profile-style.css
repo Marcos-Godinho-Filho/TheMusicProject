@@ -348,7 +348,7 @@ marquee {
 }
 
 #deleteUserBox {
-    height: 300px;
+    height: 250px;
     margin-top: calc((100vh - 250px) / 2);
 }
 
