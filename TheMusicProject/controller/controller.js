@@ -63,8 +63,6 @@ exports.searchFromAPI = ('/search/:id/results', async (req, res) => {
         })
     }
     catch (erro) { console.log(erro) }
-
-    console.log(retorno)
 })
 
 exports.getSearchResults = ('/search/:id/results', async (req, res) => {
@@ -116,6 +114,13 @@ async function getUsersPlaylists(idUser) {
 
     return playlists
 }
+
+exports.getPlaylists = ('/search/:id/playlists', async (req, res) => {
+    let idUser = req.params.id
+    try {
+        res.json({playlists: getUsersPlaylists(idUser)})
+    } catch (erro) { throw new Error(erro) }
+})
 
 async function isUserExistent(email) {
 

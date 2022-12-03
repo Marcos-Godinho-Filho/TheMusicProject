@@ -1,10 +1,10 @@
 const BASE_URL = window.location.href
 
-let idUser = BASE_URL.substring(29)
+const idUser = BASE_URL.substring(29)
 
-let buscarBtn = document.querySelector("#search")
-let inpBx = document.querySelector("#inputBox")
-let results = document.querySelector("#results")
+const buscarBtn = document.querySelector("#search")
+const inpBx = document.querySelector("#inputBox")
+const results = document.querySelector("#results")
 
 buscarBtn.addEventListener('click', buscar)
 
@@ -21,7 +21,7 @@ function buscar(e) {
 
     e.preventDefault()
     postInfo()
-    setTimeout(getInfo, 4000)
+    setTimeout(getInfo, 2000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
@@ -69,7 +69,7 @@ function buscar(e) {
                     </h2>
                 </div>
                 <div class="s-buttons">
-                    <button style="font-size: 20px" onclick="showSelectPlaylistBox(i)">
+                    <button style="font-size: 20px" onclick="showSelectPlaylistBox(${i})">
                         <i class="fa-solid fa-plus" style="color: #fff"></i>
                     </button>
                     <button style="font-size: 20px"
@@ -83,8 +83,10 @@ function buscar(e) {
     }
 }
 
+let idPl
+
 document.querySelector('#createPlaylist').addEventListener('click', () => {
-    let id = '#createPlaylistBox'
+    const id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image-cp">
@@ -147,7 +149,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             })
 
             const data = await res.json()
-            let idPl = data.idPl
+            idPl = data.idPl
             window.location.href = `http://localhost:3000/playlist/${idUser}/${idPl}`
         }
 
@@ -160,25 +162,25 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     })
 })
 
-let image = document.querySelector('#image')
-let title = document.querySelector('#title')
-let artist = document.querySelector('#artist')
-let album = document.querySelector('#album')
+const image = document.querySelector('#image')
+const title = document.querySelector('#title')
+const artist = document.querySelector('#artist')
+const album = document.querySelector('#album')
 
-let preview = document.querySelector('#preview')
+const preview = document.querySelector('#preview')
 
-let playBtn = document.querySelector('#playBtn')
-let pauseBtn = document.querySelector('#pauseBtn')
-let backwardBtn = document.querySelector('#backwardBtn')
-let forwardBtn = document.querySelector('#forwardBtn')
+const playBtn = document.querySelector('#playBtn')
+const pauseBtn = document.querySelector('#pauseBtn')
+const backwardBtn = document.querySelector('#backwardBtn')
+const forwardBtn = document.querySelector('#forwardBtn')
 
-let progressBar = document.querySelector('.music-progress-bar')
-let songDuration = document.querySelector('.duration')
-let songCurrentTime = document.querySelector('.current-time')
+const progressBar = document.querySelector('.music-progress-bar')
+const songDuration = document.querySelector('.duration')
+const songCurrentTime = document.querySelector('.current-time')
 
-let volumeSlider = document.querySelector('.volume-slider')
+const volumeSlider = document.querySelector('.volume-slider')
 
-let audioPlayer = document.querySelector('#audioPlayer')
+const audioPlayer = document.querySelector('#audioPlayer')
 
 function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex"
@@ -201,7 +203,7 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     songCurrentTime.innerHTML = '00 : 00'
 }
 
-const formatTime = (time) => {
+let formatTime = (time) => {
     let min = Math.floor(time / 60)
     if (min < 10) {
         min = `0` + min
@@ -290,44 +292,56 @@ closeSong.addEventListener('click', () => {
 
 let posicaoMusica
 let showSelectPlaylistBox = function (pos) {
-    let idPlaylistBox = '#selectPlaylistBox'
+    const idPlaylistBox = '#selectPlaylistBox'
     let selectPlaylistBoxContent
     posicaoMusica = pos
 
-    if (resultado.length == 0) {
-        selectPlaylistBoxContent = `
-        <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>`
-    }
-    else {
-        selectPlaylistBoxContent = `
-        <h1 class="boxTitle"> Adicionar às playlists </h1>
-        <p> Selecione a playlist desejada: </p>
-        <div id="division"> </div>
-        <div id="playlists">
-            <ul>`
+    getPlaylists()
 
-        for (let i = 0; i < resultado.length; i++) {
+    let resultado
+    async function getPlaylists(e) {
+        const res = await fetch(BASE_URL + '/playlists', {
+            method: 'GET'
+        })
+
+        const data = await res.json()
+        resultado = data.playlists
+
+        if (resultado.length == 0) {
+            selectPlaylistBoxContent = `
+                <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>`
+        }
+        else {
+            selectPlaylistBoxContent = `
+                <h1 class="boxTitle"> Adicionar às playlists </h1>
+                <p> Selecione a playlist desejada: </p>
+                <div id="division"> </div>
+                <div id="playlists">
+                    <ul>`
+
+            for (let i = 0; i < resultado.length; i++) {
+                selectPlaylistBoxContent += `
+                        <li class="playlist" onclick="select(${i})">${resultado[i].nomePlaylist}</li>`
+            }
+
             selectPlaylistBoxContent += `
-                <li class="playlist" onclick="select(${i})">${resultado[i].nomePlaylist}</li>`
+                    <ul>
+                </div>`
+
+            selectPlaylistBoxContent += `
+                <div class="options-buttons">
+                    <button id="addSongToPlaylist"> Adicionar </button>
+                    <button id="calcelAddSongToPlaylist"> Cancelar </button>
+                </div>`
         }
 
-        selectPlaylistBoxContent += `
-            <ul>
-        </div>`
-
-        selectPlaylistBoxContent += `
-        <div class="options-buttons">
-            <button id="addSongToPlaylist"> Adicionar </button>
-            <button id="calcelDeletePlaylist"> Cancelar </button>
-        </div>`
+        showBox(idPlaylistBox, selectPlaylistBoxContent)
     }
-
-    showBox(idPlaylistBox, selectPlaylistBoxContent)
 
     let selectedPlaylist
 
     let posPl
-    function select(pos) {
+    let select = function (pos) {
         const playlists = document.getElementsByClassName('playlist')
         posPl = pos
 
@@ -340,8 +354,10 @@ let showSelectPlaylistBox = function (pos) {
 
     document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
+        const resultadoBusca = document.querySelector("#results")
+
         async function addSong(e) {
-            const res = await fetch(BASE_URL + `/${posPl}/insertMusic`, {
+            const res = await fetch(BASE_URL + `/${posPl}/insertSong`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -360,11 +376,11 @@ let showSelectPlaylistBox = function (pos) {
 
         addSong()
 
-        hideBox(id)
+        hideBox(idPlaylistBox)
     })
 
-    document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
-        hideBox(id)
+    document.querySelector("#calcelAddSongToPlaylist").addEventListener('click', () => {
+        hideBox(idPlaylistBox)
     })
 }
 

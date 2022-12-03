@@ -1,20 +1,20 @@
 const BASE_URL = window.location.href
 
 let songs = []
-let idUser = BASE_URL.substring(31, 55)
+const idUser = BASE_URL.substring(31, 55)
 
-let playBtn = document.querySelector('#playBtn')
-let pauseBtn = document.querySelector('#pauseBtn')
-let backwardBtn = document.querySelector('#backwardBtn')
-let forwardBtn = document.querySelector('#forwardBtn')
+const playBtn = document.querySelector('#playBtn')
+const pauseBtn = document.querySelector('#pauseBtn')
+const backwardBtn = document.querySelector('#backwardBtn')
+const forwardBtn = document.querySelector('#forwardBtn')
 
-let progressBar = document.querySelector('.music-progress-bar')
-let songDuration = document.querySelector('.duration')
-let songCurrentTime = document.querySelector('.current-time')
+const progressBar = document.querySelector('.music-progress-bar')
+const songDuration = document.querySelector('.duration')
+const songCurrentTime = document.querySelector('.current-time')
 
-let volumeSlider = document.querySelector('.volume-slider')
+const volumeSlider = document.querySelector('.volume-slider')
 
-let audioPlayer = document.querySelector('#audioPlayer')
+const audioPlayer = document.querySelector('#audioPlayer')
 
 function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex"
@@ -37,7 +37,7 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     songCurrentTime.innerHTML = '00 : 00'
 }
 
-const formatTime = (time) => {
+let formatTime = (time) => {
     let min = Math.floor(time / 60)
     if (min < 10) {
         min = `0` + min
@@ -125,7 +125,7 @@ volumeBtn.addEventListener('click', () => {
     }
 })
 
-let closeSong = document.querySelector('#closeSong')
+const closeSong = document.querySelector('#closeSong')
 
 closeSong.addEventListener('click', () => {
     audioPlayer.pause()
@@ -135,7 +135,7 @@ closeSong.addEventListener('click', () => {
 })
 
 document.querySelector('#createPlaylist').addEventListener('click', () => {
-    let id = '#createPlaylistBox'
+    const id = '#createPlaylistBox'
     let createPlaylistBoxContent = `
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image-cp">
@@ -216,7 +216,7 @@ document.querySelector('#play').addEventListener('click', () => {
 })
 
 document.querySelector('#delete').addEventListener('click', () => {
-    let id = '#deletePlaylistBox'
+    const id = '#deletePlaylistBox'
     let deletePlaylistBoxContent = `
         <h1 class="boxTitle"> Deletar Playlist </h1>
         <p class="warningMessage"> Esta ação é irreversível. Todas as suas músicas salvas serão perdidas. </p>
@@ -247,7 +247,7 @@ document.querySelector('#delete').addEventListener('click', () => {
 
 document.querySelector('#edit').addEventListener('click', () => {
 
-    let id = '#editPlaylistBox'
+    const id = '#editPlaylistBox'
     let editBoxContent = `
         <h1 class="boxTitle"> Editar Playlist </h1>
         <div id="edit-image">
@@ -327,7 +327,7 @@ document.querySelector('#edit').addEventListener('click', () => {
 })
 
 let removeSong = function (pos) {
-    let id = '#removeSongBox'
+    const id = '#removeSongBox'
     let removeSongBoxContent = `
         <h1 class="boxTitle"> Remover música </h1>
         <p class="message"> Tem certeza que deseja remover a música da Playlist? </p>

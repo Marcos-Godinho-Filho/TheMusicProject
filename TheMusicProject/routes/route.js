@@ -30,6 +30,7 @@ router.get('/profile/:id', controller.getDataProfile) // Profile Page // feito
 router.get('/playlist/:id/:idPl', controller.getDataPlaylist) // Playlist Page // feito
 
 router.get('/search/:id/results', controller.getSearchResults)
+router.get('/search/:id/playlists', controller.getPlaylists)
 
 /*
     POST (getting data from frontend and passing them to backend)
@@ -53,7 +54,7 @@ router.put('/home/:id/insertPlaylist', controller.insertNewPlaylist) // feito
 router.put('/search/:id/insertPlaylist', controller.insertNewPlaylist)
 router.put('/profile/:id/insertPlaylist', controller.insertNewPlaylist)
 router.put('/playlist/:id/:idPl/insertPlaylist', controller.insertNewPlaylist)
-// router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // feito
+router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // feito
 
 // DELETAR
 router.put('/playlist/:id/:idPl/deletePlaylist', controller.deletePlaylist) // Playlist Page // feito
