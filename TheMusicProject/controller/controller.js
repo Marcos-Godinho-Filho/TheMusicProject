@@ -5,9 +5,7 @@ const user = require('../models/user')
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users')
 
-const pattern = __dirname.replace('\\controller', '')
-
-let retorno = []
+let retorno = ["first"]
 
 // SELECIONAR
 
@@ -28,14 +26,13 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
     let playlists = await getUsersPlaylists(idUser)
 
     try {
-        res.render(pattern + '/public/views/search.ejs', { idUser: idUser, playlists: playlists})
+        res.render('../public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
     }
     catch (erro) { throw new Error(erro) }
 })
 
-exports.searchFromAPI = ('/search/:id', async (req, res) => {
+exports.searchFromAPI = ('/search/:id/results', async (req, res) => {
 
-    let idUser = req.params.id
     retorno = []
 
     let parcel = req.body.parcel
@@ -65,8 +62,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
             console.error(error)
         })
 
-        res.render(pattern + '/public/partials/results.ejs', { retorno: retorno })
-        res.json({idUser: idUser})
+        res.render('../public/partials/results.ejs', { retorno: retorno })
     }
     catch (erro) { console.log(erro) }
 })
@@ -74,7 +70,7 @@ exports.searchFromAPI = ('/search/:id', async (req, res) => {
 exports.getDataSearchResult = ('/search/:id/results', async (req, res) => {
 
     try {
-        res.render(pattern + '/public/partials/results.ejs', { retorno: retorno })
+        res.render('/..public/partials/results.ejs', { retorno: retorno })
     }
     catch (erro) { throw new Error(erro) }
 })
@@ -91,7 +87,7 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
     playlists = user["playlists"]
 
     try {
-        res.render(pattern + '/public/views/profile.ejs', { playlists: playlists, idUser: idUser, user: user })
+        res.render('../public/views/profile.ejs', { playlists: playlists, idUser: idUser, user: user })
     }
     catch (erro) { throw new Error(erro) }
 })
@@ -111,7 +107,7 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
         console.log(idUser);
         console.log(playlist);
         console.log(idPlaylist);
-        res.render(pattern + '/public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
+        res.render('../public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
     }
     catch (erro) { throw new Error(erro) }
 })

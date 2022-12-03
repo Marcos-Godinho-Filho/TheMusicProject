@@ -7,38 +7,36 @@ const router = express.Router()
     Registration, authentication and password-recovery don't need get since we're not passing data from back to front 
 */
 
-const pattern = __dirname.replace('\\routes', '')
-
 // '/' --> go to registration page
 router.get('/', (req, res) => {
-    res.render(pattern + '/public/views/sign-up.ejs')
+    res.render('../public/views/sign-up.ejs')
 })
 
 router.get('/registration', (req, res) => {
-    res.render(pattern + '/public/views/sign-up.ejs')
+    res.render('../public/views/sign-up.ejs')
 })
 
 router.get('/authentication', (req, res) => {
-    res.render(pattern + '/public/views/login.ejs')
+    res.render('../public/views/login.ejs')
 })
 
 router.get('/password-recovery', (req, res) => {
-    res.render(pattern + '/public/views/password-recovery.ejs')
+    res.render('../public/views/password-recovery.ejs')
 })
 
 router.get('/home/:id', controller.getDataHome) // Home Page // feito
 router.get('/search/:id', controller.getDataSearch) // Search Page // feito
-router.get('/search/:id/results', controller.getDataSearchResult)
 router.get('/profile/:id', controller.getDataProfile) // Profile Page // feito
 router.get('/playlist/:id/:idPl', controller.getDataPlaylist) // Playlist Page // feito
 
+router.get('/search/:id/results', controller.getDataSearchResult)
 
 // /*
 //     POST (getting data from frontend and passing them to backend)
 // */
 router.post('/registration', controller.insertNewUser) // feito
 router.post('/authentication', controller.checkValidation) // feito
-router.post('/search/:id', controller.searchFromAPI) // feito
+router.post('/search/:id/results', controller.searchFromAPI)
 
 
 // /*

@@ -21,13 +21,12 @@ function buscar(e) {
 
     e.preventDefault()
     postInfo();
-    // setTimeout(getInfo(), 2000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
             return
         }
-        const res = await fetch(BASE_URL, {
+        const res = await fetch(BASE_URL + '/results', {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
@@ -37,14 +36,7 @@ function buscar(e) {
             })
         })
 
-        windowlocation.href = `http://localhost:3000/search/${res.json().idUser}/result`
-    }
-
-    async function getInfo(e) {
-        location.reload()
-        document.querySelector('.container-animation').style.display = 'none'
-        if (results.childNodes.length == 0)
-            results.innerHTML = "<div id='noResults'> Sem resultados para a busca. </div>"
+        window.location.href = "http://localhost:3000/search/" + idUser
     }
 }
 
