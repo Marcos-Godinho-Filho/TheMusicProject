@@ -136,8 +136,8 @@ header {
 
 #top-image {
     float: left;
-    max-height: 250px;
-    max-width: 250px;
+    height: 250px;
+    width: 250px;
     padding: 15px;
 }
 
@@ -434,7 +434,7 @@ main {
 }
 
 .s-image>img {
-    
+
 }
 
 .s-data {

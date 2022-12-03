@@ -265,8 +265,8 @@ document.querySelector('#edit').addEventListener('click', () => {
             <input type="file" id="fileReader" accept="image/*">
         </div>
         <div id="edit-data">
-            <input type="text" id="newTitle" value="${document.querySelector('#title').value}"> </input> 
-            <textarea id="newDescription">${document.querySelector('#description').value}</textarea>
+            <input type="text" id="newTitle" value="${document.querySelector('#title').innerHTML.trim()}"> </input> 
+            <textarea id="newDescription">${document.querySelector('#description').innerHTML.trim()}</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditPlaylist"> Salvar </button>
@@ -312,11 +312,11 @@ document.querySelector('#edit').addEventListener('click', () => {
                 headers: {
                     "Content-Type": 'application/json'
                 },
-                body: {
+                body: JSON.stringify({
                     name: document.querySelector('#newTitle').value,
                     description: document.querySelector('#newDescription').value,
                     img: document.querySelector('#img-button').src
-                }
+                })
             })
         }
 

@@ -82,8 +82,8 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
     let playlists = user.playlists
 
     if (user == undefined)
-        throw new Error ("Erro! Usuário inexistente!")
-    
+        throw new Error("Erro! Usuário inexistente!")
+
     playlists = user["playlists"]
 
     try {
@@ -111,8 +111,8 @@ async function getUsersPlaylists(idUser) {
     let user = await Users.findById({ "_id": idUser })
 
     if (user == undefined)
-        throw new Error ("Erro! Usuário inexistente!")
-    
+        throw new Error("Erro! Usuário inexistente!")
+
     playlists = user["playlists"]
 
     return playlists
@@ -183,7 +183,6 @@ exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/playlist/:id/:idPl/
     let nomePlaylist = req.body.nome
     let img = req.body.imagem
     let desc = req.body.descricao
-    console.log("CHEGAMOS AQUI ------------------- 5");
     let songs = []
     let idUser = req.params.id
 
@@ -269,10 +268,14 @@ exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
     let descPerfil = req.body.descPerfil
     let corFundo = req.body.corFundo
 
-    await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
+    try {
+        await Users.updateOne({ "_id": idUser }, { $set: { nome: nome, imagemPerfil: imagemPerfil, desc: descPerfil, corFundo: corFundo } })
+    } catch (erro) { res.json({ success: false }) }
 })
 
-exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
+exports.updatePlaylist = ('/playlist/:id/:idPl/updatePlaylist', async (req, res) => {
+
+    console.log("1")
 
     let namePlaylist = req.body.name
     let descPlaylist = req.body.description
@@ -282,20 +285,22 @@ exports.updatePlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
     let playlists
     try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists
+        let user = await Users.findById({ "_id": idUser })
+        playlists = user.playlists
     }
     catch (erro) { res.json({ success: false }) }
 
-    let music = playlists[posicaoPlaylist].songs
-    playlists[posicaoPlaylist] = { namePlaylist, descPlaylist, image, music }
+    console.log("2")
+
+    let songs = playlists[posicaoPlaylist].musicas
+    playlists[posicaoPlaylist] = { nomePlaylist: namePlaylist, imagem: image, descricao: descPlaylist, musicas: songs }
 
     try {
-        if (await isUserExistent(idUser)) {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
+        await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) { res.json({ success: false }) }
+
+    console.log("3")
 })
 
 exports.checkValidation = ('/authentication', async (req, res) => {
@@ -320,7 +325,7 @@ exports.deleteUser = ('/profile/:id/deleteUser', async (req, res) => {
     await Users.deleteOne({ "_id": idUser })
 })
 
-exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => { 
+exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => {
 
     let posicaoPlaylist = req.body.idPl
     let idUser = req.params.id
