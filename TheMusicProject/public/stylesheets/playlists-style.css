@@ -313,7 +313,7 @@ header {
 
 #deletePlaylistBox {
     top: calc((100vh - 200px) / 2);
-    height: 200px;
+    height: 250px;
 }
 
 #removeSongBox {
@@ -611,6 +611,14 @@ main {
 
 #close:hover {
     cursor: pointer;
+}
+
+.warningMessage {
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    margin: 5% 10%;
+    color: #ff0000;
 }
 
 ::-webkit-scrollbar {

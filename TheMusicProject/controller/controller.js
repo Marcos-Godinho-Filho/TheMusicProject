@@ -275,8 +275,6 @@ exports.updateUser = ('/profile/:id/updateUser', async (req, res) => {
 
 exports.updatePlaylist = ('/playlist/:id/:idPl/updatePlaylist', async (req, res) => {
 
-    console.log("1")
-
     let namePlaylist = req.body.name
     let descPlaylist = req.body.description
     let image = req.body.img
@@ -290,8 +288,6 @@ exports.updatePlaylist = ('/playlist/:id/:idPl/updatePlaylist', async (req, res)
     }
     catch (erro) { res.json({ success: false }) }
 
-    console.log("2")
-
     let songs = playlists[posicaoPlaylist].musicas
     playlists[posicaoPlaylist] = { nomePlaylist: namePlaylist, imagem: image, descricao: descPlaylist, musicas: songs }
 
@@ -299,8 +295,6 @@ exports.updatePlaylist = ('/playlist/:id/:idPl/updatePlaylist', async (req, res)
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) { res.json({ success: false }) }
-
-    console.log("3")
 })
 
 exports.checkValidation = ('/authentication', async (req, res) => {
@@ -325,32 +319,25 @@ exports.deleteUser = ('/profile/:id/deleteUser', async (req, res) => {
     await Users.deleteOne({ "_id": idUser })
 })
 
-exports.deletePlaylist = ('/playlist/deletePlaylist/:id/:idPl'), async (req, res) => {
+exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist'), async (req, res) => {
 
-    let posicaoPlaylist = req.body.idPl
+    let posicaoPlaylist = req.params.idPl
     let idUser = req.params.id
 
     let playlists
     try {
-        const registro = await Users.findById({ "_id": idUser })
-        playlists = registro.playlists
+        let user = await Users.findById({ "_id": idUser })
+        playlists = user.playlists
     }
     catch (erro) { res.json({ success: false }) }
 
     // Que que é tudo isso
-    const halfBeforeTheUnwantedElement = playlists.slice(posicaoPlaylist)
-    const halfAfterTheUnwantedElement = playlists(posicaoPlaylist + 1)
-    const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement)
-
-    playlists = copyWithoutRemovedElement
+    playlists = playlists.slice(posicaoPlaylist)
+    
     try {
-        if (await isUserExistent(idUser)) {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
+        await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) { res.json({ success: false }) }
-    // Redirecionar para home
-    res.render('../public/views/home', { idUser: idUser, playlists: playlists })
 }
 
 exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
@@ -368,11 +355,9 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res
 
     try {
         const musicas = playlists[posicaoPlaylist].songs
-        const halfBeforeTheUnwantedElement = musicas.slice(posicaoMusica)
-        const halfAfterTheUnwantedElement = musicas(posicaoMusica + 1)
-        const copyWithoutRemovedElement = halfBeforeTheUnwantedElement.concat(halfAfterTheUnwantedElement)
+        musicas = musicas.slice(posicaoMusica)
 
-        playlists[posicaoPlaylist].songs = copyWithoutRemovedElement
+        playlists[posicaoPlaylist].musicas = musicas
 
         try {
             if (await isUserExistent(idUser))

@@ -1,8 +1,7 @@
 const BASE_URL = window.location.href
 
 let songs = []
-let idUser
-let posPl
+let idUser = BASE_URL.substring(31, 55)
 
 let playBtn = document.querySelector('#playBtn')
 let pauseBtn = document.querySelector('#pauseBtn')
@@ -220,7 +219,7 @@ document.querySelector('#delete').addEventListener('click', () => {
     let id = '#deletePlaylistBox'
     let deletePlaylistBoxContent = `
         <h1 class="boxTitle"> Deletar Playlist </h1>
-        <p class="message"> Tem certeza que deseja deletar a Playlist? </p>
+        <p class="warningMessage"> Esta ação é irreversível. Todas as suas músicas salvas serão perdidas. </p>
         <div class="options-buttons">
             <button id="deletePlaylist"> Deletar </button>
             <button id="calcelDeletePlaylist"> Cancelar </button>
@@ -236,16 +235,10 @@ document.querySelector('#delete').addEventListener('click', () => {
         async function deletePlaylist(e) {
             const res = await fetch(BASE_URL + '/deletePlaylist', {
                 method: 'PUT',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: {
-                    posPl: posPl
-                }
             })
-        }
 
-        window.location.href = `/${idUser}/home`
+            window.location.href = `http://localhost:3000/home/${idUser}/`
+        }
     })
 
     document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
