@@ -465,6 +465,7 @@ main {
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: white;
 }
 
 .playlist:hover {

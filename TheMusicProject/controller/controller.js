@@ -102,6 +102,14 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     catch (erro) { throw new Error(erro) }
 })
 
+exports.getPlaylists = ('/search/:id/playlists', async (req, res) => {
+
+    let idUser = req.params.id
+    try {
+        res.json({ playlists: await getUsersPlaylists(idUser) })
+    } catch (erro) { throw new Error(erro) }
+})
+
 async function getUsersPlaylists(idUser) {
 
     let playlists = []
@@ -114,13 +122,6 @@ async function getUsersPlaylists(idUser) {
 
     return playlists
 }
-
-exports.getPlaylists = ('/search/:id/playlists', async (req, res) => {
-    let idUser = req.params.id
-    try {
-        res.json({playlists: getUsersPlaylists(idUser)})
-    } catch (erro) { throw new Error(erro) }
-})
 
 async function isUserExistent(email) {
 
@@ -233,8 +234,7 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
     if (isPlaylistExistent(idUser, pos)) {
         playlists[posPlaylist].musicas = playlists[posPlaylist].musicas.push(song)
         try {
-            if (await isUserExistent(idUser))
-                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
         catch (erro) {
             res.json({ success: false })
@@ -370,8 +370,8 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res)
         playlists[posicaoPlaylist].musicas = musicas
 
         try {
-            if (await isUserExistent(idUser))
-                await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
+
+            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
         catch (erro) {
             res.json({ success: false })

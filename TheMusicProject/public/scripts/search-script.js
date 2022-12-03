@@ -307,6 +307,8 @@ let showSelectPlaylistBox = function (pos) {
         const data = await res.json()
         resultado = data.playlists
 
+        console.log(resultado)
+
         if (resultado.length == 0) {
             selectPlaylistBoxContent = `
                 <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>`
@@ -321,7 +323,7 @@ let showSelectPlaylistBox = function (pos) {
 
             for (let i = 0; i < resultado.length; i++) {
                 selectPlaylistBoxContent += `
-                        <li class="playlist" onclick="select(${i})">${resultado[i].nomePlaylist}</li>`
+                        <li class="playlist" onclick="selectPlaylist(${i})">${resultado[i].nomePlaylist}</li>`
             }
 
             selectPlaylistBoxContent += `
@@ -336,52 +338,51 @@ let showSelectPlaylistBox = function (pos) {
         }
 
         showBox(idPlaylistBox, selectPlaylistBoxContent)
-    }
 
-    let selectedPlaylist
-
-    let posPl
-    let select = function (pos) {
         const playlists = document.getElementsByClassName('playlist')
-        posPl = pos
 
-        if (selectedPlaylist !== undefined)
+        let selectedPlaylist
+
+        let selectPlaylist = function (pos) {
+
+            // if (selectedPlaylist != undefined)
             selectedPlaylist.style.backgroundColor = 'transparent'
 
-        selectedPlaylist = playlists.item(pos)
-        selectedPlaylist.style.backgroundColor = '#505050'
-    }
-
-    document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
-
-        const resultadoBusca = document.querySelector("#results")
-
-        async function addSong(e) {
-            const res = await fetch(BASE_URL + `/${posPl}/insertSong`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    nomeMusica: resultadoBusca[posicaoMusica]["nome"],
-                    nomeArtista: resultadoBusca[posicaoMusica]["artista"],
-                    nomeAlbum: resultadoBusca[posicaoMusica]["album"],
-                    previewMusica: resultadoBusca[posicaoMusica]["preview"],
-                    imagem: resultadoBusca[posicaoMusica]["imagem"],
-                    posPlaylist: posPl,
-                    idUser: idUser
-                }
-            })
+            selectedPlaylist = playlists.item(pos)
+            selectedPlaylist.style.backgroundColor = '#505050'
         }
 
-        addSong()
+        document.querySelector("#calcelAddSongToPlaylist").addEventListener('click', () => {
+            hideBox(idPlaylistBox)
+        })
 
-        hideBox(idPlaylistBox)
-    })
+        document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
-    document.querySelector("#calcelAddSongToPlaylist").addEventListener('click', () => {
-        hideBox(idPlaylistBox)
-    })
+            let resultadoBusca = results.childNodes.length
+
+            async function addSong(e) {
+                const res = await fetch(BASE_URL + `/${posPl}/insertSong`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: {
+                        nomeMusica: resultadoBusca[posicaoMusica]["nome"],
+                        nomeArtista: resultadoBusca[posicaoMusica]["artista"],
+                        nomeAlbum: resultadoBusca[posicaoMusica]["album"],
+                        previewMusica: resultadoBusca[posicaoMusica]["preview"],
+                        imagem: resultadoBusca[posicaoMusica]["imagem"],
+                        posPlaylist: posPl,
+                        idUser: idUser
+                    }
+                })
+            }
+
+            addSong()
+
+            hideBox(idPlaylistBox)
+        })
+    }
 }
 
 let showBox = function (id, content) {

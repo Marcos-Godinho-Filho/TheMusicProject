@@ -11,30 +11,27 @@ const router = express.Router()
 router.get('/', (req, res) => {
     res.render('../public/views/login.ejs')
 })
-
 router.get('/registration', (req, res) => {
     res.render('../public/views/sign-up.ejs')
 })
-
 router.get('/authentication', (req, res) => {
     res.render('../public/views/login.ejs')
 })
-
 router.get('/password-recovery', (req, res) => {
     res.render('../public/views/password-recovery.ejs')
 })
-
 router.get('/home/:id', controller.getDataHome) // Home Page // feito
 router.get('/search/:id', controller.getDataSearch) // Search Page // feito
 router.get('/profile/:id', controller.getDataProfile) // Profile Page // feito
 router.get('/playlist/:id/:idPl', controller.getDataPlaylist) // Playlist Page // feito
-
 router.get('/search/:id/results', controller.getSearchResults)
 router.get('/search/:id/playlists', controller.getPlaylists)
+
 
 /*
     POST (getting data from frontend and passing them to backend)
 */
+
 router.post('/registration', controller.insertNewUser) // feito
 router.post('/authentication', controller.checkValidation) // feito
 router.post('/search/:id/results', controller.searchFromAPI)
@@ -60,9 +57,11 @@ router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // fe
 router.put('/playlist/:id/:idPl/deletePlaylist', controller.deletePlaylist) // Playlist Page // feito
 router.put('/playlist/:id/idPl/:idSong/deleteSong', controller.deleteSong) // Playlist Page // feito
 
+
 /*
     DELETE (deleting data from backend)
 */
+
 router.delete('/profile/:id/deleteUser', controller.deleteUser) // Profile Page // feito
 
 module.exports = router
