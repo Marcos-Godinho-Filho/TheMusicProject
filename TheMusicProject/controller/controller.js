@@ -94,20 +94,13 @@ exports.getDataProfile = ('/profile/:id', async (req, res) => {
 
 exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
 
-    console.log("CHEGAMOS AQUI ------------------- 1");
     let idUser = req.params.id
     let idPlaylist = Number(req.params.idPl)
-    console.log(idUser + "       " + idPlaylist);
     let playlists = await getUsersPlaylists(idUser)
     let playlist = playlists[idPlaylist]
-    console.log("CHEGAMOS AQUI ------------------- 2");
 
     try {
-        console.log(playlists);
-        console.log(idUser);
-        console.log(playlist);
-        console.log(idPlaylist);
-        res.render('../public/views/playlist.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
+        res.render('../public/views/playlists.ejs', { playlists: playlists, idUser: idUser, playlist: playlist, idPlaylist: idPlaylist })
     }
     catch (erro) { throw new Error(erro) }
 })

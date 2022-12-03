@@ -141,7 +141,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             <h1 class="boxTitle"> Criar Playlist </h1>
             <div id="edit-image-cp">
                 <button id="edit-img-button-cp" onclick="document.getElementById('fileReader-cp').click()">
-                    <img id="img-button-cp" alt="Browse" src="../imgs/playlist-icon.png">
+                    <img id="img-button-cp" alt="Browse" src="/imgs/playlist-icon.png">
                 </button>
                 <input type="file" id="fileReader-cp" accept="image/*">
             </div>
@@ -174,7 +174,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 
     document.querySelector('#edit-img-button-cp').addEventListener('mouseover', () => {
         previousImg = img.src
-        img.src = '../imgs/browse.png'
+        img.src = '/imgs/browse.png'
         img.style.width = '200px'
         img.style.height = '200px'
     })
@@ -293,7 +293,7 @@ document.querySelector('#edit').addEventListener('click', () => {
 
     document.querySelector('#edit-img-button').addEventListener('mouseover', () => {
         previousImg = img.src
-        img.src = '../photos/browse.png'
+        img.src = '/imgs/browse.png'
         img.style.width = '200px'
         img.style.height = '200px'
     })

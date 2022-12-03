@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheMusicProject - Playlist</title>
-    <link rel="icon" type="image/x-icon" href="../imgs/icon.ico">
-    <link rel="stylesheet" href="../stylesheets/playlist-style.css">
+    <link rel="icon" type="image/x-icon" href="/imgs/icon.ico">
+    <link rel="stylesheet" href="/stylesheets/playlists-style.css">
 </head>
 
 <body>
     <aside id="aside">
         <div class="sidebar-logo">
-            <img src="../imgs/THEmusicPROJECT.png" alt="logo" draggable="false">
+            <img src="/imgs/THEmusicPROJECT.png" alt="logo" draggable="false">
         </div>
         <div class="sidebar-menu">
             <a href="/home/<%= idUser %>">
@@ -83,7 +83,7 @@
         <% for (let i=0; i < playlist.musicas.length; i++) { %>
             <div id="musicas">
                 <div class="song">
-                    <div class="s-image">
+                    <div class="s-image-wrapper">
                         <img src="<%= playlists.musicas[i].imagem %>" alt="Img" draggable="false">
                     </div>
                     <div class="s-data">
@@ -155,8 +155,8 @@
                 </audio>
     </main>
 
-    <script src="../stylesheets/all.min.js"></script>
-    <script src="../scripts/playlist-script.js"></script>
+    <script src="/stylesheets/all.min.js"></script>
+    <script src="/scripts/playlists-script.js"></script>
 </body>
 
 </html>

@@ -426,7 +426,7 @@ main {
     background-color: #3c3c3c;
 }
 
-.s-image {
+.s-image-wrapper {
     float: left;
     height: 70px;
     width: 70px;
@@ -434,7 +434,7 @@ main {
 }
 
 .s-image>img {
-    width: 100%;
+    
 }
 
 .s-data {
