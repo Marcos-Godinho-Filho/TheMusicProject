@@ -70,8 +70,8 @@ exports.searchFromAPI = ('/search/:id/results', async (req, res) => {
 exports.getSearchResults = ('/search/:id/results', async (req, res) => {
 
     try {
-        res.json ({ retorno: retorno })
-    } catch (erro) { throw new Error (erro) }
+        res.status(200).json({ retorno: retorno })
+    } catch (erro) { throw new Error(erro) }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {

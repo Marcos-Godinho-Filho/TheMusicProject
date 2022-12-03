@@ -21,7 +21,7 @@ function buscar(e) {
 
     e.preventDefault()
     postInfo()
-    setTimeout(getInfo(), 4000)
+    setTimeout(getInfo, 4000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
