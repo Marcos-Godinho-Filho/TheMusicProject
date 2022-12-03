@@ -26,7 +26,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             </div>
             <div id="edit-data-cp">
                 <input type="text" id="newTitle" value="Nome"> </input> 
-                <textarea id="newDescription">Descrição</textarea>
+                <textarea maxlength="50" id="newDescription" resize="none">Descrição</textarea>
             </div>
             <div class="options-buttons">
                 <button id="confirmCreatePlaylist"> Criar </button>
@@ -92,12 +92,6 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
         hideBox(id)
     })
 })
-
-
-document.querySelector(".testeBotaoFuncionaPFV").addEventListener('click', () => {
-    console.log("--- CHEGAMOS AQUI PRINCIPAL ---");
-    console.log(document.querySelector(".testeBotaoFuncionaPFV").href);
-});
 
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)'

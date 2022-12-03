@@ -52,7 +52,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             </div>
             <div id="edit-data-cp">
                 <input type="text" id="newTitle" value="Nome"> </input> 
-                <textarea id="newDescription">Descrição</textarea>
+                <textarea maxlength="50" id="newDescription" resize="none">Descrição</textarea>
             </div>
             <div class="options-buttons">
                 <button id="confirmCreatePlaylist"> Criar </button>
