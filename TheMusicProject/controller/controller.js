@@ -5,7 +5,7 @@ const user = require('../models/user')
 
 const Users = db.Mongoose.model('esquemaUsuario', user.UserSchema, 'users')
 
-let retorno = ["first"]
+let retorno = []
 
 // SELECIONAR
 
@@ -26,7 +26,7 @@ exports.getDataSearch = ('/search/:id', async (req, res) => {
     let playlists = await getUsersPlaylists(idUser)
 
     try {
-        res.render('../public/views/search.ejs', { idUser: idUser, playlists: playlists, retorno: retorno })
+        res.render('../public/views/search.ejs', { idUser: idUser, playlists: playlists })
     }
     catch (erro) { throw new Error(erro) }
 })
@@ -61,18 +61,17 @@ exports.searchFromAPI = ('/search/:id/results', async (req, res) => {
         }).catch(function (error) {
             console.error(error)
         })
-
-        res.render('../public/partials/results.ejs', { retorno: retorno })
     }
     catch (erro) { console.log(erro) }
+
+    console.log(retorno)
 })
 
-exports.getDataSearchResult = ('/search/:id/results', async (req, res) => {
+exports.getSearchResults = ('/search/:id/results', async (req, res) => {
 
     try {
-        res.render('/..public/partials/results.ejs', { retorno: retorno })
-    }
-    catch (erro) { throw new Error(erro) }
+        res.json ({ retorno: retorno })
+    } catch (erro) { throw new Error (erro) }
 })
 
 exports.getDataProfile = ('/profile/:id', async (req, res) => {
@@ -305,7 +304,7 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec()
     if (listaUsuarios.length > 0) {
         let id = await getUserID(email)
-        res.json({ success: true, id: id }); 
+        res.json({ success: true, id: id });
     }
     else { res.json({ success: false }); }
 })

@@ -19,7 +19,6 @@ app.use(express.static(__dirname + '/public/stylesheets'))
 app.use(express.static(__dirname + '/public/imgs'))
 app.use(express.static(__dirname + '/public/fonts'))
 app.use(express.static(__dirname + '/public/scripts'))
-app.use(express.static(__dirname + '/public/partials'))
 app.use('/', rota)
 
 

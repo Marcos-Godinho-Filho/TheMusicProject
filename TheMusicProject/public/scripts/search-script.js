@@ -20,7 +20,8 @@ function buscar(e) {
     document.querySelector('.container-animation').style.display = 'flex'
 
     e.preventDefault()
-    postInfo();
+    postInfo()
+    setTimeout(getInfo(), 4000)
 
     async function postInfo(e) {
         if (inpBx.value == "") {
@@ -35,8 +36,50 @@ function buscar(e) {
                 parcel: inpBx.value
             })
         })
+    }
 
-        window.location.href = "http://localhost:3000/search/" + idUser
+    async function getInfo(e) {
+        const res = await fetch(BASE_URL + '/results', {
+            method: 'GET',
+        })
+
+        const data = await res.json()
+        const retorno = data.retorno
+
+        document.querySelector('.container-animation').style.display = 'none'
+
+        if (retorno.length == 0)
+            results.innerHTML = "<div id='noResults'> Sem resultados para a busca. </div>"
+        else {
+            for (let i = 0; i < retorno.length; i++) {
+                results.innerHTML += `
+            <div class="song">
+                <div class="s-image">
+                    <img src="${retorno[i].imagem}" alt="" draggable="false">
+                </div>
+                <div class="s-data">
+                    <h1>
+                        ${retorno[i].nome}
+                    </h1>
+                    <h2>
+                        ${retorno[i].artista}
+                    </h2>
+                    <h2>
+                        ${retorno[i].album}
+                    </h2>
+                </div>
+                <div class="s-buttons">
+                    <button style="font-size: 20px" onclick="showSelectPlaylistBox(i)">
+                        <i class="fa-solid fa-plus" style="color: #fff"></i>
+                    </button>
+                    <button style="font-size: 20px"
+                        onclick="showSongData('${retorno[i].imagem}', '${retorno[i].nome}', '${retorno[i].artista}', '${retorno[i].album}', '${retorno[i].preview}')">
+                        <i class="fa-solid fa-play" style="color: #fff"></i>
+                    </button>
+                </div>
+            </div>`
+            }
+        }
     }
 }
 
