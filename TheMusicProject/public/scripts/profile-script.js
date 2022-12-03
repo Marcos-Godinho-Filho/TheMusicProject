@@ -199,6 +199,29 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
     })
 })
 
+document.querySelector("#logout").addEventListener('click', () => {
+    let id = '#logoutBox'
+    let logoutBoxContent = `
+        <h1 class="boxTitle"> Sair da conta </h1>
+        <p class="message"> Tem certeza que deseja sair da conta? </p>
+        <div class="options-buttons">
+            <button id="logout"> Sair </button>
+            <button id="calcelLogout"> Cancelar </button>
+        </div>
+    `
+    showBox(id, logoutBoxContent)
+
+    document.querySelector('#logout').addEventListener('click', () => {
+        hideBox(id)
+
+        window.location.href = `http://localhost:3000/authentication`
+    })
+
+    document.querySelector('#calcelLogout').addEventListener('click', () => {
+        hideBox(id)
+    })
+})
+
 let showBox = function (id, content) {
     document.querySelector('#aside').style.filter = 'blur(7px)'
     document.querySelector('#main').style.filter = 'blur(7px)'

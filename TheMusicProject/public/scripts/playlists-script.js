@@ -385,7 +385,7 @@ let hideBox = function (id) {
     box.style.display = 'none'
 }
 
-let showDBResult = function(success) {
+let showDBResult = function (success) {
     const box = document.querySelector('#dbResultBox')
     box.display = "block"
 
@@ -393,13 +393,13 @@ let showDBResult = function(success) {
         box.innerHTML = "A operação feita com sucesso!"
         box.style.backgroundColor = "#66ff99"
     }
-    else { 
+    else {
         box.innerHTML = "Erro! A operação falhou!"
         box.style.backgroundColor = " #ff8080"
     }
 
-    setTimeout(() => { 
-        box.innerHTML = "" 
+    setTimeout(() => {
+        box.innerHTML = ""
         box.display = "none"
     }, 3000)
 }

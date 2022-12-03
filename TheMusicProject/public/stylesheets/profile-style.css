@@ -154,9 +154,9 @@ marquee {
     cursor: pointer;
 }
 
-#play,
 #delete,
-#edit:hover {
+#edit,
+#logout:hover {
     cursor: pointer;
 }
 
@@ -519,10 +519,14 @@ marquee {
     resize: none;
 }
 
+#logoutBox {
+    top: calc((100vh - 200px) / 2);
+    height: 200px;
+}
+
 ::-webkit-scrollbar {
     width: 12.5px;
 }
-
 
 ::-webkit-scrollbar-track {
     background-color: #d3d3d3;
