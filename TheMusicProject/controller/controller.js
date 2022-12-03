@@ -157,7 +157,6 @@ exports.insertNewUser = ('/registration', async (req, res) => {
             await usuario.save()
             // Redireciona para home com o id cadastrado
             let id = await getUserID(email)
-            console.log(" -- CADASTRADO -- ");
             res.json({ success: true, id: id })
 
         }
@@ -178,7 +177,7 @@ isPlaylistExistent = async (idUser, posPlaylist) => {
     catch (err) { return false }
 }
 
-exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist' || '/profile/:id/insertPlaylist' || '/search/:id/insertPlaylist/', async (req, res) => {
+exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/search/:id/insertPlaylist/' || '/profile/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist', async (req, res) => {
 
     let nomePlaylist = req.body.nome
     let img = req.body.imagem
@@ -306,9 +305,9 @@ exports.checkValidation = ('/authentication', async (req, res) => {
     let listaUsuarios = await Users.find({ email: email, senha: senha }).lean().exec()
     if (listaUsuarios.length > 0) {
         let id = await getUserID(email)
-        res.json({ success: true, id: id }); console.log("LOGADO")
+        res.json({ success: true, id: id }); 
     }
-    else { res.json({ success: false }); console.log("NAO LOGADO") }
+    else { res.json({ success: false }); }
 })
 
 // DELETAR
@@ -324,8 +323,6 @@ exports.deleteUser = ('/profile/:id/deleteUser', async (req, res) => {
 
 exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist', async (req, res) => {
 
-    console.log("1")
-
     let posicaoPlaylist = Number(req.params.idPl)
     let idUser = req.params.id
 
@@ -336,8 +333,6 @@ exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist', async (req, res)
     }
     catch (erro) { res.json({ success: false }) }
 
-    console.log("2")
-
     let before = playlists.slice(0, posicaoPlaylist)
     let after = playlists.slice(posicaoPlaylist + 1)
     playlists = before.concat(after)
@@ -346,8 +341,6 @@ exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist', async (req, res)
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) { res.json({ success: false }) }
-
-    console.log("3")
 })
 
 exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res) => {
