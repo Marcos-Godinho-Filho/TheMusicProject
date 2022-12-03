@@ -229,16 +229,15 @@ document.querySelector('#delete').addEventListener('click', () => {
 
     document.querySelector('#deletePlaylist').addEventListener('click', () => {
         hideBox(id)
-
         deletePlaylist()
 
         async function deletePlaylist(e) {
             const res = await fetch(BASE_URL + '/deletePlaylist', {
                 method: 'PUT',
             })
-
-            window.location.href = `http://localhost:3000/home/${idUser}/`
         }
+
+        window.location.href = `http://localhost:3000/home/${idUser}/`
     })
 
     document.querySelector('#calcelDeletePlaylist').addEventListener('click', () => {
@@ -349,11 +348,11 @@ let removeSong = function (pos) {
                 headers: {
                     "Content-Type": 'application/json'
                 },
-                body: {
+                body: JSON.stringify({
                     idUser: idUser,
                     posPl: posPl,
                     posMs: document.getElementsByClassName('song')[pos]
-                }
+                })
             })
         }
 

@@ -49,12 +49,12 @@ router.put('/profile/:id/updateUser', controller.updateUser) // Profile Page // 
 router.put('/playlist/:id/:idPl/updatePlaylist', controller.updatePlaylist) // Playlist Page // feito
 
 // INSERIR
-router.put('/home/:id/insertPlaylist' || '/search/:id/insertPlaylist' || '/profile/:id/insertPlaylist' || '/playlist/:id/insertPlaylist', controller.insertNewPlaylist) // feito 
-router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // feito
+router.put('/home/:id/insertPlaylist' || '/search/:id/insertPlaylist' || '/profile/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist', controller.insertNewPlaylist) // feito 
+// router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // feito
 
 // DELETAR
-//router.put('/playlist/deletePlaylist/:id/:idPl', controller.deletePlaylist) // Playlist Page // feito
-//router.put('/playlist/deleteSong/:id/idPl/:idSong', controller.deleteSong) // Playlist Page // feito
+router.put('/playlist/:id/:idPl/deletePlaylist', controller.deletePlaylist) // Playlist Page // feito
+router.put('/playlist/:id/idPl/:idSong/deleteSong', controller.deleteSong) // Playlist Page // feito
 
 /*
     DELETE (deleting data from backend)

@@ -214,7 +214,7 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
     let nomeAlbum = req.body.nomeAlbum
     let previewMusica = req.body.previewMusica
     let imagem = req.body.imagem
-    let posPlaylist = req.body.posPlaylist
+    let posPlaylist = Number(req.body.posPlaylist)
     let idUser = req.params.id
 
     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
@@ -278,7 +278,7 @@ exports.updatePlaylist = ('/playlist/:id/:idPl/updatePlaylist', async (req, res)
     let namePlaylist = req.body.name
     let descPlaylist = req.body.description
     let image = req.body.img
-    let posicaoPlaylist = req.params.idPl
+    let posicaoPlaylist = Number(req.params.idPl)
     let idUser = req.params.id
 
     let playlists
@@ -316,12 +316,17 @@ exports.checkValidation = ('/authentication', async (req, res) => {
 exports.deleteUser = ('/profile/:id/deleteUser', async (req, res) => {
 
     let idUser = req.params.id
-    await Users.deleteOne({ "_id": idUser })
+
+    try {
+        await Users.deleteOne({ "_id": idUser })
+    } catch (erro) { res.json({ success: false }) }
 })
 
-exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist'), async (req, res) => {
+exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist', async (req, res) => {
 
-    let posicaoPlaylist = req.params.idPl
+    console.log("1")
+
+    let posicaoPlaylist = Number(req.params.idPl)
     let idUser = req.params.id
 
     let playlists
@@ -331,16 +336,21 @@ exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist'), async (req, res
     }
     catch (erro) { res.json({ success: false }) }
 
-    // Que que é tudo isso
-    playlists = playlists.slice(posicaoPlaylist)
-    
+    console.log("2")
+
+    let before = playlists.slice(0, posicaoPlaylist)
+    let after = playlists.slice(posicaoPlaylist + 1)
+    playlists = before.concat(after)
+
     try {
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
     catch (erro) { res.json({ success: false }) }
-}
 
-exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res) => {
+    console.log("3")
+})
+
+exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res) => {
 
     let posicaoPlaylist = req.body.idPl
     let posicaoMusica = req.body.idSong
@@ -354,8 +364,11 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res
     catch (erro) { res.json({ success: false }) }
 
     try {
+
         const musicas = playlists[posicaoPlaylist].songs
-        musicas = musicas.slice(posicaoMusica)
+        let before = musicas.slice(0, posicaoMusica)
+        let after = musicas.slice(posicaoMusica)
+        musicas = before.concat(after)
 
         playlists[posicaoPlaylist].musicas = musicas
 
@@ -370,4 +383,4 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong'), async (req, res
     catch (erro) {
         res.json({ success: false })
     }
-}
+})
