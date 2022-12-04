@@ -349,11 +349,11 @@ let showSelectPlaylistBox = function (pos) {
         document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
             const playlists = document.getElementsByName("playlist")
-        
-            let posPl = 0
+       
+            let posicoes = []
             for (let i = 0; i < playlists.length; i++) {
                 if (playlists[i].checked)
-                    posPl = i
+                    posicoes.push(i)
             }
 
             async function addSong(e) {
@@ -370,7 +370,7 @@ let showSelectPlaylistBox = function (pos) {
                         nomeAlbum: musica["album"],
                         previewMusica: musica["preview"],
                         imagem: musica["imagem"],
-                        posPlaylist: posPl,
+                        posicoes: posicoes,
                         idUser: idUser
                     })
                 })

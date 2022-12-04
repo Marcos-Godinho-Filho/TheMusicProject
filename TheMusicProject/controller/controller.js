@@ -206,11 +206,10 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
     let nomeAlbum = req.body.nomeAlbum
     let previewMusica = req.body.previewMusica
     let imagem = req.body.imagem
-    let posPlaylist = Number(req.body.posPlaylist)
+    let posicoes = req.body.posicoes
     let idUser = req.params.id
 
     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
-    console.log(song)
 
     let playlists
     try {
@@ -221,8 +220,10 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
         res.json({ success: false })
     }
 
-    playlists[posPlaylist].musicas = playlists[posPlaylist].musicas.push(song)
-   
+    for (let i = 0; i < posicoes.length; i++) {
+        playlists[posicoes[i]].musicas.push(song)
+    }
+    
     try {
         await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }

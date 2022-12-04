@@ -461,14 +461,13 @@ main {
 
 .playlist {
     width: 80%;
-    text-align: center;
     overflow-x: hidden;
     height: 50%;
 }
 
 .playlist>label {
     font-size: 18px;
-    padding: 50px;
+    margin: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: white;
