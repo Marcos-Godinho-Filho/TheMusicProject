@@ -60,7 +60,11 @@
                     <%= playlist.descricao %>
                 </h2>
                 <p id="songCount">
-                    <%= playlist.musicas.length %> músicas
+                    <%= playlist.musicas.length %>
+                        <% if(playlist.musicas.length==1) { %>
+                            música
+                            <% } else { %> músicas
+                                <% } %>
                 </p>
             </div>
         </div>
@@ -88,17 +92,17 @@
             <div id="musicas">
                 <div class="song">
                     <div class="s-image-wrapper">
-                        <img src="<%= playlists.musicas[i].imagem %>" alt="Img" draggable="false">
+                        <img src="<%= playlist.musicas[i].imagem %>" alt="Img" draggable="false">
                     </div>
                     <div class="s-data">
                         <h1>
-                            <%= playlists.musicas[i].nomeMusica %>
+                            <%= playlist.musicas[i].nomeMusica %>
                         </h1>
                         <h2>
-                            <%= playlists.musicas[i].nomeArtista %>
+                            <%= playlist.musicas[i].nomeArtista %>
                         </h2>
                         <h2>
-                            <%= playlists.musicas[i].nomeAlbum %>
+                            <%= playlist.musicas[i].nomeAlbum %>
                         </h2>
                     </div>
                     <div class="s-buttons">
@@ -106,7 +110,7 @@
                             <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                         </button>
                         <button style="font-size: 20px;"
-                            onclick="showSongData('<%= playlists.musicas[i].imagem %>', '<%= playlists.musicas[i].nomeMusica %>', '<%= playlists.musicas[i].nomeArtista %>', '<%= playlists.musicas[i].nomeAlbum %>', '<%= playlists.musicas[i].previewMusica %>')">
+                            onclick="showSongData('<%= playlist.musicas[i].imagem %>', '<%= playlist.musicas[i].nomeMusica %>', '<%= playlist.musicas[i].nomeArtista %>', '<%= playlist.musicas[i].nomeAlbum %>', '<%= playlist.musicas[i].previewMusica %>')">
                             <i class="fa-solid fa-play" style="color: #fff;"></i>
                         </button>
                     </div>

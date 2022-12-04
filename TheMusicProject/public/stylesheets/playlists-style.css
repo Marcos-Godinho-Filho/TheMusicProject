@@ -433,8 +433,8 @@ main {
     margin: 5px;
 }
 
-.s-image>img {
-
+.s-image-wrapper >img {
+    width: 100%;
 }
 
 .s-data {
