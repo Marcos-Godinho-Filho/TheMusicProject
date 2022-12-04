@@ -170,18 +170,6 @@ exports.insertNewUser = ('/registration', async (req, res) => {
     else { res.json({ success: false }); return } // Já existe no banco de dados
 })
 
-isPlaylistExistent = async (idUser, posPlaylist) => {
-
-    try {
-        let usuario = await Users.findById({ "_id": idUser }).lean().exec()
-        if (usuario.playlists.length > posPlaylist && posPlaylist >= 0)
-            return true
-        else
-            return false
-    }
-    catch (err) { return false }
-}
-
 exports.insertNewPlaylist = ('/home/:id/insertPlaylist' || '/search/:id/insertPlaylist/' || '/profile/:id/insertPlaylist' || '/playlist/:id/:idPl/insertPlaylist', async (req, res) => {
 
     let nomePlaylist = req.body.nome
@@ -222,7 +210,9 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
     let idUser = req.params.id
 
     let song = { nomeMusica: nomeMusica, nomeArtista: nomeArtista, nomeAlbum: nomeAlbum, previewMusica: previewMusica, imagem: imagem }
+    console.log(song)
 
+    let playlists
     try {
         const registro = await Users.findById({ "_id": idUser })
         playlists = registro.playlists
@@ -231,18 +221,14 @@ exports.insertNewSongIntoPlaylist = ('/search/:id/insertSong', async (req, res) 
         res.json({ success: false })
     }
 
-    if (isPlaylistExistent(idUser, pos)) {
-        playlists[posPlaylist].musicas = playlists[posPlaylist].musicas.push(song)
-        try {
-            await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
-        }
-        catch (erro) {
-            res.json({ success: false })
-        }
+    playlists[posPlaylist].musicas = playlists[posPlaylist].musicas.push(song)
+   
+    try {
+        await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
     }
-    else
+    catch (erro) {
         res.json({ success: false })
-
+    }
 })
 
 // EDITAR
@@ -370,7 +356,6 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res)
         playlists[posicaoPlaylist].musicas = musicas
 
         try {
-
             await Users.updateOne({ "_id": idUser }, { $set: { playlists: playlists } })
         }
         catch (erro) {

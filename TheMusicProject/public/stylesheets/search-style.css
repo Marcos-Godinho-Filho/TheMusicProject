@@ -460,17 +460,26 @@ main {
 }
 
 .playlist {
-    font-size: 16px;
-    padding: 10px 30px;
+    width: 80%;
+    text-align: center;
     overflow-x: hidden;
+    height: 50%;
+}
+
+.playlist>label {
+    font-size: 18px;
+    padding: 50px;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: white;
+    vertical-align: middle;
 }
 
-.playlist:hover {
-    background-color: #3c3c3c;
-    cursor: pointer;
+.playlist>input {
+    width: 10%;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
 }
 
 .song {

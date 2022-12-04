@@ -15,6 +15,7 @@ inpBx.addEventListener('keyup', function (e) {
         buscarBtn.click()
 })
 
+let retorno
 function buscar(e) {
     results.innerHTML = ''
     document.querySelector('.container-animation').style.display = 'flex'
@@ -44,7 +45,7 @@ function buscar(e) {
         })
 
         const data = await res.json()
-        const retorno = data.retorno
+        retorno = data.retorno
 
         document.querySelector('.container-animation').style.display = 'none'
 
@@ -318,16 +319,18 @@ let showSelectPlaylistBox = function (pos) {
                 <h1 class="boxTitle"> Adicionar às playlists </h1>
                 <p> Selecione a playlist desejada: </p>
                 <div id="division"> </div>
-                <div id="playlists">
-                    <ul>`
+                <div id="playlists">`
 
             for (let i = 0; i < resultado.length; i++) {
                 selectPlaylistBoxContent += `
-                        <li class="playlist" onclick="selectPlaylist(${i})">${resultado[i].nomePlaylist}</li>`
+                    <div class="playlist">
+                        <input type="checkbox" value="${i}" name="playlist">
+                        <label>${resultado[i].nomePlaylist}</label>
+                        <br>
+                    </div class="playlist">`
             }
 
             selectPlaylistBoxContent += `
-                    <ul>
                 </div>`
 
             selectPlaylistBoxContent += `
@@ -339,42 +342,37 @@ let showSelectPlaylistBox = function (pos) {
 
         showBox(idPlaylistBox, selectPlaylistBoxContent)
 
-        const playlists = document.getElementsByClassName('playlist')
-
-        let selectedPlaylist
-
-        let selectPlaylist = function (pos) {
-
-            // if (selectedPlaylist != undefined)
-            selectedPlaylist.style.backgroundColor = 'transparent'
-
-            selectedPlaylist = playlists.item(pos)
-            selectedPlaylist.style.backgroundColor = '#505050'
-        }
-
         document.querySelector("#calcelAddSongToPlaylist").addEventListener('click', () => {
             hideBox(idPlaylistBox)
         })
 
         document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
-            let resultadoBusca = results.childNodes.length
+            const playlists = document.getElementsByName("playlist")
+        
+            let posPl = 0
+            for (let i = 0; i < playlists.length; i++) {
+                if (playlists[i].checked)
+                    posPl = i
+            }
 
             async function addSong(e) {
-                const res = await fetch(BASE_URL + `/${posPl}/insertSong`, {
+                let musica = retorno[posicaoMusica]
+
+                const res = await fetch(BASE_URL + `/insertSong`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: {
-                        nomeMusica: resultadoBusca[posicaoMusica]["nome"],
-                        nomeArtista: resultadoBusca[posicaoMusica]["artista"],
-                        nomeAlbum: resultadoBusca[posicaoMusica]["album"],
-                        previewMusica: resultadoBusca[posicaoMusica]["preview"],
-                        imagem: resultadoBusca[posicaoMusica]["imagem"],
+                    body: JSON.stringify({
+                        nomeMusica: musica["nome"],
+                        nomeArtista: musica["artista"],
+                        nomeAlbum: musica["album"],
+                        previewMusica: musica["preview"],
+                        imagem: musica["imagem"],
                         posPlaylist: posPl,
                         idUser: idUser
-                    }
+                    })
                 })
             }
 
