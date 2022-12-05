@@ -90,7 +90,7 @@
     <main id="main" onload="addSongsToVector(<%= playlist.musicas %>)">
         <% for (let i=0; i < playlist.musicas.length; i++) { %>
             <div id="musicas">
-                <div class="song">
+                <div class="song" id='song<%=i %>'>
                     <div class="s-image-wrapper">
                         <img src="<%= playlist.musicas[i].imagem %>" alt="Img" draggable="false">
                     </div>
@@ -106,7 +106,7 @@
                         </h2>
                     </div>
                     <div class="s-buttons">
-                        <button style="font-size: 20px;" onclick="removeSong('#song1')">
+                        <button style="font-size: 20px;" onclick="removeSong('<%=i %>')">
                             <i class="fa-solid fa-trash-can" style="color: #fff;"></i>
                         </button>
                         <button style="font-size: 20px;"

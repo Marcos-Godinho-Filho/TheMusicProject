@@ -334,10 +334,11 @@ exports.deletePlaylist = ('/playlist/:id/:idPl/deletePlaylist', async (req, res)
     catch (erro) { res.json({ success: false }) }
 })
 
-exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res) => {
+exports.deleteSong = ('/playlist/:id/:idPl/deleteSong', async (req, res) => {
 
-    let posicaoPlaylist = req.body.idPl
-    let posicaoMusica = req.body.idSong
+    let posicaoPlaylist = req.params.idPl
+    let posicaoMusica = req.body.posMs
+    posicaoMusica = Number(posicaoMusica)
     let idUser = req.params.id
 
     let playlists
@@ -349,9 +350,9 @@ exports.deleteSong = ('/playlist/deleteSong/:id/:idPl/:idSong', async (req, res)
 
     try {
 
-        const musicas = playlists[posicaoPlaylist].songs
+        let musicas = playlists[posicaoPlaylist].musicas
         let before = musicas.slice(0, posicaoMusica)
-        let after = musicas.slice(posicaoMusica)
+        let after = musicas.slice(posicaoMusica + 1)
         musicas = before.concat(after)
 
         playlists[posicaoPlaylist].musicas = musicas

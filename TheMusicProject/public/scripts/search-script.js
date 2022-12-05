@@ -287,7 +287,7 @@ let closeSong = document.querySelector('#closeSong')
 closeSong.addEventListener('click', () => {
     audioPlayer.pause()
     document.querySelector('.player').style.display = "none"
-    document.querySelector('#main').style.height = 'calc(100% - 75px)'
+    document.querySelector('#main').style.height = '100%'
     document.querySelector('#aside').style.height = '100%'
 })
 

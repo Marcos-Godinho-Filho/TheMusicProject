@@ -55,7 +55,7 @@ router.put('/search/:id/insertSong', controller.insertNewSongIntoPlaylist) // fe
 
 // DELETAR
 router.put('/playlist/:id/:idPl/deletePlaylist', controller.deletePlaylist) // Playlist Page // feito
-router.put('/playlist/:id/idPl/:idSong/deleteSong', controller.deleteSong) // Playlist Page // feito
+router.put('/playlist/:id/:idPl/deleteSong', controller.deleteSong) // Playlist Page // feito
 
 
 /*

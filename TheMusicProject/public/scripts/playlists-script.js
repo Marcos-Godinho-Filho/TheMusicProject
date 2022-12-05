@@ -1,6 +1,7 @@
 const BASE_URL = window.location.href
 
 let songs = []
+let posPl = BASE_URL.substr(56,57);
 
 let addSongsToVector = function (musicas) {
     songs = musicas
@@ -331,7 +332,9 @@ document.querySelector('#edit').addEventListener('click', () => {
     })
 })
 
+let idSong;
 let removeSong = function (pos) {
+    idSong = pos;
     const id = '#removeSongBox'
     let removeSongBoxContent = `
         <h1 class="boxTitle"> Remover música </h1>
@@ -348,20 +351,19 @@ let removeSong = function (pos) {
         deleteSong()
 
         async function deleteSong(e) {
+           
             const res = await fetch(BASE_URL + '/deleteSong', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": 'application/json'
                 },
                 body: JSON.stringify({
-                    idUser: idUser,
-                    posPl: posPl,
-                    posMs: document.getElementsByClassName('song')[pos]
+                    posMs: pos
                 })
             })
         }
 
-        let removedSong = document.querySelector(idSong)
+        let removedSong = document.querySelector(`#song${idSong}`)
         removedSong.remove()
 
         hideBox(id)
