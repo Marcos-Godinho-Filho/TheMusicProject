@@ -311,12 +311,16 @@ let showSelectPlaylistBox = function (pos) {
         console.log(resultado)
 
         if (resultado.length == 0) {
+            document.querySelector("#selectPlaylistBox").style.height = "200px"
             selectPlaylistBoxContent = `
-                <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>`
+                <p> Você ainda possui nenhuma playlist criada. Clique no botão "Criar Playlist" na barra lateral para poder criá-la e salvar suas músicas favoritas! </p>
+                <div class="options-buttons" >
+                    <button id="calcelAddSongToPlaylist"> Cancelar </button>
+                </div>`
         }
         else {
             selectPlaylistBoxContent = `
-                <h1 class="boxTitle"> Adicionar às playlists </h1>
+            <h1 class="boxTitle"> Adicionar às playlists </h1>
                 <p> Selecione a playlist desejada: </p>
                 <div id="division"> </div>
                 <div id="playlists">`
@@ -334,10 +338,10 @@ let showSelectPlaylistBox = function (pos) {
                 </div>`
 
             selectPlaylistBoxContent += `
-                <div class="options-buttons">
+                <div class="options-buttons" >
                     <button id="addSongToPlaylist"> Adicionar </button>
                     <button id="calcelAddSongToPlaylist"> Cancelar </button>
-                </div>`
+                </div> `
         }
 
         showBox(idPlaylistBox, selectPlaylistBoxContent)
@@ -349,7 +353,7 @@ let showSelectPlaylistBox = function (pos) {
         document.querySelector('#addSongToPlaylist').addEventListener('click', () => {
 
             const playlists = document.getElementsByName("playlist")
-       
+
             let posicoes = []
             for (let i = 0; i < playlists.length; i++) {
                 if (playlists[i].checked)
@@ -359,7 +363,7 @@ let showSelectPlaylistBox = function (pos) {
             async function addSong(e) {
                 let musica = retorno[posicaoMusica]
 
-                const res = await fetch(BASE_URL + `/insertSong`, {
+                const res = await fetch(BASE_URL + '/insertSong', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
