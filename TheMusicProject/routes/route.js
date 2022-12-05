@@ -26,6 +26,7 @@ router.get('/profile/:id', controller.getDataProfile) // Profile Page // feito
 router.get('/playlist/:id/:idPl', controller.getDataPlaylist) // Playlist Page // feito
 router.get('/search/:id/results', controller.getSearchResults)
 router.get('/search/:id/playlists', controller.getPlaylists)
+router.get('/playlist/:id/:idPl/playlists', controller.getPlaylists)
 
 
 /*

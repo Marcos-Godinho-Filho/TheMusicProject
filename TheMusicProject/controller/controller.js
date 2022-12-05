@@ -102,7 +102,7 @@ exports.getDataPlaylist = ('/playlist/:id/:idPl', async (req, res) => {
     catch (erro) { throw new Error(erro) }
 })
 
-exports.getPlaylists = ('/search/:id/playlists', async (req, res) => {
+exports.getPlaylists = ('/search/:id/playlists' || '/playlist/:id/:idPl/playlists', async (req, res) => {
 
     let idUser = req.params.id
     try {

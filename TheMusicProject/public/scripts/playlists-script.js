@@ -1,10 +1,25 @@
 const BASE_URL = window.location.href
 
-let songs = []
-let posPl = BASE_URL.substr(56,57);
+let songs
+let posPl = BASE_URL.substring(56, 57);
 
-let addSongsToVector = function (musicas) {
-    songs = musicas
+function getMusicasOnload () {
+    async function getMusicas(e) {
+        const res = await fetch(BASE_URL + '/playlists', {
+            method: 'GET'
+        })
+
+        console.log("a")
+        const data = await res.json()
+        console.log("b")
+        playlists = data.playlists
+        console.log("c")
+        songs = playlists[posPl].musicas
+        console.log("d")
+        console.log(songs)
+    }
+
+    getMusicas()
 }
 
 const idUser = BASE_URL.substring(31, 55)
@@ -22,7 +37,7 @@ const volumeSlider = document.querySelector('.volume-slider')
 
 const audioPlayer = document.querySelector('#audioPlayer')
 
-function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
+function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc, posMusica) {
     document.querySelector('.player').style.display = "flex"
     document.querySelector('#main').style.height = 'calc(100% - 270px - 80px - 125px + 15px)'
     document.querySelector('#aside').style.height = 'calc(100% - 125px + 15px)'
@@ -41,6 +56,8 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     songDuration.innerHTML = formatTime(29)
 
     songCurrentTime.innerHTML = '00 : 00'
+
+    musicaAtual = Number(posMusica)
 }
 
 let formatTime = (time) => {
@@ -64,7 +81,7 @@ playBtn.addEventListener('click', () => {
     pauseBtn.style.display = "inline"
 
     if (audioPlayer.currentTime >= 29) {
-        backwardBtn.click()
+        forwardBtn.click()
     }
     else {
         audioPlayer.play()
@@ -80,16 +97,22 @@ pauseBtn.addEventListener('click', () => {
 
 backwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = 0
-    playBtn.click()
 
-    if (musicaAtual != 0)
+    if (musicaAtual > 0) {
         musicaAtual -= 1
 
-    showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src)
+        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaAtual].nomeAlbum, songs[musicaAtual].previewMusica, musicaAtual)
+    }
 })
 
 forwardBtn.addEventListener('click', () => {
-    audioPlayer.currentTime = 29
+    if (songs.length - 1 > musicaAtual) {
+        musicaAtual += 1
+
+        console.log(musicaAtual)
+        console.log(songs[musicaAtual].imagem)
+        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaAtual].nomeAlbum, songs[musicaAtual].previewMusica, musicaAtual)
+    }
 })
 
 setInterval(() => {
@@ -99,10 +122,10 @@ setInterval(() => {
     if (audioPlayer.currentTime >= 29) {
         pauseBtn.click()
 
-        if (songs.length > musicaAtual)
+        if (songs.length - 1 > musicaAtual)
             musicaAtual += 1
 
-        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src)
+        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaAtual].nomeAlbum, songs[musicaAtual].previewMusica, musicaAtual)
     }
 }, 500)
 
@@ -218,7 +241,8 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
 })
 
 document.querySelector('#play').addEventListener('click', () => {
-    showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaArtista].nomeAlbum, songs[musicaAtual].src)
+    if (songs.length > 0)
+        showSongData(songs[musicaAtual].imagem, songs[musicaAtual].nomeMusica, songs[musicaAtual].nomeArtista, songs[musicaAtual].nomeAlbum, songs[musicaAtual].previewMusica, musicaAtual)
 })
 
 document.querySelector('#delete').addEventListener('click', () => {
@@ -351,7 +375,7 @@ let removeSong = function (pos) {
         deleteSong()
 
         async function deleteSong(e) {
-           
+
             const res = await fetch(BASE_URL + '/deleteSong', {
                 method: 'PUT',
                 headers: {
