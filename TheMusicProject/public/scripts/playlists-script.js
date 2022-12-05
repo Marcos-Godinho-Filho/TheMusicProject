@@ -28,7 +28,7 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('#aside').style.height = 'calc(100% - 125px)'
 
     document.querySelector('#pa-img').src = imageSrc
-    document.querySelector('#title').innerHTML = titleTxt
+    document.querySelector('#pa-title').innerHTML = titleTxt
     document.querySelector('#artist').innerHTML = artistTxt
     document.querySelector('#album').innerHTML = albumTxt
     document.querySelector('#preview').src = previewSrc
