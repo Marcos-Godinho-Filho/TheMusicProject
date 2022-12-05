@@ -52,7 +52,7 @@ document.querySelector('#edit').addEventListener('click', () => {
         </div>
         <div id="edit-data">
             <input type="text" id="newUsername" value="${document.querySelector('#username').innerHTML.trim()}"> </input> 
-            <textarea maxlength="50" id="newBio" resize="none">${document.querySelector('#bio').innerHTML.trim()}</textarea>
+            <textarea maxlength="100" id="newBio" resize="none">${document.querySelector('#bio').innerHTML.trim()}</textarea>
         </div>
         <div class="options-buttons">
             <button id="saveEditUser"> Salvar </button>
@@ -134,7 +134,7 @@ document.querySelector('#createPlaylist').addEventListener('click', () => {
             </div>
             <div id="edit-data-cp">
                 <input type="text" id="newTitle" value="Nome"> </input> 
-                <textarea maxlength="50" id="newDescription" resize="none">Descrição</textarea>
+                <textarea maxlength="100" id="newDescription" resize="none">Descrição</textarea>
             </div>
             <div class="options-buttons">
                 <button id="confirmCreatePlaylist"> Criar </button>
