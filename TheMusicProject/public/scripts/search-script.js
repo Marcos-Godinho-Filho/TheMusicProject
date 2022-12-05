@@ -320,7 +320,7 @@ let showSelectPlaylistBox = function (pos) {
         }
         else {
             selectPlaylistBoxContent = `
-    < h1 class="boxTitle" > Adicionar às playlists </h1 >
+            <h1 class="boxTitle"> Adicionar às playlists </h1>
                 <p> Selecione a playlist desejada: </p>
                 <div id="division"> </div>
                 <div id="playlists">`
@@ -338,10 +338,10 @@ let showSelectPlaylistBox = function (pos) {
                 </div>`
 
             selectPlaylistBoxContent += `
-    < div class="options-buttons" >
+                <div class="options-buttons" >
                     <button id="addSongToPlaylist"> Adicionar </button>
                     <button id="calcelAddSongToPlaylist"> Cancelar </button>
-                </div > `
+                </div> `
         }
 
         showBox(idPlaylistBox, selectPlaylistBoxContent)
@@ -363,7 +363,7 @@ let showSelectPlaylistBox = function (pos) {
             async function addSong(e) {
                 let musica = retorno[posicaoMusica]
 
-                const res = await fetch(BASE_URL + `/ insertSong`, {
+                const res = await fetch(BASE_URL + '/insertSong', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
