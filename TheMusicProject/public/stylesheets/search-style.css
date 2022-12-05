@@ -461,8 +461,8 @@ main {
 
 .playlist {
     width: 80%;
-    overflow-x: hidden;
-    height: 50%;
+    overflow: hidden;
+    height: 20%;
 }
 
 .playlist>label {
