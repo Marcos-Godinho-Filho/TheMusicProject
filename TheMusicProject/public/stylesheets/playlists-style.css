@@ -479,13 +479,25 @@ main {
 
 .player {
     width: 100%;
-    height: auto;
+    height: 125px;
     position: absolute;
     left: 0;
     bottom: 0;
     display: none;
     background-color: black;
     padding: 15px 25px;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    font-family: circular-light;
+    width: calc(100% - 50px);
+    z-index: 99;
+    float: left;
 }
 
 .player-artist {
@@ -600,8 +612,9 @@ main {
     cursor: pointer;
 }
 
-#close {
-    color: #ffffff;
+
+#closeSong {
+    color: white;
     background-color: transparent;
     border: none;
     position: absolute;
@@ -609,7 +622,7 @@ main {
     top: 5px;
 }
 
-#close:hover {
+#closeSong:hover {
     cursor: pointer;
 }
 

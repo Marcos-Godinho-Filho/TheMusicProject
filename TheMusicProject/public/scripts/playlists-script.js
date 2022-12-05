@@ -24,8 +24,8 @@ const audioPlayer = document.querySelector('#audioPlayer')
 
 function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('.player').style.display = "flex"
-    document.querySelector('#main').style.height = 'calc(100% - 75px - 125px)'
-    document.querySelector('#aside').style.height = 'calc(100% - 125px)'
+    document.querySelector('#main').style.height = 'calc(100% - 270px - 80px - 125px + 15px)'
+    document.querySelector('#aside').style.height = 'calc(100% - 125px + 15px)'
 
     document.querySelector('#pa-img').src = imageSrc
     document.querySelector('#pa-title').innerHTML = titleTxt
@@ -136,7 +136,7 @@ const closeSong = document.querySelector('#closeSong')
 closeSong.addEventListener('click', () => {
     audioPlayer.pause()
     document.querySelector('.player').style.display = "none"
-    document.querySelector('#main').style.height = 'calc(100% - 75px)'
+    document.querySelector('#main').style.height = 'calc(100% - 270px - 80px)'
     document.querySelector('#aside').style.height = '100%'
 })
 
