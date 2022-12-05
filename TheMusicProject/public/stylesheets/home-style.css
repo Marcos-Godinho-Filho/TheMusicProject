@@ -423,3 +423,11 @@ marquee {
         margin-right: 2%;
     }
 }
+
+.dark-mode{
+    filter: invert(1) hue-rotate(180deg)
+}
+
+.dark-mode img{
+    filter: invert(1) hue-rotate(180deg);
+}

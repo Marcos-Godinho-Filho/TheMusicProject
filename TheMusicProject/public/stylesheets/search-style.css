@@ -722,3 +722,11 @@ audio::-webkit-media-controls-volume-control-container {
         padding: 15px 15px;
     }
 }
+
+.dark-mode{
+    filter: invert(1) hue-rotate(180deg)
+}
+
+.dark-mode img{
+    filter: invert(1) hue-rotate(180deg);
+}
