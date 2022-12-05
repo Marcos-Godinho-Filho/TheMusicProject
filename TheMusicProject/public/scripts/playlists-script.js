@@ -1,6 +1,11 @@
 const BASE_URL = window.location.href
 
 let songs = []
+
+let addSongsToVector = function (musicas) {
+    songs = musicas
+}
+
 const idUser = BASE_URL.substring(31, 55)
 
 const playBtn = document.querySelector('#playBtn')
@@ -21,7 +26,7 @@ function showSongData(imageSrc, titleTxt, artistTxt, albumTxt, previewSrc) {
     document.querySelector('#main').style.height = 'calc(100% - 75px - 125px)'
     document.querySelector('#aside').style.height = 'calc(100% - 125px)'
 
-    document.querySelector('#image').src = imageSrc
+    document.querySelector('#pa-img').src = imageSrc
     document.querySelector('#title').innerHTML = titleTxt
     document.querySelector('#artist').innerHTML = artistTxt
     document.querySelector('#album').innerHTML = albumTxt

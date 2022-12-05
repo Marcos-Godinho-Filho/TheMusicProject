@@ -87,7 +87,7 @@
     <div class="box" id="createPlaylistBox"> </div>
     <div id="#dbResultBox"> </div>
 
-    <main id="main">
+    <main id="main" onload="addSongsToVector(<%= playlist.musicas %>)">
         <% for (let i=0; i < playlist.musicas.length; i++) { %>
             <div id="musicas">
                 <div class="song">
