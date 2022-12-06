@@ -461,7 +461,6 @@ main {
 
 .playlist {
     width: 80%;
-    overflow: hidden;
     height: 20%;
 }
 
@@ -472,6 +471,8 @@ main {
     text-overflow: ellipsis;
     color: white;
     vertical-align: middle;
+    overflow: hidden;
+    width: 250px;
 }
 
 .playlist>input {

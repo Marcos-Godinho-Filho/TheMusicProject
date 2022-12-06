@@ -154,8 +154,9 @@ header {
     font-size: 64px;
     padding: 30px 7px;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow-x: hidden;
     white-space: nowrap;
+    width: 950px;
 }
 
 #description {
@@ -445,6 +446,8 @@ main {
 .s-data h1 {
     color: white;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .s-data h2 {

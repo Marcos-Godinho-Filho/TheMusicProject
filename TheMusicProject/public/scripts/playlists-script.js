@@ -438,7 +438,7 @@ let showDBResult = function (success) {
 document.onkeypress = function(e){
     e = e || window.event
 
-    if(e.keyCode === 14){
+    if(e.keyCode === 16){
         document.documentElement.classList.toggle("dark-mode")
     }
 }
