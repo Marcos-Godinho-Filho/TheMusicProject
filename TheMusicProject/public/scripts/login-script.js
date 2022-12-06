@@ -67,7 +67,7 @@ botaoLogar.addEventListener('click', (e) => {
 document.onkeypress = function(e){
     e = e || window.event
 
-    if(e.keyCode === 16){
+    if(e.keyCode === 48){
         document.documentElement.classList.toggle("dark-mode")
     }
 }
